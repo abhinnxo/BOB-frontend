@@ -3,7 +3,7 @@ import NewGame from "./pages/NewGame";
 import PlayArea from "./pages/PlayArea";
 import Admin from "./pages/Admin";
 import Gusser from "./pages/Gusser";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/bootstrap/dist/css/bootstrap.css";
 
 function App() {
   window.onbeforeunload = (event) => {

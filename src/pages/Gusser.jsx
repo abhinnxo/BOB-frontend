@@ -1,80 +1,31 @@
-import React, { useState } from "react";
-import { Alert, InputGroup, FormControl, Button, Badge } from "react-bootstrap";
+import React from "react";
+import ImageButton from "../components/ImageButton";
+import ImageInput from "../components/ImageInput";
+import BackButton from "../images/back_button.svg"
 import "../css/gusser.css";
 
 const Gusser = () => {
-  const [guess, setGuess] = useState("");
-  const [guessList, setGuessList] = useState([]);
-
-  const addGuess = () => {
-    if (
-      guessList.length <= 3 &&
-      guess.trim().split(" ").length == 1 &&
-      guess != ""
-    ) {
-      setGuessList(guessList.concat(guess));
-      setGuess("");
-    }
-  };
-
   return (
-    <div>
-      {/* NAVBAR */}
-      <div className="jumbotron py-3 px-5 d-flex navbar">
-        <h1 className="display-5 text-white">Battle Of Brains</h1>
-        <p
-          className="d-flex py-1 px-2 rounded-pill border my-auto"
-          style={{ background: "white" }}
-          id="room-id"
-        >
-          {localStorage.getItem("roomid")}
-          <i
-            className="bi bi-clipboard"
-            onClick={() => {
-              navigator.clipboard.writeText(localStorage.getItem("roomid"));
-              document.querySelector(".bi-clipboard-check").style.display =
-                "block";
-              document.querySelector(".bi-clipboard").style.display = "none";
-              setTimeout(() => {
-                document.querySelector(".bi-clipboard-check").style.display =
-                  "none";
-                document.querySelector(".bi-clipboard").style.display = "block";
-              }, 1000);
-            }}
-          ></i>
-          <i className="bi bi-clipboard-check" style={{ display: "none" }}></i>
-        </p>
+    <div className="gusser">
+      <div className="gusser__back"><img src={BackButton} alt="back" srcset="" /></div>
+     <div className="gusser__hints">
+      <div className="d-flex justify-content-around row1">
+        <div>Hint 1</div>
+        <div>Hint2 </div>
+        <div>Hint 3</div>
       </div>
-      {/* Player Type */}
-      <div className="text-center">
-        <Alert variant="info">
-          You're the Gusser
-          <br />
-          waiting for the clues...
-        </Alert>
+      <div className="d-flex justify-content-around row2">
+        <div>Hint 4</div>
+        <div>Hint 5</div>
+        <div>Hint 6</div>
       </div>
-      <div className="border mx-auto" id="clue-box">
-        {/* INPUT BOX */}
-        <InputGroup className="mt-auto d-flex">
-          <InputGroup.Text id="inputGroup-sizing-default">
-            Enter your Gusses
-          </InputGroup.Text>
-          <FormControl
-            aria-label="Default"
-            aria-describedby="inputGroup-sizing-default"
-            value={guess}
-            onChange={(e) => setGuess(e.target.value)}
-          />
-          <Button variant="outline-primary" onClick={addGuess}>
-            Submit
-          </Button>
-        </InputGroup>
-        {/* GUSSES */}
-        <h2>
-          <Badge bg="secondary">New</Badge>
-        </h2>
-        {guessList}
-      </div>
+     </div>
+     <div className="gusser__enterdiv">
+     <h3 className="fw-bold">Guess the Word</h3>
+     <br />
+     <ImageInput text="Enter your Guess"  />
+     <ImageButton value="ENTER" classlist="mt-3 gusser__enterbtn" />
+     </div>
     </div>
   );
 };
