@@ -7,7 +7,13 @@ import "../css/gusser.css";
 const Gusser = () => {
   return (
     <div className="gusser">
-      <div className="gusser__back"><img src={BackButton} alt="back" srcset="" /></div>
+     <div className="gusser__back">
+       <img src={BackButton} alt="back"/>
+       </div>
+       <div className="gusser__teamranks">
+         <h3>TEAM RANKS</h3>
+         
+       </div>
      <div className="gusser__hints">
       <div className="d-flex justify-content-around row1">
         <div>Hint 1</div>

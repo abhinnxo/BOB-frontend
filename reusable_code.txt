@@ -149,3 +149,23 @@ export default Login;
           </Card.Text>
         </Card.Body>
       </Card>
+
+
+            <Modal
+            show={show}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Select Your Team</Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="d-flex flex-column">
+              <Button variant="danger" className="my-1" onClick={joinTeamRed}>
+                Join Team Red
+              </Button>
+              <Button variant="primary" className="my-1" onClick={joinTeamBlue}>
+                Join Team Blue
+              </Button>
+            </Modal.Body>
+          </Modal>

@@ -1,0 +1,17 @@
+body {
+    background: url("../images/map1.png") !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.lobby__teamtable {
+    position: absolute;
+    width: 75rem;
+    top: 35%;
+    left: 50%;
+    margin-left: -36rem;
+}
+.lobby__joinbtn {
+    background: url("../images/join.png") no-repeat;
+    width: 65px !important;
+    height: 25px !important;
+  }

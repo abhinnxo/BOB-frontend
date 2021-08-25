@@ -1,5 +1,6 @@
 import { BrowserRouter, Route } from "react-router-dom";
 import NewGame from "./pages/NewGame";
+import WaitingLobby from "./pages/WaitingLobby"
 import PlayArea from "./pages/PlayArea";
 import Admin from "./pages/Admin";
 import Gusser from "./pages/Gusser";
@@ -18,6 +19,7 @@ function App() {
   return (
     <BrowserRouter>
       <Route exact path="/" component={NewGame} />
+      <Route exact path="/waitinglobby" component={WaitingLobby} />
       <Route exact path="/play" component={PlayArea} />
       <Route exact path="/admin" component={Admin} />
       <Route exact path="/guess" component={Gusser} />
