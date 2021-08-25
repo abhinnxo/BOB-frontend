@@ -1,7 +1,35 @@
-.navbar {
-  background-color: rgb(179, 199, 255);
+.gusser__back {
+  position: absolute;
+  top: 10rem;
+  left: 30rem;
 }
-#clue-box {
-    height: 500px;
-    width: 500px;
+.gusser__back:hover {
+  cursor: pointer;
+}
+.gusser__hints {
+  display: grid;
+  place-items: center;
+  height: 126px;
+  width: 592px;
+  position: absolute;
+  left: 50%;
+  margin-left: -296px;
+  top: 50%;
+  margin-top: -150px;
+  border: 3px solid #68360f;
+  border-radius: 8px;
+  background: linear-gradient(92.17deg, #d38a31 16.61%, #c76f21 87.7%);
+}
+.row1, .row2 {
+  width: 592px;
+}
+.gusser__enterdiv {
+  position: absolute;
+  text-align: center;
+  left: 50%;
+  margin-left: -200px;
+  top: 50%;
+}
+.gusser__enterbtn {
+  background: url("../images/button.png") no-repeat;
 }

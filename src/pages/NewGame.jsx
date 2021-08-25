@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Card, Alert, Nav, Button, Modal } from "react-bootstrap";
+import ImageButton from "../components/ImageButton";
+import ImageInput from "../components/ImageInput";
 import "../css/newgame.css";
 var customId = require("custom-id");
 
@@ -44,25 +46,29 @@ const NewGame = () => {
   useEffect(() => {
     localStorage.setItem("nickname", nickname);
   }, [nickname]);
-  // set Roomk ID in the localstorage
+  // set Room ID in the localstorage
   useEffect(() => {
     localStorage.setItem("roomid", customId({}));
-  }, []);
+  }, [roomid]);
 
   // On Click the Join Room Button
   const joinroom = () => {
-    if (nickname === "") {
-      document.querySelector("#no-nickname").classList.remove("d-none");
-      setTimeout(() => {
-        document.querySelector("#no-nickname").classList.add("d-none");
-      }, 3000);
-    } else if (roomid === "") {
-      document.querySelector("#no-roomid").classList.remove("d-none");
-      setTimeout(() => {
-        document.querySelector("#no-roomid").classList.add("d-none");
-      }, 3000);
-    } else {
-      setShow(true);
+    if (roomid === "") {
+      alert("Enter roomid")
+
+    } else if(nickname === "") {
+      alert("Enter Username")
+
+    } 
+    else {
+      history.push({
+        pathname: "/waitinglobby",
+        state: {
+          nickname,
+          roomid,
+          host: true,
+        },
+      });
     }
   };
   // On Click the Host Room Button
@@ -110,94 +116,68 @@ const NewGame = () => {
     });
   };
   return (
-    <>
-      <div className="display-5 py-5 text-center">Battle of Brains</div>
-      <Card style={{ width: "18rem" }} id="newgame-card">
-        <Card.Header>
-          <Nav variant="tabs" defaultActiveKey="#first">
-            <Nav.Item>
-              <Nav.Link onClick={join}>Join</Nav.Link>
+    <div className="newgame__div">
+      <Card style={{ width: "40rem" }} className="newgame__card">
+        <Card.Header className="newgame__header">
+          <Nav
+            variant="tabs"
+            defaultActiveKey="#first"
+            className="newgame__header"
+          >
+            <Nav.Item className="newgame__header">
+              <Nav.Link className="newgame__navlink" onClick={join}>
+                Join
+              </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link onClick={host}>Host</Nav.Link>
+              <Nav.Link className="newgame__navlink" onClick={host}>
+                Host
+              </Nav.Link>
             </Nav.Item>
           </Nav>
         </Card.Header>
-        <Card.Body className="" id="join">
-          <Card.Title>Join an Existing Room</Card.Title>
-          <label htmlFor="username">NickName</label>
+        {/* JOIN */}
+        <Card.Body className="newgame__body" id="join">
           <br />
-          <input
-            type="text"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
+          <ImageInput
+            change={(e) => setNickname(e.target.value)}
+            text="Enter Nickname"
           />
           <br />
-          <label htmlFor="room code">Room Code</label>
-          <br />
-          <input type="text" onChange={(e) => setRoomid(e.target.value)} />
-          <br />
-          <Button variant="primary" onClick={joinroom} className="mt-2">
-            Join
-          </Button>
-          <Modal
-            show={show}
-            onHide={handleClose}
-            backdrop="static"
-            keyboard={false}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>Select Your Team</Modal.Title>
-            </Modal.Header>
-            <Modal.Body className="d-flex flex-column">
-              <Button variant="danger" className="my-1" onClick={joinTeamRed}>
-                Join Team Red
-              </Button>
-              <Button variant="primary" className="my-1" onClick={joinTeamBlue}>
-                Join Team Blue
-              </Button>
-            </Modal.Body>
-          </Modal>
+          <ImageInput
+            change={(e) => setRoomid(e.target.value)}
+            text="Enter Room Code"
+          />
+          <ImageButton
+            clickMe={joinroom}
+            classlist="newgame__joinbtn  mt-3"
+            value="JOIN"
+          />
         </Card.Body>
-        <Card.Body className="d-none" id="host">
-          <Card.Title>Create a New Room</Card.Title>
-          <Card.Text>To Create new Room you must Login.</Card.Text>
-
-          <form>
-            <label htmlFor="username">Username</label>
-            <br />
-
-            <input
-              type="text"
-              placeholder="admin"
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <br />
-            <label htmlFor="password">Password</label>
-            <br />
-            <input
-              type="password"
-              name="password"
-              placeholder="admin"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <br />
-            <Button variant="primary" onClick={hostroom} className="mt-2">
-              Generate Code
-            </Button>
-          </form>
+        {/* HOST */}
+        <Card.Body className="d-none newgame__body" id="host">
+          <br />
+          <ImageInput
+            change={(e) => setUsername(e.target.value)}
+            text="Enter Username"
+          />
+          <br />
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <br />
+          <ImageButton
+            clickMe={hostroom}
+            classlist="newgame__hostbtn  mt-3"
+            value="LOGIN"
+          />
         </Card.Body>
-        <Alert variant="danger" className="d-none" id="no-nickname">
-          Nickname can't be Empty!
-        </Alert>
-        <Alert variant="danger" className="d-none" id="no-roomid">
-          Enter Room ID!
-        </Alert>
-        <Alert variant="danger" className="d-none" id="wrong-alert">
-          Wrong Username or Password entered!
-        </Alert>
       </Card>
-    </>
+      <ImageButton classlist="newgame__instbtn" value="INSTRUCTIONS" />
+    </div>
   );
 };
 
