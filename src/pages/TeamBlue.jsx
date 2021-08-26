@@ -43,7 +43,7 @@ function TeamBlue() {
           Team Points
         </h3>
         <h3 className="my-auto" style={{ color: "#603913" }}>
-          10
+          0
         </h3>
       </div>
     </div>

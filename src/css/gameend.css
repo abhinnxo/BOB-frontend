@@ -1,5 +1,12 @@
 .gameend {
-  background: url("../images/map1.png");
+  font-family: "PaytoneOne";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 50px;
+  text-align: center;
+  letter-spacing: 0.03em;
+  /* background: url("../images/map1.png"); */
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -10,7 +17,7 @@
   top: 50%;
   left: 50%;
   margin-top: -62.4px;
-  margin-left: -128.69px;
+  margin-left: -210px;
 }
 .end__btn {
   background: url("../images/button.png") no-repeat;

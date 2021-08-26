@@ -1,5 +1,5 @@
 body {
-  background-image: url("../images/map.png");
+  background: url("../images/map.png");
   height: 100%;
   background-position: center center;
   background-attachment: fixed;

@@ -10,6 +10,8 @@ import AdminPoints from "./pages/AdminPoints";
 import Admin from "./pages/Admin";
 
 function App() {
+
+    // Prompt when the user tries to close/leave the tab
   window.onbeforeunload = (event) => {
     const e = event || window.event;
     // Cancel the event

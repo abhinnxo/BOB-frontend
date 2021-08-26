@@ -19,9 +19,13 @@
   top: 15%;
   right: 20%;
 }
+.gusser__teamranks > h3 {
+  font-family: "PaytoneOne";
+}
 .gusser__hints {
   display: grid;
   place-items: center;
+  font-family: "PaytoneOne";
   height: 126px;
   width: 592px;
   position: absolute;
@@ -39,6 +43,7 @@
 }
 .gusser__enterdiv {
   position: absolute;
+  font-family: "PaytoneOne"; 
   text-align: center;
   left: 50%;
   margin-left: -233.5px;
@@ -49,9 +54,12 @@
 }
 .gusser__timer {
   position: absolute;
-  top: 50%;
+  width: 125px;
+  top: 45%;
   right: 20%;
 }
 .gusser__timer h3 {
-  transform: translate(-18px, -4px);
+  font-family: "PaytoneOne"; 
+  transform: translate(-90px, -53px);
+  color: white;
 }

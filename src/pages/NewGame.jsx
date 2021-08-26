@@ -31,18 +31,13 @@ const NewGame = () => {
 
   const history = useHistory();
 
-  const login = (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    console.log("username", username);
+  }, [username])
+  useEffect(() => {
+    console.log("password", password);
+  }, [password])
 
-    // Login
-    if (username === "admin" && password === "admin") {
-      history.push({
-        pathname: "/newgame",
-      });
-    } else {
-      document.querySelector("#wrong-alert").classList.remove("d-none");
-    }
-  };
   // change cards for host/player, for joining or creating a new room
   const join = () => {
     document.querySelector("#join").classList.add("d-block");
@@ -77,31 +72,20 @@ const NewGame = () => {
       dispatch(update_nickname(nickname));
       dispatch(update_roomid(roomid));
       dispatch(update_host(true));
-      history.push({
-        pathname: "/lobby",
-        state: {
-          nickname,
-          roomid,
-          host: true,
-        },
-      });
+      localStorage.setItem("host", false);
+      history.push( "/lobby");
     }
   };
   // On Click the Host Room Button
-  const hostroom = (e) => {
-    e.preventDefault();
+  const hostroom = () => {
+
+    console.log("uname " + username + " pass " + password);
 
     if (username === "admin" && password === "admin") {
-      history.push({
-        pathname: "/admin",
-        state: {
-          nickname,
-          roomid,
-          host: true,
-        },
-      });
+      localStorage.setItem("host", true);
+      history.push( "/lobby");
     } else {
-      document.querySelector("#wrong-alert").classList.remove("d-none");
+     alert("Username / Password is wrong")
     }
   };
 
@@ -138,9 +122,10 @@ const NewGame = () => {
             change={(e) => setRoomid(e.target.value)}
             text="Enter Room Code"
           />
+          <br />
           <ImageButton
             clickMe={joinroom}
-            classlist="newgame__joinbtn  mt-3"
+            classlist="newgame__joinbtn"
             value="JOIN"
           />
           <ImageButton classlist="newgame__instbtn" value="INSTRUCTIONS" />
@@ -153,16 +138,14 @@ const NewGame = () => {
             text="Enter Username"
           />
           <br />
-          <input
-            type="password"
-            name="password"
-            placeholder="Enter Password"
-            onChange={(e) => setPassword(e.target.value)}
+          <ImageInput
+            change={(e) => setPassword(e.target.value)}
+            text="Enter Password"
           />
           <br />
           <ImageButton
             clickMe={hostroom}
-            classlist="newgame__hostbtn  mt-3"
+            classlist="newgame__hostbtn"
             value="LOGIN"
           />
           <ImageButton classlist="newgame__instbtn" value="INSTRUCTIONS" />

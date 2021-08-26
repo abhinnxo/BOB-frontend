@@ -1,15 +1,25 @@
-.admin {
-  background: url("../images/map3.svg");
+body {
+  /* background: url("../images/map3.svg"); */
   height: 100%;
-  background-position: center;
+  background-position: center center;
+  background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
+  overflow: hidden;
+}
+.point {
+  font-family: "PaytoneOne";
 }
 .point__controls {
+  margin-top: 8rem;
   padding-left: 2rem;
   padding-right: 2rem;
+  width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .point__controls > div > div {
+  padding-bottom: 1rem;
   padding-top: 1rem;
 }
 .point__board {
@@ -19,6 +29,7 @@
   top: 43%;
 }
 .point_btn {
+  cursor: pointer;
   background: #34c78f;
   height: 2.5rem;
   width: 4.5rem;
@@ -26,10 +37,14 @@
   border-radius: 19.9895px;
   border: none;
 }
+.point__setting {
+  cursor: pointer;
+}
 .point__randomword {
   color: #34c78f;
 }
 .point__timer {
+  cursor: pointer;
   position: relative;
   display: grid;
   place-items: center;
@@ -38,6 +53,7 @@
   position: absolute;
 }
 .point__round {
+  cursor: pointer;
   position: relative;
   display: grid;
   place-items: center;

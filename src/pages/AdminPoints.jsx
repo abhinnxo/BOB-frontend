@@ -6,7 +6,7 @@ import PauseTimer from "../images/pause_timer.svg"
 import EndGame from "../images/end_game.svg"  
 import Round from "../images/round.svg"  
 import NextRound from "../images/next_round.svg"  
-import "../css/admin.css";
+import "../css/adminpoints.css";
 
 const style = {
   color: "white",
@@ -23,7 +23,7 @@ const AdminPoints = () => {
     alert("Clue sent...")
   }
   return (
-    <div className="admin">
+    <div className="point">
       <div className="point__controls d-flex justify-content-between">
         <div >
           <div className="point__setting"><img src={Setting} alt="settings" /></div>

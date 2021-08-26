@@ -6,6 +6,7 @@
   background-size: cover;
 }
 .red__enterhint {
+  font-family: "PaytoneOne";
   position: absolute;
   top: 50%;
   margin-top: -105.8px;
@@ -22,14 +23,16 @@
   right: 20%;
 }
 .red__timer h3 {
-  transform: translate(-85px, -55px);
+  font-family: "PaytoneOne";
+  transform: translate(-90px, -53px);
   color: white;
 }
 .red__teamranks {
-    background: url("../images/teamrank.svg") no-repeat;
-    position: absolute;
-    width: 306px;
-    height: 60px;
-    top: 15%;
-    right: 20%;
-  }
+  font-family: "PaytoneOne";
+  background: url("../images/teamrank.svg") no-repeat;
+  position: absolute;
+  width: 306px;
+  height: 60px;
+  top: 15%;
+  right: 20%;
+}

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ImageButton from "../components/ImageButton";
 import ImageInput from "../components/ImageInput";
-import BackButton from "../images/back_button.svg";
 import Clock from "../images/clock.svg";
 import "../css/gusser.css";
 
@@ -18,16 +17,13 @@ const Gusser = () => {
   return (
     <div className="gusser">
       <div className="bg"></div>
-      <div className="gusser__back">
-        <img src={BackButton} alt="back" />
-      </div>
       <div className="gusser__teamranks d-flex justify-content-between px-3">
         <h3 className="my-auto" style={{ color: "#ffffff" }}>
           Team Points
         </h3>
         <h3 className="my-auto" style={{ color: "#603913" }}>
           10
-        </h3>
+        </h3>          
       </div>
       <div className="gusser__hints">
         <div className="d-flex justify-content-around row1">
