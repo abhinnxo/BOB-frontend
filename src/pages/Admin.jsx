@@ -1,6 +1,6 @@
 import React from "react";
 
-const HostPoints = () => {
+const Admin = () => {
   return (
     <div>
    Admin-cross-words
@@ -8,4 +8,4 @@ const HostPoints = () => {
   );
 };
 
-export default HostPoints;
+export default Admin;

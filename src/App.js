@@ -7,6 +7,7 @@ import TeamRed from "./pages/TeamRed";
 import TeamBlue from "./pages/TeamBlue";
 import GameEnd from "./pages/GameEnd";
 import AdminPoints from "./pages/AdminPoints";
+import Admin from "./pages/Admin";
 
 function App() {
   window.onbeforeunload = (event) => {
@@ -22,7 +23,7 @@ function App() {
     <BrowserRouter>
       <Route exact path="/" component={NewGame} />
       <Route exact path="/lobby" component={WaitingLobby} />
-      {/* <Route exact path="/admin" component={Admin} /> */}
+      <Route exact path="/admin" component={Admin} />
       <Route exact path="/admin/points" component={AdminPoints} />
       <Route exact path="/red" component={TeamRed} />
       <Route exact path="/red/guess" component={Gusser} />
