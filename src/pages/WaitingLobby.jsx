@@ -4,11 +4,32 @@ import "../css/waitinglobby.css";
 import BackButton from "../images/back_button.svg";
 import RedBlock from "../images/redteam.svg";
 import ImageButton from "../components/ImageButton";
+import { useSelector, useDispatch } from 'react-redux'
+import { useHistory,useLocation } from "react-router-dom";
+import { socket } from "../services/socket";
+import { update_team } from "../store/mainstore";
 
 const WaitingLobby = () => {
   const startgame = () => {
     alert("game started...");
   };
+
+  //store
+  const mstore = useSelector((state) => state.mainstore)
+  const dispatch = useDispatch()
+  console.log(mstore)
+  const history = useHistory();
+  const location = useLocation();
+  function teamselection(e){
+    socket.emit('guessingTeam', 0);
+    dispatch(update_team(e))
+    //console.log(location.state)
+    history.push({
+      pathname: "/play"
+    })
+  }
+
+  
 
   return (
     <div className="lobby">
@@ -18,9 +39,9 @@ const WaitingLobby = () => {
       </div>
       <div className="lobby__teamtable">
         <div className="lobby__code">212121</div>
-        <input type="button" name="button" className="lobby__redteam" />
+        <input type="button" name="button" className="lobby__redteam" onClick={()=>{teamselection('blue')}}/>
         <img src={RedBlock} alt="" srcset="" />
-        <input type="button" name="button" className="lobby__blueteam" />
+        <input type="button" name="button" className="lobby__blueteam" onClick={()=>{teamselection('red')}} />
         <img src={BlueBlock} alt="" srcset="" />
         <ImageButton
           clickMe={startgame}

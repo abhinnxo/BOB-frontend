@@ -1,3 +1,6 @@
+import {update_nickname,update_host,update_roomid} from "../store/mainstore"
+import { useSelector, useDispatch } from 'react-redux'
+import { socket,createconnection } from "../services/socket";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Card, Nav } from "react-bootstrap";
@@ -7,6 +10,17 @@ import "../css/newgame.css";
 var customId = require("custom-id");
 
 const NewGame = () => {
+
+   //creating socket connection
+   useEffect(() => {
+    createconnection()
+   }, [])
+
+ //redux managements
+ const mstore = useSelector((state) => state.mainstore)
+ const dispatch = useDispatch()
+ //console.log(mstore)
+
   const [nickname, setNickname] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -60,6 +74,10 @@ const NewGame = () => {
 
     } 
     else {
+      socket.emit('joinRoom', { nickname, roomid });
+      dispatch(update_nickname(nickname))
+      dispatch(update_roomid(roomid))
+      dispatch(update_host(true))
       history.push({
         pathname: "/lobby",
         state: {
