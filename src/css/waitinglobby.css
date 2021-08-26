@@ -1,9 +1,9 @@
-body, html {
+body {
   height: 100% !important;
   margin: 0 !important;
 }
 .bg {
-  background: url("../images/map1.png") !important;
+  background: url("../images/map1.png");
   height: 100% !important; 
   background-position: center !important;
   background-repeat: no-repeat !important;
