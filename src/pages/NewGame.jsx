@@ -40,7 +40,6 @@ const NewGame = () => {
       document.querySelector("#wrong-alert").classList.remove("d-none");
     }
   };
-
   // change cards for host/player, for joining or creating a new room
   const join = () => {
     document.querySelector("#join").classList.add("d-block");
@@ -106,30 +105,6 @@ const NewGame = () => {
     }
   };
   
-  // Modal: Join Team red
-  const joinTeamRed = () => {
-    history.push({
-      pathname: "/play",
-      state: {
-        nickname,
-        roomid,
-        team: "red",
-        host: false,
-      },
-    });
-  };
-  // Modal: Join Team blue
-  const joinTeamBlue = () => {
-    history.push({
-      pathname: "/play",
-      state: {
-        nickname,
-        roomid,
-        team: "blue",
-        host: false,
-      },
-    });
-  };
   return (
     <div className="newgame__div">
       <Card style={{ width: "40rem" }} className="newgame__card">

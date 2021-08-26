@@ -1,12 +1,9 @@
 body {
-  background-image: url("../images/map.png") !important;
+  background: url("../images/map.png");
+  height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
-.newgame__div {
-  height: 100vh;
-  width: 100vw;
 }
 .newgame__card {
   position: absolute;

@@ -28,9 +28,7 @@ const WaitingLobby = () => {
       pathname: "/play"
     })
   }
-
   
-
   return (
     <div className="lobby">
       <div className="bg"></div>

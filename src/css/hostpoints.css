@@ -1,11 +1,10 @@
-body,
-html {
+/* body {
   background: url("../images/map3.svg");
-  height: 100% !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-  background-size: cover !important;
-}
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
 .point__board {
   position: absolute;
   left: 50%;

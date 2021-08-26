@@ -1,14 +1,10 @@
-body {
-  height: 100% !important;
-  margin: 0 !important;
-}
-.bg {
+/* body {
   background: url("../images/map1.png");
-  height: 100% !important; 
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-  background-size: cover !important;
-}
+  height: 100%; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
 .lobby__back {
   position: absolute;
   cursor: pointer;

@@ -23,7 +23,7 @@ const AdminPoints = () => {
     alert("Clue sent...")
   }
   return (
-    <div>
+    <div className="admin">
       <div className="point__controls d-flex justify-content-between">
         <div >
           <div className="point__setting"><img src={Setting} alt="settings" /></div>
