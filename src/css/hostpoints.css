@@ -1,0 +1,12 @@
+body,
+html {
+  background: url("../images/map3.svg");
+  height: 100% !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+.point__board {
+  position: absolute;
+  left: 50%;
+}

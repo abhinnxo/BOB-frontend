@@ -1,0 +1,54 @@
+body,
+html {
+  background: url("../images/map3.svg");
+  height: 100% !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+.point__controls {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+.point__controls > div > div {
+    padding-top: 1rem;
+}
+.point__board {
+  position: absolute;
+  left: 50%;
+  margin-left: -233.5px;
+  top: 43%;
+}
+.point_btn {
+  background: #34c78f;
+  height: 2.5rem;
+  width: 4.5rem;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 19.9895px;
+  border: none;
+}
+.point__randomword {
+    color: #34C78F;
+}
+.point__timer {
+    position: relative;
+    display: grid;
+    place-items: center;
+
+}
+.point__timer > h1 {
+    position: absolute;
+}
+.point__round {
+    position: relative;
+    display: grid;
+    place-items: center;
+
+}
+.point__round > h1 {
+    position: absolute;
+}
+.point__send {
+    background: url("../images/button.png") no-repeat;
+
+}

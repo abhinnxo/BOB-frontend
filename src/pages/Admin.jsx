@@ -1,11 +1,11 @@
 import React from "react";
 
-const Admin = () => {
+const HostPoints = () => {
   return (
     <div>
-      <p>Host</p>
+   Admin-cross-words
     </div>
   );
 };
 
-export default Admin;
+export default HostPoints;
