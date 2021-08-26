@@ -1,0 +1,10 @@
+.end__text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -62.4px;
+  margin-left: -128.69px;
+}
+.end__btn {
+  background: url("../images/button.png") no-repeat;
+}
