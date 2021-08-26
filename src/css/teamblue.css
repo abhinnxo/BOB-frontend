@@ -1,0 +1,38 @@
+body,
+html {
+  height: 100% !important;
+  margin: 0 !important;
+}
+.bg {
+  background: url("../images/map.svg") !important;
+  height: 100% !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+.blue__enterhint {
+  position: absolute;
+  top: 50%;
+  margin-top: -105.8px;
+  left: 50%;
+  margin-left: -233.5px;
+}
+.blue__enterbtn {
+  background: url("../images/button.png") no-repeat;
+}
+.blue__timer {
+  position: absolute;
+  top: 50%;
+  right: 20%;
+}
+.blue__timer h3 {
+  transform: translate(-18px, -4px);
+}
+.blue__teamranks {
+    background: url("../images/teamrank.svg") no-repeat;
+    position: absolute;
+    width: 306px;
+    height: 60px;
+    top: 15%;
+    right: 20%;
+  }

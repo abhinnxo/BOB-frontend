@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Card, Alert, Nav, Button, Modal } from "react-bootstrap";
+import { Card, Nav } from "react-bootstrap";
 import ImageButton from "../components/ImageButton";
 import ImageInput from "../components/ImageInput";
 import "../css/newgame.css";
@@ -11,7 +11,6 @@ const NewGame = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [roomid, setRoomid] = useState("");
-  const [show, setShow] = useState(false);
 
   const history = useHistory();
 
@@ -62,7 +61,7 @@ const NewGame = () => {
     } 
     else {
       history.push({
-        pathname: "/waitinglobby",
+        pathname: "/lobby",
         state: {
           nickname,
           roomid,
@@ -88,9 +87,7 @@ const NewGame = () => {
       document.querySelector("#wrong-alert").classList.remove("d-none");
     }
   };
-  // Close Buton in the Modal
-  const handleClose = () => setShow(false);
-
+  
   // Modal: Join Team red
   const joinTeamRed = () => {
     history.push({

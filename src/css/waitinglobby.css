@@ -1,17 +1,61 @@
-body {
-    background: url("../images/map1.png") !important;
-    background-repeat: no-repeat;
-    background-size: cover;
+body, html {
+  height: 100% !important;
+  margin: 0 !important;
+}
+.bg {
+  background: url("../images/map1.png") !important;
+  height: 100% !important; 
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+.lobby__back {
+  position: absolute;
+  cursor: pointer;
+  top: 15%;
+  left: 20%;
 }
 .lobby__teamtable {
-    position: absolute;
-    width: 75rem;
-    top: 35%;
-    left: 50%;
-    margin-left: -36rem;
+  position: absolute;
+  width: 75rem;
+  top: 35%;
+  left: 50%;
+  margin-left: -36rem;
 }
-.lobby__joinbtn {
-    background: url("../images/join.png") no-repeat;
-    width: 65px !important;
-    height: 25px !important;
-  }
+.lobby__redteam,
+.lobby__blueteam {
+  background: url("../images/join.png") no-repeat;
+  cursor: pointer;
+  border: none;
+  position: absolute;
+  height: 25px;
+  width: 65px;
+  top: 55px;
+  transform: translateX(450px);
+}
+.lobby__startbtn {
+  background: url("../images/button.png") no-repeat;
+  transform: translateX(370px);
+  
+}
+.lobby__code {
+    background: #E1A86F;
+    position: absolute;
+    display: grid;
+    place-items: center;
+    height: 45px;
+    width: 205px;
+    transform: translate(30rem, -2.5rem);
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+/* .lobby__teamname {
+    font-family: Paytone One;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 31px;
+    letter-spacing: 0.05em;
+    text-align: left;
+    
+} */

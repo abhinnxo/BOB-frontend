@@ -1,15 +1,11 @@
-import React from 'react'
+import React from "react";
 
 function ImageInput({ text, change }) {
-    return (
-        <div>
-            <input
-            type="text"
-            placeholder={text}
-            onChange={change}
-          />
-        </div>
-    )
+  return (
+    <div>
+      <input type="text" placeholder={text} onChange={change} />
+    </div>
+  );
 }
 
-export default ImageInput
+export default ImageInput;

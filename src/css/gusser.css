@@ -1,10 +1,28 @@
+body,
+html {
+  height: 100% !important;
+  margin: 0 !important;
+}
+.bg {
+  background: url("../images/map1.png") !important;
+  height: 100% !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
 .gusser__back {
   position: absolute;
-  top: 10rem;
-  left: 30rem;
-}
-.gusser__back:hover {
+  top: 15%;
+  left: 20%;
   cursor: pointer;
+}
+.gusser__teamranks {
+  background: url("../images/teamrank.svg") no-repeat;
+  position: absolute;
+  width: 306px;
+  height: 60px;
+  top: 15%;
+  right: 20%;
 }
 .gusser__hints {
   display: grid;
@@ -20,16 +38,25 @@
   border-radius: 8px;
   background: linear-gradient(92.17deg, #d38a31 16.61%, #c76f21 87.7%);
 }
-.row1, .row2 {
+.row1,
+.row2 {
   width: 592px;
 }
 .gusser__enterdiv {
   position: absolute;
   text-align: center;
   left: 50%;
-  margin-left: -200px;
+  margin-left: -233.5px;
   top: 50%;
 }
 .gusser__enterbtn {
   background: url("../images/button.png") no-repeat;
+}
+.gusser__timer {
+  position: absolute;
+  top: 50%;
+  right: 20%;
+}
+.gusser__timer h3 {
+  transform: translate(-18px, -4px);
 }
