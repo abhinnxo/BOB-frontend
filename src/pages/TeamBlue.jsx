@@ -30,15 +30,15 @@ function TeamBlue() {
         <br />
         <ImageButton
           value="ENTER"
-          classlist="red__enterbtn"
+          classlist="blue__enterbtn"
           clickMe={sendHint}
         />
       </div>
-      <div className="red__timer d-flex align-items-baseline">
+      <div className="blue__timer d-flex align-items-baseline">
         <img src={Clock} alt="time" />
         <h3>0:30</h3>
       </div>
-      <div className="red__teamranks d-flex justify-content-between px-3">
+      <div className="blue__teamranks d-flex justify-content-between px-3">
         <h3 className="my-auto" style={{ color: "#ffffff" }}>
           Team Points
         </h3>

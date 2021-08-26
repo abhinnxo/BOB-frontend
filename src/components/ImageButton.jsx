@@ -2,6 +2,7 @@ import React from 'react'
 
 const style = {
     color: "white",
+    fontFamily: "caesar",
     fontSize: "25px",
     width: "400px",
     height: "110px",

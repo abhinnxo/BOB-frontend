@@ -12,7 +12,7 @@ const gotoMainScreen = () => {
 }
 
     return (
-        <div>
+        <div className="gameend">
          <div className="end__text text-center">
          <h3>Team <span>Red</span> Wins</h3>
             <h3>SCORE: <span>500</span></h3>

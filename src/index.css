@@ -1,6 +1,13 @@
+@font-face {
+  font-family: "caesar";
+  src: url("./css/fonts/CaesarDressing-Regular.ttf");
+}
+@font-face {
+  font-family: "PaytoneOne";
+  src: url("./css/fonts/PaytoneOne-Regular.ttf");
+}
 body {
   margin: 0;
-  font-family: 'Caesar Dressing', cursive;  
-  -webkit-font-smoothing: antialiased ;
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

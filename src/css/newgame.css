@@ -1,14 +1,16 @@
 body {
-  background: url("../images/map.png");
+  background-image: url("../images/map.png");
   height: 100%;
-  background-position: center;
+  background-position: center center;
+  background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
+  overflow: hidden;
 }
 .newgame__card {
-  position: absolute;
-  top: 50%;
-  margin-top: -190px;
+  position: relative;
+  width: 40rem;
+  margin-top: 18%;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -32,6 +34,7 @@ input[type="password"] {
   background-color: #9b5825;
   border: none;
   text-align: center;
+  font-family: "caesar";
 }
 .newgame__body {
   background-color: #e1a86f;
@@ -53,10 +56,9 @@ input[type="password"] {
 .newgame__instbtn {
   background: url("../images/button.png") no-repeat;
 }
-.newgame__instbtn {
-  position: absolute;
-  bottom: 3.5rem;
-  left: 50%;
-  margin-left: -200px;
-}
 
+@media only screen and (max-width: 1536px) {
+  .newgame__card {
+    width: 30rem;
+  }
+}

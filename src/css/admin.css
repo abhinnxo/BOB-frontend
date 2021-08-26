@@ -1,16 +1,16 @@
-/* body {
+.admin {
   background: url("../images/map3.svg");
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-} */
+}
 .point__controls {
-    padding-left: 2rem;
-    padding-right: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 .point__controls > div > div {
-    padding-top: 1rem;
+  padding-top: 1rem;
 }
 .point__board {
   position: absolute;
@@ -27,27 +27,24 @@
   border: none;
 }
 .point__randomword {
-    color: #34C78F;
+  color: #34c78f;
 }
 .point__timer {
-    position: relative;
-    display: grid;
-    place-items: center;
-
+  position: relative;
+  display: grid;
+  place-items: center;
 }
 .point__timer > h1 {
-    position: absolute;
+  position: absolute;
 }
 .point__round {
-    position: relative;
-    display: grid;
-    place-items: center;
-
+  position: relative;
+  display: grid;
+  place-items: center;
 }
 .point__round > h1 {
-    position: absolute;
+  position: absolute;
 }
 .point__send {
-    background: url("../images/button.png") no-repeat;
-
+  background: url("../images/button.png") no-repeat;
 }

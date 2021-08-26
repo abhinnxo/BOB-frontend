@@ -1,10 +1,10 @@
-/* body {
+.blue__bg {
   background: url("../images/map.png");
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-} */
+}
 .blue__enterhint {
   position: absolute;
   top: 50%;
@@ -17,11 +17,13 @@
 }
 .blue__timer {
   position: absolute;
-  top: 50%;
+  width: 125px;
+  top: 45%;
   right: 20%;
 }
 .blue__timer h3 {
-  transform: translate(-18px, -4px);
+  transform: translate(-85px, -55px);
+  color: white;
 }
 .blue__teamranks {
     background: url("../images/teamrank.svg") no-repeat;

@@ -1,6 +1,10 @@
-import {update_nickname,update_host,update_roomid} from "../store/mainstore"
-import { useSelector, useDispatch } from 'react-redux'
-import { socket,createconnection } from "../services/socket";
+import {
+  update_nickname,
+  update_host,
+  update_roomid,
+} from "../store/mainstore";
+import { useSelector, useDispatch } from "react-redux";
+import { socket, createconnection } from "../services/socket";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Card, Nav } from "react-bootstrap";
@@ -10,16 +14,15 @@ import "../css/newgame.css";
 var customId = require("custom-id");
 
 const NewGame = () => {
+  //creating socket connection
+  useEffect(() => {
+    createconnection();
+  }, []);
 
-   //creating socket connection
-   useEffect(() => {
-    createconnection()
-   }, [])
-
- //redux managements
- const mstore = useSelector((state) => state.mainstore)
- const dispatch = useDispatch()
- //console.log(mstore)
+  //redux managements
+  const mstore = useSelector((state) => state.mainstore);
+  const dispatch = useDispatch();
+  //console.log(mstore)
 
   const [nickname, setNickname] = useState("");
   const [username, setUsername] = useState("");
@@ -66,17 +69,14 @@ const NewGame = () => {
   // On Click the Join Room Button
   const joinroom = () => {
     if (roomid === "") {
-      alert("Enter roomid")
-
-    } else if(nickname === "") {
-      alert("Enter Username")
-
-    } 
-    else {
-      socket.emit('joinRoom', { nickname, roomid });
-      dispatch(update_nickname(nickname))
-      dispatch(update_roomid(roomid))
-      dispatch(update_host(true))
+      alert("Enter roomid");
+    } else if (nickname === "") {
+      alert("Enter Username");
+    } else {
+      socket.emit("joinRoom", { nickname, roomid });
+      dispatch(update_nickname(nickname));
+      dispatch(update_roomid(roomid));
+      dispatch(update_host(true));
       history.push({
         pathname: "/lobby",
         state: {
@@ -104,10 +104,10 @@ const NewGame = () => {
       document.querySelector("#wrong-alert").classList.remove("d-none");
     }
   };
-  
+
   return (
     <div className="newgame__div">
-      <Card style={{ width: "40rem" }} className="newgame__card">
+      <Card className="newgame__card">
         <Card.Header className="newgame__header">
           <Nav
             variant="tabs"
@@ -143,6 +143,7 @@ const NewGame = () => {
             classlist="newgame__joinbtn  mt-3"
             value="JOIN"
           />
+          <ImageButton classlist="newgame__instbtn" value="INSTRUCTIONS" />
         </Card.Body>
         {/* HOST */}
         <Card.Body className="d-none newgame__body" id="host">
@@ -164,9 +165,9 @@ const NewGame = () => {
             classlist="newgame__hostbtn  mt-3"
             value="LOGIN"
           />
+          <ImageButton classlist="newgame__instbtn" value="INSTRUCTIONS" />
         </Card.Body>
       </Card>
-      <ImageButton classlist="newgame__instbtn" value="INSTRUCTIONS" />
     </div>
   );
 };

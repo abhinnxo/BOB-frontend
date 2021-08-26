@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import BlueBlock from "../images/blueteam.svg";
 import "../css/waitinglobby.css";
 import BackButton from "../images/back_button.svg";
@@ -13,6 +13,12 @@ const WaitingLobby = () => {
   const startgame = () => {
     alert("game started...");
   };
+  const copyGameCode = () => {
+    navigator.clipboard.writeText(localStorage.getItem("roomid"))
+  }
+  useEffect(() => {
+   document.querySelector(".lobby__code").innerHTML = localStorage.getItem("roomid")
+  }, [])
 
   //store
   const mstore = useSelector((state) => state.mainstore)
@@ -36,7 +42,7 @@ const WaitingLobby = () => {
         <img src={BackButton} alt="back" />
       </div>
       <div className="lobby__teamtable">
-        <div className="lobby__code">212121</div>
+        <div className="lobby__code" onClick={copyGameCode}></div>
         <input type="button" name="button" className="lobby__redteam" onClick={()=>{teamselection('blue')}}/>
         <img src={RedBlock} alt="" srcset="" />
         <input type="button" name="button" className="lobby__blueteam" onClick={()=>{teamselection('red')}} />
