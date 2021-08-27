@@ -5,12 +5,9 @@ import BackButton from "../images/back_button.svg";
 import RedTeam from "../components/RedTeam";
 import BlueTeam from "../components/BlueTeam";
 import ImageButton from "../components/ImageButton";
-import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import { socket } from "../services/socket";
-import { update_team } from "../store/mainstore";
 
-const WaitingLobby = () => {
+const WaitingLobby = ({socket}) => {
   const [host, setHost] = useState(false);
   const [team, setTeam] = useState("");
   const [redplayer, setRedPlayer] = useState("");
@@ -19,6 +16,10 @@ const WaitingLobby = () => {
   useEffect(() => {
     console.log("blueplayer", blueplayer);
   }, [blueplayer])
+  
+  useEffect(() => {
+    console.log("admin points ", socket.connected);
+  }, [])
 
   const history = useHistory();
 
@@ -56,12 +57,8 @@ const WaitingLobby = () => {
     }
   });
 
-  //store
-  const mstore = useSelector((state) => state.mainstore);
 
-  const dispatch = useDispatch();
 
-  console.log(mstore);
 
   function teamselection(e) {
     // socket.emit("guessingTeam", 0);
@@ -81,7 +78,7 @@ const WaitingLobby = () => {
 
   return (
     <div className="lobby">
-      <div className="bg"></div>
+     <div className="lobby__bg"></div>
       <div className="lobby__back">
         <img src={BackButton} alt="back" onClick={goBack} />
       </div>
