@@ -1,0 +1,20 @@
+.blueblock {
+  position: relative;
+}
+.blueblock__block {
+  position: absolute;
+}
+.blueblock__playerlist {
+  position: absolute;
+  transform: translate(40px, 100px);
+  font-family: PaytoneOne;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.1em;
+  color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  height: 250px;
+  width: 500px;
+}

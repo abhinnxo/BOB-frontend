@@ -1,12 +1,12 @@
-body {
-  /* background: url("../images/map3.svg"); */
+/* body {
+  background: url("../images/map3.svg");
   height: 100%;
   background-position: center center;
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
-}
+} */
 .point {
   font-family: "PaytoneOne";
 }

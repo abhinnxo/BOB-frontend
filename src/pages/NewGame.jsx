@@ -56,10 +56,6 @@ const NewGame = () => {
   useEffect(() => {
     localStorage.setItem("nickname", nickname);
   }, [nickname]);
-  // set Room ID in the localstorage
-  useEffect(() => {
-    localStorage.setItem("roomid", customId({}));
-  }, [roomid]);
 
   // On Click the Join Room Button
   const joinroom = () => {
@@ -73,6 +69,7 @@ const NewGame = () => {
       dispatch(update_roomid(roomid));
       dispatch(update_host(true));
       localStorage.setItem("host", false);
+      localStorage.setItem("roomid", roomid);
       history.push( "/lobby");
     }
   };
@@ -83,6 +80,7 @@ const NewGame = () => {
 
     if (username === "admin" && password === "admin") {
       localStorage.setItem("host", true);
+      localStorage.setItem("roomid", customId({}));
       history.push( "/lobby");
     } else {
      alert("Username / Password is wrong")

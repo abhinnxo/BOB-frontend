@@ -1,3 +1,4 @@
+import React, {useState} from "react"
 import { BrowserRouter, Route } from "react-router-dom";
 import NewGame from "./pages/NewGame";
 import WaitingLobby from "./pages/WaitingLobby"
@@ -10,17 +11,18 @@ import AdminPoints from "./pages/AdminPoints";
 import Admin from "./pages/Admin";
 
 function App() {
+  const [bg, setBg] = ("")
 
-    // Prompt when the user tries to close/leave the tab
-  window.onbeforeunload = (event) => {
-    const e = event || window.event;
-    // Cancel the event
-    e.preventDefault();
-    if (e) {
-      e.returnValue = ""; // Legacy method for cross browser support
-    }
-    return ""; // Legacy method for cross browser support
-  };
+  //   // Prompt when the user tries to close/leave the tab
+  // window.onbeforeunload = (event) => {
+  //   const e = event || window.event;
+  //   // Cancel the event
+  //   e.preventDefault();
+  //   if (e) {
+  //     e.returnValue = ""; // Legacy method for cross browser support
+  //   }
+  //   return ""; // Legacy method for cross browser support
+  // };
   return (
     <BrowserRouter>
       <Route exact path="/" component={NewGame} />

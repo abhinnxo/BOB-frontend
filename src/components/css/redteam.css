@@ -1,0 +1,20 @@
+.redblock {
+  position: relative;
+}
+/* .redblock__block {
+  position: absolute;
+} */
+.redblock__playerlist {
+  position: absolute;
+  transform: translate(40px, -309px);
+  font-family: PaytoneOne;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.1em;
+  color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  height: 250px;
+  width: 500px;
+}

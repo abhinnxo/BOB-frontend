@@ -1,6 +1,7 @@
 body {
   background: url("../images/map.png");
   height: 100%;
+  width: 100%;
   background-position: center center;
   background-attachment: fixed;
   background-repeat: no-repeat;
