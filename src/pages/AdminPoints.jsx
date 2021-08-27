@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import ImageInput from "../components/ImageInput";
 import Setting from "../images/settings.svg";
 import Timer from "../images/timer.svg";
@@ -23,9 +23,9 @@ const AdminPoints = () => {
     alert("Clue sent...");
   };
 
-
   return (
     <div className="point">
+      <div className="point__bg"></div>
       <div className="point__controls d-flex justify-content-between">
         <div>
           <div className="point__setting">
@@ -64,6 +64,7 @@ const AdminPoints = () => {
           <button className="point_btn plus_four">+ 4</button>
           <button className="point_btn plus_three">+ 3</button>
           <button className="point_btn plus_zero">+ 0</button>
+          <button className="point_btn wrong">Wrong</button>
         </div>
 
         <ImageInput text="Type a clue..." />

@@ -1,12 +1,17 @@
-/* body {
+.point__bg {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: -3;
   background: url("../images/map3.svg");
   height: 100%;
+  width: 100%;
   background-position: center center;
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
-} */
+}
 .point {
   font-family: "PaytoneOne";
 }
@@ -28,11 +33,29 @@
   margin-left: -233.5px;
   top: 43%;
 }
-.point_btn {
+
+.point__board > h3, .point__board >h6 {
+  color: white;
+}
+.point__board {
+  
+}
+.plus_five, .plus_four, .plus_three,.plus_zero  {
   cursor: pointer;
   background: #34c78f;
+  color: white;
   height: 2.5rem;
   width: 4.5rem;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 19.9895px;
+  border: none;
+}
+.wrong {
+  cursor: pointer;
+  background: #D6312F;
+  color: white;
+  height: 2.5rem;
+  padding: 0px 15px;
   box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
   border-radius: 19.9895px;
   border: none;

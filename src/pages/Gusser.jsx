@@ -16,7 +16,7 @@ const Gusser = () => {
 
   return (
     <div className="gusser">
-      <div className="bg"></div>
+      <div className="gusser__bg"></div>
       <div className="gusser__teamranks d-flex justify-content-between px-3">
         <h3 className="my-auto" style={{ color: "#ffffff" }}>
           Team Points
