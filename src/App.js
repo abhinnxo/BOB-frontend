@@ -9,6 +9,7 @@ import TeamBlue from "./pages/TeamBlue";
 import GameEnd from "./pages/GameEnd";
 import AdminPoints from "./pages/AdminPoints";
 import Admin from "./pages/Admin";
+import HostWaitingLobby from "./pages/HostWaitingLobby";
 
 function App() {
   const [bg, setBg] = ("")
@@ -27,6 +28,7 @@ function App() {
     <BrowserRouter>
       <Route exact path="/" component={NewGame} />
       <Route exact path="/lobby" component={WaitingLobby} />
+      <Route exact path="/hostlobby" component={HostWaitingLobby} />
       <Route exact path="/admin" component={Admin} />
       <Route exact path="/admin/points" component={AdminPoints} />
       <Route exact path="/red" component={TeamRed} />
