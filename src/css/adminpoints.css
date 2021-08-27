@@ -62,5 +62,6 @@
   position: absolute;
 }
 .point__send {
-  background: url("../images/button.png") no-repeat;
+  cursor: pointer;
+  transform: translate(200px, -43px);
 }

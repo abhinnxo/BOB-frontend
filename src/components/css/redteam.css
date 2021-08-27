@@ -1,9 +1,6 @@
 .redblock {
   position: relative;
 }
-/* .redblock__block {
-  position: absolute;
-} */
 .redblock__playerlist {
   position: absolute;
   transform: translate(40px, -309px);
