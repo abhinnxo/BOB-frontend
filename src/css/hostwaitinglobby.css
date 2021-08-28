@@ -1,3 +1,9 @@
+body{
+    background: url('../images//map3.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .hostWaitingLobby{
     display: flex;
     flex-direction: column;
@@ -110,4 +116,11 @@
 
 .player .answered{
     background-color: #1bd5e2;
+}
+
+.pointSend{
+    cursor: pointer;
+    position: relative;
+    top: -45px;
+    left: 420px;
 }
