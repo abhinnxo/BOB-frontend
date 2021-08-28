@@ -9,6 +9,7 @@ import TeamBlue from "./pages/TeamBlue";
 import GameEnd from "./pages/GameEnd";
 import AdminPoints from "./pages/AdminPoints";
 import Admin from "./pages/Admin";
+import AdminDestroy from "./pages/AdminDestroy";
 import HostWaitingLobby from "./pages/HostWaitingLobby";
 import io from "socket.io-client";
 
@@ -56,6 +57,11 @@ const [socket, setSocket] = useState(null);
         exact
         path="/admin"
         render={(props) => <Admin {...props} socket={socket} />}
+      />
+      <Route
+        exact
+        path="/admindestroy"
+        render={(props) => <AdminDestroy {...props} socket={socket} />}
       />
       <Route
         exact
