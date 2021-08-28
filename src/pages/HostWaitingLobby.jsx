@@ -10,6 +10,7 @@ import Send from "../images/send.svg";
 const HostWaitingLobby = () => {
     return (
         <section className="hostWaitingLobby">
+            <div className="hostwaitinglobby__bg"></div>
             <div className="end_settings">
                 <img src={settingsImg} alt="" className="settings" />
                 <img src={endGameImg} className="endGame" alt="" />
