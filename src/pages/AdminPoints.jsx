@@ -31,11 +31,10 @@ const AdminPoints = () => {
           <div className="point__setting">
             <img src={Setting} alt="settings" />
           </div>
-          <div className="point__timer">
-            <img src={Timer} alt="timer" />
-            <h1>1:30</h1>
-          </div>
-          <div>
+          <p className="point__timer">
+            1:30
+          </p>
+          <div className="pauseTimer">
             {" "}
             <img src={PauseTimer} alt="pause timer" />
           </div>
@@ -44,11 +43,10 @@ const AdminPoints = () => {
           <div>
             <img src={EndGame} alt="end game" />
           </div>
-          <div className="point__round">
-            <img src={Round} alt="round number" />
-            <h1>Round 1</h1>
-          </div>
-          <div>
+          <p className="point__round">
+            Round 1
+          </p>
+          <div className="nextRound">
             <img src={NextRound} alt="next round" />
           </div>
         </div>
