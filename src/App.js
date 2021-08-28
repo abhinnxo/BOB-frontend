@@ -39,7 +39,6 @@ function App() {
 
   return (
     <BrowserRouter>
-    {\*  <Route exact path="/hostlobby" component={HostWaitingLobby} /> */}
      <Route
         exact
         path="/"
@@ -50,6 +49,8 @@ function App() {
         path="/lobby"
         render={(props) => <WaitingLobby {...props} socket={socket} />}
       />
+      <Route exact path="/hostlobby" 
+      render={(props) => <HostWaitingLobby {...props} socket={socket} />} />
       <Route
         exact
         path="/admin"
