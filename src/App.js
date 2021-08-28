@@ -9,6 +9,7 @@ import TeamBlue from "./pages/TeamBlue";
 import GameEnd from "./pages/GameEnd";
 import AdminPoints from "./pages/AdminPoints";
 import Admin from "./pages/Admin";
+import HostWaitingLobby from "./pages/HostWaitingLobby";
 import io from "socket.io-client";
 
 function App() {
@@ -38,7 +39,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Route
+    {\*  <Route exact path="/hostlobby" component={HostWaitingLobby} /> */}
+     <Route
         exact
         path="/"
         render={(props) => <NewGame {...props} socket={socket} />}
