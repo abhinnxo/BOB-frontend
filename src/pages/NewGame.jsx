@@ -6,8 +6,6 @@ import ImageInput from "../components/ImageInput";
 import "../css/newgame.css";
 var customId = require("custom-id");
 
-
-
 const NewGame = ({ socket }) => {
   const [nickname, setNickname] = useState("");
   const [username, setUsername] = useState("");
@@ -16,9 +14,6 @@ const NewGame = ({ socket }) => {
 
   const history = useHistory();
 
-  useEffect(() => {
-    console.log("passed props", socket);
-  }, []);
   useEffect(() => {
     console.log("username", username);
   }, [username]);
@@ -52,7 +47,6 @@ const NewGame = ({ socket }) => {
     } else if (nickname === "") {
       alert("Enter Username");
     } else {
-      socket.emit("joinRoom", { nickname, roomid });
       localStorage.setItem("host", false);
       localStorage.setItem("roomid", roomid);
       history.push("/lobby");

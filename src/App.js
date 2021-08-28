@@ -13,9 +13,7 @@ import HostWaitingLobby from "./pages/HostWaitingLobby";
 import io from "socket.io-client";
 
 function App() {
-  const [bg, setBg] = "";
-
-  const [socket, setSocket] = useState(null);
+const [socket, setSocket] = useState(null);
 
   //   // Prompt when the user tries to close/leave the tab
   // window.onbeforeunload = (event) => {
@@ -30,12 +28,15 @@ function App() {
 
   useEffect(() => {
     const newSocket = io(`http://${window.location.hostname}:5000`);
-    newSocket.on("confirmation", function (message) {
-      console.log(message);
-    });
+    console.log(newSocket);
+    newSocket.on('confirmation',function(message){console.log(message)})
     setSocket(newSocket);
     return () => newSocket.close();
   }, [setSocket]);
+
+  // useEffect(() => {
+  //   console.log(socket);
+  // }, [socket]);
 
   return (
     <BrowserRouter>

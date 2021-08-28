@@ -9,6 +9,7 @@ import ImageInput from '../components/ImageInput';
 const HostWaitingLobby = () => {
     return (
         <section className="hostWaitingLobby">
+            <div className="hostwaitinglobby__bg"></div>
             <div className="end_settings">
                 <img src={settingsImg} alt="" className="settings" />
                 <img src={endGameImg} className="endGame" alt="" />

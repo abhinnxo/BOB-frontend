@@ -1,113 +1,116 @@
-.hostWaitingLobby{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: auto;
-    width: max-content;
-    margin-top: 100px;
-}
-
-.end_settings, .timer_round, .pauseTimer_nextRound {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 900px;
-    margin-bottom: 5px;
-}
-
-.endGame{
-    width: 200px;
-}
-
-.timer_round>p{
-    background: url('../images/timer.svg');
+.hostwaitinglobby__bg {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: -3;
+    background: url("../images/map1.png");
+    height: 100%;
+    width: 100%;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     background-size: cover;
-    width: 186px;
-    height: 53px;
-    display: grid;
-    place-items: center;
-    font-size: large;
-    font-weight: 700;
-    color: #ffffff;
+    overflow: hidden;
+  }
+.hostWaitingLobby {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  width: max-content;
+  margin-top: 100px;
 }
-
-.pauseTimer_nextRound>img{
-    background-size: cover;
-    width: 120px;
+.end_settings,
+.timer_round,
+.pauseTimer_nextRound {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 900px;
+  margin-bottom: 5px;
 }
-
-.mainWord, .teamNameBlue, .teamNameRed{
-    background-size: cover !important;
-    display: grid;
-    place-items: center;
-    min-width: 190px;
-    min-height: 45px;
-    width: fit-content;
-    font-weight: 700;
-    color: #ffffff;
-    position: relative;
+.endGame {
+  width: 200px;
 }
-
-.teamNameBlue{
-    background: url('../images//team_name_blue.svg');
-    transform: translate(100px, -100px);
+.timer_round > p {
+  background: url("../images/timer.svg");
+  background-size: cover;
+  width: 186px;
+  height: 53px;
+  display: grid;
+  place-items: center;
+  font-size: large;
+  font-weight: 700;
+  color: #ffffff;
 }
-
-.teamNameRed{
-    background: url('../images//team_nam_red.svg');
-    transform: translate(-100px, 100px);
+.pauseTimer_nextRound > img {
+  background-size: cover;
+  width: 120px;
 }
-
-.mainWord{
-    font-size: medium;
-    background: url('../images/mainword.svg');
-    width: 200px;
-    height: 50px;
-    margin: 10px auto -40px auto;
+.mainWord,
+.teamNameBlue,
+.teamNameRed {
+  background-size: cover !important;
+  display: grid;
+  place-items: center;
+  min-width: 190px;
+  min-height: 45px;
+  width: fit-content;
+  font-weight: 700;
+  color: #ffffff;
+  position: relative;
 }
-
-.destroy{
-    width: 150px;
+.teamNameBlue {
+  background: url("../images//team_name_blue.svg");
+  transform: translate(100px, -100px);
 }
-
-.join{
-    display: flex;
-    align-items: center;
+.teamNameRed {
+  background: url("../images//team_nam_red.svg");
+  transform: translate(-100px, 100px);
 }
-
-.teams{
-    color: #ffffff;
-    background: url('../images/centre_box.svg');
-    background-size: cover !important;
-    width: 750px;
-    height: 400px;
-    padding: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+.mainWord {
+  font-size: medium;
+  background: url("../images/mainword.svg");
+  width: 200px;
+  height: 50px;
+  margin: 10px auto -40px auto;
 }
-
-.allPlayers{
-    width: 500px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+.destroy {
+  width: 150px;
 }
-
-.player{
-    display: flex;
-    justify-content: center;
+.join {
+  display: flex;
+  align-items: center;
 }
-
-.player>div{
-    margin: 3px 0px 0px 10px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #ffffff;
-    border: 5px solid #ffffff;
+.teams {
+  color: #ffffff;
+  background: url("../images/centre_box.svg");
+  background-size: cover !important;
+  width: 750px;
+  height: 400px;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
-
-.player .answered{
-    background-color: #1bd5e2;
+.allPlayers {
+  width: 500px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.player {
+  display: flex;
+  justify-content: center;
+}
+.player > div {
+  margin: 3px 0px 0px 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 5px solid #ffffff;
+}
+.player .answered {
+  background-color: #1bd5e2;
 }

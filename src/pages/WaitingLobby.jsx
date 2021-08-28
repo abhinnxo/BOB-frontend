@@ -7,19 +7,32 @@ import BlueTeam from "../components/BlueTeam";
 import ImageButton from "../components/ImageButton";
 import { useHistory, useLocation } from "react-router-dom";
 
-const WaitingLobby = ({socket}) => {
+const WaitingLobby = ({ socket }) => {
+  const [username, setUsername] = useState("");
   const [host, setHost] = useState(false);
   const [team, setTeam] = useState("");
+  // comming from server
+  const [blueplayerlist, setBluePlayerList] = useState([]);
+  const [redplayerlist, setRedPlayerList] = useState([]);
   const [redplayer, setRedPlayer] = useState("");
   const [blueplayer, setBluePlayer] = useState("");
 
   useEffect(() => {
-    console.log("blueplayer", blueplayer);
-  }, [blueplayer])
-  
+    setUsername(localStorage.getItem("nickname"));
+  }, []);
+
+  //  Team red Players
+  socket.on("teamredpayernames", function (message) {
+    setRedPlayerList(message);
+  });
+  //  Team blue Players
+  socket.on("teambluepayernames", function (message) {
+    setBluePlayerList(message);
+  });
+
   useEffect(() => {
-    console.log("admin points ", socket.connected);
-  }, [])
+    console.log("blueplayer", blueplayer);
+  }, [blueplayer]);
 
   const history = useHistory();
 
@@ -57,28 +70,28 @@ const WaitingLobby = ({socket}) => {
     }
   });
 
-
-
-
   function teamselection(e) {
-    // socket.emit("guessingTeam", 0);
-    // dispatch(update_team(e));
-    //console.log(location.state)
     if (e === "red") {
       setTeam("red");
       localStorage.setItem("team", "red");
-      setRedPlayer(localStorage.getItem("nickname"))
+      setRedPlayer(localStorage.getItem("nickname"));
+      document.querySelector(".lobby__redteam").style.display = "none";
+      document.querySelector(".lobby__blueteam").style.display = "none";
+      socket.emit("joinRoom", { username, room: "Team Red" });
     }
     if (e === "blue") {
       setTeam("blue");
       localStorage.setItem("team", "blue");
-      setBluePlayer(localStorage.getItem("nickname"))
+      setBluePlayer(localStorage.getItem("nickname"));
+      document.querySelector(".lobby__redteam").style.display = "none";
+      document.querySelector(".lobby__blueteam").style.display = "none";
+      socket.emit("joinRoom", { username, room: "Team Blue" });
     }
   }
 
   return (
     <div className="lobby">
-     <div className="lobby__bg"></div>
+      <div className="lobby__bg"></div>
       <div className="lobby__back">
         <img src={BackButton} alt="back" onClick={goBack} />
       </div>
@@ -88,9 +101,7 @@ const WaitingLobby = ({socket}) => {
         </div>
         <div className="d-flex">
           {/* Red Box */}
-          <RedTeam 
-           playername={redplayer}
-           />
+          <RedTeam playerList={redplayerlist} />
           <input
             type="button"
             name="button"
@@ -100,9 +111,7 @@ const WaitingLobby = ({socket}) => {
             }}
           />
           {/* Blue Box */}
-          <BlueTeam 
-          playername={blueplayer}                 
-          />
+          <BlueTeam playerList={blueplayerlist} />
           <input
             type="button"
             name="button"
