@@ -9,6 +9,32 @@
     background-position: center center;
     background-attachment: fixed;
     background-repeat: no-repeat;
+}
+body{
+    background: url('../images//map3.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.hostWaitingLobby{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    width: max-content;
+    margin-top: 100px;
+}
+.end_settings, .timer_round, .pauseTimer_nextRound {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 900px;
+    margin-bottom: 5px;
+}
+.endGame{
+    width: 200px;
+}
+.timer_round>p{
+    background: url('../images/timer.svg');
     background-size: cover;
     overflow: hidden;
   }
@@ -113,4 +139,11 @@
 }
 .player .answered {
   background-color: #1bd5e2;
+}
+
+.pointSend{
+    cursor: pointer;
+    position: relative;
+    top: -45px;
+    left: 420px;
 }

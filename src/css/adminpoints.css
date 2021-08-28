@@ -16,16 +16,26 @@
   font-family: "PaytoneOne";
 }
 .point__controls {
-  margin-top: 8rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  width: 1100px;
+  margin-top: 100px;
+  width: 900px;
   margin-left: auto;
   margin-right: auto;
 }
+
+.point__controls > div:first-child{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.point__controls > div:last-child{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
 .point__controls > div > div {
-  padding-bottom: 1rem;
-  padding-top: 1rem;
+  margin: 10px 0px;
 }
 .point__board {
   position: absolute;
@@ -66,6 +76,23 @@
 .point__randomword {
   color: #34c78f;
 }
+
+.point__timer, .point__round{
+  background: url('../images/timer.svg');
+    background-size: cover;
+    width: 186px;
+    height: 53px;
+    display: grid;
+    place-items: center;
+    font-size: large;
+    color: #ffffff;
+}
+
+.pauseTimer>img, .nextRound>img{
+  background-size: cover;
+    width: 120px;
+}
+
 .point__timer {
   cursor: pointer;
   position: relative;

@@ -5,6 +5,7 @@ import endGameImg from '../images/end_game.svg';
 import pauseTimerImg from '../images/pause_timer.svg'
 import nextRoundImg from '../images/next_round.svg';
 import ImageInput from '../components/ImageInput';
+import Send from "../images/send.svg";
 
 const HostWaitingLobby = () => {
     return (
@@ -80,6 +81,7 @@ const HostWaitingLobby = () => {
                         </div>
                         <div className="msgInput">
                            <ImageInput text="Enter your message" />
+                           <img src={Send} alt="send" className="pointSend" />
                         </div>
                     </div>
                     <span className="teamNameRed">Team Name (G)</span>
