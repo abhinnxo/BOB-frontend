@@ -11,6 +11,7 @@ const NewGame = ({ socket }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [roomid, setRoomid] = useState("");
+  const [hostId, setHosutId] = useState("")
 
   const history = useHistory();
 
@@ -69,6 +70,7 @@ const NewGame = ({ socket }) => {
         pathname: "/lobby",
         state: {
           xyz: 1,
+          hostId: socket.id,
         },
       });
     } else {

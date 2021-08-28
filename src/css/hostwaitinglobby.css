@@ -10,11 +10,11 @@
     background-attachment: fixed;
     background-repeat: no-repeat;
 }
-body{
+/* body{
     background: url('../images//map3.svg');
     background-repeat: no-repeat;
     background-size: cover;
-}
+} */
 .hostWaitingLobby{
     display: flex;
     flex-direction: column;

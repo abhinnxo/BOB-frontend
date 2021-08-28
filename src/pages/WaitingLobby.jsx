@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import BlueBlock from "../images/blueteam.svg";
 import "../css/waitinglobby.css";
 import BackButton from "../images/back_button.svg";
 import RedTeam from "../components/RedTeam";
@@ -10,22 +9,24 @@ import { useHistory, useLocation } from "react-router-dom";
 const WaitingLobby = ({ socket}) => {
   const [username, setUsername] = useState("");
   const [host, setHost] = useState(false);
+  const [hostId, setHostId] = useState("");
   const [team, setTeam] = useState("");
   // comming from server
   const [blueplayerlist, setBluePlayerList] = useState([]);
   const [redplayerlist, setRedPlayerList] = useState([]);
   const [redplayer, setRedPlayer] = useState("");
   const [blueplayer, setBluePlayer] = useState("");
-  
-  
-  const location = useLocation();
 
-  console.log("from newgame", location.state.xyz);
-  
+  const location = useLocation();
 
   useEffect(() => {
     setUsername(localStorage.getItem("nickname"));
   }, []);
+
+  useEffect(() => {
+    socket.emit("hostId", location.state.hostId);
+    console.log("Host: ", location.state.hostId);
+  }, [])
 
   //  Team red Players
   socket.on("teamredplayernames", function (message) {
@@ -42,7 +43,18 @@ const WaitingLobby = ({ socket}) => {
 
   const history = useHistory();
 
+  // On clicking start button
   const startgame = () => {
+    socket.on("guesserID", function(id) {
+        if(id === socket.id) {
+          // this is the player who will guess
+          history.push(`/${team}/guess`)
+        }
+        else {
+          history.push(`/${team}`)
+        }
+    })
+
     if (host === true) {
       history.push("/admin/points");
     }

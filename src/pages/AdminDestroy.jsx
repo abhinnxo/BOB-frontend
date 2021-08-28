@@ -1,5 +1,6 @@
 import React from 'react'
-import '../css/hostwaitinglobby.css';
+// import '../css/hostwaitinglobby.css';
+import "../css/admindestroy.css"
 import settingsImg from '../images/settings.svg';
 import endGameImg from '../images/end_game.svg';
 import pauseTimerImg from '../images/pause_timer.svg'
