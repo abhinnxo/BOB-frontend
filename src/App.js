@@ -9,11 +9,8 @@ import TeamBlue from "./pages/TeamBlue";
 import GameEnd from "./pages/GameEnd";
 import AdminPoints from "./pages/AdminPoints";
 import Admin from "./pages/Admin";
-<<<<<<< HEAD
 import HostWaitingLobby from "./pages/HostWaitingLobby";
-=======
 import io from "socket.io-client";
->>>>>>> 236367e30b5e9149b01dd0ffb83ca047e00410e4
 
 function App() {
   const [bg, setBg] = "";
@@ -42,19 +39,8 @@ function App() {
 
   return (
     <BrowserRouter>
-<<<<<<< HEAD
-      <Route exact path="/" component={NewGame} />
-      <Route exact path="/lobby" component={WaitingLobby} />
-      <Route exact path="/hostlobby" component={HostWaitingLobby} />
-      <Route exact path="/admin" component={Admin} />
-      <Route exact path="/admin/points" component={AdminPoints} />
-      <Route exact path="/red" component={TeamRed} />
-      <Route exact path="/red/guess" component={Gusser} />
-      <Route exact path="/blue" component={TeamBlue} />
-      <Route exact path="/blue/guess" component={Gusser} />
-      <Route exact path="/gameend" component={GameEnd} />
-=======
-      <Route
+    {\*  <Route exact path="/hostlobby" component={HostWaitingLobby} /> */}
+     <Route
         exact
         path="/"
         render={(props) => <NewGame {...props} socket={socket} />}
@@ -99,7 +85,6 @@ function App() {
         path="/gameend"
         render={(props) => <GameEnd {...props} socket={socket} />}
       />
->>>>>>> 236367e30b5e9149b01dd0ffb83ca047e00410e4
     </BrowserRouter>
   );
 }
