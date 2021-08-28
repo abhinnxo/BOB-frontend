@@ -7,7 +7,7 @@ import BlueTeam from "../components/BlueTeam";
 import ImageButton from "../components/ImageButton";
 import { useHistory, useLocation } from "react-router-dom";
 
-const WaitingLobby = ({ socket }) => {
+const WaitingLobby = ({ socket}) => {
   const [username, setUsername] = useState("");
   const [host, setHost] = useState(false);
   const [team, setTeam] = useState("");
@@ -16,17 +16,23 @@ const WaitingLobby = ({ socket }) => {
   const [redplayerlist, setRedPlayerList] = useState([]);
   const [redplayer, setRedPlayer] = useState("");
   const [blueplayer, setBluePlayer] = useState("");
+  
+  
+  const location = useLocation();
+
+  console.log("from newgame", location.state.xyz);
+  
 
   useEffect(() => {
     setUsername(localStorage.getItem("nickname"));
   }, []);
 
   //  Team red Players
-  socket.on("teamredpayernames", function (message) {
+  socket.on("teamredplayernames", function (message) {
     setRedPlayerList(message);
   });
   //  Team blue Players
-  socket.on("teambluepayernames", function (message) {
+  socket.on("teamblueplayernames", function (message) {
     setBluePlayerList(message);
   });
 
@@ -55,20 +61,13 @@ const WaitingLobby = ({ socket }) => {
   };
 
   useEffect(() => {
+    setHost(localStorage.getItem("host"));
+  }, [])
+  useEffect(() => {
     // set room id to div
     document.querySelector(".lobby__code").innerHTML =
       localStorage.getItem("roomid");
-    // get host status (true/false)
-    setHost(localStorage.getItem("host"));
   }, []);
-  // setting style of start button
-  useEffect(() => {
-    console.log(host);
-    if (host === true) {
-      console.log("got host state");
-      document.querySelector(".lobby__startbtn").classList.remove("d-none");
-    }
-  });
 
   function teamselection(e) {
     if (e === "red") {
@@ -111,7 +110,7 @@ const WaitingLobby = ({ socket }) => {
             }}
           />
           {/* Blue Box */}
-          <BlueTeam playerList={blueplayerlist} />
+          <BlueTeam playerListBlue={blueplayerlist} />
           <input
             type="button"
             name="button"
@@ -122,11 +121,13 @@ const WaitingLobby = ({ socket }) => {
           />
         </div>
         {/* Start Button */}
-        <ImageButton
-          clickMe={startgame}
-          classlist="lobby__startbtn mx-auto"
-          value="START"
-        />
+       {
+         (location.state.xyz>0)?(<div> <ImageButton
+         clickMe={startgame}
+         classlist="lobby__startbtn mx-auto"
+         value="START"
+       /></div>):(<div></div>)
+       }
       </div>
     </div>
   );

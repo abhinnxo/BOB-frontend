@@ -49,7 +49,12 @@ const NewGame = ({ socket }) => {
     } else {
       localStorage.setItem("host", false);
       localStorage.setItem("roomid", roomid);
-      history.push("/lobby");
+      history.push({
+        pathname: "/lobby",
+        state: {
+          xyz: 0,
+        },
+      });
     }
   };
   // On Click the Host Room Button
@@ -59,7 +64,13 @@ const NewGame = ({ socket }) => {
     if (username === "admin" && password === "admin") {
       localStorage.setItem("host", true);
       localStorage.setItem("roomid", customId({}));
-      history.push("/lobby");
+      // history.push("/lobby");
+      history.push({
+        pathname: "/lobby",
+        state: {
+          xyz: 1,
+        },
+      });
     } else {
       alert("Username / Password is wrong");
     }

@@ -2,17 +2,7 @@ import React, { useEffect, useState } from "react";
 import RedBlock from "../images/redteam.svg";
 import "./css/redteam.css";
 
-const RedTeam = ({ playername, playerList }) => {
-  // const [playerList, setPlayerList] = useState([]);
-
-  // useEffect(() => {
-  //     console.log("red", playername);
-  //   setPlayerList([playername]);
-  // }, [playername]);
-
-  useEffect(() => {
-    console.log(playerList);
-  }, [])
+const RedTeam = ({ playerList }) => {
 
   return (
     <div>

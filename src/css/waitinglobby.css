@@ -88,3 +88,7 @@
     text-align: left;
     
 } */
+
+.disabled:hover {
+  cursor: not-allowed !important;
+}
