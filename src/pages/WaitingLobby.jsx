@@ -8,22 +8,17 @@ import { useHistory, useLocation } from "react-router-dom";
 
 const WaitingLobby = ({ socket }) => {
   const [username, setUsername] = useState("");
-  const [host, setHost] = useState(null);
-  const [hostId, setHostId] = useState("");
   const [team, setTeam] = useState("");
+  // Current Player name
+  const [redPlayer, setRedPlayer] = useState("")
+  const [bluePlayer, setBluePlayer] = useState("")
   // comming from server
   const [blueplayerlist, setBluePlayerList] = useState([]);
   const [redplayerlist, setRedPlayerList] = useState([]);
-  const [redplayer, setRedPlayer] = useState("");
-  const [blueplayer, setBluePlayer] = useState("");
   // Guesser id available to gusser only
   const [guesser, setGuesser] = useState("")
 
   const location = useLocation();
-
-  useEffect(() => {
-    setHost(localStorage.getItem("host"));
-  }, []);
 
   useEffect(() => {
     setUsername(localStorage.getItem("nickname"));
@@ -43,10 +38,6 @@ const WaitingLobby = ({ socket }) => {
     setBluePlayerList(message);
   });
 
-  useEffect(() => {
-    console.log("blueplayer", blueplayer);
-  }, [blueplayer]);
-
   const history = useHistory();
 
   // Start Game when event is emitted
@@ -57,7 +48,12 @@ const WaitingLobby = ({ socket }) => {
           history.push("/admindestroy");      
         }
         else if (socket.id === guesser) {
-           history.push(`/${team}/guess`)  
+           history.push({
+             pathname: `/${team}/guess`,
+             state: {
+               gusserid: guesser,
+             }
+           })  
         } 
         else history.push(`/${team}`)   
     }

@@ -37,8 +37,8 @@
   font-family: "PaytoneOne";
 }
 .gusser__hints {
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: space-evenly;
   font-family: "PaytoneOne";
   height: 126px;
   width: 592px;
@@ -57,7 +57,7 @@
 }
 .gusser__enterdiv {
   position: absolute;
-  font-family: "PaytoneOne"; 
+  font-family: "PaytoneOne";
   text-align: center;
   left: 50%;
   margin-left: -233.5px;
@@ -73,7 +73,7 @@
   right: 20%;
 }
 .gusser__timer h3 {
-  font-family: "PaytoneOne"; 
+  font-family: "PaytoneOne";
   transform: translate(-90px, -53px);
   color: white;
 }

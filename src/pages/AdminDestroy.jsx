@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 // import '../css/hostwaitinglobby.css';
 import "../css/admindestroy.css";
 import settingsImg from "../images/settings.svg";
@@ -10,7 +11,12 @@ import destroyButton from "../images/destroy_button.svg";
 const AdminDestroy = ({ socket }) => {
   const [bluearr, setBluearr] = useState([]);
   const [redarr, setRedarr] = useState([]);
+  const [giveGuest, setGiveGuest] = useState(false);
+  const [arr, setArr] = useState([]);
 
+  const history = useHistory();
+
+  // On clicking proceed button
   socket.on("Team-BlueWordList", (bluearr) => {
     console.log(bluearr);
     setBluearr(bluearr);
@@ -19,6 +25,17 @@ const AdminDestroy = ({ socket }) => {
   socket.on("Team-RedWordList", (redarr) => {
     setRedarr(redarr);
   });
+
+  socket.on("All-Words", (arr) => {
+    console.log("All words log 2");
+    setArr(arr)
+    
+  });
+  useEffect(() => {
+    socket.emit("showToGuesser", arr);
+    if(giveGuest)
+      history.push("/admin/points")
+  }, [giveGuest]);
 
   return (
     <section className="hostWaitingLobby">
@@ -70,6 +87,9 @@ const AdminDestroy = ({ socket }) => {
           <span className="teamNameRed">Team Red</span>
         </div>
       </div>
+      <button className="admin__destroy" onClick={() => setGiveGuest(true)}>
+        proceed
+      </button>
     </section>
   );
 };

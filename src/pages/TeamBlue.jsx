@@ -8,10 +8,12 @@ import "../css/teamblue.css";
 function TeamBlue({socket}) {
   const [hint, setHint] = useState("");
 
-  socket.on("random-word", (word) => {
-    console.log("randomWord", word);
-    document.querySelector(".red__randomword").innerHTML = `" ${word} "`;
-  });
+ 
+    socket.on("random-word", (word) => {
+      console.log("randomWord", word);
+      document.querySelector(".blue__randomword").innerHTML = `" ${word} "`;
+    });
+
   const sendHint = () => {
     socket.emit("msgListMake", {hint, room: "Team Blue"})
     document.querySelector(".blue__input").value = "";    
@@ -22,7 +24,7 @@ function TeamBlue({socket}) {
       <div className="blue__enterhint text-center">
         <h3>
           Enter a Word simmilar to{" "}
-          <span style={{ color: "red" }}>"Random"</span>
+          <span style={{ color: "red" }}>" ... "</span>
         </h3>
         <br />
         <ImageInput
