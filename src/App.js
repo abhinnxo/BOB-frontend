@@ -11,6 +11,7 @@ import AdminPoints from "./pages/AdminPoints";
 import Admin from "./pages/Admin";
 import AdminDestroy from "./pages/AdminDestroy";
 import HostWaitingLobby from "./pages/HostWaitingLobby";
+import BattleScreen from "./pages/BattleScreen";
 import io from "socket.io-client";
 
 function App() {
@@ -62,6 +63,11 @@ const [socket, setSocket] = useState(null);
         exact
         path="/admindestroy"
         render={(props) => <AdminDestroy {...props} socket={socket} />}
+      />
+      <Route
+        exact
+        path="/battlescreen"
+        render={(props) => <BattleScreen {...props} socket={socket} />}
       />
       <Route
         exact
