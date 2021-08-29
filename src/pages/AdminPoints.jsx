@@ -28,6 +28,7 @@ const AdminPoints = ({ socket }) => {
     document.querySelector(".point__mainword").innerHTML = word;
   });
   socket.on("guessSubmitted", word => {
+    console.log("guessSubmitted", word);
     document.querySelector(".point__randomword").innerHTML = word;
   })
 
