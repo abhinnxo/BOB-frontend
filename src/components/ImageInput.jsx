@@ -7,14 +7,13 @@ const style = {
   padding: " 5px 50px"
 }
 
-function ImageInput({ text, change, classList }) {
+function ImageInput({ text, change }) {
   return (
     <div>
       <input type="text" 
       placeholder={text} 
       onChange={change} 
       style={style}
-      className={classList}
       />
     </div>
   );

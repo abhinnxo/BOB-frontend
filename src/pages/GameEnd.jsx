@@ -12,7 +12,6 @@ const GameEnd = () => {
 
   return (
     <div className="gameend">
-      <div className="gameend__bg"></div>
       <div className="end__text text-center">
         <div>
           Team <span>Red</span> Wins

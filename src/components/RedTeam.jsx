@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import RedBlock from "../images/redteam.svg";
 import "./css/redteam.css";
 
-const RedTeam = ({ playerList }) => {
+const RedTeam = ({ playername }) => {
+  const [playerList, setPlayerList] = useState([]);
+
+  useEffect(() => {
+      console.log("red", playername);
+    setPlayerList([playername]);
+  }, [playername]);
 
   return (
     <div>
@@ -11,11 +17,9 @@ const RedTeam = ({ playerList }) => {
         className="redblock__block"
         />
         <div className="redblock__playerlist">
-          <ul>
           {playerList.map((name, key) => {
-            return <li key={key}>{name}</li>;
+            return <p key={key}>{name}</p>;
           })}
-          </ul>
         </div>
       </div>
     </div>
