@@ -295,3 +295,32 @@
     background-color: #ff0000;
     border: 3px solid #ffffff;
 }
+
+@media only screen and (max-width:1366px){
+    .hostWaitingLobby{
+        margin-top: 70px;
+    }
+    
+    .end_settings, .timer_round, .pauseTimer_nextRound{
+        width: 800px;
+        margin-bottom: 0px;
+    }
+    
+    .teams, .seperateBoard{
+        width: 650px;
+        height: 350px;
+    }
+
+    .players{
+        transform: translateY(-10px);
+    }
+
+    .teams>h3, .players>h3{
+        font-size: 22px;
+    }
+
+    .msgInput>div>input{
+        width: 350px !important;
+        height: 50px !important;
+    }
+}
