@@ -5,6 +5,20 @@
   background-repeat: no-repeat;
   background-size: cover;
 } */
+.gusser__bg {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: -3;
+  background: url("../images/map1.png");
+  height: 100%;
+  width: 100%;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
 .gusser__back {
   position: absolute;
   top: 15%;
@@ -23,8 +37,8 @@
   font-family: "PaytoneOne";
 }
 .gusser__hints {
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: space-evenly;
   font-family: "PaytoneOne";
   height: 126px;
   width: 592px;
@@ -43,7 +57,7 @@
 }
 .gusser__enterdiv {
   position: absolute;
-  font-family: "PaytoneOne"; 
+  font-family: "PaytoneOne";
   text-align: center;
   left: 50%;
   margin-left: -233.5px;
@@ -59,7 +73,7 @@
   right: 20%;
 }
 .gusser__timer h3 {
-  font-family: "PaytoneOne"; 
+  font-family: "PaytoneOne";
   transform: translate(-90px, -53px);
   color: white;
 }

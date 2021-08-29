@@ -5,27 +5,32 @@ import ImageInput from "../components/ImageInput";
 import Clock from "../images/clock.svg";
 import "../css/teamblue.css";
 
-function TeamBlue() {
+function TeamBlue({socket}) {
   const [hint, setHint] = useState("");
 
-  useEffect(() => {
-    console.log(hint);
-  }, [hint]);
+ 
+    socket.on("random-word", (word) => {
+      console.log("randomWord", word);
+      document.querySelector(".blue__randomword").innerHTML = `" ${word} "`;
+    });
 
   const sendHint = () => {
-    alert("Hint Sent...");
+    socket.emit("msgListMake", {hint, room: "Team Blue"})
+    document.querySelector(".blue__input").value = "";    
   };
+
   return (
     <div className="blue__bg">
       <div className="blue__enterhint text-center">
         <h3>
           Enter a Word simmilar to{" "}
-          <span style={{ color: "red" }}>"Random"</span>
+          <span style={{ color: "red" }}>" ... "</span>
         </h3>
         <br />
         <ImageInput
           text="Type your word here..."
           change={(e) => setHint(e.target.value)}
+          classList="blue__input"
         />
         <br />
         <ImageButton

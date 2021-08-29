@@ -1,26 +1,41 @@
-/* body {
+.point__bg {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: -3;
   background: url("../images/map3.svg");
   height: 100%;
+  width: 100%;
   background-position: center center;
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
-} */
+}
 .point {
   font-family: "PaytoneOne";
 }
 .point__controls {
-  margin-top: 8rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  width: 1100px;
+  margin-top: 100px;
+  width: 900px;
   margin-left: auto;
   margin-right: auto;
 }
+
+.point__controls > div:first-child{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.point__controls > div:last-child{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
 .point__controls > div > div {
-  padding-bottom: 1rem;
-  padding-top: 1rem;
+  margin: 10px 0px;
 }
 .point__board {
   position: absolute;
@@ -28,11 +43,29 @@
   margin-left: -233.5px;
   top: 43%;
 }
-.point_btn {
+
+.point__board > h3, .point__board >h6 {
+  color: white;
+}
+.point__board {
+  
+}
+.plus_five, .plus_four, .plus_three,.plus_zero  {
   cursor: pointer;
   background: #34c78f;
+  color: white;
   height: 2.5rem;
   width: 4.5rem;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 19.9895px;
+  border: none;
+}
+.wrong {
+  cursor: pointer;
+  background: #D6312F;
+  color: white;
+  height: 2.5rem;
+  padding: 0px 15px;
   box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
   border-radius: 19.9895px;
   border: none;
@@ -43,6 +76,23 @@
 .point__randomword {
   color: #34c78f;
 }
+
+.point__timer, .point__round{
+  background: url('../images/timer.svg');
+    background-size: cover;
+    width: 186px;
+    height: 53px;
+    display: grid;
+    place-items: center;
+    font-size: large;
+    color: #ffffff;
+}
+
+.pauseTimer>img, .nextRound>img{
+  background-size: cover;
+    width: 120px;
+}
+
 .point__timer {
   cursor: pointer;
   position: relative;
