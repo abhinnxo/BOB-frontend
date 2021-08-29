@@ -3,7 +3,7 @@
   left: 0px;
   top: 0px;
   z-index: -3;
-  background: url("../images/map1.png") !important;
+  background: url("../images/map1.png");
   height: 100%;
   width: 100%;
   background-position: center center;
