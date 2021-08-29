@@ -6,6 +6,7 @@ import EndGame from '../images/end_game.svg';
 import NextRound from '../images/next_round.svg';
 import Send from '../images/send.svg';
 import '../css/adminpoints.css';
+import { useHistory } from 'react-router';
 
 const style = {
   color: 'white',
@@ -20,62 +21,99 @@ const AdminPoints = ({ socket }) => {
   // const [word, setWord] = useState("")
   const [score, setScore] = useState(0);
   const [gameStatus, setGameStatus] = useState(0);
-  const [roundNumber, setRoundNumber] = useState(1);
+  const [giveGuest, setGiveGuest] = useState(false);
+  const [wrong, setWrong] = useState(0);
+  const [word, setword] = useState('');
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  const [arr, setArr] = useState([]);
   var count = 0;
   var stopTimer = 0;
   var finalArray = [];
   const pointSend = () => {
     alert('Clue sent...');
   };
+  const history = useHistory();
+
+  const [roundNumber, setRoundNumber] = useState(1);
 
   useEffect(() => {
+    socket.on('random-word', (rands) => {
+      console.log(rands);
+      document.getElementById('randomWord').innerHTML = rands;
+    });
+
     socket.on('game-ended', (gameValue) => {
       if (gameValue === 1) {
         window.location.href = '/';
       }
     });
 
-    socket.on('random-word-host', (rands) => {
-      console.log(rands);
-      document.getElementById('randomWord').innerHTML = rands;
-    });
-
-    socket.on('final-Array', (myArray) => {
-      console.log('final Array:', myArray);
-
-      finalArray = myArray;
-      for (var i = 0; i < myArray.length; i++) {
-        document.getElementById(`checkbox${i}`).hidden = false;
-        document.getElementById(`check${i}`).innerHTML = myArray[i];
-      }
-    });
-
-    socket.on('timer-counter', ({ minutes, seconds }) => {
-      document.getElementById('Timer').innerHTML = minutes + ':' + seconds;
-    });
-
     socket.on('game-ended', (gameValue) => {
       console.log('vbnm');
-      if (gameValue == 1) {
+      if (gameValue === 1) {
         window.location.href = '/';
       }
     });
-  }, []);
+
+    socket.on('random-word', (word) => {
+      console.log('ADMIN POINT', word);
+      setword(word);
+      localStorage.setItem('word', word);
+    });
+
+    socket.on('guessToHost', (guessSubmitted) => {
+      console.log('guessSubmitted', guessSubmitted);
+      document.querySelector('.point__randomword').innerHTML = guessSubmitted;
+    });
+
+    // socket.on('final-Array', (myArray) => {
+    //   console.log('final Array:', myArray);
+
+    //   finalArray = myArray;
+    //   for (var i = 0; i < myArray.length; i++) {
+    //     document.getElementById(`checkbox${i}`).hidden = false;
+    //     document.getElementById(`check${i}`).innerHTML = myArray[i];
+    //   }
+    // });
+  }, [socket]);
+
+  socket.on('All-Words', (arr) => {
+    console.log('All words log 2');
+    setArr(arr);
+  });
+
+  useEffect(() => {
+    socket.emit('showToGuesser', arr);
+    if (giveGuest)
+      history.push({
+        pathname: '/admindestroy',
+      });
+  }, [giveGuest]);
+
+  // useEffect(() => {
+  //   socket.on('timer-counter', ({ minutes, seconds }) => {
+  //     setMinutes(minutes);
+  //     setSeconds(seconds);
+  //   });
+  // }, []);
+
+  socket.on('guessed-wrong', (wrong) => {
+    if (wrong > 2) {
+      setScore(0);
+      socket.emit('change-score', score);
+      setRoundNumber(roundNumber + 1);
+      socket.emit('change-round', roundNumber);
+      socket.emit('timer-start', count);
+      document.getElementById('roundNo').innerHTML = roundNumber;
+      setWrong(1);
+      history.push('/admindestroy');
+    }
+  });
 
   function stopTime() {
-    document.getElementById('Timer').innerHTML = 0 + ':' + 0;
     socket.emit('stopTimer', stopTimer);
   }
-
-  socket.on('random-word', (word) => {
-    console.log('ADMIN POINT', word);
-    document.querySelector('.point__mainword').innerHTML = word;
-  });
-
-  socket.on('guessToHost', (guessSubmitted) => {
-    console.log('guessSubmitted', guessSubmitted);
-    document.querySelector('.point__randomword').innerHTML = guessSubmitted;
-  });
 
   count = 0;
   socket.emit('timer-start', count);
@@ -89,6 +127,7 @@ const AdminPoints = ({ socket }) => {
     count = 0;
     socket.emit('timer-start', count);
     document.getElementById('roundNo').innerHTML = roundNumber;
+    //history.push('/admindestroy');
   }
 
   function score4() {
@@ -99,6 +138,7 @@ const AdminPoints = ({ socket }) => {
     socket.emit('change-round', roundNumber);
     socket.emit('timer-start', count);
     document.getElementById('roundNo').innerHTML = roundNumber;
+    //history.push('/admindestroy');
   }
 
   function score3() {
@@ -109,6 +149,7 @@ const AdminPoints = ({ socket }) => {
     socket.emit('change-round', roundNumber);
     socket.emit('timer-start', count);
     document.getElementById('roundNo').innerHTML = roundNumber;
+    //history.push('/admindestroy');
   }
 
   function score0() {
@@ -119,10 +160,16 @@ const AdminPoints = ({ socket }) => {
     socket.emit('change-round', roundNumber);
     socket.emit('timer-start', count);
     document.getElementById('roundNo').innerHTML = roundNumber;
+    //history.push('/admindestroy');
   }
 
   function endGame() {
     socket.emit('game-end-clicked', gameStatus);
+  }
+
+  function wrongFxn() {
+    setWrong(wrong + 1);
+    socket.emit('wrong-guess', wrong);
   }
 
   return (
@@ -134,7 +181,9 @@ const AdminPoints = ({ socket }) => {
             <img src={Setting} alt='settings' />
           </div>
           <p className='point__timer'>
-            <span id='Timer'></span>
+            <span>
+              {minutes}:{seconds}
+            </span>
           </p>
           <div className='pauseTimer'>
             {' '}
@@ -156,9 +205,9 @@ const AdminPoints = ({ socket }) => {
         </div>
       </div>
       <div className='point__board text-center'>
-        <h4 className='point__mainword'>Main Word</h4>
+        <h4 className='point__mainword'>{word}</h4>
         <h3>
-          Guess - <span>1</span>
+          Guess - <span>{wrong}</span>
         </h3>
         <h6>The Answer submitted is</h6>
         <h1 className='point__randomword' id='randomWord'>
@@ -177,16 +226,21 @@ const AdminPoints = ({ socket }) => {
           <button className='point_btn plus_zero' onClick={score0}>
             + 0
           </button>
-          <button className='point_btn wrong'>Wrong</button>
+          <button className='point_btn wrong' onClick={wrongFxn}>
+            Wrong
+          </button>
         </div>
 
         {/* <ImageInput text='Type a clue...' /> */}
-        <img
+        {/* <img
           src={Send}
           alt='send'
           className='point__send'
           onClick={pointSend}
-        />
+        /> */}
+        <button className='admin__destroy' onClick={() => setGiveGuest(true)}>
+          proceed
+        </button>
       </div>
     </div>
   );
