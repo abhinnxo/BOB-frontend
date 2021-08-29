@@ -1,10 +1,3 @@
-import {
-  update_nickname,
-  update_host,
-  update_roomid,
-} from "../store/mainstore";
-import { useSelector, useDispatch } from "react-redux";
-import { socket, createconnection } from "../services/socket";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Card, Nav } from "react-bootstrap";
@@ -13,30 +6,21 @@ import ImageInput from "../components/ImageInput";
 import "../css/newgame.css";
 var customId = require("custom-id");
 
-const NewGame = () => {
-  //creating socket connection
-  useEffect(() => {
-    createconnection();
-  }, []);
-
-  //redux managements
-  const mstore = useSelector((state) => state.mainstore);
-  const dispatch = useDispatch();
-  //console.log(mstore)
-
+const NewGame = ({ socket }) => {
   const [nickname, setNickname] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [roomid, setRoomid] = useState("");
+  const [hostId, setHosutId] = useState("")
 
   const history = useHistory();
 
   useEffect(() => {
     console.log("username", username);
-  }, [username])
+  }, [username]);
   useEffect(() => {
     console.log("password", password);
-  }, [password])
+  }, [password]);
 
   // change cards for host/player, for joining or creating a new room
   const join = () => {
@@ -64,31 +48,39 @@ const NewGame = () => {
     } else if (nickname === "") {
       alert("Enter Username");
     } else {
-      socket.emit("joinRoom", { nickname, roomid });
-      dispatch(update_nickname(nickname));
-      dispatch(update_roomid(roomid));
-      dispatch(update_host(true));
       localStorage.setItem("host", false);
       localStorage.setItem("roomid", roomid);
-      history.push( "/lobby");
+      history.push({
+        pathname: "/lobby",
+        state: {
+          xyz: 0,
+        },
+      });
     }
   };
   // On Click the Host Room Button
   const hostroom = () => {
-
     console.log("uname " + username + " pass " + password);
 
     if (username === "admin" && password === "admin") {
       localStorage.setItem("host", true);
       localStorage.setItem("roomid", customId({}));
-      history.push( "/lobby");
+      // history.push("/lobby");
+      history.push({
+        pathname: "/lobby",
+        state: {
+          xyz: 1,
+          hostId: socket.id,
+        },
+      });
     } else {
-     alert("Username / Password is wrong")
+      alert("Username / Password is wrong");
     }
   };
 
   return (
     <div className="newgame__div">
+      <div className="newgame__bg"></div>
       <Card className="newgame__card">
         <Card.Header className="newgame__header">
           <Nav

@@ -1,0 +1,39 @@
+{
+  "files": {
+    "main.css": "/static/css/main.66eb3863.chunk.css",
+    "main.js": "/static/js/main.eadfc65c.chunk.js",
+    "main.js.map": "/static/js/main.eadfc65c.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.69781038.js",
+    "runtime-main.js.map": "/static/js/runtime-main.69781038.js.map",
+    "static/css/2.3772862e.chunk.css": "/static/css/2.3772862e.chunk.css",
+    "static/js/2.78d848dd.chunk.js": "/static/js/2.78d848dd.chunk.js",
+    "static/js/2.78d848dd.chunk.js.map": "/static/js/2.78d848dd.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.3772862e.chunk.css.map": "/static/css/2.3772862e.chunk.css.map",
+    "static/css/main.66eb3863.chunk.css.map": "/static/css/main.66eb3863.chunk.css.map",
+    "static/js/2.78d848dd.chunk.js.LICENSE.txt": "/static/js/2.78d848dd.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/PaytoneOne-Regular.d906fa71.ttf",
+    "static/media/back_button.87b07efd.svg": "/static/media/back_button.87b07efd.svg",
+    "static/media/blueteam.fd9af332.svg": "/static/media/blueteam.fd9af332.svg",
+    "static/media/hostpoints.css": "/static/media/button.ce6a0a1c.png",
+    "static/media/clock.ea7d9592.svg": "/static/media/clock.ea7d9592.svg",
+    "static/media/waitinglobby.css": "/static/media/copy_code.ffedaa7c.svg",
+    "static/media/end_game.aa858ff4.svg": "/static/media/end_game.aa858ff4.svg",
+    "static/media/newgame.css": "/static/media/map.5bab44c7.png",
+    "static/media/next_round.7cf0bdf5.svg": "/static/media/next_round.7cf0bdf5.svg",
+    "static/media/pause_timer.a5a1faa8.svg": "/static/media/pause_timer.a5a1faa8.svg",
+    "static/media/redteam.cdbac077.svg": "/static/media/redteam.cdbac077.svg",
+    "static/media/round.cac231aa.svg": "/static/media/round.cac231aa.svg",
+    "static/media/send.6b4b1195.svg": "/static/media/send.6b4b1195.svg",
+    "static/media/settings.324045e6.svg": "/static/media/settings.324045e6.svg",
+    "static/media/teamblue.css": "/static/media/teamrank.1bade416.svg",
+    "static/media/timer.cac231aa.svg": "/static/media/timer.cac231aa.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.69781038.js",
+    "static/css/2.3772862e.chunk.css",
+    "static/js/2.78d848dd.chunk.js",
+    "static/css/main.66eb3863.chunk.css",
+    "static/js/main.eadfc65c.chunk.js"
+  ]
+}
