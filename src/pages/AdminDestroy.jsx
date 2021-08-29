@@ -8,17 +8,33 @@ import nextRoundImg from "../images/next_round.svg";
 import destroyButton from "../images/destroy_button.svg";
 
 const AdminDestroy = ({ socket }) => {
-  const [bluearr, setBluearr] = useState([]);
-  const [redarr, setRedarr] = useState([]);
+  const [bluearr, setBluearr] = useState(['word1', 'word2']);
+  const [redarr, setRedarr] = useState(['word3', 'word4']);
+  const [round, setRound] = useState(1);
+  const [guessingArr, setGuessingArr] = useState(round%2==0?redarr:bluearr);
+  const [guessingTeam, setGuessingTeam] = useState(round%2==0?'red':'blue');
+  //round%2==0?redisguessing:blue
+  //remove enemy team checkboxes
+  const destroyWords = () => {
+    alert(`Are you sure you wants to destroy these words ${guessingArr}`);
+    let allWords = document.querySelectorAll('.guessingTeam>input');
+    allWords.forEach(word => {
+        if(word.checked){
+            setGuessingArr(guessingArr.filter(item=>word.value===item?null:item));
+        }
+    });
+    // console.log(guessingArr);
+  }
 
-  socket.on("Team-BlueWordList", (bluearr) => {
-    console.log(bluearr);
-    setBluearr(bluearr);
-  });
+//   socket.on("Team-BlueWordList", (bluearr) => {
+//     console.log(bluearr);
+//     setBluearr(bluearr);
+//   });
 
-  socket.on("Team-RedWordList", (redarr) => {
-    setRedarr(redarr);
-  });
+//   socket.on("Team-RedWordList", (redarr) => {
+//     setRedarr(redarr);
+//   });
+
 
   return (
     <section className="hostWaitingLobby">
@@ -29,7 +45,7 @@ const AdminDestroy = ({ socket }) => {
       </div>
       <div className="timer_round">
         <p>01:30</p>
-        <p>Round 2</p>
+        <p>Round {round}</p>
       </div>
       <div className="pauseTimer_nextRound">
         <img src={pauseTimerImg} alt="" />
@@ -46,8 +62,9 @@ const AdminDestroy = ({ socket }) => {
               <div className="eachTeam">
                 {bluearr.map((word) => {
                   return (
-                    <div className="word">
-                      <span>{word}</span> <span></span>
+                    <div className={`word ${guessingTeam==='blue' ? 'guessingTeam' : ''}`}>
+                      <label for={word}>{word}</label>
+                      <input type="checkbox" name={word} id={word} value={word} />
                     </div>
                   );
                 })}
@@ -56,14 +73,15 @@ const AdminDestroy = ({ socket }) => {
               <div className="eachTeam">
                 {redarr.map((word) => {
                   return (
-                    <div className="word">
-                      <span>{word}</span> <span></span>
+                    <div className={`word ${guessingTeam==='red' ? 'guessingTeam' : ''}`}>
+                      <label for={word}>{word}</label>
+                      <input type="checkbox" name={word} id={word} value={word} />
                     </div>
                   );
                 })}
               </div>
             </div>
-            <div className="destroyButton">
+            <div className="destroyButton" onClick={()=>destroyWords()}>
               <img src={destroyButton} alt="" />
             </div>
           </div>

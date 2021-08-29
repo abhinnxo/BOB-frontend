@@ -292,8 +292,12 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #ff0000;
+    background-color: #ffffff;
     border: 3px solid #ffffff;
+}
+
+.crossed{
+    background-color: #ff0000;
 }
 
 @media only screen and (max-width:1366px){
