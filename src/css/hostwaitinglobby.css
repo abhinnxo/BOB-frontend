@@ -10,11 +10,6 @@
     background-attachment: fixed;
     background-repeat: no-repeat;
 }
-/* body{
-    background: url('../images//map3.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
-} */
 .hostWaitingLobby{
     display: flex;
     flex-direction: column;
@@ -220,6 +215,7 @@
 .player {
   display: flex;
   justify-content: center;
+  /* margin-top: 2rem; */
 }
 .player > div {
   margin: 3px 0px 0px 10px;

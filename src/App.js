@@ -51,7 +51,7 @@ const [socket, setSocket] = useState(null);
         path="/lobby"
         render={(props) => <WaitingLobby {...props} socket={socket} />}
       />
-      <Route exact path="/hostlobby" 
+      <Route exact path="/admin/lobby" 
       render={(props) => <HostWaitingLobby {...props} socket={socket} />} />
       <Route
         exact

@@ -1,134 +1,132 @@
-.point__bg {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    z-index: -3;
-    background: url("../images/map.svg");
-    height: 100%;
-    width: 100%;
-    background-position: center center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-    overflow: hidden;
-  }
-
-  
-.hostWaitingLobby{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: auto;
-    width: max-content;
-    margin-top: 100px;
+.admindestroy__bg {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: -3;
+  background: url("../images/map1.png") !important;
+  height: 100%;
+  width: 100%;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
 }
-.end_settings>img{
-    cursor: pointer;
+.hostWaitingLobby {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  width: max-content;
+  margin-top: 100px;
 }
-.end_settings, .timer_round, .pauseTimer_nextRound {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 900px;
-    margin-bottom: 5px;
+.end_settings > img {
+  cursor: pointer;
 }
-.endGame{
-    width: 200px;
+.end_settings,
+.timer_round,
+.pauseTimer_nextRound {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 900px;
+  margin-bottom: 5px;
 }
-.timer_round>p{
-    background: url('../images/timer.svg');
-    background-size: cover;
-    width: 186px;
-    height: 53px;
-    display: grid;
-    place-items: center;
-    font-size: large;
-    font-weight: 700;
-    color: #ffffff;
+.endGame {
+  width: 200px;
 }
-
-.pauseTimer_nextRound>img{
-    cursor: pointer;
-    background-size: cover;
-    width: 120px;
+.timer_round > p {
+  background: url("../images/timer.svg");
+  background-size: cover;
+  width: 186px;
+  height: 53px;
+  display: grid;
+  place-items: center;
+  font-size: large;
+  font-weight: 700;
+  color: #ffffff;
 }
-
-.mainWord, .teamNameBlue, .teamNameRed{
-    background-size: cover !important;
-    display: grid;
-    place-items: center;
-    min-width: 190px;
-    min-height: 45px;
-    width: fit-content;
-    font-weight: 700;
-    color: #ffffff;
-    position: relative;
+.pauseTimer_nextRound > img {
+  cursor: pointer;
+  background-size: cover;
+  width: 120px;
 }
-
-.teamNameBlue{
-    background: url('../images//team_name_blue.svg');
-    transform: translate(100px, -100px);
+.mainWord,
+.teamNameBlue,
+.teamNameRed {
+  background-size: cover !important;
+  display: grid;
+  place-items: center;
+  min-width: 190px;
+  min-height: 45px;
+  width: fit-content;
+  font-weight: 700;
+  color: #ffffff;
+  position: relative;
 }
-
-.teamNameRed{
-    background: url('../images//team_nam_red.svg');
-    transform: translate(-100px, 100px);
+.teamNameBlue {
+  background: url("../images//team_name_blue.svg");
+  transform: translate(100px, -100px);
+}
+.teamNameRed {
+  background: url("../images//team_nam_red.svg");
+  transform: translate(-100px, 100px);
 }
 
-.mainWord{
-    font-size: medium;
-    background: url('../images/mainword.svg');
-    width: 200px;
-    height: 50px;
-    margin: 10px auto -40px auto;
+.mainWord {
+  font-size: medium;
+  background: url("../images/mainword.svg");
+  width: 200px;
+  height: 50px;
+  margin: 10px auto -40px auto;
 }
 
-.destroy{
-    width: 150px;
+.destroy {
+  width: 150px;
 }
 
-.join{
-    display: flex;
-    align-items: center;
+.join {
+  display: flex;
+  align-items: center;
 }
 
-.teams{
-    color: #ffffff;
-    background: url('../images/centre_box.svg');
-    background-size: cover !important;
-    width: 750px;
-    height: 400px;
-    padding: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+.teams {
+  color: #ffffff;
+  background: url("../images/centre_box.svg");
+  background-size: cover !important;
+  width: 750px;
+  height: 400px;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.allPlayers{
-    width: 500px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+.allPlayers {
+  width: 500px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
-.player{
-    display: flex;
-    justify-content: center;
+.player {
+  display: flex;
+  justify-content: center;
 }
 
-.player>div{
-    margin: 3px 0px 0px 10px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #ffffff;
-    border: 5px solid #ffffff;
+.player > div {
+  margin: 3px 0px 0px 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 5px solid #ffffff;
 }
 
-.player .answered{
-    background-color: #1bd5e2;
-    overflow: hidden;
-  }
+.player .answered {
+  background-color: #1bd5e2;
+  overflow: hidden;
+}
 .hostWaitingLobby {
   display: flex;
   flex-direction: column;
@@ -232,69 +230,68 @@
   background-color: #1bd5e2;
 }
 
-.pointSend{
-    cursor: pointer;
-    position: relative;
-    top: -45px;
-    left: 420px;
+.pointSend {
+  cursor: pointer;
+  position: relative;
+  top: -45px;
+  left: 420px;
 }
-
 
 /* ========================== Destroy Admin ======================== */
 
-.seperateBoard{
-    color: #ffffff;
-    background: url('../images/centre_box_with_partition.svg');
-    background-size: cover !important;
-    width: 750px;
-    height: 400px;
-    padding: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+.seperateBoard {
+  color: #ffffff;
+  background: url("../images/centre_box_with_partition.svg");
+  background-size: cover !important;
+  width: 750px;
+  height: 400px;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.destroyButton>img{
-    cursor: pointer;
-    width: 150px;
+.destroyButton > img {
+  cursor: pointer;
+  width: 150px;
 }
 
-.team{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 550px;
-    gap: 20px;
-    /* border: 1px solid black; */
+.team {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 550px;
+  gap: 20px;
+  /* border: 1px solid black; */
 }
 
-.eachTeam{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.eachTeam {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.word{
-    font-weight: 800;
-    padding: 0px 10px;
-    background: url('../images//timer.svg');
-    background-size: cover;
-    height: 25px;
-    min-width: 100px;
-    width: fit-content;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 5px;
-    font-size: small;
+.word {
+  font-weight: 800;
+  padding: 0px 10px;
+  background: url("../images//timer.svg");
+  background-size: cover;
+  height: 25px;
+  min-width: 100px;
+  width: fit-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px;
+  font-size: small;
 }
 
-.word>span:last-child{
-    cursor: pointer;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #ff0000;
-    border: 3px solid #ffffff;
+.word > span:last-child {
+  cursor: pointer;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ff0000;
+  border: 3px solid #ffffff;
 }
