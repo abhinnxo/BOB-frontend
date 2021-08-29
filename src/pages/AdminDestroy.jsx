@@ -8,8 +8,8 @@ import nextRoundImg from "../images/next_round.svg";
 import destroyButton from "../images/destroy_button.svg";
 
 const AdminDestroy = ({ socket }) => {
-  const [bluearr, setBluearr] = useState(['word1', 'word2']);
-  const [redarr, setRedarr] = useState(['word3', 'word4']);
+  const [bluearr, setBluearr] = useState([]);
+  const [redarr, setRedarr] = useState([]);
   const [round, setRound] = useState(1);
   const [guessingArr, setGuessingArr] = useState(round%2==0?redarr:bluearr);
   const [guessingTeam, setGuessingTeam] = useState(round%2==0?'red':'blue');
@@ -26,14 +26,14 @@ const AdminDestroy = ({ socket }) => {
     // console.log(guessingArr);
   }
 
-//   socket.on("Team-BlueWordList", (bluearr) => {
-//     console.log(bluearr);
-//     setBluearr(bluearr);
-//   });
+  socket.on("Team-BlueWordList", (bluearr) => {
+    console.log(bluearr);
+    setBluearr(bluearr);
+  });
 
-//   socket.on("Team-RedWordList", (redarr) => {
-//     setRedarr(redarr);
-//   });
+  socket.on("Team-RedWordList", (redarr) => {
+    setRedarr(redarr);
+  });
 
 
   return (
