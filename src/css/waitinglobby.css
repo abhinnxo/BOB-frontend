@@ -1,21 +1,7 @@
-/* body {
-  background: url("../images/map1.png");
+body {
+  /* background: url("../images/map1.png"); */
   height: 100%;
   background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  overflow: hidden;
-} */
-.lobby__bg {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  z-index: -3;
-  background: url("../images/map1.png");
-  height: 100%;
-  width: 100%;
-  background-position: center center;
-  background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
@@ -88,7 +74,3 @@
     text-align: left;
     
 } */
-
-.disabled:hover {
-  cursor: not-allowed !important;
-}

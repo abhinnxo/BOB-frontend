@@ -5,33 +5,27 @@ import ImageInput from "../components/ImageInput";
 import Clock from "../images/clock.svg";
 import "../css/teamred.css";
 
-const TeamRed = ({ socket }) => {
+const TeamRed = () => {
   const [hint, setHint] = useState("");
-  
-  socket.on("random-word", (word) => {
-    console.log("randomWord", word);
-    document.querySelector(".red__randomword").innerHTML = `" ${word} "`;
-  });
+
+  useEffect(() => {
+    console.log(hint);
+  }, [hint]);
 
   const sendHint = () => {
-    socket.emit("msgListMake", {hint, room: "Team Red"})
-    document.querySelector(".red__input").value = "";    
+    alert("Hint Sent...");
   };
-
   return (
     <div className="red__bg">
       <div className="red__enterhint text-center">
         <h3>
           Enter a Word simmilar to{" "}
-          <span className="red__randomword" style={{ color: "red" }}>
-            " ... "
-          </span>
+          <span style={{ color: "red" }}>"Random"</span>
         </h3>
         <br />
         <ImageInput
           text="Type your word here..."
           change={(e) => setHint(e.target.value)}
-          classList="red__input"
         />
         <br />
         <ImageButton
@@ -44,7 +38,7 @@ const TeamRed = ({ socket }) => {
         <img src={Clock} alt="time" />
         <h3>0:30</h3>
       </div>
-      <div className="red__teamranks d-flex justify-content-between px-3">
+   <div className="red__teamranks d-flex justify-content-between px-3">
         <h3 className="my-auto" style={{ color: "#ffffff" }}>
           Team Points
         </h3>

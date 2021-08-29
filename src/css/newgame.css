@@ -1,18 +1,4 @@
-/* body {
-  background: url("../images/map.png");
-  height: 100%;
-  width: 100%;
-  background-position: center center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-  overflow: hidden;
-} */
-.newgame__bg {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  z-index: -3;
+body {
   background: url("../images/map.png");
   height: 100%;
   width: 100%;
