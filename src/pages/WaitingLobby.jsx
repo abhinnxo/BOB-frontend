@@ -6,9 +6,9 @@ import BlueTeam from "../components/BlueTeam";
 import ImageButton from "../components/ImageButton";
 import { useHistory, useLocation } from "react-router-dom";
 
-const WaitingLobby = ({ socket}) => {
+const WaitingLobby = ({ socket }) => {
   const [username, setUsername] = useState("");
-  const [host, setHost] = useState(false);
+  const [host, setHost] = useState(null);
   const [hostId, setHostId] = useState("");
   const [team, setTeam] = useState("");
   // comming from server
@@ -16,8 +16,14 @@ const WaitingLobby = ({ socket}) => {
   const [redplayerlist, setRedPlayerList] = useState([]);
   const [redplayer, setRedPlayer] = useState("");
   const [blueplayer, setBluePlayer] = useState("");
+  // Guesser id available to gusser only
+  const [guesser, setGuesser] = useState("")
 
   const location = useLocation();
+
+  useEffect(() => {
+    setHost(localStorage.getItem("host"));
+  }, []);
 
   useEffect(() => {
     setUsername(localStorage.getItem("nickname"));
@@ -26,7 +32,7 @@ const WaitingLobby = ({ socket}) => {
   useEffect(() => {
     socket.emit("hostId", location.state.hostId);
     console.log("Host: ", location.state.hostId);
-  }, [])
+  }, []);
 
   //  Team red Players
   socket.on("teamredplayernames", function (message) {
@@ -43,27 +49,28 @@ const WaitingLobby = ({ socket}) => {
 
   const history = useHistory();
 
+  // Start Game when event is emitted
+  socket.on("startGameForAll", function (value) {
+    if (value) {
+      console.log("startGameForAll", value);
+        if (socket.id === location.state.hostId) {
+          history.push("/admin/points");      
+        }
+        else if (socket.id === guesser) {
+           history.push(`/${team}/guess`)  
+        } 
+        else history.push(`/${team}`)   
+    }
+  });
+
+  socket.on("guesser", (id) => {
+    console.log("guess id", id);
+   setGuesser(id)
+  })
+ 
   // On clicking start button
   const startgame = () => {
-    socket.on("guesserID", function(id) {
-        if(id === socket.id) {
-          // this is the player who will guess
-          history.push(`/${team}/guess`)
-        }
-        else {
-          history.push(`/${team}`)
-        }
-    })
-
-    if (host === true) {
-      history.push("/admin/points");
-    }
-    if (team === "red") {
-      history.push("/red");
-    }
-    if (team === "blue") {
-      history.push("/blue");
-    }
+    socket.emit("hostStartedGame", true);
   };
   const goBack = () => {
     history.push("/");
@@ -72,9 +79,6 @@ const WaitingLobby = ({ socket}) => {
     navigator.clipboard.writeText(localStorage.getItem("roomid"));
   };
 
-  useEffect(() => {
-    setHost(localStorage.getItem("host"));
-  }, [])
   useEffect(() => {
     // set room id to div
     document.querySelector(".lobby__code").innerHTML =
@@ -133,13 +137,18 @@ const WaitingLobby = ({ socket}) => {
           />
         </div>
         {/* Start Button */}
-       {
-         (location.state.xyz>0)?(<div> <ImageButton
-         clickMe={startgame}
-         classlist="lobby__startbtn mx-auto"
-         value="START"
-       /></div>):(<div></div>)
-       }
+        {location.state.xyz > 0 ? (
+          <div>
+            {" "}
+            <ImageButton
+              clickMe={startgame}
+              classlist="lobby__startbtn mx-auto"
+              value="START"
+            />
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
     </div>
   );
