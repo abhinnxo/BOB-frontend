@@ -45,7 +45,7 @@ const WaitingLobby = ({ socket }) => {
     if (value) {
       console.log("startGameForAll", value);
         if (socket.id === location.state.hostId) {
-          history.push("/admindestroy");      
+          history.push("/admin/destroy");      
         }
         else if (socket.id === guesser) {
            history.push({
