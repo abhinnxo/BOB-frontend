@@ -9,12 +9,12 @@ import Send from "../images/send.svg";
 
 const HostWaitingLobby = ({ socket }) => {
   
-  useEffect(() => {
-    socket.on("random-word", (word) => {
-      console.log("randomWord", word);
-      document.querySelector(".mainWord").innerHTML = word;
-    });
-  }, [])
+  // useEffect(() => {
+  //   socket.on("random-word", (word) => {
+  //     console.log("randomWord", word);
+  //     document.querySelector(".mainWord").innerHTML = word;
+  //   });
+  // }, [])
   return (
     <section className="hostWaitingLobby">
       <div className="hostwaitinglobby__bg"></div>
