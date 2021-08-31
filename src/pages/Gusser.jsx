@@ -8,31 +8,50 @@ import "../css/gusser.css";
 const Gusser = ({ socket }) => {
   const [guess, setGuess] = useState("");
   const [hintList, setHintList] = useState(["Waiting for Clues..."]);
-
+  const [score, setScore] = useState(0);
   const location = useLocation();
+  const [roundfromBackend, setRoundFromBackend] = useState(1);
 
   useEffect(() => {
     socket.emit("gusserid", location.state.gusserid);
+
+    socket.on("round-change-from-backend", (round) => {
+      setRoundFromBackend(round);
+    });
+
+    socket.on("scores", (game) => {
+      console.log("game:", game);
+      //document.getElementById('scoreTeamRed').innerHTML = game[0].TeamScore;
+      if (roundfromBackend % 2 == 0) {
+        setScore(game[0].TeamScore);
+      } else {
+        setScore(game[1].TeamScore);
+      }
+    });
   }, []);
 
   useEffect(() => {
     console.log(guess);
   }, [guess]);
-  
+
   //  On clickong Enter button
   const guessSubmitted = () => {
-    socket.emit("guessSubmission", guess)
+    socket.emit("guessSubmission", guess);
     console.log(guess);
     alert("Guess Submited...");
   };
+  useEffect(() => {
+    socket.on("game-ended", (gameValue) => {
+      if (gameValue == 1) {
+        window.location.href = "/";
+      }
+    });
+  }, [socket]);
 
   // final array from host
-  useEffect(() => {
-    socket.on("gusserHints", (arr) => {
-      console.log("<<< RECIVED >>>");
-      setHintList(arr);
-    });
-  }, []);
+  socket.on("gusserHints", (arr) => {
+    setHintList(arr);
+  });
 
   return (
     <div className="gusser">
@@ -42,7 +61,7 @@ const Gusser = ({ socket }) => {
           Team Points
         </h3>
         <h3 className="my-auto" style={{ color: "#603913" }}>
-          10
+          {score}
         </h3>
       </div>
       <div className="gusser__hints">

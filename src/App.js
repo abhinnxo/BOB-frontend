@@ -11,11 +11,10 @@ import AdminPoints from "./pages/AdminPoints";
 import Admin from "./pages/Admin";
 import AdminDestroy from "./pages/AdminDestroy";
 import HostWaitingLobby from "./pages/HostWaitingLobby";
-import BattleScreen from "./pages/BattleScreen";
 import io from "socket.io-client";
 
 function App() {
-const [socket, setSocket] = useState(null);
+  const [socket, setSocket] = useState(null);
 
   //   // Prompt when the user tries to close/leave the tab
   // window.onbeforeunload = (event) => {
@@ -29,20 +28,18 @@ const [socket, setSocket] = useState(null);
   // };
 
   useEffect(() => {
-    const newSocket = io(`http://${window.location.hostname}:5000`);
+    const newSocket = io("http://localhost:5000");
     console.log(newSocket);
-    newSocket.on('confirmation',function(message){console.log(message)})
+    newSocket.on("confirmation", function (message) {
+      console.log(message);
+    });
     setSocket(newSocket);
     return () => newSocket.close();
   }, [setSocket]);
 
-  // useEffect(() => {
-  //   console.log(socket);
-  // }, [socket]);
-
   return (
     <BrowserRouter>
-     <Route
+      <Route
         exact
         path="/"
         render={(props) => <NewGame {...props} socket={socket} />}
@@ -52,8 +49,11 @@ const [socket, setSocket] = useState(null);
         path="/lobby"
         render={(props) => <WaitingLobby {...props} socket={socket} />}
       />
-      <Route exact path="/admin/lobby" 
-      render={(props) => <HostWaitingLobby {...props} socket={socket} />} />
+      <Route
+        exact
+        path="/admin/lobby"
+        render={(props) => <HostWaitingLobby {...props} socket={socket} />}
+      />
       <Route
         exact
         path="/admin"
@@ -61,13 +61,8 @@ const [socket, setSocket] = useState(null);
       />
       <Route
         exact
-        path="/admindestroy"
+        path="/admin/destroy"
         render={(props) => <AdminDestroy {...props} socket={socket} />}
-      />
-      <Route
-        exact
-        path="/battlescreen"
-        render={(props) => <BattleScreen {...props} socket={socket} />}
       />
       <Route
         exact
