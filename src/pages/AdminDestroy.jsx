@@ -98,7 +98,7 @@ const AdminDestroy = ({ socket }) => {
         <div className="join">
           <span className="teamNameBlue">Team Blue</span>
           <div className="seperateBoard">
-            <h4>Select the similar word and destroy them</h4>
+            <h4>Select the simmilar word and destroy them</h4>
             <div className="team">
               {/* Blue Team Words */}
               <div className="eachTeam">

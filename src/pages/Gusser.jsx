@@ -50,6 +50,7 @@ const Gusser = ({ socket }) => {
 
   // final array from host
   socket.on("gusserHints", (arr) => {
+    console.log("HINT LIST ", arr);
     setHintList(arr);
   });
 

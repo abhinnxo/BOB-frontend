@@ -71,7 +71,7 @@ const TeamRed = ({ socket }) => {
         <h3>
           Enter a Word simmilar to{" "}
           <span className="red__randomword" style={{ color: "red" }}>
-            {randomword}
+            " {randomword} "
           </span>
         </h3>
         <br />
@@ -98,7 +98,7 @@ const TeamRed = ({ socket }) => {
           Score: {score}
         </h3>
         <h3 className="my-auto" style={{ color: "#603913" }}>
-          Round:<span>{roundfromBackend - 1}</span>
+          Round: <span>{roundfromBackend - 1}</span>
         </h3>
       </div>
     </div>
