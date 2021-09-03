@@ -1,6 +1,5 @@
 // Team Red Players will enter their hinst here
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import ImageButton from "../components/ImageButton";
 import ImageInput from "../components/ImageInput";
 import Clock from "../images/clock.svg";
@@ -13,7 +12,6 @@ const TeamRed = ({ socket }) => {
   const [chatmsgSent, setchatmsgSent] = useState(0);
   const [score, setScore] = useState(0);
   const [randomword, setRandomWord] = useState(" ... ");
-  const history = useHistory();
 
   // getting the random word
   useEffect(() => {
@@ -31,6 +29,7 @@ const TeamRed = ({ socket }) => {
   useEffect(() => {
     socket.on("game-ended", (gameValue) => {
       if (gameValue == 1) {
+        localStorage.clear();
         window.location.href = "/";
       }
     });
@@ -56,6 +55,11 @@ const TeamRed = ({ socket }) => {
   }, [socket]);
 
   socket.emit("guessingTeam", roundfromBackend);
+
+  socket.on("random-word", (word) => {
+    console.log("randomWord", word);
+    document.querySelector(".red__randomword").innerHTML = `" ${word} "`;
+  });
 
   const sendHint = () => {
     socket.emit("msgListMake", { hint, room: "Team Red" });

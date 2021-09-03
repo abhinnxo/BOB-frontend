@@ -45,6 +45,7 @@ const Gusser = ({ socket }) => {
   useEffect(() => {
     socket.on("game-ended", (gameValue) => {
       if (gameValue == 1) {
+        localStorage.clear();
         window.location.href = "/";
       }
     });
