@@ -14,13 +14,32 @@ const AdminDestroy = ({ socket }) => {
   const [gameStatus, setGameStatus] = useState(0);
   const [giveGuest, setGiveGuest] = useState(false);
   const [arr, setArr] = useState([]);
-
   const [randomword, setRandomWord] = useState("MainWord");
-  // let randomword = "Main Word"
+  const [round, setRound] = useState(1);
+  const [guessingArr, setGuessingArr] = useState(
+    round % 2 == 0 ? redarr : bluearr
+  );
+  const [guessingTeam, setGuessingTeam] = useState(
+    round % 2 == 0 ? "red" : "blue"
+  );
   const history = useHistory();
 
   var score = 0;
   socket.emit("change-score", score);
+
+  //remove enemy team checkboxes
+  const destroyWords = () => {
+    alert(`Are you sure you wants to destroy these words ${guessingArr}`);
+    let allWords = document.querySelectorAll(".guessingTeam>input");
+    allWords.forEach((word) => {
+      if (word.checked) {
+        setGuessingArr(
+          guessingArr.filter((item) => (word.value === item ? null : item))
+        );
+      }
+    });
+    // console.log(guessingArr);
+  };
 
   // getting the random word
   useEffect(() => {
@@ -52,14 +71,6 @@ const AdminDestroy = ({ socket }) => {
     });
   }, [socket]);
 
-  // socket.on("random-word", (word) => {
-  //   console.log("ADMIN POINT", word);
-  //   setRandomWord(word);
-  //   // randomword = word;
-  //   console.log("GoingtoAdminPoint", word);
-  //   socket.emit("SameRandomWord", word);
-  // });
-
   socket.on("final-Array", (arr) => {
     console.log("All words log 2");
     setArr(arr);
@@ -83,29 +94,39 @@ const AdminDestroy = ({ socket }) => {
       <div className="admindestroy__bg"></div>
       <div className="end_settings">
         <img src={settingsImg} alt="" className="settings" />
-        <img src={endGameImg} onClick={endGame} className="endGame" alt="" />
+        <img src={endGameImg} className="endGame" alt="" />
       </div>
-      {/* <div className="timer_round">
+      <div className="timer_round">
         <p>01:30</p>
-        <p>Round 2</p>
-      </div> */}
+        <p>Round {round}</p>
+      </div>
       <div className="pauseTimer_nextRound">
-        {/* <img src={pauseTimerImg} alt='' /> */}
-        {/* <img src={nextRoundImg} alt='' /> */}
+        <img src={pauseTimerImg} alt="" />
+        <img src={nextRoundImg} alt="" />
       </div>
       <div className="players">
         <h2 className="mainWord">{randomword}</h2>
         <div className="join">
           <span className="teamNameBlue">Team Blue</span>
           <div className="seperateBoard">
-            <h4>Select the simmilar word and destroy them</h4>
+            <h4>Select the simmilar words and destroy them</h4>
             <div className="team">
               {/* Blue Team Words */}
               <div className="eachTeam">
                 {bluearr.map((word) => {
                   return (
-                    <div className="word">
-                      <span>{word}</span> <span></span>
+                    <div
+                      className={`word ${
+                        guessingTeam === "blue" ? "guessingTeam" : ""
+                      }`}
+                    >
+                      <label for={word}>{word}</label>
+                      <input
+                        type="checkbox"
+                        name={word}
+                        id={word}
+                        value={word}
+                      />
                     </div>
                   );
                 })}
@@ -114,14 +135,24 @@ const AdminDestroy = ({ socket }) => {
               <div className="eachTeam">
                 {redarr.map((word) => {
                   return (
-                    <div className="word">
-                      <span>{word}</span> <span></span>
+                    <div
+                      className={`word ${
+                        guessingTeam === "red" ? "guessingTeam" : ""
+                      }`}
+                    >
+                      <label for={word}>{word}</label>
+                      <input
+                        type="checkbox"
+                        name={word}
+                        id={word}
+                        value={word}
+                      />
                     </div>
                   );
                 })}
               </div>
             </div>
-            <div className="destroyButton">
+            <div className="destroyButton" onClick={() => destroyWords()}>
               <img src={destroyButton} alt="" />
             </div>
           </div>
