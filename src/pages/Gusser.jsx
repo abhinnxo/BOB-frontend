@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import ImageButton from "../components/ImageButton";
 import ImageInput from "../components/ImageInput";
 import Clock from "../images/clock.svg";
@@ -11,6 +11,7 @@ const Gusser = ({ socket }) => {
   const [score, setScore] = useState(0);
   const location = useLocation();
   const [roundfromBackend, setRoundFromBackend] = useState(1);
+  const history = useHistory();
 
   useEffect(() => {
     socket.emit("gusserid", location.state.gusserid);
@@ -40,6 +41,7 @@ const Gusser = ({ socket }) => {
     console.log(guess);
     alert("Guess Submited...");
   };
+
   useEffect(() => {
     socket.on("game-ended", (gameValue) => {
       if (gameValue == 1) {
@@ -53,6 +55,16 @@ const Gusser = ({ socket }) => {
     console.log("HINT LIST ", arr);
     setHintList(arr);
   });
+
+  // remove this player from guessing on round change
+  // socket.on("change-guesser", (round) => {
+  //   socket.on("guesser", (id) => {
+  //     if (socket.id !== id) {
+  //       if (round % 2 === 0) history.push("/blue");
+  //       else history.push("/red");
+  //     }
+  //   });
+  // });
 
   return (
     <div className="gusser">
