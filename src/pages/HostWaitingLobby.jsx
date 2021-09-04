@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import "../css/hostwaitinglobby.css";
 import settingsImg from "../images/settings.svg";
 import endGameImg from "../images/end_game.svg";
@@ -7,8 +7,7 @@ import nextRoundImg from "../images/next_round.svg";
 import ImageInput from "../components/ImageInput";
 import Send from "../images/send.svg";
 
-const HostWaitingLobby = ({ socket }) => {
-  
+const HostWaitingLobby = () => {
   // useEffect(() => {
   //   socket.on("random-word", (word) => {
   //     console.log("randomWord", word);

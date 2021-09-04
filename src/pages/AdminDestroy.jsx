@@ -27,20 +27,18 @@ const AdminDestroy = ({ socket }) => {
   var score = 0;
   socket.emit("change-score", score);
 
-  useEffect(() => {
-    if (round % 2 === 0) {
-      // setGuessingArr(redarr);
-      setGuessingTeam("red");
-    } else {
-      // setGuessingArr(bluearr);
-      setGuessingTeam("blue");
-    }
-  }, [round]);
+  // useEffect(() => {
+  //   if (round % 2 === 0) {
+  //     // setGuessingArr(redarr);
+  //     setGuessingTeam("red");
+  //   } else {
+  //     // setGuessingArr(bluearr);
+  //     setGuessingTeam("blue");
+  //   }
+  // }, [round]);
 
   //remove enemy team checkboxes
   const destroyWords = () => {
-    setGuessingArr([]);
-    alert(`Are you sure you wants to destroy these words?`);
     let allWords = document.querySelectorAll(".guessingTeam > input");
     allWords.forEach((word) => {
       if (!word.checked) {
@@ -49,11 +47,15 @@ const AdminDestroy = ({ socket }) => {
         // console.log("unchecked ", word.value);
       }
     });
-    console.log("guessingArr", guessingArr);
+    document.querySelector(".destroyButton").style.display = "none";
+
+    alert(
+      "Your Selected Words are removed, Click Proceed to send the clues to the Guesser..."
+    );
   };
 
-  // getting the random word
   useEffect(() => {
+    // getting the random word
     axios({
       method: "get",
       url: "http://localhost:5000/randomword",
@@ -64,6 +66,7 @@ const AdminDestroy = ({ socket }) => {
       })
       .catch((err) => console.error(err));
 
+    // getting the round number
     axios({
       method: "get",
       url: "http://localhost:5000/roundNo",

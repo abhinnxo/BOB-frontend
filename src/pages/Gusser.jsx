@@ -40,7 +40,7 @@ const Gusser = ({ socket }) => {
 
   //  get team name
   useEffect(() => {
-    team = localStorage.getItem("team");
+    setTeam(localStorage.getItem("team"));
   }, []);
 
   //  On clickong Enter button

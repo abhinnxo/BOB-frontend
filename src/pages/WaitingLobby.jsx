@@ -35,6 +35,14 @@ const WaitingLobby = ({ socket }) => {
       .catch((err) => console.error(err));
   }, []);
 
+  // Hide Join Button for Host
+  useEffect(() => {
+    if (location.state.hostId) {
+      document.querySelector(".lobby__redteam").style.display = "none";
+      document.querySelector(".lobby__blueteam").style.display = "none";
+    }
+  }, []);
+
   useEffect(() => {
     setUsername(localStorage.getItem("nickname"));
   }, []);
