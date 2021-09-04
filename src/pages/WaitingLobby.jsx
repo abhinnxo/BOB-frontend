@@ -54,9 +54,11 @@ const WaitingLobby = ({ socket }) => {
   });
 
   const history = useHistory();
+  var count = 0;
 
   // Start Game when event is emitted
   socket.on('startGameForAll', function (value) {
+    socket.emit('timer-start', count);
     if (value) {
       console.log('startGameForAll', value);
       if (socket.id === location.state.hostId) {

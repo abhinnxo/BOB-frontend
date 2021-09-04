@@ -1,26 +1,28 @@
 // Team blue. Players will enter their hinst here
-import React, { useState, useEffect } from "react";
-import ImageButton from "../components/ImageButton";
-import ImageInput from "../components/ImageInput";
-import Clock from "../images/clock.svg";
-import "../css/teamblue.css";
-const axios = require("axios");
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
+import ImageButton from '../components/ImageButton';
+import ImageInput from '../components/ImageInput';
+import Clock from '../images/clock.svg';
+import '../css/teamblue.css';
+const axios = require('axios');
 
 function TeamBlue({ socket }) {
-  const [hint, setHint] = useState("");
+  const [hint, setHint] = useState('');
   const [roundfromBackend, setRoundFromBackend] = useState(1);
   const [chatmsgSent, setchatmsgSent] = useState(0);
   const [score, setScore] = useState(0);
-  const [randomword, setRandomWord] = useState(" ... ");
+  const [randomword, setRandomWord] = useState(' ... ');
+  const history = useHistory();
 
   // getting the random word
   useEffect(() => {
     axios({
-      method: "get",
-      url: "http://localhost:5000/randomword",
+      method: 'get',
+      url: 'http://localhost:5000/randomword',
     })
       .then((res) => {
-        console.log("axios ", res.data);
+        console.log('axios ', res.data);
         setRandomWord(res.data);
       })
       .catch((err) => console.error(err));
@@ -28,20 +30,29 @@ function TeamBlue({ socket }) {
 
   //  end game button
   useEffect(() => {
-    socket.on("game-ended", (gameValue) => {
+    axios({
+      method: 'get',
+      url: 'http://localhost:5000/guesserid',
+    })
+      .then((res) => {
+        console.log('guesserID from backend: ', res.data);
+      })
+      .catch((err) => console.error(err));
+
+    socket.on('game-ended', (gameValue) => {
       if (gameValue == 1) {
         localStorage.clear();
-        window.location.href = "/";
+        window.location.href = '/';
       }
     });
 
-    socket.on("round-change-from-backend", (round) => {
+    socket.on('round-change-from-backend', (round) => {
       setchatmsgSent(1);
       setRoundFromBackend(round);
     });
 
-    socket.on("scores", (game) => {
-      console.log("game:", game);
+    socket.on('scores', (game) => {
+      console.log('game:', game);
       //document.getElementById('scoreTeamRed').innerHTML = game[0].TeamScore;
       setScore(game[1].TeamScore);
     });
@@ -50,22 +61,36 @@ function TeamBlue({ socket }) {
     //   document.getElementById('Timer').innerHTML = minutes + ':' + seconds;
     // });
 
-    socket.on("guessed-wrong", (wrong) => {
+    socket.on('guessed-wrong', (wrong) => {
       alert(`Guesser guessed wrong,Now ${2 - wrong} chances left`);
+    });
+
+    socket.on('guessID', (guesserID) => {
+      console.log('guesser ID from backend', guesserID);
+      if (guesserID == socket.id) {
+        if (socket.id === guesserID) {
+          history.push({
+            pathname: `/blue/guess`,
+            state: {
+              gusserid: guesserID,
+            },
+          });
+        }
+      }
     });
   }, [socket]);
 
-  socket.emit("guessingTeam", roundfromBackend);
+  socket.emit('guessingTeam', roundfromBackend);
 
-  socket.on("random-word", (word) => {
-    console.log("randomWord", word);
-    var x = document.querySelector(".blue__randomword");
+  socket.on('random-word', (word) => {
+    console.log('randomWord', word);
+    var x = document.querySelector('.blue__randomword');
     if (x != null) x.innerHTML = word;
   });
 
   const sendHint = () => {
-    socket.emit("msgListMake", { hint, room: "Team Blue" });
-    document.querySelector(".blue__input").value = "";
+    socket.emit('msgListMake', { hint, room: 'Team Blue' });
+    document.querySelector('.blue__input').value = '';
   };
 
   //  send the new player for guessing when the round is changed
@@ -76,39 +101,39 @@ function TeamBlue({ socket }) {
   // });
 
   return (
-    <div className="blue__bg">
-      <div className="blue__enterhint text-center">
+    <div className='blue__bg'>
+      <div className='blue__enterhint text-center'>
         <h3>
-          Enter a Word simmilar to{" "}
-          <span className="blue__randomword" style={{ color: "red" }}>
+          Enter a Word simmilar to{' '}
+          <span className='blue__randomword' style={{ color: 'red' }}>
             " {randomword} "
           </span>
         </h3>
         <br />
         <ImageInput
-          text="Type your word here..."
+          text='Type your word here...'
           change={(e) => setHint(e.target.value)}
-          classList="blue__input"
+          classList='blue__input'
         />
         <br />
         <ImageButton
-          value="ENTER"
-          classlist="blue__enterbtn"
+          value='ENTER'
+          classlist='blue__enterbtn'
           clickMe={sendHint}
         />
       </div>
-      <div className="blue__timer d-flex align-items-baseline">
-        <img src={Clock} alt="time" />
+      <div className='blue__timer d-flex align-items-baseline'>
+        <img src={Clock} alt='time' />
         <h3>
-          <span id="Timer"></span>
+          <span id='Timer'></span>
         </h3>
       </div>
-      <div className="blue__teamranks d-flex justify-content-between px-3">
-        <h3 className="my-auto" style={{ color: "#ffffff" }}>
+      <div className='blue__teamranks d-flex justify-content-between px-3'>
+        <h3 className='my-auto' style={{ color: '#ffffff' }}>
           Score: {score}
         </h3>
-        <h3 className="my-auto" style={{ color: "#603913" }}>
-          Round: <span>{roundfromBackend - 1}</span>
+        <h3 className='my-auto' style={{ color: '#603913' }}>
+          Round: <span>{roundfromBackend}</span>
         </h3>
       </div>
     </div>
