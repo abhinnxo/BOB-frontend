@@ -30,6 +30,15 @@ function TeamBlue({ socket }) {
 
   //  end game button
   useEffect(() => {
+    axios({
+      method: "get",
+      url: "http://localhost:5000/guesserid",
+    })
+      .then((res) => {
+        console.log("guesserID from backend: ", res.data);
+      })
+      .catch((err) => console.error(err));
+
     socket.on("game-ended", (gameValue) => {
       if (gameValue == 1) {
         localStorage.clear();
@@ -53,7 +62,21 @@ function TeamBlue({ socket }) {
     // });
 
     socket.on("guessed-wrong", (wrong) => {
-      alert(`Guesser guessed wrong, ${wrong} chances left`);
+      alert(`Guesser guessed wrong,Now ${2 - wrong} chances left`);
+    });
+
+    socket.on("guessID", (guesserID) => {
+      console.log("guesser ID from backend", guesserID);
+      if (guesserID == socket.id) {
+        if (socket.id === guesserID) {
+          history.push({
+            pathname: `/blue/guess`,
+            state: {
+              gusserid: guesserID,
+            },
+          });
+        }
+      }
     });
   }, [socket]);
 
@@ -120,7 +143,7 @@ function TeamBlue({ socket }) {
           Score: {score}
         </h3>
         <h3 className="my-auto" style={{ color: "#603913" }}>
-          Round: <span>{roundfromBackend - 1}</span>
+          Round: <span>{roundfromBackend}</span>
         </h3>
       </div>
     </div>

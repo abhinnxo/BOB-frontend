@@ -12,7 +12,7 @@ const Gusser = ({ socket }) => {
   const [score, setScore] = useState(0);
   const location = useLocation();
   const [roundfromBackend, setRoundFromBackend] = useState(1);
-  let team = "";
+  const [team, setTeam] = useState("");
   const history = useHistory();
 
   useEffect(() => {
@@ -20,6 +20,11 @@ const Gusser = ({ socket }) => {
 
     socket.on("round-change-from-backend", (round) => {
       setRoundFromBackend(round);
+      if (round % 2 === 0) {
+        setTeam("red");
+      } else {
+        setTeam("blue");
+      }
     });
 
     socket.on("scores", (game) => {
@@ -52,6 +57,25 @@ const Gusser = ({ socket }) => {
         window.location.href = "/";
       }
     });
+
+    socket.on("guessID", (guesserID) => {
+      console.log("guesser ID from backend", guesserID);
+      console.log(team);
+      if (socket.id === guesserID) {
+        history.push({
+          pathname: `/${team}/guess`,
+          state: {
+            gusserid: guesserID,
+          },
+        });
+      } else {
+        if (roundfromBackend % 2 === 0) {
+          history.push({ pathname: `/red` });
+        } else {
+          history.push({ pathname: `/blue` });
+        }
+      }
+    });
   }, [socket]);
 
   // final array from host
@@ -59,32 +83,6 @@ const Gusser = ({ socket }) => {
     console.log("HINT LIST ", arr);
     setHintList(arr);
   });
-
-  // remove this player from guessing on round change
-  // socket.on("change-guesser", (round) => {
-  //   socket.on("guesser", (id) => {
-  //     if (socket.id !== id) {
-  //       if (round % 2 === 0) history.push("/blue");
-  //       else history.push("/red");
-  //     }
-  //   });
-  // });
-
-  // Change routes for new gusser
-  // socket.on("change-guesser", (value) => {
-  //   if (value) {
-  //     axios({
-  //       method: "get",
-  //       url: "http://localhost:5000/guesserid",
-  //     })
-  //       .then((res) => {
-  //         if (socket.id === res.data.gusserSocketID) {
-  //           history.push(`/${team}`);
-  //         }
-  //       })
-  //       .catch((err) => console.error(err));
-  //   }
-  // });
 
   return (
     <div className="gusser">

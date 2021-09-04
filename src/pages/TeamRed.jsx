@@ -26,6 +26,15 @@ const TeamRed = ({ socket }) => {
         setRandomWord(res.data);
       })
       .catch((err) => console.error(err));
+
+    axios({
+      method: "get",
+      url: "http://localhost:5000/guesserid",
+    })
+      .then((res) => {
+        console.log("guesserID from backend: ", res.data);
+      })
+      .catch((err) => console.error(err));
   }, []);
 
   //  End Game button
@@ -46,16 +55,24 @@ const TeamRed = ({ socket }) => {
     socket.on("scores", (game) => {
       console.log("game:", game);
       setScore(game[0].TeamScore);
-      //document.getElementById('scoreTeamBlue').innerHTML = game[1].TeamScore;
     });
 
-    // socket.on('timer-counter', ({ minutes, seconds }) => {
-    //   document.getElementById('Timer').innerHTML = minutes + ':' + seconds;
-    // });
-
-    //  send on guessing qrong word
     socket.on("guessed-wrong", (wrong) => {
-      alert(`Guesser guessed wrong, Now ${wrong} chances left`);
+      alert(`Guesser guessed wrong, Now ${2 - wrong} chances left`);
+    });
+
+    socket.on("guessID", (guesserID) => {
+      console.log("guesser ID from backend", guesserID);
+      if (guesserID == socket.id) {
+        if (socket.id === guesserID) {
+          history.push({
+            pathname: `/red/guess`,
+            state: {
+              gusserid: guesserID,
+            },
+          });
+        }
+      }
     });
   }, [socket]);
 
@@ -121,7 +138,7 @@ const TeamRed = ({ socket }) => {
           Score: {score}
         </h3>
         <h3 className="my-auto" style={{ color: "#603913" }}>
-          Round: <span>{roundfromBackend - 1}</span>
+          Round: <span>{roundfromBackend}</span>
         </h3>
       </div>
     </div>

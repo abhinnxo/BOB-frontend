@@ -13,9 +13,11 @@ const AdminDestroy = ({ socket }) => {
   const [redarr, setRedarr] = useState([]);
   const [gameStatus, setGameStatus] = useState(0);
   const [giveGuest, setGiveGuest] = useState(false);
-  const [arr, setArr] = useState([]);
   const [randomword, setRandomWord] = useState("MainWord");
   const [round, setRound] = useState(1);
+  const [roundNumber, setRoundNumber] = useState(1);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
   // set array for the team
   const [guessingArr, setGuessingArr] = useState([]);
   // set guessing team
@@ -61,6 +63,16 @@ const AdminDestroy = ({ socket }) => {
         setRandomWord(res.data);
       })
       .catch((err) => console.error(err));
+
+    axios({
+      method: "get",
+      url: "http://localhost:5000/roundNo",
+    })
+      .then((res) => {
+        console.log("axios ", res.data);
+        setRoundNumber(res.data.round);
+      })
+      .catch((err) => console.error(err));
   }, []);
 
   useEffect(() => {
@@ -78,11 +90,19 @@ const AdminDestroy = ({ socket }) => {
         window.location.href = "/";
       }
     });
+    socket.on("timer-counter", ({ minutes, seconds }) => {
+      console.log(minutes, seconds);
+      setMinutes(minutes);
+      setSeconds(seconds);
+    });
+    socket.on("guessID", (guesserID) => {
+      console.log("guesser ID from backend", guesserID);
+    });
   }, [socket]);
 
   socket.on("final-Array", (arr) => {
     console.log("final-array", arr);
-    setArr(arr);
+    // setFinalArr(arr);
   });
 
   useEffect(() => {
@@ -96,6 +116,7 @@ const AdminDestroy = ({ socket }) => {
 
   function endGame() {
     socket.emit("game-end-clicked", gameStatus);
+    localStorage.clear();
   }
 
   return (
@@ -106,8 +127,10 @@ const AdminDestroy = ({ socket }) => {
         <img src={endGameImg} className="endGame" onClick={endGame} alt="" />
       </div>
       <div className="timer_round">
-        <p>01:30</p>
-        <p>Round {round}</p>
+        <p>
+          {minutes}:{seconds}
+        </p>
+        <p>Round {roundNumber}</p>
       </div>
       <div className="pauseTimer_nextRound">
         <img src={pauseTimerImg} alt="" />
