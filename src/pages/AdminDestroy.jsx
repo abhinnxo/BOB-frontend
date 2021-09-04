@@ -16,29 +16,38 @@ const AdminDestroy = ({ socket }) => {
   const [arr, setArr] = useState([]);
   const [randomword, setRandomWord] = useState("MainWord");
   const [round, setRound] = useState(1);
-  const [guessingArr, setGuessingArr] = useState(
-    round % 2 == 0 ? redarr : bluearr
-  );
-  const [guessingTeam, setGuessingTeam] = useState(
-    round % 2 == 0 ? "red" : "blue"
-  );
+  // set array for the team
+  const [guessingArr, setGuessingArr] = useState([]);
+  // set guessing team
+  const [guessingTeam, setGuessingTeam] = useState("blue");
   const history = useHistory();
 
   var score = 0;
   socket.emit("change-score", score);
 
+  useEffect(() => {
+    if (round % 2 === 0) {
+      // setGuessingArr(redarr);
+      setGuessingTeam("red");
+    } else {
+      // setGuessingArr(bluearr);
+      setGuessingTeam("blue");
+    }
+  }, [round]);
+
   //remove enemy team checkboxes
   const destroyWords = () => {
-    alert(`Are you sure you wants to destroy these words ${guessingArr}`);
-    let allWords = document.querySelectorAll(".guessingTeam>input");
+    setGuessingArr([]);
+    alert(`Are you sure you wants to destroy these words?`);
+    let allWords = document.querySelectorAll(".guessingTeam > input");
     allWords.forEach((word) => {
-      if (word.checked) {
-        setGuessingArr(
-          guessingArr.filter((item) => (word.value === item ? null : item))
-        );
+      if (!word.checked) {
+        // guessingArr.filter((item) => (word.value === item ? null : item));
+        setGuessingArr([...guessingArr, word.value]);
+        // console.log("unchecked ", word.value);
       }
     });
-    // console.log(guessingArr);
+    console.log("guessingArr", guessingArr);
   };
 
   // getting the random word
@@ -72,12 +81,12 @@ const AdminDestroy = ({ socket }) => {
   }, [socket]);
 
   socket.on("final-Array", (arr) => {
-    console.log("All words log 2");
+    console.log("final-array", arr);
     setArr(arr);
   });
 
   useEffect(() => {
-    socket.emit("showToGuesser", arr);
+    socket.emit("showToGuesser", guessingArr);
     if (giveGuest) history.push("/admin/points");
   }, [giveGuest]);
 
@@ -94,7 +103,7 @@ const AdminDestroy = ({ socket }) => {
       <div className="admindestroy__bg"></div>
       <div className="end_settings">
         <img src={settingsImg} alt="" className="settings" />
-        <img src={endGameImg} className="endGame" alt="" />
+        <img src={endGameImg} className="endGame" onClick={endGame} alt="" />
       </div>
       <div className="timer_round">
         <p>01:30</p>

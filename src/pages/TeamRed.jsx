@@ -1,5 +1,6 @@
 // Team Red Players will enter their hinst here
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 import ImageButton from "../components/ImageButton";
 import ImageInput from "../components/ImageInput";
 import Clock from "../images/clock.svg";
@@ -12,6 +13,7 @@ const TeamRed = ({ socket }) => {
   const [chatmsgSent, setchatmsgSent] = useState(0);
   const [score, setScore] = useState(0);
   const [randomword, setRandomWord] = useState(" ... ");
+  const history = useHistory();
 
   // getting the random word
   useEffect(() => {
@@ -26,6 +28,7 @@ const TeamRed = ({ socket }) => {
       .catch((err) => console.error(err));
   }, []);
 
+  //  End Game button
   useEffect(() => {
     socket.on("game-ended", (gameValue) => {
       if (gameValue == 1) {
@@ -39,6 +42,7 @@ const TeamRed = ({ socket }) => {
       setRoundFromBackend(round);
     });
 
+    //  Set scores
     socket.on("scores", (game) => {
       console.log("game:", game);
       setScore(game[0].TeamScore);
@@ -49,17 +53,13 @@ const TeamRed = ({ socket }) => {
     //   document.getElementById('Timer').innerHTML = minutes + ':' + seconds;
     // });
 
+    //  send on guessing qrong word
     socket.on("guessed-wrong", (wrong) => {
-      alert(`Guesser guessed wrong,Now ${2 - wrong} chances left`);
+      alert(`Guesser guessed wrong, Now ${wrong} chances left`);
     });
   }, [socket]);
 
   socket.emit("guessingTeam", roundfromBackend);
-
-  socket.on("random-word", (word) => {
-    console.log("randomWord", word);
-    document.querySelector(".red__randomword").innerHTML = `" ${word} "`;
-  });
 
   const sendHint = () => {
     socket.emit("msgListMake", { hint, room: "Team Red" });
@@ -73,6 +73,21 @@ const TeamRed = ({ socket }) => {
   //   }
   // });
 
+  // Change routes for new gusser
+  socket.on("change-guesser", (value) => {
+    if (value) {
+      axios({
+        method: "get",
+        url: "http://localhost:5000/guesserid",
+      })
+        .then((res) => {
+          if (socket.id === res.data.gusserSocketID) {
+            history.push("/red/guess");
+          }
+        })
+        .catch((err) => console.error(err));
+    }
+  });
   return (
     <div className="red__bg">
       <div className="red__enterhint text-center">

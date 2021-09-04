@@ -1,5 +1,6 @@
 // Team blue. Players will enter their hinst here
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 import ImageButton from "../components/ImageButton";
 import ImageInput from "../components/ImageInput";
 import Clock from "../images/clock.svg";
@@ -12,6 +13,7 @@ function TeamBlue({ socket }) {
   const [chatmsgSent, setchatmsgSent] = useState(0);
   const [score, setScore] = useState(0);
   const [randomword, setRandomWord] = useState(" ... ");
+  const history = useHistory();
 
   // getting the random word
   useEffect(() => {
@@ -51,17 +53,11 @@ function TeamBlue({ socket }) {
     // });
 
     socket.on("guessed-wrong", (wrong) => {
-      alert(`Guesser guessed wrong,Now ${2 - wrong} chances left`);
+      alert(`Guesser guessed wrong, ${wrong} chances left`);
     });
   }, [socket]);
 
   socket.emit("guessingTeam", roundfromBackend);
-
-  socket.on("random-word", (word) => {
-    console.log("randomWord", word);
-    var x = document.querySelector(".blue__randomword");
-    if (x != null) x.innerHTML = word;
-  });
 
   const sendHint = () => {
     socket.emit("msgListMake", { hint, room: "Team Blue" });
@@ -74,6 +70,22 @@ function TeamBlue({ socket }) {
   //     history.push("/blue/guess");
   //   }
   // });
+
+  // Change routes for new gusser
+  socket.on("change-guesser", (value) => {
+    if (value) {
+      axios({
+        method: "get",
+        url: "http://localhost:5000/guesserid",
+      })
+        .then((res) => {
+          if (socket.id === res.data.gusserSocketID) {
+            history.push("/blue/guess");
+          }
+        })
+        .catch((err) => console.error(err));
+    }
+  });
 
   return (
     <div className="blue__bg">

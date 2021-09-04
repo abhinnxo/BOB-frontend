@@ -4,6 +4,7 @@ import ImageButton from "../components/ImageButton";
 import ImageInput from "../components/ImageInput";
 import Clock from "../images/clock.svg";
 import "../css/gusser.css";
+const axios = require("axios");
 
 const Gusser = ({ socket }) => {
   const [guess, setGuess] = useState("");
@@ -11,6 +12,7 @@ const Gusser = ({ socket }) => {
   const [score, setScore] = useState(0);
   const location = useLocation();
   const [roundfromBackend, setRoundFromBackend] = useState(1);
+  let team = "";
   const history = useHistory();
 
   useEffect(() => {
@@ -31,9 +33,10 @@ const Gusser = ({ socket }) => {
     });
   }, []);
 
+  //  get team name
   useEffect(() => {
-    console.log(guess);
-  }, [guess]);
+    team = localStorage.getItem("team");
+  }, []);
 
   //  On clickong Enter button
   const guessSubmitted = () => {
@@ -65,6 +68,22 @@ const Gusser = ({ socket }) => {
   //       else history.push("/red");
   //     }
   //   });
+  // });
+
+  // Change routes for new gusser
+  // socket.on("change-guesser", (value) => {
+  //   if (value) {
+  //     axios({
+  //       method: "get",
+  //       url: "http://localhost:5000/guesserid",
+  //     })
+  //       .then((res) => {
+  //         if (socket.id === res.data.gusserSocketID) {
+  //           history.push(`/${team}`);
+  //         }
+  //       })
+  //       .catch((err) => console.error(err));
+  //   }
   // });
 
   return (
