@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Card, Nav } from "react-bootstrap";
 import ImageButton from "../components/ImageButton";
+// import ImageButton from "https://ik.imagekit.io/abhinnkriishn/images/button_wHcqW1ghX.png";
 import ImageInput from "../components/ImageInput";
 import "../css/newgame.css";
 var customId = require("custom-id");
@@ -11,7 +12,6 @@ const NewGame = ({ socket }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [roomid, setRoomid] = useState("");
-  const [hostId, setHosutId] = useState("");
 
   const history = useHistory();
 

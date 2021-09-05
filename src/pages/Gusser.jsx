@@ -9,7 +9,8 @@ const axios = require("axios");
 const Gusser = ({ socket }) => {
   const [guess, setGuess] = useState("");
   const [hintList, setHintList] = useState(["Waiting for Clues..."]);
-  const [score, setScore] = useState(0);
+  const [redTeamScore, setRedTeamScore] = useState(0);
+  const [blueTeamScore, setBlueTeamScore] = useState(0);
   const location = useLocation();
   const [roundfromBackend, setRoundFromBackend] = useState(1);
   const [team, setTeam] = useState("");
@@ -30,6 +31,7 @@ const Gusser = ({ socket }) => {
       seconds--;
     }, 1000);
   }, []);
+  let v = 0;
 
   useEffect(() => {
     socket.emit("gusserid", location.state.gusserid);
@@ -41,22 +43,50 @@ const Gusser = ({ socket }) => {
       } else {
         setTeam("blue");
       }
+
+      // socket.on("scores", (game) => {
+      //   console.log("game:", game);
+      //   //document.getElementById('scoreTeamRed').innerHTML = game[0].TeamScore;
+      //   if (round % 2 == 0) {
+      //     setScore(game[0].TeamScore);
+      //   } else {
+      //     setScore(game[1].TeamScore);
+      //   }
+      // });
+
+      socket.on("guessID", (guesserID) => {
+        console.log("guesser ID from backend", guesserID);
+        setTeam(localStorage.getItem("team"));
+        let teamName = localStorage.getItem("team");
+
+        if (socket.id === guesserID) {
+          v = 1;
+
+          history.push({
+            pathname: `/${teamName}/guess`,
+            state: {
+              gusserid: guesserID,
+            },
+          });
+        } else {
+          console.log("History", history);
+          if (teamName === "blue") {
+            history.push({ pathname: "/blue" });
+          } else history.push({ pathname: "/red" });
+        }
+      });
     });
 
-    socket.on("scores", (game) => {
-      console.log("game:", game);
-      //document.getElementById('scoreTeamRed').innerHTML = game[0].TeamScore;
-      if (roundfromBackend % 2 == 0) {
-        setScore(game[0].TeamScore);
-      } else {
-        setScore(game[1].TeamScore);
-      }
-    });
-  }, []);
-
-  //  get team name
-  useEffect(() => {
-    setTeam(localStorage.getItem("team"));
+    axios({
+      method: "get",
+      url: "http://localhost:5000/score",
+    })
+      .then((res) => {
+        console.log("guesserID from backend: ", res.data.game);
+        setRedTeamScore(res.data.game[0]);
+        setBlueTeamScore(res.data.game[1]);
+      })
+      .catch((err) => console.error(err));
   }, []);
 
   //  On clickong Enter button
@@ -73,25 +103,6 @@ const Gusser = ({ socket }) => {
         window.location.href = "/";
       }
     });
-
-    socket.on("guessID", (guesserID) => {
-      console.log("guesser ID from backend", guesserID);
-      console.log(team);
-      if (socket.id === guesserID) {
-        history.push({
-          pathname: `/${team}/guess`,
-          state: {
-            gusserid: guesserID,
-          },
-        });
-      } else {
-        if (roundfromBackend % 2 === 0) {
-          history.push({ pathname: `/red` });
-        } else {
-          history.push({ pathname: `/blue` });
-        }
-      }
-    });
   }, [socket]);
 
   // final array from host
@@ -105,10 +116,10 @@ const Gusser = ({ socket }) => {
       <div className="gusser__bg"></div>
       <div className="gusser__teamranks d-flex justify-content-between px-3">
         <h3 className="my-auto" style={{ color: "#ffffff" }}>
-          Team Points
+          Team Points:
         </h3>
         <h3 className="my-auto" style={{ color: "#603913" }}>
-          {score}
+          {team === "red" ? redTeamScore : blueTeamScore}
         </h3>
       </div>
       <div className="gusser__hints">
