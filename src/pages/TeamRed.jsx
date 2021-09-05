@@ -11,7 +11,8 @@ const TeamRed = ({ socket }) => {
   const [hint, setHint] = useState("");
   const [roundfromBackend, setRoundFromBackend] = useState(0);
   const [chatmsgSent, setchatmsgSent] = useState(0);
-  const [score, setScore] = useState(0);
+  const [redTeamScore, setRedTeamScore] = useState(0);
+  const [blueTeamScore, setBlueTeamScore] = useState(0);
   const [randomword, setRandomWord] = useState(" ... ");
   const history = useHistory();
 
@@ -35,9 +36,19 @@ const TeamRed = ({ socket }) => {
         console.log("guesserID from backend: ", res.data);
       })
       .catch((err) => console.error(err));
+
+    axios({
+      method: "get",
+      url: "http://localhost:5000/score",
+    })
+      .then((res) => {
+        console.log("guesserID from backend: ", res.data.game);
+        setRedTeamScore(res.data.game[0]);
+        setBlueTeamScore(res.data.game[1]);
+      })
+      .catch((err) => console.error(err));
   }, []);
 
-  //  End Game button
   useEffect(() => {
     socket.on("game-ended", (gameValue) => {
       if (gameValue == 1) {
@@ -51,14 +62,13 @@ const TeamRed = ({ socket }) => {
       setRoundFromBackend(round);
     });
 
-    //  Set scores
-    socket.on("scores", (game) => {
-      console.log("game:", game);
-      setScore(game[0].TeamScore);
-    });
+    // socket.on("scores", (game) => {
+    //   console.log("game:", game);
+    //   setScore(game[0].TeamScore);
+    // });
 
     socket.on("guessed-wrong", (wrong) => {
-      alert(`Guesser guessed wrong, Now ${2 - wrong} chances left`);
+      alert(`Guesser guessed wrong,Now ${2 - wrong} chances left`);
     });
 
     socket.on("guessID", (guesserID) => {
@@ -90,21 +100,6 @@ const TeamRed = ({ socket }) => {
   //   }
   // });
 
-  // Change routes for new gusser
-  socket.on("change-guesser", (value) => {
-    if (value) {
-      axios({
-        method: "get",
-        url: "http://localhost:5000/guesserid",
-      })
-        .then((res) => {
-          if (socket.id === res.data.gusserSocketID) {
-            history.push("/red/guess");
-          }
-        })
-        .catch((err) => console.error(err));
-    }
-  });
   return (
     <div className="red__bg">
       <div className="red__enterhint text-center">
@@ -135,7 +130,7 @@ const TeamRed = ({ socket }) => {
       </div>
       <div className="red__teamranks d-flex justify-content-between px-3">
         <h3 className="my-auto" style={{ color: "#ffffff" }}>
-          Score: {score}
+          Score: {redTeamScore}
         </h3>
         <h3 className="my-auto" style={{ color: "#603913" }}>
           Round: <span>{roundfromBackend}</span>
