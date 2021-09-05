@@ -27,7 +27,7 @@ const AdminPoints = ({ socket }) => {
   useEffect(() => {
     axios({
       method: "get",
-      url: "http://localhost:5000/randomword",
+      url: `http://localhost:5000/randomword`,
     })
       .then((res) => {
         console.log("axios ", res.data);
@@ -37,7 +37,7 @@ const AdminPoints = ({ socket }) => {
 
     axios({
       method: "get",
-      url: "http://localhost:5000/roundNo",
+      url: `http://localhost:5000/roundNo`,
     })
       .then((res) => {
         console.log("axios ", res.data);
@@ -48,7 +48,7 @@ const AdminPoints = ({ socket }) => {
     socket.on("guessed-wrong", (wrong) => {
       if (wrong > 2) {
         setScore(0);
-        socket.emit("change-score", score);
+        socket.emit("change-score", 0);
         setRoundNumber(roundNumber + 1);
         socket.emit("change-round", roundNumber);
         socket.emit("timer-start", count);
@@ -116,8 +116,8 @@ const AdminPoints = ({ socket }) => {
 
   function score5() {
     setScore(5);
-    console.log("5 score button clicked");
-    socket.emit("change-score", score);
+    console.log("5 score button clicked....", score);
+    socket.emit("change-score", 5);
     setRoundNumber(roundNumber + 1);
     socket.emit("change-round", roundNumber);
     count = 0;
@@ -128,7 +128,7 @@ const AdminPoints = ({ socket }) => {
   function score4() {
     setScore(4);
     console.log("4 score button clicked");
-    socket.emit("change-score", score);
+    socket.emit("change-score", 4);
     setRoundNumber(roundNumber + 1);
     socket.emit("change-round", roundNumber);
     socket.emit("timer-start", count);
@@ -138,7 +138,7 @@ const AdminPoints = ({ socket }) => {
   function score3() {
     setScore(3);
     console.log("3 score button clicked");
-    socket.emit("change-score", score);
+    socket.emit("change-score", 3);
     setRoundNumber(roundNumber + 1);
     socket.emit("change-round", roundNumber);
     socket.emit("timer-start", count);
@@ -148,7 +148,7 @@ const AdminPoints = ({ socket }) => {
   function score0() {
     setScore(0);
     console.log("0 score button clicked");
-    socket.emit("change-score", score);
+    socket.emit("change-score", 0);
     setRoundNumber(roundNumber + 1);
     socket.emit("change-round", roundNumber);
     socket.emit("timer-start", count);

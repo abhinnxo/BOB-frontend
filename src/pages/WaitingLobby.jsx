@@ -84,7 +84,7 @@ const WaitingLobby = ({ socket }) => {
 
   useEffect(() => {
     socket.on("guesser", (id) => {
-      console.log("guess id", id);
+      // console.log("guess id", id);
       setGuesser(id);
     });
   });
