@@ -16,14 +16,28 @@ const AdminDestroy = ({ socket }) => {
   const [randomword, setRandomWord] = useState("MainWord");
   const [round, setRound] = useState(1);
   const [roundNumber, setRoundNumber] = useState(1);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
   // set array for the team
   const [guessingArr, setGuessingArr] = useState([]);
   const [finalArr, setFinalArr] = useState([]);
   // set guessing team
   const [guessingTeam, setGuessingTeam] = useState("blue");
   const history = useHistory();
+  const [min, setMin] = useState(0);
+  const [sec, setSec] = useState(0);
+  let seconds = 90;
+
+  // timer function
+  useEffect(() => {
+    setInterval(() => {
+      if (seconds >= 0) {
+        setMin(parseInt(seconds / 60, 10));
+        setSec(parseInt(seconds % 60, 10));
+
+        console.log(min + ":" + sec);
+      } else console.log("Time is up!!!");
+      seconds--;
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     if (round % 2 === 0) {
@@ -88,11 +102,6 @@ const AdminDestroy = ({ socket }) => {
         window.location.href = "/";
       }
     });
-    socket.on("timer-counter", ({ minutes, seconds }) => {
-      console.log(minutes, seconds);
-      setMinutes(minutes);
-      setSeconds(seconds);
-    });
     socket.on("guessID", (guesserID) => {
       console.log("guesser ID from backend", guesserID);
     });
@@ -124,7 +133,7 @@ const AdminDestroy = ({ socket }) => {
       </div>
       <div className="timer_round">
         <p>
-          {minutes}:{seconds}
+          {min}:{sec}
         </p>
         <p>Round {roundNumber}</p>
       </div>

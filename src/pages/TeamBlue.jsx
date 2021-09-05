@@ -13,6 +13,23 @@ function TeamBlue({ socket }) {
   const [chatmsgSent, setchatmsgSent] = useState(0);
   const [score, setScore] = useState(0);
   const [randomword, setRandomWord] = useState(" ... ");
+  const [min, setMin] = useState(0);
+  const [sec, setSec] = useState(0);
+  let seconds = 90;
+
+  // timer function
+  useEffect(() => {
+    setInterval(() => {
+      if (seconds >= 0) {
+        setMin(parseInt(seconds / 60, 10));
+        setSec(parseInt(seconds % 60, 10));
+
+        console.log(min + ":" + sec);
+      } else console.log("Time is up!!!");
+      seconds--;
+    }, 1000);
+  }, []);
+
   const history = useHistory();
 
   // getting the random word
@@ -26,9 +43,7 @@ function TeamBlue({ socket }) {
         setRandomWord(res.data);
       })
       .catch((err) => console.error(err));
-  }, []);
-
-  //  end game button
+  });
   useEffect(() => {
     axios({
       method: "get",
@@ -87,13 +102,6 @@ function TeamBlue({ socket }) {
     document.querySelector(".blue__input").value = "";
   };
 
-  //  send the new player for guessing when the round is changed
-  // socket.on("guesser", (id) => {
-  //   if (id === socket.id) {
-  //     history.push("/blue/guess");
-  //   }
-  // });
-
   // Change routes for new gusser
   socket.on("change-guesser", (value) => {
     if (value) {
@@ -135,7 +143,9 @@ function TeamBlue({ socket }) {
       <div className="blue__timer d-flex align-items-baseline">
         <img src={Clock} alt="time" />
         <h3>
-          <span id="Timer"></span>
+          <span id="Timer">
+            {min}:{sec}
+          </span>
         </h3>
       </div>
       <div className="blue__teamranks d-flex justify-content-between px-3">

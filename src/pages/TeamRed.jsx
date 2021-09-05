@@ -14,6 +14,22 @@ const TeamRed = ({ socket }) => {
   const [score, setScore] = useState(0);
   const [randomword, setRandomWord] = useState(" ... ");
   const history = useHistory();
+  const [min, setMin] = useState(0);
+  const [sec, setSec] = useState(0);
+  let seconds = 90;
+
+  // timer function
+  useEffect(() => {
+    setInterval(() => {
+      if (seconds >= 0) {
+        setMin(parseInt(seconds / 60, 10));
+        setSec(parseInt(seconds % 60, 10));
+
+        console.log(min + ":" + sec);
+      } else console.log("Time is up!!!");
+      seconds--;
+    }, 1000);
+  }, []);
 
   // getting the random word
   useEffect(() => {
@@ -26,7 +42,8 @@ const TeamRed = ({ socket }) => {
         setRandomWord(res.data);
       })
       .catch((err) => console.error(err));
-
+  });
+  useEffect(() => {
     axios({
       method: "get",
       url: "http://localhost:5000/guesserid",
@@ -83,13 +100,6 @@ const TeamRed = ({ socket }) => {
     document.querySelector(".red__input").value = "";
   };
 
-  //  send the new player for guessing when the round is changed
-  // socket.on("guesser", (id) => {
-  //   if (id === socket.id) {
-  //     history.push("/red/guess");
-  //   }
-  // });
-
   // Change routes for new gusser
   socket.on("change-guesser", (value) => {
     if (value) {
@@ -130,7 +140,9 @@ const TeamRed = ({ socket }) => {
       <div className="red__timer d-flex align-items-baseline">
         <img src={Clock} alt="time" />
         <h3>
-          <span id="Timer"></span>
+          <span id="Timer">
+            {min}:{sec}
+          </span>
         </h3>
       </div>
       <div className="red__teamranks d-flex justify-content-between px-3">

@@ -3,7 +3,6 @@ import { useHistory } from "react-router";
 import Setting from "../images/settings.svg";
 import PauseTimer from "../images/pause_timer.svg";
 import EndGame from "../images/end_game.svg";
-import NextRound from "../images/next_round.svg";
 import "../css/adminpoints.css";
 const axios = require("axios");
 
@@ -12,10 +11,24 @@ const AdminPoints = ({ socket }) => {
   const [gameStatus, setGameStatus] = useState(0);
   const [guess, setGusser] = useState('" ... "');
   const [wrong, setWrong] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
   const [roundNumber, setRoundNumber] = useState(1);
   const [randomWord, setRandomWord] = useState("Main Word");
+  const [min, setMin] = useState(0);
+  const [sec, setSec] = useState(0);
+  let seconds = 90;
+
+  // timer function
+  useEffect(() => {
+    setInterval(() => {
+      if (seconds >= 0) {
+        setMin(parseInt(seconds / 60, 10));
+        setSec(parseInt(seconds % 60, 10));
+
+        console.log(min + ":" + sec);
+      } else console.log("Time is up!!!");
+      seconds--;
+    }, 1000);
+  }, []);
 
   var count = 0;
   var stopTimer = 0;
@@ -68,44 +81,12 @@ const AdminPoints = ({ socket }) => {
   socket.on("random-word", (value) => {
     console.log("Hey ReachedPOINT", value);
     setRandomWord(value);
-    //   localStorage.setItem("word", word);
   });
 
   socket.on("guessToHost", (guessSubmitted) => {
     console.log("guessSubmitted", guessSubmitted);
     setGusser(guessSubmitted);
   });
-
-  // socket.on('final-Array', (myArray) => {
-  //   console.log('final Array:', myArray);
-
-  //   finalArray = myArray;
-  //   for (var i = 0; i < myArray.length; i++) {
-  //     document.getElementById(`checkbox${i}`).hidden = false;
-  //     document.getElementById(`check${i}`).innerHTML = myArray[i];
-  //   }
-  // });
-  // }, [socket]);
-
-  // socket.on('All-Words', (arr) => {
-  //   console.log('All words log 2');
-  //   setArr(arr);
-  // });
-
-  // useEffect(() => {
-  //   socket.emit('showToGuesser', arr);
-  //   if (giveGuest)
-  //     history.push({
-  //       pathname: '/admindestroy',
-  //     });
-  // }, [giveGuest]);
-
-  // useEffect(() => {
-  //   socket.on('timer-counter', ({ minutes, seconds }) => {
-  //     setMinutes(minutes);
-  //     setSeconds(seconds);
-  //   });
-  // }, []);
 
   function stopTime() {
     socket.emit("stopTimer", stopTimer);
@@ -175,7 +156,7 @@ const AdminPoints = ({ socket }) => {
           </div>
           <p className="point__timer">
             <span>
-              {minutes}:{seconds}
+              {min}:{sec}
             </span>
           </p>
           <div className="pauseTimer">

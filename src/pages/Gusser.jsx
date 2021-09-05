@@ -14,6 +14,22 @@ const Gusser = ({ socket }) => {
   const [roundfromBackend, setRoundFromBackend] = useState(1);
   const [team, setTeam] = useState("");
   const history = useHistory();
+  const [min, setMin] = useState(0);
+  const [sec, setSec] = useState(0);
+  let seconds = 90;
+
+  // timer function
+  useEffect(() => {
+    setInterval(() => {
+      if (seconds >= 0) {
+        setMin(parseInt(seconds / 60, 10));
+        setSec(parseInt(seconds % 60, 10));
+
+        console.log(min + ":" + sec);
+      } else console.log("Time is up!!!");
+      seconds--;
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     socket.emit("gusserid", location.state.gusserid);
@@ -102,7 +118,9 @@ const Gusser = ({ socket }) => {
       </div>
       <div className="gusser__timer d-flex align-items-baseline">
         <img src={Clock} alt="time" />
-        <h3>0:30</h3>
+        <h3>
+          {min}:{sec}
+        </h3>
       </div>
       <div className="gusser__enterdiv">
         <h3 className="fw-bold">Guess the Word</h3>
