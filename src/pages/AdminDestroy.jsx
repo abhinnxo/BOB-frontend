@@ -20,31 +20,25 @@ const AdminDestroy = ({ socket }) => {
   const [seconds, setSeconds] = useState(0);
   // set array for the team
   const [guessingArr, setGuessingArr] = useState([]);
+  const [finalArr, setFinalArr] = useState([]);
   // set guessing team
   const [guessingTeam, setGuessingTeam] = useState("blue");
   const history = useHistory();
 
-  var score = 0;
-  socket.emit("change-score", score);
-
-  // useEffect(() => {
-  //   if (round % 2 === 0) {
-  //     // setGuessingArr(redarr);
-  //     setGuessingTeam("red");
-  //   } else {
-  //     // setGuessingArr(bluearr);
-  //     setGuessingTeam("blue");
-  //   }
-  // }, [round]);
+  useEffect(() => {
+    if (round % 2 === 0) {
+      setGuessingTeam("red");
+    } else {
+      setGuessingTeam("blue");
+    }
+  }, [round]);
 
   //remove enemy team checkboxes
   const destroyWords = () => {
     let allWords = document.querySelectorAll(".guessingTeam > input");
     allWords.forEach((word) => {
       if (!word.checked) {
-        // guessingArr.filter((item) => (word.value === item ? null : item));
         setGuessingArr([...guessingArr, word.value]);
-        // console.log("unchecked ", word.value);
       }
     });
     document.querySelector(".destroyButton").style.display = "none";
@@ -58,7 +52,7 @@ const AdminDestroy = ({ socket }) => {
     // getting the random word
     axios({
       method: "get",
-      url: "http://localhost:5000/randomword",
+      url: `http://localhost:5000/randomword`,
     })
       .then((res) => {
         console.log("axios ", res.data);
@@ -69,7 +63,7 @@ const AdminDestroy = ({ socket }) => {
     // getting the round number
     axios({
       method: "get",
-      url: "http://localhost:5000/roundNo",
+      url: `http://localhost:5000/roundNo`,
     })
       .then((res) => {
         console.log("axios ", res.data);
@@ -81,12 +75,13 @@ const AdminDestroy = ({ socket }) => {
   useEffect(() => {
     //  On clicking proceed button
     socket.on("Team-BlueWordList", (bluearr) => {
-      console.log(bluearr);
+      console.log("blue word array", bluearr);
       setBluearr(bluearr);
     });
 
     socket.on("Team-RedWordList", (redarr) => {
       setRedarr(redarr);
+      console.log(("red word array", redarr));
     });
     socket.on("game-ended", (gameValue) => {
       if (gameValue === 1) {
@@ -105,17 +100,15 @@ const AdminDestroy = ({ socket }) => {
 
   socket.on("final-Array", (arr) => {
     console.log("final-array", arr);
-    // setFinalArr(arr);
+    setFinalArr(arr);
   });
 
   useEffect(() => {
-    socket.emit("showToGuesser", guessingArr);
+    if (guessingArr.length == 0) socket.emit("showToGuesser", finalArr);
+    else socket.emit("showToGuesser", guessingArr);
+
     if (giveGuest) history.push("/admin/points");
   }, [giveGuest]);
-
-  // const [word, setWord] = useState('');
-
-  // setWord(localStorage.getItem('word'));
 
   function endGame() {
     socket.emit("game-end-clicked", gameStatus);

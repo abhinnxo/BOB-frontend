@@ -16,7 +16,7 @@ import io from "socket.io-client";
 function App() {
   const [socket, setSocket] = useState(null);
 
-  //   // Prompt when the user tries to close/leave the tab
+  // // Prompt when the user tries to close/leave the tab
   // window.onbeforeunload = (event) => {
   //   const e = event || window.event;
   //   // Cancel the event
