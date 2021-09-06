@@ -9,12 +9,14 @@ const axios = require("axios");
 
 const TeamRed = ({ socket }) => {
   const [hint, setHint] = useState("");
-  const [roundfromBackend, setRoundFromBackend] = useState(0);
+  const [roundfromBackend, setRoundFromBackend] = useState(1);
   const [chatmsgSent, setchatmsgSent] = useState(0);
   const [redTeamScore, setRedTeamScore] = useState(0);
   const [blueTeamScore, setBlueTeamScore] = useState(0);
   const [guesserId, setGueserId] = useState("");
   const [randomword, setRandomWord] = useState(" ... ");
+  const [usermsgsent, setUserMagSent] = useState(0);
+  const [chance, setChance] = useState("");
   const history = useHistory();
   const [min, setMin] = useState(0);
   const [sec, setSec] = useState(0);
@@ -66,6 +68,7 @@ const TeamRed = ({ socket }) => {
     });
 
     socket.on("round-change-from-backend", (round) => {
+      setUserMagSent(0);
       setchatmsgSent(1);
       setRoundFromBackend(round);
     });
@@ -93,6 +96,7 @@ const TeamRed = ({ socket }) => {
   socket.emit("guessingTeam", roundfromBackend);
 
   const sendHint = () => {
+    setUserMagSent(1);
     socket.emit("msgListMake", { hint, room: "Team Red" });
     document.querySelector(".red__input").value = "";
   };
@@ -115,6 +119,7 @@ const TeamRed = ({ socket }) => {
   return (
     <div className="red__bg">
       <div className="red__enterhint text-center">
+        <h5>{chance}</h5>
         <h3>
           Enter a Word simmilar to{" "}
           <span className="red__randomword" style={{ color: "red" }}>
@@ -122,17 +127,23 @@ const TeamRed = ({ socket }) => {
           </span>
         </h3>
         <br />
-        <ImageInput
-          text="Type your word here..."
-          change={(e) => setHint(e.target.value)}
-          classList="red__input"
-        />
-        <br />
-        <ImageButton
-          value="ENTER"
-          classlist="red__enterbtn"
-          clickMe={sendHint}
-        />
+        {usermsgsent ? (
+          <div>Word submitted</div>
+        ) : (
+          <div>
+            <ImageInput
+              text="Type your word here..."
+              change={(e) => setHint(e.target.value)}
+              classList="red__input"
+            />
+            <br />
+            <ImageButton
+              value="ENTER"
+              classlist="red__enterbtn"
+              clickMe={sendHint}
+            />
+          </div>
+        )}
       </div>
       <div className="red__timer d-flex align-items-baseline">
         <img src={Clock} alt="time" />

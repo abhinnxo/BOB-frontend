@@ -17,6 +17,8 @@ const Gusser = ({ socket }) => {
   const history = useHistory();
   const [min, setMin] = useState(0);
   const [sec, setSec] = useState(0);
+  const [guessSend, setGuessSend] = useState(0);
+  const [chance, setChance] = useState("");
   let seconds = 90;
 
   // timer function
@@ -38,6 +40,7 @@ const Gusser = ({ socket }) => {
 
     socket.on("round-change-from-backend", (round) => {
       setRoundFromBackend(round);
+      setGuessSend(0);
       if (round % 2 === 0) {
         setTeam("red");
       } else {
@@ -93,7 +96,7 @@ const Gusser = ({ socket }) => {
   const guessSubmitted = () => {
     socket.emit("guessSubmission", guess);
     console.log(guess);
-    alert("Guess Submited...");
+    setGuessSend(1);
   };
 
   useEffect(() => {
@@ -102,6 +105,11 @@ const Gusser = ({ socket }) => {
         localStorage.clear();
         window.location.href = "/";
       }
+    });
+
+    socket.on("guessed-wrong", (wrong) => {
+      setGuessSend(0);
+      setChance(`You guessed wrong,Now you have ${2 - wrong} chances left`);
     });
   }, [socket]);
 
@@ -136,15 +144,25 @@ const Gusser = ({ socket }) => {
       <div className="gusser__enterdiv">
         <h3 className="fw-bold">Guess the Word</h3>
         <br />
-        <ImageInput
-          text="Enter your Guess"
-          change={(e) => setGuess(e.target.value)}
-        />
-        <ImageButton
-          value="ENTER"
-          clickMe={guessSubmitted}
-          classlist="mt-3 gusser__enterbtn"
-        />
+        <h5>{chance}</h5>
+        <br />
+        {guessSend ? (
+          <div>
+            <h5>Guess send</h5>
+          </div>
+        ) : (
+          <div>
+            <ImageInput
+              text="Enter your Guess"
+              change={(e) => setGuess(e.target.value)}
+            />
+            <ImageButton
+              value="ENTER"
+              clickMe={guessSubmitted}
+              classlist="mt-3 gusser__enterbtn"
+            />
+          </div>
+        )}
       </div>
     </div>
   );

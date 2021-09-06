@@ -18,6 +18,8 @@ function TeamBlue({ socket }) {
   const history = useHistory();
   const [min, setMin] = useState(0);
   const [sec, setSec] = useState(0);
+  const [chance, setChance] = useState("");
+  const [usermsgsent, setUserMagSent] = useState(0);
   let seconds = 90;
   // timer function
   useEffect(() => {
@@ -70,6 +72,8 @@ function TeamBlue({ socket }) {
 
     socket.on("round-change-from-backend", (round) => {
       setchatmsgSent(1);
+      setUserMagSent(0);
+      setChance("");
       setRoundFromBackend(round);
     });
 
@@ -96,6 +100,7 @@ function TeamBlue({ socket }) {
   socket.emit("guessingTeam", roundfromBackend);
 
   const sendHint = () => {
+    setUserMagSent(1);
     socket.emit("msgListMake", { hint, room: "Team Blue" });
     document.querySelector(".blue__input").value = "";
   };
@@ -120,6 +125,7 @@ function TeamBlue({ socket }) {
   return (
     <div className="blue__bg">
       <div className="blue__enterhint text-center">
+        <h5>{chance}</h5>
         <h3>
           Enter a Word simmilar to{" "}
           <span className="blue__randomword" style={{ color: "red" }}>
@@ -127,17 +133,23 @@ function TeamBlue({ socket }) {
           </span>
         </h3>
         <br />
-        <ImageInput
-          text="Type your word here..."
-          change={(e) => setHint(e.target.value)}
-          classList="blue__input"
-        />
-        <br />
-        <ImageButton
-          value="ENTER"
-          classlist="blue__enterbtn"
-          clickMe={sendHint}
-        />
+        {usermsgsent ? (
+          <div>Word submitted</div>
+        ) : (
+          <div>
+            <ImageInput
+              text="Type your word here..."
+              change={(e) => setHint(e.target.value)}
+              classList="blue__input"
+            />
+            <br />
+            <ImageButton
+              value="ENTER"
+              classlist="blue__enterbtn"
+              clickMe={sendHint}
+            />
+          </div>
+        )}
       </div>
       <div className="blue__timer d-flex align-items-baseline">
         <img src={Clock} alt="time" />
