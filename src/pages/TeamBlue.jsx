@@ -13,25 +13,22 @@ function TeamBlue({ socket }) {
   const [chatmsgSent, setchatmsgSent] = useState(0);
   const [redTeamScore, setRedTeamScore] = useState(0);
   const [blueTeamScore, setBlueTeamScore] = useState(0);
+  const [guesserId, setGueserId] = useState("");
   const [randomword, setRandomWord] = useState(" ... ");
+  const history = useHistory();
   const [min, setMin] = useState(0);
   const [sec, setSec] = useState(0);
   let seconds = 90;
-
   // timer function
   useEffect(() => {
     setInterval(() => {
       if (seconds >= 0) {
         setMin(parseInt(seconds / 60, 10));
         setSec(parseInt(seconds % 60, 10));
-
-        console.log(min + ":" + sec);
-      } else console.log("Time is up!!!");
+      }
       seconds--;
     }, 1000);
-  }, []);
-
-  const history = useHistory();
+  }, [roundfromBackend]); // timer will reset on round change
 
   // getting the random word
   useEffect(() => {
@@ -45,23 +42,22 @@ function TeamBlue({ socket }) {
       })
       .catch((err) => console.error(err));
   });
+
+  // getting the score
   useEffect(() => {
     axios({
       method: "get",
       url: "http://localhost:5000/score",
     })
       .then((res) => {
-        console.log("guesserID from backend: ", res.data.game);
-        setRedTeamScore(res.data.game[0]);
-        setBlueTeamScore(res.data.game[1]);
+        console.log("score from backend: ", res.data[0].TeamName);
+        console.log("score from backend: ", res.data[0]);
+        console.log("score from backend: ", res.data[1]);
+        setRedTeamScore(res.data[0].TeamScore);
+        setBlueTeamScore(res.data[1].TeamScore);
       })
       .catch((err) => console.error(err));
-  }, []);
-
-  // score
-  // socket.on("scores", (game) => {
-  //   setScore(game[0].TeamScore);
-  // });
+  }, [guesserId]);
 
   //  end game button
   useEffect(() => {
@@ -77,22 +73,13 @@ function TeamBlue({ socket }) {
       setRoundFromBackend(round);
     });
 
-    // socket.on("scores", (game) => {
-    //   console.log("game:", game);
-    //   //document.getElementById('scoreTeamRed').innerHTML = game[0].TeamScore;
-    //   setScore(game[1].TeamScore);
-    // });
-
-    // socket.on('timer-counter', ({ minutes, seconds }) => {
-    //   document.getElementById('Timer').innerHTML = minutes + ':' + seconds;
-    // });
-
     socket.on("guessed-wrong", (wrong) => {
       alert(`Guesser guessed wrong,Now ${2 - wrong} chances left`);
     });
 
     socket.on("guessID", (guesserID) => {
       console.log("guesser ID from backend", guesserID);
+      setGueserId(guesserID);
       if (guesserID == socket.id) {
         if (socket.id === guesserID) {
           history.push({

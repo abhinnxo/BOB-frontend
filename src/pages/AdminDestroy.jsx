@@ -34,7 +34,7 @@ const AdminDestroy = ({ socket }) => {
         setSec(parseInt(seconds % 60, 10));
 
         console.log(min + ":" + sec);
-      } else console.log("Time is up!!!");
+      }
       seconds--;
     }, 1000);
   }, []);
