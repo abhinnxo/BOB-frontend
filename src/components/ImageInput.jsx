@@ -14,6 +14,7 @@ function ImageInput({ text, change, classList }) {
         type='text'
         placeholder={text}
         onChange={change}
+        maxLength='15'
         style={style}
         className={classList}
       />
