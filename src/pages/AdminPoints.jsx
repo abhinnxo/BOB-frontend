@@ -23,9 +23,7 @@ const AdminPoints = ({ socket }) => {
       if (seconds >= 0) {
         setMin(parseInt(seconds / 60, 10));
         setSec(parseInt(seconds % 60, 10));
-
-        console.log(min + ':' + sec);
-      } else console.log('Time is up!!!');
+      }
       seconds--;
     }, 1000);
   }, []);
@@ -40,7 +38,7 @@ const AdminPoints = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `http://localhost:5000/randomword`,
+      url: `${process.env.REACT_APP_LOCALHOST}/randomword`,
     })
       .then((res) => {
         console.log('axios ', res.data);
@@ -50,7 +48,7 @@ const AdminPoints = ({ socket }) => {
 
     axios({
       method: 'get',
-      url: `http://localhost:5000/roundNo`,
+      url: `${process.env.REACT_APP_LOCALHOST}/roundNo`,
     })
       .then((res) => {
         console.log('axios ', res.data);
@@ -148,60 +146,60 @@ const AdminPoints = ({ socket }) => {
   }
 
   return (
-    <div className='point'>
-      <div className='point__bg'></div>
-      <div className='point__controls d-flex justify-content-between'>
+    <div className="point">
+      <div className="point__bg"></div>
+      <div className="point__controls d-flex justify-content-between">
         <div>
-          <div className='point__setting'>
-            <img src={Setting} alt='settings' />
+          <div className="point__setting">
+            <img src={Setting} alt="settings" />
           </div>
-          <p className='point__timer'>
+          <p className="point__timer">
             <span>
               {min}:{sec}
             </span>
           </p>
-          <div className='pauseTimer'>
+          <div className="pauseTimer">
             {' '}
-            <img src={PauseTimer} alt='pause timer' onClick={stopTime} />
+            <img src={PauseTimer} alt="pause timer" onClick={stopTime} />
           </div>
         </div>
         <div>
           <div>
             <img
               src={EndGame}
-              alt='end game'
+              alt="end game"
               onClick={endGame}
               style={{ cursor: 'pointer' }}
             />
           </div>
-          <p className='point__round'>
+          <div className="point__round">
             <div>Round {roundNumber}</div>
-          </p>
+          </div>
         </div>
       </div>
-      <div className='point__board text-center'>
-        <h4 className='point__mainword'>{randomWord}</h4>
+      <div className="point__board text-center">
+        <h4 className="point__mainword">{randomWord}</h4>
         <h3>
           Guess - <span>{wrong}</span>
         </h3>
         <h6>The Answer submitted is</h6>
-        <h1 className='point__randomword' id='randomWord'>
+        <h1 className="point__randomword" id="randomWord">
           {guess}
         </h1>
-        <div className='d-flex justify-content-evenly text-center my-3'>
-          <button className='point__btn plus_five' onClick={score5}>
+        <div className="d-flex justify-content-evenly text-center my-3">
+          <button className="point__btn plus_five" onClick={score5}>
             + 5
           </button>
-          <button className='point__btn plus_four' onClick={score4}>
+          <button className="point__btn plus_four" onClick={score4}>
             + 4
           </button>
-          <button className='point__btn plus_three' onClick={score3}>
+          <button className="point__btn plus_three" onClick={score3}>
             + 3
           </button>
-          <button className='point__btn plus_zero' onClick={score0}>
+          <button className="point__btn plus_zero" onClick={score0}>
             + 0
           </button>
-          <button className='point__btn wrong' onClick={wrongFxn}>
+          <button className="point__btn wrong" onClick={wrongFxn}>
             Wrong
           </button>
         </div>

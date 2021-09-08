@@ -1,22 +1,22 @@
 // Team Red Players will enter their hinst here
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router";
-import ImageButton from "../components/ImageButton";
-import ImageInput from "../components/ImageInput";
-import Clock from "../images/clock.svg";
-import "../css/teamred.css";
-const axios = require("axios");
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
+import ImageButton from '../components/ImageButton';
+import ImageInput from '../components/ImageInput';
+import Clock from '../images/clock.svg';
+import '../css/teamred.css';
+const axios = require('axios');
 
 const TeamRed = ({ socket }) => {
-  const [hint, setHint] = useState("");
+  const [hint, setHint] = useState('');
   const [roundfromBackend, setRoundFromBackend] = useState(1);
   const [chatmsgSent, setchatmsgSent] = useState(0);
   const [redTeamScore, setRedTeamScore] = useState(0);
   const [blueTeamScore, setBlueTeamScore] = useState(0);
-  const [guesserId, setGueserId] = useState("");
-  const [randomword, setRandomWord] = useState(" ... ");
+  const [guesserId, setGueserId] = useState('');
+  const [randomword, setRandomWord] = useState(' ... ');
   const [usermsgsent, setUserMagSent] = useState(0);
-  const [chance, setChance] = useState("");
+  const [chance, setChance] = useState('');
   const history = useHistory();
   const [min, setMin] = useState(0);
   const [sec, setSec] = useState(0);
@@ -35,24 +35,24 @@ const TeamRed = ({ socket }) => {
   // getting the random word
   useEffect(() => {
     axios({
-      method: "get",
-      url: "http://localhost:5000/randomword",
+      method: 'get',
+      url: `${process.env.REACT_APP_LOCALHOST}/randomword`,
     })
       .then((res) => {
-        console.log("axios ", res.data);
+        console.log('axios ', res.data);
         setRandomWord(res.data);
       })
       .catch((err) => console.error(err));
   });
   useEffect(() => {
     axios({
-      method: "get",
-      url: "http://localhost:5000/score",
+      method: 'get',
+      url: `${process.env.REACT_APP_LOCALHOST}score`,
     })
       .then((res) => {
-        console.log("score from backend: ", res.data[0].TeamName);
-        console.log("score from backend: ", res.data[0].TeamScore);
-        console.log("score from backend: ", res.data[0]);
+        console.log('score from backend: ', res.data[0].TeamName);
+        console.log('score from backend: ', res.data[0].TeamScore);
+        console.log('score from backend: ', res.data[0]);
         setRedTeamScore(res.data[0].TeamScore);
         setBlueTeamScore(res.data[1].TeamScore);
       })
@@ -60,25 +60,25 @@ const TeamRed = ({ socket }) => {
   }, [guesserId]);
 
   useEffect(() => {
-    socket.on("game-ended", (gameValue) => {
+    socket.on('game-ended', (gameValue) => {
       if (gameValue == 1) {
         localStorage.clear();
-        window.location.href = "/";
+        window.location.href = '/';
       }
     });
 
-    socket.on("round-change-from-backend", (round) => {
+    socket.on('round-change-from-backend', (round) => {
       setUserMagSent(0);
       setchatmsgSent(1);
       setRoundFromBackend(round);
     });
 
-    socket.on("guessed-wrong", (wrong) => {
+    socket.on('guessed-wrong', (wrong) => {
       alert(`Guesser guessed wrong,Now ${2 - wrong} chances left`);
     });
 
-    socket.on("guessID", (guesserID) => {
-      console.log("guesser ID from backend", guesserID);
+    socket.on('guessID', (guesserID) => {
+      console.log('guesser ID from backend', guesserID);
       setGueserId(guesserID);
       if (guesserID == socket.id) {
         if (socket.id === guesserID) {
@@ -93,24 +93,24 @@ const TeamRed = ({ socket }) => {
     });
   }, [socket]);
 
-  socket.emit("guessingTeam", roundfromBackend);
+  socket.emit('guessingTeam', roundfromBackend);
 
   const sendHint = () => {
     setUserMagSent(1);
-    socket.emit("msgListMake", { hint, room: "Team Red" });
-    document.querySelector(".red__input").value = "";
+    socket.emit('msgListMake', { hint, room: 'Team Red' });
+    document.querySelector('.red__input').value = '';
   };
 
   // Change routes for new gusser
-  socket.on("change-guesser", (value) => {
+  socket.on('change-guesser', (value) => {
     if (value) {
       axios({
-        method: "get",
-        url: "http://localhost:5000/guesserid",
+        method: 'get',
+        url: `${process.env.REACT_APP_LOCALHOST}/guesserid`,
       })
         .then((res) => {
           if (socket.id === res.data.gusserSocketID) {
-            history.push("/red/guess");
+            history.push('/red/guess');
           }
         })
         .catch((err) => console.error(err));
@@ -121,8 +121,8 @@ const TeamRed = ({ socket }) => {
       <div className="red__enterhint text-center">
         <h5>{chance}</h5>
         <h3>
-          Enter a Word simmilar to{" "}
-          <span className="red__randomword" style={{ color: "red" }}>
+          Enter a Word simmilar to{' '}
+          <span className="red__randomword" style={{ color: 'red' }}>
             " {randomword} "
           </span>
         </h3>
@@ -154,10 +154,10 @@ const TeamRed = ({ socket }) => {
         </h3>
       </div>
       <div className="red__teamranks d-flex justify-content-between px-3">
-        <h3 className="my-auto" style={{ color: "#ffffff" }}>
+        <h3 className="my-auto" style={{ color: '#ffffff' }}>
           Score: {redTeamScore}
         </h3>
-        <h3 className="my-auto" style={{ color: "#603913" }}>
+        <h3 className="my-auto" style={{ color: '#603913' }}>
           Round: <span>{roundfromBackend}</span>
         </h3>
       </div>

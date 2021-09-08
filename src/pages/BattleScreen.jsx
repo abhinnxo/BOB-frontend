@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from 'react'
-import '../css/battlescreen.css'
-
+import React, { useState, useEffect } from 'react';
+import '../css/battlescreen.css';
 
 const BrainLeft = () => {
-    return (
-        <div class="brainLeft shake">
+  return (
+    <div class="brainLeft shake">
       <svg
         class="brainLeft"
         xmlns="http://www.w3.org/2000/svg"
@@ -211,12 +210,12 @@ const BrainLeft = () => {
         </g>
       </svg>
     </div>
-    );
-}
+  );
+};
 
 const BrainRight = () => {
-    return (
-        <div class="brainRight">
+  return (
+    <div class="brainRight">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="brain size"
@@ -533,66 +532,65 @@ const BrainRight = () => {
       />
       {/* <!-- Fire End --> */}
     </div>
-    );
-}
+  );
+};
 
 const shakeFunction = () => {
-    document.querySelectorAll(".brainLeft").forEach(brain => {
-        brain.style.animation = "shake 0.7s";
-    });
+  document.querySelectorAll('.brainLeft').forEach((brain) => {
+    brain.style.animation = 'shake 0.7s';
+  });
 };
 const ashFunction = () => {
-  document.querySelectorAll(".brain").forEach(item=>{
-      item.style.opacity = "0";
+  document.querySelectorAll('.brain').forEach((item) => {
+    item.style.opacity = '0';
   });
-  document.querySelectorAll(".fire").forEach(item=>{
-      item.style.opacity = "0";
-      item.style.transition = "all 1s"; 
+  document.querySelectorAll('.fire').forEach((item) => {
+    item.style.opacity = '0';
+    item.style.transition = 'all 1s';
   });
-  document.querySelectorAll(".ash").forEach(item=>{
-      item.style.opacity = "1";
-      item.style.transition = "all 1.3s"; 
+  document.querySelectorAll('.ash').forEach((item) => {
+    item.style.opacity = '1';
+    item.style.transition = 'all 1.3s';
   });
 };
 
 const myFunction = () => {
-    shakeFunction();
-    document.querySelectorAll(".brain").forEach(item=>{
-      item.style.opacity = "0.9";
+  shakeFunction();
+  document.querySelectorAll('.brain').forEach((item) => {
+    item.style.opacity = '0.9';
   });
-  document.querySelectorAll(".fire").forEach(item=>{
-      item.style.opacity = "1";
+  document.querySelectorAll('.fire').forEach((item) => {
+    item.style.opacity = '1';
   });
-  document.querySelectorAll(".ash").forEach(item=>{
-      item.style.opacity = "0";
+  document.querySelectorAll('.ash').forEach((item) => {
+    item.style.opacity = '0';
   });
-    setTimeout(function () {
-      ashFunction();
-    }, 5000);
+  setTimeout(function () {
+    ashFunction();
+  }, 5000);
 };
 
 const BattleScreen = () => {
+  useEffect(() => {
+    myFunction();
+  }, []);
 
-    useEffect(()=>{
-        myFunction();
-    },[]);
-      
-    return (
-        //abc xyz pqr
-        // abc abc kbc
-        <section className="battleScreen">
-            <div className="leftTeam">
-                <BrainLeft />
-                <BrainLeft />
-                <BrainLeft />
-            </div>
-            <div className="rightTeam">
-                <BrainRight />
-                <BrainRight />
-                <BrainRight />
-            </div>
-        </section>
-    )
-}
+  return (
+    //abc xyz pqr
+    // abc abc kbc
+    <section className="battleScreen">
+      <div className="leftTeam">
+        <BrainLeft />
+        <BrainLeft />
+        <BrainLeft />
+      </div>
+      <div className="rightTeam">
+        <BrainRight />
+        <BrainRight />
+        <BrainRight />
+      </div>
+    </section>
+  );
+};
 
-export default BattleScreen
+export default BattleScreen;

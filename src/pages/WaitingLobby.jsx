@@ -27,7 +27,7 @@ const WaitingLobby = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: 'http://localhost:5000/lobby',
+      url: `${process.env.REACT_APP_LOCALHOST}/lobby`,
     })
       .then((res) => {
         console.log('axios ', res.data);
@@ -128,22 +128,22 @@ const WaitingLobby = ({ socket }) => {
   }
 
   return (
-    <div className='lobby'>
-      <div className='lobby__bg'></div>
-      <div className='lobby__back'>
-        <img src={BackButton} alt='back' onClick={goBack} />
+    <div className="lobby">
+      <div className="lobby__bg"></div>
+      <div className="lobby__back">
+        <img src={BackButton} alt="back" onClick={goBack} />
       </div>
-      <div className='lobby__teamtable'>
-        <div className='lobby__codediv' onClick={GenerateCode}>
+      <div className="lobby__teamtable">
+        <div className="lobby__codediv" onClick={GenerateCode}>
           <div>{code}</div>
         </div>
-        <div className='d-flex'>
+        <div className="d-flex">
           {/* Red Box */}
           <RedTeam playerList={redplayerlist} />
           <input
-            type='button'
-            name='button'
-            className='lobby__blueteam'
+            type="button"
+            name="button"
+            className="lobby__blueteam"
             onClick={() => {
               teamselection('blue');
             }}
@@ -151,9 +151,9 @@ const WaitingLobby = ({ socket }) => {
           {/* Blue Box */}
           <BlueTeam playerListBlue={blueplayerlist} />
           <input
-            type='button'
-            name='button'
-            className='lobby__redteam'
+            type="button"
+            name="button"
+            className="lobby__redteam"
             onClick={() => {
               teamselection('red');
             }}
@@ -165,8 +165,8 @@ const WaitingLobby = ({ socket }) => {
             {' '}
             <ImageButton
               clickMe={startgame}
-              classlist='lobby__startbtn mx-auto'
-              value='START'
+              classlist="lobby__startbtn mx-auto"
+              value="START"
             />
           </div>
         ) : (

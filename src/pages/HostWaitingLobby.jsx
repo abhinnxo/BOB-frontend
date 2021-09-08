@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import "../css/hostwaitinglobby.css";
-import settingsImg from "../images/settings.svg";
-import endGameImg from "../images/end_game.svg";
-import pauseTimerImg from "../images/pause_timer.svg";
-import nextRoundImg from "../images/next_round.svg";
-import ImageInput from "../components/ImageInput";
-import Send from "../images/send.svg";
+import React, { useEffect } from 'react';
+import '../css/hostwaitinglobby.css';
+import settingsImg from '../images/settings.svg';
+import endGameImg from '../images/end_game.svg';
+import pauseTimerImg from '../images/pause_timer.svg';
+import nextRoundImg from '../images/next_round.svg';
+import ImageInput from '../components/ImageInput';
+import Send from '../images/send.svg';
 
 const HostWaitingLobby = () => {
   // useEffect(() => {

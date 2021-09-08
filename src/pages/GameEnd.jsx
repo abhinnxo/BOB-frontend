@@ -1,13 +1,13 @@
-import React from "react";
-import { useHistory } from "react-router";
-import ImageButton from "../components/ImageButton";
-import "../css/gameend.css";
+import React from 'react';
+import { useHistory } from 'react-router';
+import ImageButton from '../components/ImageButton';
+import '../css/gameend.css';
 
 const GameEnd = () => {
   const history = useHistory();
 
   const gotoMainScreen = () => {
-    history.push("/");
+    history.push('/');
   };
 
   return (

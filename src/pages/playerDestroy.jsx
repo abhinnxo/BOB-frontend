@@ -1,11 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const playerdestroy = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+  return <div></div>;
+};
 
-export default playerdestroy
+export default playerdestroy;

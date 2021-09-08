@@ -1,11 +1,11 @@
-import React from "react";
-import ImageButton from "../components/ImageButton";
-import "../css/hostpoints.css"
+import React from 'react';
+import ImageButton from '../components/ImageButton';
+import '../css/hostpoints.css';
 
 const Admin = () => {
   return (
     <div className="ad">
-   <ImageButton value="SUBMIT" classlist="ad__submit" />
+      <ImageButton value="SUBMIT" classlist="ad__submit" />
     </div>
   );
 };
