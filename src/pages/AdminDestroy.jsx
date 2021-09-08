@@ -130,6 +130,14 @@ const AdminDestroy = ({ socket }) => {
     console.log('pause timer clicked', min + ':' + sec);
     setTimerIsPaused(true);
   };
+  function nextRound() {
+    socket.emit('change-score', 0);
+    socket.emit('change-round', roundNumber + 1);
+    setRoundNumber(roundNumber + 1);
+    var count = 0;
+    socket.emit('timer-start', count);
+    alert('Round Changed');
+  }
 
   return (
     <section className="hostWaitingLobby">
@@ -145,8 +153,8 @@ const AdminDestroy = ({ socket }) => {
         <p>Round {roundNumber}</p>
       </div>
       <div className="pauseTimer_nextRound">
-        <img src={pauseTimerImg} onClick={pauseTimer} alt="" />
-        <img src={nextRoundImg} alt="" />
+        <img src={pauseTimerImg} alt="" />
+        <img src={nextRoundImg} alt="" onClick={nextRound} />
       </div>
       <div className="players">
         <h2 className="mainWord">{randomword}</h2>

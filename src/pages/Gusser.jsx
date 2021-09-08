@@ -17,6 +17,7 @@ const Gusser = ({ socket }) => {
   const history = useHistory();
   const [min, setMin] = useState(0);
   const [sec, setSec] = useState(0);
+  const [wordError, setWordError] = useState('');
   const [guessSend, setGuessSend] = useState(0);
   const [chance, setChance] = useState('');
   let seconds = 90;
@@ -97,6 +98,20 @@ const Gusser = ({ socket }) => {
     socket.emit('guessSubmission', guess);
     console.log(guess);
     setGuessSend(1);
+    let len = guess.length;
+    var flag = 0;
+    for (var i = 0; i < len; i++) {
+      if (guess[i] === ' ') {
+        setWordError('Please enter a guess with single word only');
+        flag = 1;
+        break;
+      }
+    }
+    if (flag == 0) {
+      socket.emit('guessSubmission', guess);
+      console.log(guess);
+      setGuessSend(1);
+    }
   };
 
   useEffect(() => {
@@ -152,6 +167,7 @@ const Gusser = ({ socket }) => {
           </div>
         ) : (
           <div>
+            <h6 style={{ color: 'red' }}>{wordError}</h6>
             <ImageInput
               text="Enter your Guess"
               change={(e) => setGuess(e.target.value)}

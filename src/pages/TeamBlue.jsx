@@ -19,6 +19,7 @@ function TeamBlue({ socket }) {
   const [min, setMin] = useState(0);
   const [sec, setSec] = useState(0);
   const [chance, setChance] = useState('');
+  const [wordError, setWordError] = useState('');
   const [usermsgsent, setUserMagSent] = useState(0);
   let seconds = 90;
   // timer function
@@ -78,7 +79,7 @@ function TeamBlue({ socket }) {
     });
 
     socket.on('guessed-wrong', (wrong) => {
-      alert(`Guesser guessed wrong,Now ${2 - wrong} chances left`);
+      setChance(`Guesser guessed wrong, ${2 - wrong} chances are left...`);
     });
 
     socket.on('guessID', (guesserID) => {
@@ -103,6 +104,20 @@ function TeamBlue({ socket }) {
     setUserMagSent(1);
     socket.emit('msgListMake', { hint, room: 'Team Blue' });
     document.querySelector('.blue__input').value = '';
+    let len = hint.length;
+    var flag = 0;
+    for (var i = 0; i < len; i++) {
+      if (hint[i] === ' ') {
+        setWordError('Please enter a clue with single word only');
+        flag = 1;
+        break;
+      }
+    }
+    if (flag == 0) {
+      setUserMagSent(1);
+      socket.emit('msgListMake', { hint, room: 'Team Blue' });
+      document.querySelector('.blue__input').value = '';
+    }
   };
 
   // Change routes for new gusser
@@ -137,6 +152,7 @@ function TeamBlue({ socket }) {
           <div>Word submitted</div>
         ) : (
           <div>
+            <h6 style={{ color: 'red' }}>{wordError}</h6>
             <ImageInput
               text="Type your word here..."
               change={(e) => setHint(e.target.value)}
