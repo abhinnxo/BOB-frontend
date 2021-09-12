@@ -11,7 +11,8 @@ const NewGame = ({ socket }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [playersInLobby, setPlayersInLobby] = useState([]);
-  const [sameNickname, setSameNickname] = useState(false);
+  // const [sameNickname, setSameNickname] = useState(false);
+  let sameNickname = false;
   const [roomid, setRoomid] = useState('');
 
   const history = useHistory();
@@ -46,10 +47,10 @@ const NewGame = ({ socket }) => {
   useEffect(() => {
     playersInLobby.forEach((name) => {
       if (name === nickname) {
-        setSameNickname(true);
+        sameNickname = true;
       }
     });
-  }, [playersInLobby, nickname]);
+  }, [playersInLobby]);
 
   // change cards for host/player, for joining or creating a new room
   const join = () => {
@@ -83,8 +84,8 @@ const NewGame = ({ socket }) => {
     } else if (nickname.length > 8) {
       alert("Nickname can't be more then 8 characters");
     } else if (sameNickname) {
+      sameNickname = false;
       alert('A Player with same Nick has already joined...');
-      setSameNickname(false);
     } else {
       axios({
         method: 'get',

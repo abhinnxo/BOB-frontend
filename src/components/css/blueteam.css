@@ -39,6 +39,7 @@ ul {
   .blueblock__ul {
     height: 200px;
     width: 500px;
+    transform: translate(-15px, -32px);
   }
 }
 @media only screen and (max-width: 1100px), screen and (max-height: 800px) {

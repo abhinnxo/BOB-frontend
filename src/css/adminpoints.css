@@ -3,7 +3,7 @@
   left: 0px;
   top: 0px;
   z-index: -3;
-  background: url("../images/map3.svg");
+  background: url('../images/map3.svg');
   height: 100%;
   width: 100%;
   background-position: center center;
@@ -13,7 +13,7 @@
   overflow: hidden;
 }
 .point {
-  font-family: "PaytoneOne";
+  font-family: 'PaytoneOne';
 }
 .point__controls {
   margin-top: 100px;
@@ -22,13 +22,13 @@
   margin-right: auto;
 }
 
-.point__controls > div:first-child{
+.point__controls > div:first-child {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.point__controls > div:last-child{
+.point__controls > div:last-child {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -44,13 +44,16 @@
   top: 43%;
 }
 
-.point__board > h3, .point__board >h6 {
+.point__board > h3,
+.point__board > h6 {
   color: white;
 }
 .point__board {
-  
 }
-.plus_five, .plus_four, .plus_three,.plus_zero  {
+.plus_five,
+.plus_four,
+.plus_three,
+.plus_zero {
   cursor: pointer;
   background: #34c78f;
   color: white;
@@ -62,7 +65,7 @@
 }
 .wrong {
   cursor: pointer;
-  background: #D6312F;
+  background: #d6312f;
   color: white;
   height: 2.5rem;
   padding: 0px 15px;
@@ -77,20 +80,22 @@
   color: #34c78f;
 }
 
-.point__timer, .point__round{
+.point__timer,
+.point__round {
   background: url('../images/timer.svg');
-    background-size: cover;
-    width: 186px;
-    height: 53px;
-    display: grid;
-    place-items: center;
-    font-size: large;
-    color: #ffffff;
+  background-size: cover;
+  width: 186px;
+  height: 53px;
+  display: grid;
+  place-items: center;
+  font-size: large;
+  color: #ffffff;
 }
 
-.pauseTimer>img, .nextRound>img{
+.pauseTimer > img,
+.nextRound > img {
   background-size: cover;
-    width: 120px;
+  width: 120px;
 }
 
 .point__timer {

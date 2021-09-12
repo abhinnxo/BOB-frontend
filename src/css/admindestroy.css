@@ -290,16 +290,3 @@
   background-color: #ff0000;
   border: 3px solid #ffffff;
 }
-
-.admindestroy__hide {
-  transition: opacity 10ms ease-out;
-}
-
-@keyframes hidebtn {
-  before {
-    opacity: 1;
-  }
-  after {
-    opacity: 0;
-  }
-}

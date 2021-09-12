@@ -58,6 +58,12 @@
 }
 .gusser__enterbtn {
   background: url('../images/button.png') no-repeat;
+  color: white;
+  font-family: 'caesar';
+  font-size: 25px;
+  width: 400px;
+  height: 110px;
+  border: none;
 }
 .gusser__timer {
   position: absolute;

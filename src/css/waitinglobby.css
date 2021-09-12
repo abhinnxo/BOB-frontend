@@ -100,12 +100,6 @@
   .lobby__code {
     transform: translate(-35px, -8px);
   }
-  .lobby__blueteam {
-    transform: translate(950px, -8px);
-  }
-  .lobby__redteam {
-    transform: translate(400px, -8px);
-  }
   .lobby__startbtn {
     background-size: 300px;
     width: 300px;
