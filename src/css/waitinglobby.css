@@ -1,17 +1,9 @@
-/* body {
-  background: url("../images/map1.png");
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  overflow: hidden;
-} */
 .lobby__bg {
   position: absolute;
   left: 0px;
   top: 0px;
   z-index: -3;
-  background: url("../images/map1.webp");
+  background: url('../images/map.webp');
   height: 100%;
   width: 100%;
   background-position: center center;
@@ -19,12 +11,6 @@
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
-}
-.lobby__back {
-  position: absolute;
-  cursor: pointer;
-  top: 15%;
-  left: 20%;
 }
 .lobby__teamtable {
   position: absolute;
@@ -34,61 +20,112 @@
   margin-left: -36rem;
 }
 .lobby__redteam {
-  background: url("../images/join.png") no-repeat;
+  background: url('../images/join.png') no-repeat;
   cursor: pointer;
   border: none;
-  height: 25px;
-  width: 65px;
+  height: 35px;
+  width: 100px;
   position: absolute;
   z-index: 3 !important;
   top: 55px;
-  transform: translateX(450px);
+  transform: translate(465px, 10px);
 }
 .lobby__blueteam {
-  background: url("../images/join.png") no-repeat;
+  background: url('../images/join.png') no-repeat;
   cursor: pointer;
   border: none;
-  height: 25px;
-  width: 65px;
+  height: 35px;
+  width: 100px;
   position: absolute;
   z-index: 3 !important;
   top: 55px;
-  transform: translateX(1028px);
+  transform: translate(1120px, 12px);
 }
 .lobby__startbtn {
-  background: url("../images/button.png") no-repeat;
-  transform: translateX(370px);
+  background: url('../images/button.png') no-repeat;
+  transform: translateX(435px);
 }
 .lobby__codediv {
-  background: url("../images/copy_code.svg") no-repeat;
+  background: url('../images/copy_code.webp') no-repeat;
   position: absolute;
+  z-index: 3;
   display: grid;
   place-items: center;
-  height: 45px;
-  width: 165px;
-  cursor: pointer;
-  transform: translate(30rem, -2.5rem);
-  border-radius: 20px;
-}
-.lobby__code {
-  font-family: "caesar";
+  font-family: 'caesar';
+  height: 60px;
+  width: 248px;
+  color: white;
+  letter-spacing: 3px;
   font-weight: bolder;
   font-size: 25px;
-  color: #9b5825;
-  letter-spacing: 2px;
+  cursor: pointer;
+  transform: translate(32rem, -3rem);
+}
+.lobby__code {
+  letter-spacing: 5px;
   transform: translate(-15px, -1px);
 }
-/* .lobby__teamname {
-    font-family: Paytone One;
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 31px;
-    letter-spacing: 0.05em;
-    text-align: left;
-    
-} */
+.lobby__startbtn {
+  color: white;
+  font-family: 'caesar';
+  font-size: 25px;
+  width: 400px;
+  height: 110px;
+  cursor: pointer;
+  border: none;
+}
 
-.disabled:hover {
-  cursor: not-allowed !important;
+@media only screen and (max-width: 1610px), screen and (max-height: 910) {
+  .lobby__teamtable {
+    position: absolute;
+    width: 75rem;
+    top: 35%;
+    left: 50%;
+    margin-left: -40rem;
+  }
+}
+@media only screen and (max-width: 1400px), screen and (max-height: 800px) {
+  .lobby__teamtable {
+    position: absolute;
+    width: 75rem;
+    top: 35%;
+    left: 50%;
+    margin-left: -35rem;
+  }
+  .lobby__codediv {
+    font-size: 20px;
+    background-size: 180px;
+    transform: translate(28.5rem, -2.5rem);
+  }
+  .lobby__code {
+    transform: translate(-35px, -8px);
+  }
+  .lobby__blueteam {
+    transform: translate(950px, -8px);
+  }
+  .lobby__redteam {
+    transform: translate(400px, -8px);
+  }
+  .lobby__startbtn {
+    background-size: 300px;
+    width: 300px;
+    height: 80px;
+    transform: translateX(370px);
+  }
+}
+@media only screen and (max-width: 1100px), screen and (max-height: 800px) {
+  .lobby__codediv {
+    transform: translate(400px, -40px);
+  }
+  .lobby__teamtable {
+    top: 35%;
+    left: 50%;
+    margin-left: -32.5rem;
+  }
+  .lobby__blueteam {
+    transform: translate(860px, -12px);
+  }
+  .lobby__redteam {
+    transform: translate(360px, -12px);
+  }
 }

@@ -18,22 +18,10 @@ const TeamRed = ({ socket }) => {
   const [usermsgsent, setUserMagSent] = useState(0);
   const [chance, setChance] = useState('');
   const history = useHistory();
+  const [wordError, setWordError] = useState('');
   const [min, setMin] = useState(0);
   const [sec, setSec] = useState(0);
-  const [wordError, setWordError] = useState('');
-  let seconds = 90;
-  // timer function
-  useEffect(() => {
-    setInterval(() => {
-      if (seconds >= 0) {
-        setMin(parseInt(seconds / 60, 10));
-        setSec(parseInt(seconds % 60, 10));
-      }
-      seconds--;
-    }, 1000);
-  }, [roundfromBackend]); // timer will reset on round change
 
-  // getting the random word
   useEffect(() => {
     axios({
       method: 'get',
@@ -45,15 +33,21 @@ const TeamRed = ({ socket }) => {
       })
       .catch((err) => console.error(err));
   });
+
+  // setting the round number
+  socket.on('current-round', (round) => {
+    console.log('xyz round', round);
+    setRoundFromBackend(round);
+  });
+
   useEffect(() => {
     axios({
       method: 'get',
-      url: `${process.env.REACT_APP_LOCALHOST}score`,
+      url: `${process.env.REACT_APP_LOCALHOST}/score`,
     })
       .then((res) => {
-        console.log('score from backend: ', res.data[0].TeamName);
-        console.log('score from backend: ', res.data[0].TeamScore);
-        console.log('score from backend: ', res.data[0]);
+        console.log('score from backend: ', res.data);
+
         setRedTeamScore(res.data[0].TeamScore);
         setBlueTeamScore(res.data[1].TeamScore);
       })
@@ -66,6 +60,13 @@ const TeamRed = ({ socket }) => {
         localStorage.clear();
         window.location.href = '/';
       }
+    });
+
+    // sync-timer-to-frontend
+    socket.on('sync-timer-to-frontend', (time) => {
+      console.info('guesser timer', time);
+      setMin(time.minutes);
+      setSec(time.seconds);
     });
 
     socket.on('round-change-from-backend', (round) => {
@@ -128,6 +129,17 @@ const TeamRed = ({ socket }) => {
           if (socket.id === res.data.gusserSocketID) {
             history.push('/red/guess');
           }
+        })
+        .catch((err) => console.error(err));
+
+      // getting the random word
+      axios({
+        method: 'get',
+        url: `${process.env.REACT_APP_LOCALHOST}/randomword`,
+      })
+        .then((res) => {
+          console.log('axios ', res.data);
+          setRandomWord(res.data);
         })
         .catch((err) => console.error(err));
     }

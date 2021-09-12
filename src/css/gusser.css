@@ -1,16 +1,9 @@
-/* .gusser{
-  background: url("../images/map1.png");
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-} */
 .gusser__bg {
   position: absolute;
   left: 0px;
   top: 0px;
   z-index: -3;
-  background: url("../images/map1.webp");
+  background: url('../images/map.webp');
   height: 100%;
   width: 100%;
   background-position: center center;
@@ -26,7 +19,7 @@
   cursor: pointer;
 }
 .gusser__teamranks {
-  background: url("../images/teamrank.svg") no-repeat;
+  background: url('../images/teamrank.svg') no-repeat;
   position: absolute;
   width: 306px;
   height: 60px;
@@ -34,12 +27,12 @@
   right: 20%;
 }
 .gusser__teamranks > h3 {
-  font-family: "PaytoneOne";
+  font-family: 'PaytoneOne';
 }
 .gusser__hints {
   display: flex;
   justify-content: space-evenly;
-  font-family: "PaytoneOne";
+  font-family: 'PaytoneOne';
   height: 126px;
   width: 592px;
   position: absolute;
@@ -57,23 +50,23 @@
 }
 .gusser__enterdiv {
   position: absolute;
-  font-family: "PaytoneOne";
+  font-family: 'PaytoneOne';
   text-align: center;
   left: 50%;
   margin-left: -233.5px;
   top: 50%;
 }
 .gusser__enterbtn {
-  background: url("../images/button.png") no-repeat;
+  background: url('../images/button.png') no-repeat;
 }
 .gusser__timer {
   position: absolute;
-  width: 125px;
-  top: 45%;
-  right: 20%;
+  width: 100px;
+  top: 129px;
+  left: 286px;
 }
 .gusser__timer h3 {
-  font-family: "PaytoneOne";
-  transform: translate(-90px, -53px);
+  font-family: 'PaytoneOne';
+  transform: translate(-73px, -42px);
   color: white;
 }

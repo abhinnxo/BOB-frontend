@@ -15,25 +15,12 @@ const Gusser = ({ socket }) => {
   const [roundfromBackend, setRoundFromBackend] = useState(1);
   const [team, setTeam] = useState('');
   const history = useHistory();
-  const [min, setMin] = useState(0);
-  const [sec, setSec] = useState(0);
+  const [min, setMin] = useState(1);
+  const [sec, setSec] = useState(30);
   const [wordError, setWordError] = useState('');
   const [guessSend, setGuessSend] = useState(0);
   const [chance, setChance] = useState('');
-  let seconds = 90;
 
-  // timer function
-  useEffect(() => {
-    setInterval(() => {
-      if (seconds >= 0) {
-        setMin(parseInt(seconds / 60, 10));
-        setSec(parseInt(seconds % 60, 10));
-
-        console.log(min + ':' + sec);
-      }
-      seconds--;
-    }, 1000);
-  }, []);
   let v = 0;
 
   useEffect(() => {
@@ -47,16 +34,6 @@ const Gusser = ({ socket }) => {
       } else {
         setTeam('blue');
       }
-
-      // socket.on("scores", (game) => {
-      //   console.log("game:", game);
-      //   //document.getElementById('scoreTeamRed').innerHTML = game[0].TeamScore;
-      //   if (round % 2 == 0) {
-      //     setScore(game[0].TeamScore);
-      //   } else {
-      //     setScore(game[1].TeamScore);
-      //   }
-      // });
 
       socket.on('guessID', (guesserID) => {
         console.log('guesser ID from backend', guesserID);
@@ -81,14 +58,21 @@ const Gusser = ({ socket }) => {
       });
     });
 
+    // sync-timer-to-frontend
+    socket.on('sync-timer-to-frontend', (time) => {
+      console.info('guesser timer', time);
+      setMin(time.minutes);
+      setSec(time.seconds);
+    });
+
     axios({
       method: 'get',
       url: `${process.env.REACT_APP_LOCALHOST}/score`,
     })
       .then((res) => {
-        console.log('guesserID from backend: ', res.data.game);
-        setRedTeamScore(res.data.game[0]);
-        setBlueTeamScore(res.data.game[1]);
+        console.log('guesserID from backend: ', res.data);
+        setRedTeamScore(res.data[0].TeamScore);
+        setBlueTeamScore(res.data[1].TeamScore);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -124,7 +108,7 @@ const Gusser = ({ socket }) => {
 
     socket.on('guessed-wrong', (wrong) => {
       setGuessSend(0);
-      setChance(`You guessed wrong,Now you have ${2 - wrong} chances left`);
+      setChance(`You guessed wrong, you have ${2 - wrong} chances left`);
     });
   }, [socket]);
 
@@ -163,7 +147,7 @@ const Gusser = ({ socket }) => {
         <br />
         {guessSend ? (
           <div>
-            <h5>Guess send</h5>
+            <h5>Guess sent...</h5>
           </div>
         ) : (
           <div>

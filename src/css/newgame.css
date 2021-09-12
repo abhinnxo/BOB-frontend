@@ -1,19 +1,9 @@
-/* body {
-  background: url("../images/map.png");
-  height: 100%;
-  width: 100%;
-  background-position: center center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-  overflow: hidden;
-} */
 .newgame__bg {
   position: absolute;
   left: 0px;
   top: 0px;
   z-index: -3;
-  background: url("../images/map.webp");
+  background: url('../images/map.webp');
   height: 100%;
   width: 100%;
   background-position: center center;
@@ -22,17 +12,52 @@
   background-size: cover;
   overflow: hidden;
 }
+.newgame__box {
+  background: url('../images/box.webp');
+  width: 755px;
+  height: 524px;
+  padding: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 304px;
+}
+#hostbtn {
+  background-color: #c6905b;
+}
+.newgame__linkbtn {
+  margin-top: 20px;
+  width: 686px;
+  background-color: #9b5825;
+  font-family: 'PaytoneOne';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 22px;
+  line-height: 30.71px;
+  letter-spacing: 5%;
+}
+.newgame__linkbtn > button {
+  width: 50%;
+  height: 60px;
+  color: white;
+  border: none;
+  background-color: #9b5825;
+}
+#host {
+  display: none;
+}
+.newgame__join,
+.newgame__host {
+  text-align: center;
+}
 .newgame__card {
   position: relative;
-  width: 40rem;
   margin-top: 18%;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  background-color: #774e2f;
 }
-input[type="text"],
-input[type="password"] {
+input[type='text'],
+input[type='password'] {
   border-color: #9b5825;
   width: 29.188rem;
   height: 3.75rem;
@@ -45,35 +70,55 @@ input[type="password"] {
   border: 3px solid #68360f;
   box-sizing: border-box;
 }
-.newgame__header {
-  background-color: #9b5825;
-  border: none;
-  text-align: center;
-  font-family: "caesar";
-}
-.newgame__body {
-  background-color: #e1a86f;
-}
-.newgame__navlink {
-  color: white !important;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 36px;
-  line-height: 44px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-.card-header {
-  padding: 0 !important;
-}
+
 .newgame__joinbtn,
-.newgame__hostbtn,
-.newgame__instbtn {
-  background: url("../images/button.png") no-repeat;
+.newgame__hostbtn {
+  background: url('../images/button.png') no-repeat;
+  color: white;
+  font-family: 'caesar';
+  font-size: 25px;
+  width: 400px;
+  height: 110px;
+  cursor: pointer;
+  border: none;
 }
 
-@media only screen and (max-width: 1536px) {
-  .newgame__card {
-    width: 30rem;
+@media only screen and (max-width: 1610px), screen and (max-height: 910) {
+  .newgame__box {
+    /* margin-top: 200px; */
+    transform: translateY(-30px);
+    width: 703px;
+    height: 549px;
+    background-size: 703px 549px;
+  }
+  .newgame__linkbtn {
+    width: 620px;
+  }
+}
+@media only screen and (max-width: 1500px) {
+  .newgame__box {
+    margin-top: 250px;
+  }
+}
+@media only screen and (max-width: 1400px), screen and (max-height: 800px) {
+  .newgame__box {
+    margin-top: 210px;
+    width: 654px;
+    height: 500px;
+    background-size: 654px 500px;
+  }
+  .newgame__linkbtn {
+    width: 575px;
+    transform: translate(-5px, -4px);
+  }
+}
+@media only screen and (max-height: 1300px) {
+  .newgame__box {
+    margin-top: 300px;
+  }
+}
+@media only screen and (max-width: 1024), screen and (max-height: 810px) {
+  .newgame__box {
+    margin-top: 230px;
   }
 }

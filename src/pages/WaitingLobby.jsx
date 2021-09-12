@@ -19,10 +19,11 @@ const WaitingLobby = ({ socket }) => {
   const [redplayerlist, setRedPlayerList] = useState([]);
   // Guesser id available to gusser only
   const [guesser, setGuesser] = useState('');
-  const [code, setCode] = useState(0);
+  const [code, setCode] = useState('...');
 
   const location = useLocation();
   const roomid = localStorage.getItem('roomid');
+
   // fill teams with existing players
   useEffect(() => {
     axios({
@@ -46,7 +47,10 @@ const WaitingLobby = ({ socket }) => {
   }, []);
 
   useEffect(() => {
-    setUsername(localStorage.getItem('nickname'));
+    setCode(roomid);
+  }, []);
+  useEffect(() => {
+    setUsername(localStorage.getItem('nickname').trim());
   }, []);
 
   useEffect(() => {
@@ -86,7 +90,6 @@ const WaitingLobby = ({ socket }) => {
 
   useEffect(() => {
     socket.on('guesser', (id) => {
-      // console.log("guess id", id);
       setGuesser(id);
     });
   });
@@ -94,9 +97,6 @@ const WaitingLobby = ({ socket }) => {
   // On clicking start button
   const startgame = () => {
     socket.emit('hostStartedGame', true);
-  };
-  const goBack = () => {
-    history.push('/');
   };
   const copyGameCode = () => {
     navigator.clipboard.writeText(localStorage.getItem('roomid'));
@@ -122,7 +122,6 @@ const WaitingLobby = ({ socket }) => {
   }
 
   function GenerateCode() {
-    setCode(roomid);
     socket.emit('Game-Code', roomid);
     localStorage.setItem('GameCode', code);
   }
@@ -130,12 +129,11 @@ const WaitingLobby = ({ socket }) => {
   return (
     <div className="lobby">
       <div className="lobby__bg"></div>
-      <div className="lobby__back">
-        <img src={BackButton} alt="back" onClick={goBack} />
-      </div>
       <div className="lobby__teamtable">
         <div className="lobby__codediv" onClick={GenerateCode}>
-          <div>{code}</div>
+          <div className="lobby__code" onClick={copyGameCode}>
+            {code}
+          </div>
         </div>
         <div className="d-flex">
           {/* Red Box */}

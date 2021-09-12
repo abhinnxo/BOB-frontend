@@ -3,15 +3,13 @@ import { useHistory } from 'react-router';
 import '../css/admindestroy.css';
 import settingsImg from '../images/settings.svg';
 import endGameImg from '../images/end_game.svg';
-import pauseTimerImg from '../images/pause_timer.svg';
-import nextRoundImg from '../images/next_round.svg';
 import destroyButton from '../images/destroy_button.svg';
+import MyTimer from '../components/MyTimer';
 const axios = require('axios');
 
 const AdminDestroy = ({ socket }) => {
   const [bluearr, setBluearr] = useState([]);
   const [redarr, setRedarr] = useState([]);
-  const [gameStatus, setGameStatus] = useState(0);
   const [giveGuest, setGiveGuest] = useState(false);
   const [randomword, setRandomWord] = useState('MainWord');
   const [round, setRound] = useState(1);
@@ -22,22 +20,9 @@ const AdminDestroy = ({ socket }) => {
   // set guessing team
   const [guessingTeam, setGuessingTeam] = useState('blue');
   const history = useHistory();
-  const [min, setMin] = useState(0);
-  const [sec, setSec] = useState(0);
-  const [timerIsPaused, setTimerIsPaused] = useState(false);
-  let seconds = 90;
 
-  // timer function
-  useEffect(() => {
-    setInterval(() => {
-      if (!timerIsPaused) {
-        setMin(parseInt(seconds / 60, 10));
-        setSec(parseInt(seconds % 60, 10));
-        seconds--;
-        console.log('time = ', min + ':' + sec);
-      } else console.log('Timer has been paused');
-    }, 1000);
-  }, []);
+  const time = new Date();
+  time.setSeconds(time.getSeconds() + 90);
 
   useEffect(() => {
     if (round % 2 === 0) {
@@ -82,6 +67,7 @@ const AdminDestroy = ({ socket }) => {
     })
       .then((res) => {
         console.log('axios ', res.data);
+        console.log('ad des,  ', res.data.round);
         setRoundNumber(res.data.round);
       })
       .catch((err) => console.error(err));
@@ -106,6 +92,13 @@ const AdminDestroy = ({ socket }) => {
     socket.on('guessID', (guesserID) => {
       console.log('guesser ID from backend', guesserID);
     });
+    socket.on('current-round', (round) => {
+      setRoundNumber(round);
+    });
+
+    socket.on('random-word', (word) => {
+      setRandomWord(word);
+    });
   }, [socket]);
 
   socket.on('final-Array', (arr) => {
@@ -121,15 +114,10 @@ const AdminDestroy = ({ socket }) => {
   }, [giveGuest]);
 
   function endGame() {
-    socket.emit('game-end-clicked', gameStatus);
+    socket.emit('game-end-clicked', 0);
     localStorage.clear();
   }
 
-  const pauseTimer = (e) => {
-    e.preventDefault();
-    console.log('pause timer clicked', min + ':' + sec);
-    setTimerIsPaused(true);
-  };
   function nextRound() {
     socket.emit('change-score', 0);
     socket.emit('change-round', roundNumber + 1);
@@ -142,19 +130,19 @@ const AdminDestroy = ({ socket }) => {
   return (
     <section className="hostWaitingLobby">
       <div className="admindestroy__bg"></div>
-      <div className="end_settings">
-        <img src={settingsImg} alt="" className="settings" />
-        <img src={endGameImg} className="endGame" onClick={endGame} alt="" />
-      </div>
+
       <div className="timer_round">
-        <p>
-          {min}:{sec}
-        </p>
-        <p>Round {roundNumber}</p>
-      </div>
-      <div className="pauseTimer_nextRound">
-        <img src={pauseTimerImg} alt="" />
-        <img src={nextRoundImg} alt="" onClick={nextRound} />
+        {<MyTimer expiryTimestamp={time} socket={socket} />}
+        <div>
+          <img src={settingsImg} alt="" className="settings" />
+          <p>Round {roundNumber}</p>
+          <img
+            src={endGameImg}
+            className="endGame"
+            onClick={endGame}
+            alt="End Game Button"
+          />
+        </div>
       </div>
       <div className="players">
         <h2 className="mainWord">{randomword}</h2>

@@ -3,18 +3,50 @@
 }
 .redblock__playerlist {
   position: absolute;
-  transform: translate(40px, -309px);
+  transform: translate(40px, -320px);
   font-family: PaytoneOne;
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 20px;
+  line-height: 30 px;
   letter-spacing: 0.1em;
   color: rgba(0, 0, 0, 0.5);
   display: flex;
-  height: 250px;
-  width: 500px;
 }
-ul, li {
+ul,
+li {
   list-style: none;
+}
+
+ul {
+  height: 250px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+@media only screen and (max-width: 1400px), screen and (max-height: 800px) {
+  .redblock > img {
+    width: 548px;
+    height: 361px;
+  }
+  .redblock__playerlist {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .redblock__ul {
+    height: 200px;
+    width: 500px;
+  }
+}
+@media only screen and (max-width: 1100px), screen and (max-height: 800px) {
+  .redblock > img {
+    width: 500px;
+    height: 313px;
+  }
+  .redblock__ul {
+    transform: translate(-25px, 95px);
+    height: 180px;
+    width: 450px;
+  }
 }

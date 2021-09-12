@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Card, Nav } from 'react-bootstrap';
 import ImageButton from '../components/ImageButton';
 import ImageInput from '../components/ImageInput';
 import '../css/newgame.css';
@@ -11,8 +10,8 @@ const NewGame = ({ socket }) => {
   const [nickname, setNickname] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [usernames, setUsernames] = useState([]);
-  const [sameUsername, setSameUsername] = useState(false);
+  const [playersInLobby, setPlayersInLobby] = useState([]);
+  const [sameNickname, setSameNickname] = useState(false);
   const [roomid, setRoomid] = useState('');
 
   const history = useHistory();
@@ -24,30 +23,50 @@ const NewGame = ({ socket }) => {
   useEffect(() => {
     console.log('password', password);
   }, [password]);
+  useEffect(() => {
+    console.log('nickname', nickname);
+  }, [nickname]);
+  useEffect(() => {
+    console.log('roomid', roomid);
+  }, [roomid]);
 
-  // get usernames for comparing
+  //  Get Nanmes of Joined Players
   useEffect(() => {
     axios({
       method: 'get',
       url: `${process.env.REACT_APP_LOCALHOST}/usernames`,
-    }).then((res) => {
-      console.log(res.data);
-      setUsernames(res.data);
+    })
+      .then((res) => {
+        setPlayersInLobby(res.data);
+      })
+      .catch((err) => console.error(err));
+  });
+
+  // check for duplicate usernames
+  useEffect(() => {
+    playersInLobby.forEach((name) => {
+      if (name === nickname) {
+        setSameNickname(true);
+      }
     });
-  }, []);
+  }, [playersInLobby, nickname]);
 
   // change cards for host/player, for joining or creating a new room
   const join = () => {
     document.querySelector('#join').classList.add('d-block');
     document.querySelector('#join').classList.remove('d-none');
+    document.querySelector('#joinbtn').style.backgroundColor = '#9b5825';
     document.querySelector('#host').classList.add('d-none');
     document.querySelector('#host').classList.remove('d-blobk');
+    document.querySelector('#hostbtn').style.backgroundColor = '#c6905b';
   };
   const host = () => {
     document.querySelector('#join').classList.add('d-none');
     document.querySelector('#join').classList.remove('d-block');
+    document.querySelector('#joinbtn').style.backgroundColor = '#c6905b';
     document.querySelector('#host').classList.add('d-block');
     document.querySelector('#host').classList.remove('d-none');
+    document.querySelector('#hostbtn').style.backgroundColor = '#9b5825';
   };
 
   // set NickName in the localstorage
@@ -57,19 +76,15 @@ const NewGame = ({ socket }) => {
 
   // On Click the Join Room Button
   const joinroom = () => {
-    // checking for duplicate username
-    usernames.forEach((e) => {
-      console.log(e);
-      if (e === username) setSameUsername(true);
-    });
     if (roomid === '') {
       alert('Enter Game Code');
     } else if (nickname === '') {
       alert('Enter Nickrname');
-    } else if (sameUsername) {
-      alert(
-        'A Player with same Nickname has already joined, try a different one...'
-      );
+    } else if (nickname.length > 8) {
+      alert("Nickname can't be more then 8 characters");
+    } else if (sameNickname) {
+      alert('A Player with same Nick has already joined...');
+      setSameNickname(false);
     } else {
       axios({
         method: 'get',
@@ -80,6 +95,7 @@ const NewGame = ({ socket }) => {
           if (roomid == res.data && res.data != 0) {
             localStorage.setItem('host', false);
             localStorage.setItem('roomid', roomid);
+            socket.emit('joining-players-to-backend', nickname.trim());
             history.push({
               pathname: '/lobby',
               state: {
@@ -100,7 +116,6 @@ const NewGame = ({ socket }) => {
     if (username === 'admin' && password === 'admin') {
       localStorage.setItem('host', true);
       localStorage.setItem('roomid', customId({}));
-      // history.push("/lobby");
       history.push({
         pathname: '/lobby',
         state: {
@@ -116,28 +131,17 @@ const NewGame = ({ socket }) => {
   return (
     <div className="newgame__div">
       <div className="newgame__bg"></div>
-      <Card className="newgame__card">
-        <Card.Header className="newgame__header">
-          <Nav
-            variant="tabs"
-            defaultActiveKey="#first"
-            className="newgame__header"
-          >
-            <Nav.Item className="newgame__header">
-              <Nav.Link className="newgame__navlink" onClick={join}>
-                Join
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link className="newgame__navlink" onClick={host}>
-                Host
-              </Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </Card.Header>
-        {/* JOIN */}
-        <Card.Body className="newgame__body" id="join">
-          <br />
+      <div className="newgame__box">
+        <div className="newgame__linkbtn">
+          <button id="joinbtn" onClick={join}>
+            JOIN
+          </button>
+          <button id="hostbtn" onClick={host}>
+            HOST
+          </button>
+        </div>
+        <div className="newgame__join" id="join">
+          <br /> <br />
           <ImageInput
             change={(e) => setNickname(e.target.value)}
             text="Enter Nickname"
@@ -153,11 +157,9 @@ const NewGame = ({ socket }) => {
             classlist="newgame__joinbtn"
             value="JOIN"
           />
-          <ImageButton classlist="newgame__instbtn" value="INSTRUCTIONS" />
-        </Card.Body>
-        {/* HOST */}
-        <Card.Body className="d-none newgame__body" id="host">
-          <br />
+        </div>
+        <div className="newgame__host" id="host">
+          <br /> <br />
           <ImageInput
             change={(e) => setUsername(e.target.value)}
             text="Enter Username"
@@ -181,9 +183,8 @@ const NewGame = ({ socket }) => {
             classlist="newgame__hostbtn"
             value="LOGIN"
           />
-          <ImageButton classlist="newgame__instbtn" value="INSTRUCTIONS" />
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };

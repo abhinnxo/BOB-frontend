@@ -3,7 +3,7 @@
   left: 0px;
   top: 0px;
   z-index: -3;
-  background: url("../images/map1.webp");
+  background: url('../images/map1.webp');
   height: 100%;
   width: 100%;
   background-position: center center;
@@ -23,9 +23,7 @@
 .end_settings > img {
   cursor: pointer;
 }
-.end_settings,
-.timer_round,
-.pauseTimer_nextRound {
+.timer_round {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,9 +32,15 @@
 }
 .endGame {
   width: 200px;
+  cursor: pointer;
 }
-.timer_round > p {
-  background: url("../images/timer.svg");
+.settings {
+  cursor: pointer;
+  margin-left: auto;
+}
+/* background of round number */
+.timer_round > div > p {
+  background: url('../images/timer.svg');
   background-size: cover;
   width: 186px;
   height: 53px;
@@ -65,34 +69,30 @@
   position: relative;
 }
 .teamNameBlue {
-  background: url("../images//team_name_blue.svg");
+  background: url('../images//team_name_blue.svg');
   transform: translate(100px, -100px);
 }
 .teamNameRed {
-  background: url("../images//team_nam_red.svg");
+  background: url('../images//team_nam_red.svg');
   transform: translate(-100px, 100px);
 }
-
 .mainWord {
   font-size: medium;
-  background: url("../images/mainword.svg");
+  background: url('../images/mainword.svg');
   width: 200px;
   height: 50px;
   margin: 10px auto -40px auto;
 }
-
 .destroy {
   width: 150px;
 }
-
 .join {
   display: flex;
   align-items: center;
 }
-
 .teams {
   color: #ffffff;
-  background: url("../images/centre_box.svg");
+  background: url('../images/centre_box.svg');
   background-size: cover !important;
   width: 750px;
   height: 400px;
@@ -102,18 +102,15 @@
   align-items: center;
   justify-content: space-between;
 }
-
 .allPlayers {
   width: 500px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
-
 .player {
   display: flex;
   justify-content: center;
 }
-
 .player > div {
   margin: 3px 0px 0px 10px;
   width: 20px;
@@ -122,7 +119,6 @@
   background-color: #ffffff;
   border: 5px solid #ffffff;
 }
-
 .player .answered {
   background-color: #1bd5e2;
   overflow: hidden;
@@ -148,7 +144,7 @@
   width: 200px;
 }
 .timer_round > p {
-  background: url("../images/timer.svg");
+  background: url('../images/timer.svg');
   background-size: cover;
   width: 186px;
   height: 53px;
@@ -176,16 +172,16 @@
   position: relative;
 }
 .teamNameBlue {
-  background: url("../images//team_name_blue.svg");
+  background: url('../images//team_name_blue.svg');
   transform: translate(100px, -100px);
 }
 .teamNameRed {
-  background: url("../images//team_nam_red.svg");
+  background: url('../images//team_nam_red.svg');
   transform: translate(-100px, 100px);
 }
 .mainWord {
   font-size: medium;
-  background: url("../images/mainword.svg");
+  background: url('../images/mainword.svg');
   width: 200px;
   height: 50px;
   margin: 10px auto -40px auto;
@@ -199,7 +195,7 @@
 }
 .teams {
   color: #ffffff;
-  background: url("../images/centre_box.svg");
+  background: url('../images/centre_box.svg');
   background-size: cover !important;
   width: 750px;
   height: 400px;
@@ -241,7 +237,7 @@
 
 .seperateBoard {
   color: #ffffff;
-  background: url("../images/centre_box_with_partition.svg");
+  background: url('../images/centre_box_with_partition.svg');
   background-size: cover !important;
   width: 750px;
   height: 400px;
@@ -262,7 +258,6 @@
   grid-template-columns: 1fr 1fr;
   width: 550px;
   gap: 20px;
-  /* border: 1px solid black; */
 }
 
 .eachTeam {
@@ -275,7 +270,7 @@
 .word {
   font-weight: 800;
   padding: 0px 10px;
-  background: url("../images//timer.svg");
+  background: url('../images//timer.svg');
   background-size: cover;
   height: 25px;
   min-width: 100px;
@@ -297,7 +292,7 @@
 }
 
 .admindestroy__hide {
-  transition: hidebtn 10ms ease-out;
+  transition: opacity 10ms ease-out;
 }
 
 @keyframes hidebtn {
