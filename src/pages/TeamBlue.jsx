@@ -40,7 +40,7 @@ function TeamBlue({ socket }) {
     // getting the  random word
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com//randomword`,
+      url: `https://bob-backend-madiee-h.herokuapp.com/randomword`,
     })
       .then((res) => {
         console.log('axios ', res.data);
@@ -125,7 +125,7 @@ function TeamBlue({ socket }) {
     if (value) {
       axios({
         method: 'get',
-        url: `https://bob-backend-madiee-h.herokuapp.com//guesserid`,
+        url: `https://bob-backend-madiee-h.herokuapp.com/guesserid`,
       })
         .then((res) => {
           console.log('guesserID from backend: ', res.data);
@@ -138,7 +138,7 @@ function TeamBlue({ socket }) {
       // getting the random word
       axios({
         method: 'get',
-        url: `https://bob-backend-madiee-h.herokuapp.com//randomword`,
+        url: `https://bob-backend-madiee-h.herokuapp.com/randomword`,
       })
         .then((res) => {
           console.log('axios ', res.data);

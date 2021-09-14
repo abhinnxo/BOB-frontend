@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.2eb83ced.chunk.css",
-    "main.js": "/static/js/main.c3ecd19e.chunk.js",
-    "main.js.map": "/static/js/main.c3ecd19e.chunk.js.map",
+    "main.css": "/static/css/main.4df3bc54.chunk.css",
+    "main.js": "/static/js/main.1ba1a50e.chunk.js",
+    "main.js.map": "/static/js/main.1ba1a50e.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.69781038.js",
     "runtime-main.js.map": "/static/js/runtime-main.69781038.js.map",
     "static/css/2.983f79de.chunk.css": "/static/css/2.983f79de.chunk.css",
@@ -10,12 +10,13 @@
     "static/js/2.595212fd.chunk.js.map": "/static/js/2.595212fd.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.983f79de.chunk.css.map": "/static/css/2.983f79de.chunk.css.map",
-    "static/css/main.2eb83ced.chunk.css.map": "/static/css/main.2eb83ced.chunk.css.map",
+    "static/css/main.4df3bc54.chunk.css.map": "/static/css/main.4df3bc54.chunk.css.map",
     "static/js/2.595212fd.chunk.js.LICENSE.txt": "/static/js/2.595212fd.chunk.js.LICENSE.txt",
     "static/media/index.css": "/static/media/PaytoneOne-Regular.d906fa71.ttf",
     "static/media/back_button.87b07efd.svg": "/static/media/back_button.87b07efd.svg",
     "static/media/admindestroy.css": "/static/media/bglogo.369f5a04.webp",
     "static/media/blueblock.c5920bd3.webp": "/static/media/blueblock.c5920bd3.webp",
+    "static/media/scorepresent.css": "/static/media/redscore.228a7cd9.webp",
     "static/media/newgame.css": "/static/media/box.d0a0709d.webp",
     "static/media/hostwaitinglobby.css": "/static/media/timer.2d0362c8.svg",
     "static/media/clock.ea7d9592.svg": "/static/media/clock.ea7d9592.svg",
@@ -34,7 +35,7 @@
     "static/js/runtime-main.69781038.js",
     "static/css/2.983f79de.chunk.css",
     "static/js/2.595212fd.chunk.js",
-    "static/css/main.2eb83ced.chunk.css",
-    "static/js/main.c3ecd19e.chunk.js"
+    "static/css/main.4df3bc54.chunk.css",
+    "static/js/main.1ba1a50e.chunk.js"
   ]
 }

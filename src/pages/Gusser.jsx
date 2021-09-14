@@ -67,7 +67,7 @@ const Gusser = ({ socket }) => {
 
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com//score`,
+      url: `https://bob-backend-madiee-h.herokuapp.com/score`,
     })
       .then((res) => {
         console.log('guesserID from backend: ', res.data);

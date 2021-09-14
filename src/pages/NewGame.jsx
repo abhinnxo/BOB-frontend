@@ -35,7 +35,7 @@ const NewGame = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com//usernames`,
+      url: `https://bob-backend-madiee-h.herokuapp.com/usernames`,
     })
       .then((res) => {
         setPlayersInLobby(res.data);

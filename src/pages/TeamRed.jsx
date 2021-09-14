@@ -26,7 +26,7 @@ const TeamRed = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com//score`,
+      url: `https://bob-backend-madiee-h.herokuapp.com/score`,
     })
       .then((res) => {
         console.log('score from backend: ', res.data);
@@ -42,7 +42,7 @@ const TeamRed = ({ socket }) => {
     // getting the random word
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com//randomword`,
+      url: `https://bob-backend-madiee-h.herokuapp.com/randomword`,
     })
       .then((res) => {
         console.log('axios ', res.data);
@@ -126,7 +126,7 @@ const TeamRed = ({ socket }) => {
     if (value) {
       axios({
         method: 'get',
-        url: `https://bob-backend-madiee-h.herokuapp.com//guesserid`,
+        url: `https://bob-backend-madiee-h.herokuapp.com/guesserid`,
       })
         .then((res) => {
           if (socket.id === res.data.gusserSocketID) {
@@ -138,7 +138,7 @@ const TeamRed = ({ socket }) => {
       // getting the random word
       axios({
         method: 'get',
-        url: `https://bob-backend-madiee-h.herokuapp.com//randomword`,
+        url: `https://bob-backend-madiee-h.herokuapp.com/randomword`,
       })
         .then((res) => {
           console.log('axios ', res.data);

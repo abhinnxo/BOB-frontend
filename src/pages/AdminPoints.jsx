@@ -38,7 +38,7 @@ const AdminPoints = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com//randomword`,
+      url: `https://bob-backend-madiee-h.herokuapp.com/randomword`,
     })
       .then((res) => {
         console.log('axios ', res.data);
@@ -48,7 +48,7 @@ const AdminPoints = ({ socket }) => {
 
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com//roundNo`,
+      url: `https://bob-backend-madiee-h.herokuapp.com/roundNo`,
     })
       .then((res) => {
         console.log('axios ', res.data);
