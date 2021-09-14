@@ -89,7 +89,7 @@ const NewGame = ({ socket }) => {
     } else {
       axios({
         method: 'get',
-        url: `${process.env.REACT_APP_LOCALHOST}/code`,
+        url: `https://bob-backend-madiee-h.herokuapp.com/code`,
       })
         .then((res) => {
           console.log('axios ', res.data);

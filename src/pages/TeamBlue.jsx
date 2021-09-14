@@ -26,7 +26,7 @@ function TeamBlue({ socket }) {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `${process.env.REACT_APP_LOCALHOST}/score`,
+      url: `https://bob-backend-madiee-h.herokuapp.com/score`,
     })
       .then((res) => {
         console.log('score from backend: ', res.data);
