@@ -40,7 +40,8 @@
 .point__board {
   position: absolute;
   left: 50%;
-  margin-left: -233.5px;
+  margin-top: 50px;
+  margin-left: -155px;
   top: 43%;
 }
 
@@ -48,7 +49,8 @@
 .point__board > h6 {
   color: white;
 }
-.point__board {
+.point__board button {
+  margin: 0px 2px;
 }
 .plus_five,
 .plus_four,
@@ -119,4 +121,13 @@
 .point__send {
   cursor: pointer;
   transform: translate(200px, -43px);
+}
+
+@media only screen and (max-width: 1280px), screen and (max-height: 720px) {
+  .point__board {
+    margin-top: 15px;
+  }
+  .point__endgame {
+    width: 150px;
+  }
 }

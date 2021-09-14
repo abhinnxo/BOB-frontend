@@ -22,7 +22,6 @@ function TeamBlue({ socket }) {
   const [min, setMin] = useState(1);
   const [sec, setSec] = useState(30);
 
-  // getting the random word
   // getting the score
   useEffect(() => {
     axios({
@@ -37,6 +36,25 @@ function TeamBlue({ socket }) {
       .catch((err) => console.error(err));
   }, [guesserId]);
 
+  useEffect(() => {
+    // getting the  random word
+    axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_LOCALHOST}/randomword`,
+    })
+      .then((res) => {
+        console.log('axios ', res.data);
+        setRandomWord(res.data);
+      })
+      .catch((err) => console.error(err));
+  });
+
+  // setting the round number
+  socket.on('current-round', (round) => {
+    console.log('xyz round', round);
+    setRoundFromBackend(round);
+  });
+
   //  end game button
   useEffect(() => {
     socket.on('game-ended', (gameValue) => {
@@ -44,10 +62,6 @@ function TeamBlue({ socket }) {
         localStorage.clear();
         window.location.href = '/';
       }
-    });
-
-    socket.on('sync-timer-to-frontend', (timer) => {
-      console.info('timer ', timer);
     });
 
     // sync-timer-to-frontend
@@ -101,7 +115,7 @@ function TeamBlue({ socket }) {
     }
     if (flag == 0) {
       setUserMagSent(1);
-      socket.emit('msgListMake', { hint, room: 'Team Blue' });
+      // socket.emit('msgListMake', { hint, room: 'Team Blue' });
       document.querySelector('.blue__input').value = '';
     }
   };

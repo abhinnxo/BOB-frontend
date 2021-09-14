@@ -131,7 +131,7 @@ const AdminDestroy = ({ socket }) => {
     <section className="hostWaitingLobby">
       <div className="admindestroy__bg"></div>
 
-      <div className="timer_round">
+      <div className="timer__round">
         {<MyTimer expiryTimestamp={time} socket={socket} />}
         <div>
           <img src={settingsImg} alt="" className="settings" />
@@ -200,7 +200,7 @@ const AdminDestroy = ({ socket }) => {
         </div>
       </div>
       <button className="admin__destroy" onClick={() => setGiveGuest(true)}>
-        proceed
+        Proceed
       </button>
     </section>
   );

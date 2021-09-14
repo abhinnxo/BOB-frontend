@@ -60,8 +60,8 @@ const AdminPoints = ({ socket }) => {
       if (wrong > 1) {
         setScore(0);
         socket.emit('change-score', 0);
+        socket.emit('change-round', roundNumber + 1);
         setRoundNumber(roundNumber + 1);
-        socket.emit('change-round', roundNumber);
         socket.emit('timer-start', count);
         setWrong(1);
         history.push('/admin/destroy');
@@ -125,15 +125,15 @@ const AdminPoints = ({ socket }) => {
     history.push('/admin/destroy');
   }
 
-  function score0() {
-    setScore(0);
-    console.log('0 score button clicked');
-    socket.emit('change-score', 0);
-    setRoundNumber(roundNumber + 1);
-    socket.emit('change-round', roundNumber);
-    socket.emit('timer-start', count);
-    history.push('/admin/destroy');
-  }
+  // function score0() {
+  //   setScore(0);
+  //   console.log('0 score button clicked');
+  //   socket.emit('change-score', 0);
+  //   setRoundNumber(roundNumber + 1);
+  //   socket.emit('change-round', roundNumber);
+  //   socket.emit('timer-start', count);
+  //   history.push('/admin/destroy');
+  // }
 
   function endGame() {
     socket.emit('game-end-clicked', gameStatus);
@@ -170,6 +170,7 @@ const AdminPoints = ({ socket }) => {
               alt="end game"
               onClick={endGame}
               style={{ cursor: 'pointer' }}
+              className="point__endgame"
             />
           </div>
           <div className="point__round">
@@ -196,9 +197,9 @@ const AdminPoints = ({ socket }) => {
           <button className="point__btn plus_three" onClick={score3}>
             + 3
           </button>
-          <button className="point__btn plus_zero" onClick={score0}>
+          {/* <button className="point__btn plus_zero" onClick={score0}>
             + 0
-          </button>
+          </button> */}
           <button className="point__btn wrong" onClick={wrongFxn}>
             Wrong
           </button>

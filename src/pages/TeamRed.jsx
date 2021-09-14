@@ -22,7 +22,24 @@ const TeamRed = ({ socket }) => {
   const [min, setMin] = useState(0);
   const [sec, setSec] = useState(0);
 
+  // getting the score
   useEffect(() => {
+    axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_LOCALHOST}/score`,
+    })
+      .then((res) => {
+        console.log('score from backend: ', res.data);
+
+        setRedTeamScore(res.data[0].TeamScore);
+        setBlueTeamScore(res.data[1].TeamScore);
+      })
+      .catch((err) => console.error(err));
+  }, [guesserId]);
+
+  //  get random word
+  useEffect(() => {
+    // getting the random word
     axios({
       method: 'get',
       url: `${process.env.REACT_APP_LOCALHOST}/randomword`,
@@ -39,20 +56,6 @@ const TeamRed = ({ socket }) => {
     console.log('xyz round', round);
     setRoundFromBackend(round);
   });
-
-  useEffect(() => {
-    axios({
-      method: 'get',
-      url: `${process.env.REACT_APP_LOCALHOST}/score`,
-    })
-      .then((res) => {
-        console.log('score from backend: ', res.data);
-
-        setRedTeamScore(res.data[0].TeamScore);
-        setBlueTeamScore(res.data[1].TeamScore);
-      })
-      .catch((err) => console.error(err));
-  }, [guesserId]);
 
   useEffect(() => {
     socket.on('game-ended', (gameValue) => {
@@ -113,7 +116,7 @@ const TeamRed = ({ socket }) => {
     }
     if (flag == 0) {
       setUserMagSent(1);
-      socket.emit('msgListMake', { hint, room: 'Team Red' });
+      // socket.emit('msgListMake', { hint, room: 'Team Red' });
       document.querySelector('.red__input').value = '';
     }
   };
