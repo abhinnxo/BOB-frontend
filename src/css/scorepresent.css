@@ -1,0 +1,29 @@
+.score__bg {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: -3;
+  background: url('../images/bglogo.webp');
+  height: 100%;
+  width: 100%;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+.score__teamcards {
+  display: flex;
+}
+.score__teamred {
+  background: url('../images/redscore.webp') no-repeat;
+  background-size: cover;
+  width: 590px;
+  height: 210.9px;
+}
+.score__teamblue {
+  background: url('../images/bluescore.webp') no-repeat;
+  background-size: cover;
+  width: 590px;
+  height: 210.9px;
+}

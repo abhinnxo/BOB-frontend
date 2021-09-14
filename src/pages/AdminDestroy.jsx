@@ -52,7 +52,7 @@ const AdminDestroy = ({ socket }) => {
     // getting the random word
     axios({
       method: 'get',
-      url: `${process.env.REACT_APP_LOCALHOST}/randomword`,
+      url: `https://bob-backend-madiee-h.herokuapp.com//randomword`,
     })
       .then((res) => {
         console.log('axios ', res.data);
@@ -63,7 +63,7 @@ const AdminDestroy = ({ socket }) => {
     // getting the round number
     axios({
       method: 'get',
-      url: `${process.env.REACT_APP_LOCALHOST}/roundNo`,
+      url: `https://bob-backend-madiee-h.herokuapp.com//roundNo`,
     })
       .then((res) => {
         console.log('axios ', res.data);
