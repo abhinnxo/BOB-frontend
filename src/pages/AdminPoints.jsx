@@ -56,18 +56,16 @@ const AdminPoints = ({ socket }) => {
       })
       .catch((err) => console.error(err));
 
-    socket.on('guessed-wrong', (wrong) => {
-      if (wrong > 1) {
-        setScore(0);
-        socket.emit('change-score', 0);
-        socket.emit('change-round', roundNumber + 1);
-        setRoundNumber(roundNumber + 1);
-        socket.emit('timer-start', count);
-        setWrong(1);
-        history.push('/admin/destroy');
-      }
-    });
+     
+
   }, []);
+
+
+
+
+  
+    
+  
 
   // when game is ended route everyone to main screen
   socket.on('game-ended', (gameValue) => {
@@ -143,6 +141,16 @@ const AdminPoints = ({ socket }) => {
   function wrongFxn() {
     setWrong(wrong + 1);
     socket.emit('wrong-guess', wrong);
+    if (wrong ==2) {
+      setScore(0);
+      socket.emit('change-score', 0);
+      setRoundNumber(roundNumber + 1);
+      socket.emit('change-round', roundNumber);
+      count = 0;
+      socket.emit('timer-start', count);
+      setWrong(1);
+      history.push('/admin/destroy');
+    }
   }
 
   return (
