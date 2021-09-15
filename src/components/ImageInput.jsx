@@ -1,21 +1,15 @@
 import React from 'react';
-
-const style = {
-  fontFamily: 'PaytoneOne',
-  width: '29.1rem',
-  height: '3.75rem',
-  padding: ' 5px 50px',
-};
+import './css/imageinput.css';
 
 function ImageInput({ text, change, classList }) {
   return (
     <div>
       <input
-        type='text'
+        type="text"
         placeholder={text}
         onChange={change}
-        maxLength='15'
-        style={style}
+        maxLength="15"
+        id="ImageInput"
         className={classList}
       />
     </div>

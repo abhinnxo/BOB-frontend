@@ -56,3 +56,56 @@
   top: 110px;
   right: 475px;
 }
+.red__bluescore {
+  position: absolute;
+  color: #9b5825;
+  font-family: 'PaytoneOne';
+  top: 210px;
+  right: 400px;
+}
+
+@media only screen and (max-width: 1280px), screen and (max-height: 720px) {
+  .red__timer {
+    width: 75px;
+    top: 100px;
+    left: 150px;
+  }
+  .red__timer h3 {
+    transform: translate(-60px, -30px);
+    font-size: 24px;
+  }
+  .red__title {
+    top: 75px;
+    right: 175px;
+  }
+  .red__teamranks {
+    background-size: 250px;
+    width: 250px;
+    height: 60px;
+    top: 15%;
+    right: 125px;
+  }
+  .red__teamranks h3 {
+    font-size: 18px;
+    transform: translateY(-7px);
+  }
+  .red__bluescore {
+    font-size: 20px;
+    top: 160px;
+    right: 155px;
+  }
+}
+@media only screen and (max-width: 1360), screen and (max-height: 682px) {
+  .red__title {
+    top: 68px;
+    right: 175px;
+  }
+  .red__bluescore {
+    font-size: 20px;
+    top: 155px;
+    right: 155px;
+  }
+  .red__teamranks h3 {
+    font-size: 18px;
+  }
+}

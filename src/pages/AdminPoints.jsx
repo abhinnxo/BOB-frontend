@@ -55,17 +55,7 @@ const AdminPoints = ({ socket }) => {
         setRoundNumber(res.data.round);
       })
       .catch((err) => console.error(err));
-
-     
-
   }, []);
-
-
-
-
-  
-    
-  
 
   // when game is ended route everyone to main screen
   socket.on('game-ended', (gameValue) => {
@@ -141,7 +131,7 @@ const AdminPoints = ({ socket }) => {
   function wrongFxn() {
     setWrong(wrong + 1);
     socket.emit('wrong-guess', wrong);
-    if (wrong ==2) {
+    if (wrong == 2) {
       setScore(0);
       socket.emit('change-score', 0);
       setRoundNumber(roundNumber + 1);

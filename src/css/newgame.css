@@ -85,7 +85,6 @@ input[type='password'] {
 
 @media only screen and (max-width: 1610px), screen and (max-height: 910) {
   .newgame__box {
-    /* margin-top: 200px; */
     transform: translateY(-30px);
     width: 703px;
     height: 549px;
@@ -120,5 +119,33 @@ input[type='password'] {
 @media only screen and (max-width: 1024), screen and (max-height: 810px) {
   .newgame__box {
     margin-top: 230px;
+  }
+}
+@media only screen and (max-width: 1360), screen and (max-height: 682px) {
+  .newgame__box {
+    margin-top: 210px;
+    width: 554px;
+    height: 400px;
+    background-size: 554px 400px;
+  }
+  .newgame__linkbtn {
+    width: 490px;
+    transform: translate(-10px, -15px);
+  }
+  .newgame__joinbtn,
+  .newgame__hostbtn {
+    width: 300px;
+    height: 80px;
+    background-size: 300px, 50px;
+  }
+  .newgame__join,
+  .newgame__host {
+    transform: translateY(-40px);
+  }
+  #newgame__pass {
+    width: 25rem;
+    height: 3rem;
+    padding: 5px 0px;
+    font-size: 18px;
   }
 }

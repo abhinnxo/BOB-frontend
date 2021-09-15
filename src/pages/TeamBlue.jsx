@@ -22,6 +22,20 @@ function TeamBlue({ socket }) {
   const [min, setMin] = useState(1);
   const [sec, setSec] = useState(30);
 
+  useEffect(() => {
+    // getting the round number
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/roundNo`,
+    })
+      .then((res) => {
+        console.log('axios ', res.data);
+        console.log('ad des,  ', res.data.round);
+        setRoundFromBackend(res.data.round);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
   // getting the score
   useEffect(() => {
     axios({
@@ -153,7 +167,7 @@ function TeamBlue({ socket }) {
       <div className="blue__enterhint text-center">
         <h5>{chance}</h5>
         <h3>
-          Enter a Word simmilar to{' '}
+          Enter a Word similar to{' '}
           <span className="blue__randomword" style={{ color: 'red' }}>
             " {randomword} "
           </span>
@@ -195,6 +209,7 @@ function TeamBlue({ socket }) {
           Round: <span>{roundfromBackend}</span>
         </h3>
       </div>
+      <h3 className="blue__redscore">Red Team Score: {redTeamScore}</h3>
     </div>
   );
 }

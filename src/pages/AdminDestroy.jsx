@@ -136,7 +136,7 @@ const AdminDestroy = ({ socket }) => {
         {<MyTimer expiryTimestamp={time} socket={socket} />}
         <div>
           <img src={settingsImg} alt="" className="settings" />
-          <p>Round {roundNumber}</p>
+          <p className="admin__round">Round {roundNumber}</p>
           <img
             src={endGameImg}
             className="endGame"

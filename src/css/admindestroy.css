@@ -38,6 +38,9 @@
   cursor: pointer;
   margin-left: auto;
 }
+.admin__round {
+  background: url('../images/timer.svg');
+}
 /* background of round number */
 .timer_round > div > p {
   background: url('../images/timer.svg');

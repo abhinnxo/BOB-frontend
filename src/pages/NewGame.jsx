@@ -175,6 +175,7 @@ const NewGame = ({ socket }) => {
               height: '3.75rem',
               padding: ' 5px 50px',
             }}
+            id="newgame__pass"
             onChange={(e) => setPassword(e.target.value)}
           />
           <br />

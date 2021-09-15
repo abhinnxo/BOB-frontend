@@ -22,6 +22,20 @@ const TeamRed = ({ socket }) => {
   const [min, setMin] = useState(0);
   const [sec, setSec] = useState(0);
 
+  useEffect(() => {
+    // getting the round number
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/roundNo`,
+    })
+      .then((res) => {
+        console.log('axios ', res.data);
+        console.log('ad des,  ', res.data.round);
+        setRoundFromBackend(res.data.round);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
   // getting the score
   useEffect(() => {
     axios({
@@ -147,12 +161,13 @@ const TeamRed = ({ socket }) => {
         .catch((err) => console.error(err));
     }
   });
+
   return (
     <div className="red__bg">
       <div className="red__enterhint text-center">
         <h5>{chance}</h5>
         <h3>
-          Enter a Word simmilar to{' '}
+          Enter a Word similar to{' '}
           <span className="red__randomword" style={{ color: 'red' }}>
             " {randomword} "
           </span>
@@ -185,7 +200,6 @@ const TeamRed = ({ socket }) => {
           </span>
         </h3>
       </div>
-      {/* <div className=""> */}
       <h3 className="red__title">Team Red</h3>
       <div className="red__teamranks d-flex justify-content-between px-3">
         <h3 className="my-auto" style={{ color: '#ffffff' }}>
@@ -195,8 +209,8 @@ const TeamRed = ({ socket }) => {
           Round: <span>{roundfromBackend}</span>
         </h3>
       </div>
+      <h3 className="red__bluescore">Blue Team Score: {blueTeamScore}</h3>
     </div>
-    // </div>
   );
 };
 
