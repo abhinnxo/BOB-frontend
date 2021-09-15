@@ -63,7 +63,7 @@
 }
 .lobby__code {
   letter-spacing: 5px;
-  transform: translate(-15px, -1px);
+  transform: translate(0px, -1px);
 }
 .lobby__startbtn {
   color: white;

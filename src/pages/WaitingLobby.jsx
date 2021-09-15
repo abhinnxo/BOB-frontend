@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../css/waitinglobby.css';
-import BackButton from '../images/back_button.svg';
+import CopyCode from '../images/copy.svg';
 import RedTeam from '../components/RedTeam';
 import BlueTeam from '../components/BlueTeam';
 import ImageButton from '../components/ImageButton';
@@ -132,7 +132,8 @@ const WaitingLobby = ({ socket }) => {
       <div className="lobby__teamtable">
         <div className="lobby__codediv" onClick={GenerateCode}>
           <div className="lobby__code" onClick={copyGameCode}>
-            {code}
+            {code} &nbsp;
+            <img src={CopyCode} alt="copy code" />
           </div>
         </div>
         <div className="d-flex">
@@ -160,7 +161,6 @@ const WaitingLobby = ({ socket }) => {
         {/* Start Button */}
         {location.state.xyz > 0 ? (
           <div>
-            {' '}
             <ImageButton
               clickMe={startgame}
               classlist="lobby__startbtn mx-auto"

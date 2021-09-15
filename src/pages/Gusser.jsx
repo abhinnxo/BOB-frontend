@@ -121,6 +121,7 @@ const Gusser = ({ socket }) => {
   return (
     <div className="gusser">
       <div className="gusser__bg"></div>
+      <h3 className="guesser__title">Team {team === 'red' ? 'Red' : 'Blue'}</h3>
       <div className="gusser__teamranks d-flex justify-content-between px-3">
         <h3 className="my-auto" style={{ color: '#ffffff' }}>
           Team Points:
@@ -157,7 +158,7 @@ const Gusser = ({ socket }) => {
               change={(e) => setGuess(e.target.value)}
             />
             <ImageButton
-              value="ENTER"
+              value="SEND"
               clickMe={guessSubmitted}
               classlist="mt-3 gusser__enterbtn"
             />

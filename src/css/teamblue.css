@@ -49,3 +49,10 @@
   top: 15%;
   right: 20%;
 }
+.blue__title {
+  position: absolute;
+  color: #9b5825;
+  font-family: 'PaytoneOne';
+  top: 110px;
+  right: 475px;
+}

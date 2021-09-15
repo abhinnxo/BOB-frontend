@@ -186,6 +186,7 @@ function TeamBlue({ socket }) {
           </span>
         </h3>
       </div>
+      <h3 className="blue__title">Team Blue</h3>
       <div className="blue__teamranks d-flex justify-content-between px-3">
         <h3 className="my-auto" style={{ color: '#ffffff' }}>
           Score: {blueTeamScore}

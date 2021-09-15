@@ -69,11 +69,11 @@
   position: relative;
 }
 .teamNameBlue {
-  background: url('../images//team_name_blue.svg');
+  background: url('../images/team_name_blue.svg');
   transform: translate(100px, -100px);
 }
 .teamNameRed {
-  background: url('../images//team_nam_red.svg');
+  background: url('../images/team_nam_red.svg');
   transform: translate(-100px, 100px);
 }
 .mainWord {
@@ -249,7 +249,7 @@
 .seperateBoard {
   color: #ffffff;
   background: url('../images/centre_box_with_partition.svg');
-  z-index: -3;
+  /* z-index: -2; */
   background-size: cover !important;
   width: 750px;
   height: 400px;
@@ -280,9 +280,10 @@
 }
 
 .word {
+  /* z-index: 5; */
   font-weight: 800;
   padding: 0px 10px;
-  background: url('../images//timer.svg');
+  background: url('../images/timer.svg');
   background-size: cover;
   height: 25px;
   min-width: 100px;
@@ -293,7 +294,9 @@
   margin: 5px;
   font-size: small;
 }
-
+.wprd input {
+  z-index: 5;
+}
 .word > span:last-child {
   cursor: pointer;
   width: 10px;
@@ -312,9 +315,11 @@
   }
   .mainWord {
     transform: translateY(-60px);
+    z-index: 3;
   }
   .teamNameBlue {
     transform: translateY(-70px);
+    z-index: 3;
   }
   span.teamNameRed {
     transform: translate(-100px, 25px);

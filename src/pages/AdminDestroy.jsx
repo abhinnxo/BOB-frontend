@@ -10,7 +10,6 @@ const axios = require('axios');
 const AdminDestroy = ({ socket }) => {
   const [bluearr, setBluearr] = useState([]);
   const [redarr, setRedarr] = useState([]);
-  const [giveGuest, setGiveGuest] = useState(false);
   const [randomword, setRandomWord] = useState('MainWord');
   const [round, setRound] = useState(1);
   const [roundNumber, setRoundNumber] = useState(1);
@@ -106,12 +105,15 @@ const AdminDestroy = ({ socket }) => {
     setFinalArr(arr);
   });
 
-  useEffect(() => {
-    if (guessingArr.length == 0) socket.emit('showToGuesser', finalArr);
+  // send clues to the guesser
+  const sendClues = () => {
+    if (guessingArr.length === 0) socket.emit('showToGuesser', finalArr);
     else socket.emit('showToGuesser', guessingArr);
 
-    if (giveGuest) history.push('/admin/points');
-  }, [giveGuest]);
+    console.log('<<<GYES ARR>>>', guessingArr);
+
+    history.push('/admin/points');
+  };
 
   function endGame() {
     socket.emit('game-end-clicked', 0);
@@ -130,7 +132,6 @@ const AdminDestroy = ({ socket }) => {
   return (
     <section className="hostWaitingLobby">
       <div className="admindestroy__bg"></div>
-
       <div className="timer__round">
         {<MyTimer expiryTimestamp={time} socket={socket} />}
         <div>
@@ -147,7 +148,9 @@ const AdminDestroy = ({ socket }) => {
       <div className="players">
         <h2 className="mainWord">{randomword}</h2>
         <div className="join">
-          <span className="teamNameBlue">Team Blue</span>
+          <span className="teamNameBlue">
+            Team Blue {roundNumber % 2 === 0 ? '(E)' : '(G)'}
+          </span>
           <div className="seperateBoard">
             <h4>Select the simmilar words and destroy them</h4>
             <div className="team">
@@ -196,10 +199,12 @@ const AdminDestroy = ({ socket }) => {
               <img src={destroyButton} alt="" />
             </div>
           </div>
-          <span className="teamNameRed">Team Red</span>
+          <span className="teamNameRed">
+            Team Red {roundNumber % 2 !== 0 ? '(E)' : '(G)'}
+          </span>
         </div>
       </div>
-      <button className="admin__destroy" onClick={() => setGiveGuest(true)}>
+      <button className="admin__destroy" onClick={sendClues}>
         Proceed
       </button>
     </section>

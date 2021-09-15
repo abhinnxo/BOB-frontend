@@ -185,6 +185,8 @@ const TeamRed = ({ socket }) => {
           </span>
         </h3>
       </div>
+      {/* <div className=""> */}
+      <h3 className="red__title">Team Red</h3>
       <div className="red__teamranks d-flex justify-content-between px-3">
         <h3 className="my-auto" style={{ color: '#ffffff' }}>
           Score: {redTeamScore}
@@ -194,6 +196,7 @@ const TeamRed = ({ socket }) => {
         </h3>
       </div>
     </div>
+    // </div>
   );
 };
 

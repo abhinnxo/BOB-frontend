@@ -18,6 +18,14 @@
   left: 20%;
   cursor: pointer;
 }
+.guesser__title {
+  position: absolute;
+  color: #9b5825;
+  font-family: 'PaytoneOne';
+  top: 110px;
+  top: 110px;
+  right: 475px;
+}
 .gusser__teamranks {
   background: url('../images/teamrank.svg') no-repeat;
   position: absolute;
