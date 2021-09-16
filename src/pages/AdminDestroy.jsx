@@ -133,7 +133,13 @@ const AdminDestroy = ({ socket }) => {
     <section className="hostWaitingLobby">
       <div className="admindestroy__bg"></div>
       <div className="timer__round">
-        {<MyTimer expiryTimestamp={time} socket={socket} />}
+        {
+          <MyTimer
+            expiryTimestamp={time}
+            showNextRound={true}
+            socket={socket}
+          />
+        }
         <div>
           <img src={settingsImg} alt="" className="settings" />
           <p className="admin__round">Round {roundNumber}</p>

@@ -80,8 +80,27 @@
     position: absolute;
     width: 75rem;
     top: 35%;
-    left: 50%;
-    margin-left: -40rem;
+    left: 55%;
+  }
+  .lobby__blueteam {
+    transform: translate(850px, -10px);
+  }
+  .lobby__redteam {
+    transform: translate(350px, -10px);
+  }
+  .lobby__codediv {
+    font-size: 16px;
+    background-size: 180px;
+    transform: translate(25rem, -2.5rem);
+  }
+  .lobby__code {
+    transform: translate(-35px, -8px);
+  }
+  .lobby__startbtn {
+    background-size: 250px;
+    width: 250px;
+    height: 70px;
+    transform: translateX(370px);
   }
 }
 @media only screen and (max-width: 1400px), screen and (max-height: 800px) {

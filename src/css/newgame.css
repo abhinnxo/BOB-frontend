@@ -84,8 +84,11 @@ input[type='password'] {
 }
 
 @media only screen and (max-width: 1610px), screen and (max-height: 910) {
+  body {
+    overflow-y: hidden;
+  }
   .newgame__box {
-    transform: translateY(-30px);
+    transform: translateY(-80px);
     width: 703px;
     height: 549px;
     background-size: 703px 549px;

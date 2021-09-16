@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
-import Setting from '../images/settings.svg';
-import PauseTimer from '../images/pause_timer.svg';
 import EndGame from '../images/end_game.svg';
 import '../css/adminpoints.css';
+import MyTimer from '../components/MyTimer';
 const axios = require('axios');
 
 const AdminPoints = ({ socket }) => {
@@ -13,24 +12,12 @@ const AdminPoints = ({ socket }) => {
   const [wrong, setWrong] = useState(0);
   const [roundNumber, setRoundNumber] = useState(1);
   const [randomWord, setRandomWord] = useState('Main Word');
-  const [min, setMin] = useState(0);
-  const [sec, setSec] = useState(0);
-  let seconds = 90;
+  // Show players score
+  const [redTeamScore, setRedTeamScore] = useState(0);
+  const [blueTeamScore, setBlueTeamScore] = useState(0);
 
-  // timer function
-  useEffect(() => {
-    setInterval(() => {
-      if (seconds >= 0) {
-        setMin(parseInt(seconds / 60, 10));
-        setSec(parseInt(seconds % 60, 10));
-      }
-      seconds--;
-    }, 1000);
-  }, []);
-
-  var count = 0;
-  var stopTimer = 0;
-  // var finalArray = [];
+  const time = new Date();
+  time.setSeconds(time.getSeconds() + 90);
 
   const history = useHistory();
 
@@ -46,6 +33,7 @@ const AdminPoints = ({ socket }) => {
       })
       .catch((err) => console.error(err));
 
+    //  getting round number
     axios({
       method: 'get',
       url: `https://bob-backend-madiee-h.herokuapp.com/roundNo`,
@@ -53,6 +41,20 @@ const AdminPoints = ({ socket }) => {
       .then((res) => {
         console.log('axios ', res.data);
         setRoundNumber(res.data.round);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+  // getting the score
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/score`,
+    })
+      .then((res) => {
+        console.log('score from backend: ', res.data);
+
+        setRedTeamScore(res.data[0].TeamScore);
+        setBlueTeamScore(res.data[1].TeamScore);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -75,21 +77,12 @@ const AdminPoints = ({ socket }) => {
     setGusser(guessSubmitted);
   });
 
-  function stopTime() {
-    socket.emit('stopTimer', stopTimer);
-  }
-
-  count = 0;
-  socket.emit('timer-start', count);
-
   function score5() {
     setScore(5);
     console.log('5 score button clicked....', score);
     socket.emit('change-score', 5);
     setRoundNumber(roundNumber + 1);
     socket.emit('change-round', roundNumber);
-    count = 0;
-    socket.emit('timer-start', count);
     history.push('/admin/destroy');
   }
 
@@ -99,7 +92,6 @@ const AdminPoints = ({ socket }) => {
     socket.emit('change-score', 4);
     setRoundNumber(roundNumber + 1);
     socket.emit('change-round', roundNumber);
-    socket.emit('timer-start', count);
     history.push('/admin/destroy');
   }
 
@@ -109,19 +101,8 @@ const AdminPoints = ({ socket }) => {
     socket.emit('change-score', 3);
     setRoundNumber(roundNumber + 1);
     socket.emit('change-round', roundNumber);
-    socket.emit('timer-start', count);
     history.push('/admin/destroy');
   }
-
-  // function score0() {
-  //   setScore(0);
-  //   console.log('0 score button clicked');
-  //   socket.emit('change-score', 0);
-  //   setRoundNumber(roundNumber + 1);
-  //   socket.emit('change-round', roundNumber);
-  //   socket.emit('timer-start', count);
-  //   history.push('/admin/destroy');
-  // }
 
   function endGame() {
     socket.emit('game-end-clicked', gameStatus);
@@ -136,8 +117,6 @@ const AdminPoints = ({ socket }) => {
       socket.emit('change-score', 0);
       setRoundNumber(roundNumber + 1);
       socket.emit('change-round', roundNumber);
-      count = 0;
-      socket.emit('timer-start', count);
       setWrong(1);
       history.push('/admin/destroy');
     }
@@ -148,18 +127,11 @@ const AdminPoints = ({ socket }) => {
       <div className="point__bg"></div>
       <div className="point__controls d-flex justify-content-between">
         <div>
-          <div className="point__setting">
-            <img src={Setting} alt="settings" />
-          </div>
-          <p className="point__timer">
-            <span>
-              {min}:{sec}
-            </span>
-          </p>
-          <div className="pauseTimer">
-            {' '}
-            <img src={PauseTimer} alt="pause timer" onClick={stopTime} />
-          </div>
+          <MyTimer
+            expiryTimestamp={time}
+            showNextRound={false}
+            socket={socket}
+          />
         </div>
         <div>
           <div>
@@ -176,10 +148,16 @@ const AdminPoints = ({ socket }) => {
           </div>
         </div>
       </div>
+      <div className="d-flex justify-content-between point__teamscores">
+        <div className="point_redteamscore">Red Team Score: {redTeamScore}</div>
+        <div className="point_blueteamscore">
+          Red Blue Score: {blueTeamScore}
+        </div>
+      </div>
       <div className="point__board text-center">
         <h4 className="point__mainword">{randomWord}</h4>
         <h3>
-          Guess - <span>{wrong}</span>
+          Guess - <span>{wrong + 1}</span>
         </h3>
         <h6>The Answer submitted is</h6>
         <h1 className="point__randomword" id="randomWord">
@@ -195,9 +173,6 @@ const AdminPoints = ({ socket }) => {
           <button className="point__btn plus_three" onClick={score3}>
             + 3
           </button>
-          {/* <button className="point__btn plus_zero" onClick={score0}>
-            + 0
-          </button> */}
           <button className="point__btn wrong" onClick={wrongFxn}>
             Wrong
           </button>

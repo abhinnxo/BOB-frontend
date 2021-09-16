@@ -64,8 +64,8 @@
   background-size: cover !important;
   display: grid;
   place-items: center;
-  min-width: 190px;
-  min-height: 45px;
+  width: 190px;
+  height: 45px;
   width: fit-content;
   font-weight: 700;
   color: #ffffff;
@@ -83,7 +83,7 @@
   font-size: medium;
   background: url('../images/mainword.svg');
   width: 200px;
-  height: 50px;
+  height: 40px;
   margin: 10px auto -40px auto;
 }
 .destroy {
@@ -308,7 +308,28 @@
   background-color: #ff0000;
   border: 3px solid #ffffff;
 }
-
+@media only screen and (max-width: 1610px), screen and (max-height: 910) {
+  img.endgame {
+    width: 150px;
+  }
+  .seperateBoard {
+    transform: translateY(-110px);
+  }
+  .mainWord {
+    transform: translateY(-100px);
+    z-index: 3;
+  }
+  span.teamNameBlue {
+    transform: translate(120px, -175px);
+    z-index: 3;
+  }
+  span.teamNameRed {
+    transform: translate(-100px, -25px);
+  }
+  .admin__destroy {
+    transform: translateY(-100px);
+  }
+}
 @media only screen and (max-width: 1280px), screen and (max-height: 720px) {
   .timer__round {
     width: 1000px;

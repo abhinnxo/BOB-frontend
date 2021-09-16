@@ -25,6 +25,18 @@ ul {
   flex-direction: column;
   flex-wrap: wrap;
 }
+@media only screen and (max-width: 1610px), screen and (max-height: 910) {
+  .redblock > img {
+    width: 500px;
+    height: 313px;
+  }
+  .redblock__ul {
+    font-size: 16px;
+    transform: translate(-25px, 95px);
+    height: 180px;
+    width: 450px;
+  }
+}
 @media only screen and (max-width: 1400px), screen and (max-height: 800px) {
   .redblock > img {
     width: 548px;

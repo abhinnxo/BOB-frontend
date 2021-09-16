@@ -29,7 +29,7 @@ const controlStyle = {
   transform: 'translateY(-50px)',
 };
 
-const MyTimer = ({ expiryTimestamp, socket }) => {
+const MyTimer = ({ expiryTimestamp, socket, showNextRound }) => {
   const [paused, setPaused] = useState(false);
   const [roundNumber, setRoundNumber] = useState(1);
 
@@ -109,15 +109,19 @@ const MyTimer = ({ expiryTimestamp, socket }) => {
           />
         )}
       </div>
-      <div>
-        <input
-          type="button"
-          name="button"
-          value="Next Round"
-          style={style}
-          onClick={nextRound}
-        />
-      </div>
+      {showNextRound ? (
+        <div>
+          <input
+            type="button"
+            name="button"
+            value="Next Round"
+            style={style}
+            onClick={nextRound}
+          />
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

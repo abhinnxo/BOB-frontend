@@ -33,6 +33,13 @@
   flex-direction: column;
   align-items: flex-end;
 }
+.point__teamscores {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
+  transform: translateY(40px);
+}
 
 .point__controls > div > div {
   margin: 10px 0px;
@@ -122,7 +129,11 @@
   cursor: pointer;
   transform: translate(200px, -43px);
 }
-
+@media only screen and (max-width: 1610px), screen and (max-height: 910) {
+  .point__endgame {
+    width: 150px;
+  }
+}
 @media only screen and (max-width: 1280px), screen and (max-height: 720px) {
   .point__board {
     margin-top: 15px;
