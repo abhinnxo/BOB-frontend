@@ -149,9 +149,11 @@ const AdminPoints = ({ socket }) => {
         </div>
       </div>
       <div className="d-flex justify-content-between point__teamscores">
-        <div className="point_redteamscore">Red Team Score: {redTeamScore}</div>
-        <div className="point_blueteamscore">
-          Red Blue Score: {blueTeamScore}
+        <div className="point__redteamscore">
+          Red Team Score: {redTeamScore}
+        </div>
+        <div className="point__blueteamscore">
+          Blue Team Score: {blueTeamScore}
         </div>
       </div>
       <div className="point__board text-center">

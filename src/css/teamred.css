@@ -47,7 +47,20 @@
   width: 306px;
   height: 60px;
   top: 15%;
-  right: 20%;
+  right: 10%;
+}
+.red__blueranks {
+  font-family: 'PaytoneOne';
+  background: url('../images/teamrank.svg') no-repeat;
+  position: absolute;
+  width: 240px;
+  background-size: 240px;
+  top: 22%;
+  right: 11.5%;
+}
+.red__blueranks h3 {
+  font-size: 24px;
+  padding: 7px 0 30px 0;
 }
 .red__title {
   position: absolute;
@@ -63,7 +76,6 @@
   top: 210px;
   right: 400px;
 }
-
 @media only screen and (max-width: 1280px), screen and (max-height: 720px) {
   .red__timer {
     width: 75px;

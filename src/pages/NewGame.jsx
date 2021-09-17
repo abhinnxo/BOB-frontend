@@ -112,9 +112,9 @@ const NewGame = ({ socket }) => {
   };
   // On Click the Host Room Button
   const hostroom = () => {
-    console.log('uname ' + username + ' pass ' + password);
-
     if (username === 'admin' && password === 'admin') {
+      //  Clear any existing data(if present)
+      socket.emit('clear-game-credentials', 0);
       localStorage.setItem('host', true);
       localStorage.setItem('roomid', customId({}));
       history.push({

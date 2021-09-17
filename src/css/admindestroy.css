@@ -31,6 +31,7 @@
   margin-bottom: 5px;
 }
 .endGame {
+  margin-bottom: 50px;
   width: 200px;
   cursor: pointer;
 }
@@ -40,6 +41,13 @@
 }
 .admin__round {
   background: url('../images/timer.svg');
+  height: 45px;
+  width: 150px;
+  color: white;
+  font-size: 20px;
+  font-weight: bolder;
+  padding: 7px 0 6px 37px;
+  margin-top: -30px;
 }
 /* background of round number */
 .timer_round > div > p {
@@ -74,17 +82,24 @@
 .teamNameBlue {
   background: url('../images/team_name_blue.svg');
   transform: translate(100px, -100px);
+  padding-bottom: 5px;
 }
 .teamNameRed {
   background: url('../images/team_nam_red.svg');
   transform: translate(-100px, 100px);
+  padding-bottom: 5px;
 }
 .mainWord {
-  font-size: medium;
-  background: url('../images/mainword.svg');
+  font-size: 20px !important;
+  letter-spacing: 1.5px;
   width: 200px;
   height: 40px;
-  margin: 10px auto -40px auto;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+}
+.admin__similar {
+  font-weight: bolder;
+  text-shadow: 10px solid black;
 }
 .destroy {
   width: 150px;
@@ -184,7 +199,7 @@
 }
 .mainWord {
   font-size: medium;
-  background: url('../images/mainword.svg');
+  /* background: url('../images/mainword.svg'); */
   width: 200px;
   height: 50px;
   margin: 10px auto -40px auto;
@@ -341,8 +356,8 @@
     transform: translateY(-60px);
     z-index: 3;
   }
-  .teamNameBlue {
-    transform: translateY(-70px);
+  span.teamNameBlue {
+    transform: translate(110px, -150px);
     z-index: 3;
   }
   span.teamNameRed {

@@ -7,7 +7,8 @@ const style = {
   background: '#C27129',
   color: 'white',
   fonFamily: 'caesar',
-  fontSize: '15px',
+  fontSize: '20px',
+  fontWeight: 'bold',
   width: '161px',
   height: '40px',
   cursor: 'pointer',
@@ -23,7 +24,7 @@ const timeStyle = {
   fontWeight: '400',
   lineHeight: '50px',
   letterSpacing: '0.05em',
-  transform: 'translate(17px, -68px)',
+  transform: 'translate(17px, -73px)',
 };
 const controlStyle = {
   transform: 'translateY(-50px)',
@@ -50,10 +51,12 @@ const MyTimer = ({ expiryTimestamp, socket, showNextRound }) => {
       .catch((err) => console.error(err));
   }, []);
 
-  const { seconds, minutes, pause, resume, restart } = useTimer({
+  let { seconds, minutes, pause, resume, restart } = useTimer({
     expiryTimestamp,
     onExpire: () => console.warn('onExpire called'),
   });
+
+  if (seconds < 10) seconds = seconds < 10 ? '0' + seconds : seconds;
 
   const pausedfn = () => {
     pause();
@@ -85,7 +88,7 @@ const MyTimer = ({ expiryTimestamp, socket, showNextRound }) => {
   return (
     <div>
       <div>
-        <img src={ClockImg} width="80px" alt="clock_image" />
+        <img src={ClockImg} width="90px" alt="clock_image" />
         <p style={timeStyle}>
           {minutes}:{seconds}
         </p>

@@ -14,10 +14,10 @@
 }
 .lobby__teamtable {
   position: absolute;
-  width: 75rem;
+  width: 80.5rem;
   top: 35%;
   left: 50%;
-  margin-left: -36rem;
+  margin-left: -650px !important;
 }
 .lobby__redteam {
   background: url('../images/join.png') no-repeat;
@@ -59,7 +59,7 @@
   font-weight: bolder;
   font-size: 25px;
   cursor: pointer;
-  transform: translate(32rem, -3rem);
+  transform: translate(32rem, -4rem);
 }
 .lobby__code {
   letter-spacing: 5px;
@@ -74,13 +74,22 @@
   cursor: pointer;
   border: none;
 }
-
+.lobby__playermsg {
+  color: #603913cc;
+  font-family: 'PaytoneOne';
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
 @media only screen and (max-width: 1610px), screen and (max-height: 910) {
   .lobby__teamtable {
     position: absolute;
-    width: 75rem;
+    width: 62rem;
     top: 35%;
-    left: 55%;
+    left: 52%;
+    /* margin-left: -400px; */
   }
   .lobby__blueteam {
     transform: translate(850px, -10px);
@@ -91,7 +100,8 @@
   .lobby__codediv {
     font-size: 16px;
     background-size: 180px;
-    transform: translate(25rem, -2.5rem);
+    transform: translate(31.5rem, -2.5rem);
+    margin-top: -10px;
   }
   .lobby__code {
     transform: translate(-35px, -8px);
@@ -100,16 +110,19 @@
     background-size: 250px;
     width: 250px;
     height: 70px;
-    transform: translateX(370px);
+    transform: translateX(470px);
   }
 }
 @media only screen and (max-width: 1400px), screen and (max-height: 800px) {
   .lobby__teamtable {
     position: absolute;
-    width: 75rem;
-    top: 35%;
+    /* width: 75rem; */
+    top: 35% !important;
     left: 50%;
-    margin-left: -35rem;
+    margin-left: -31rem !important;
+  }
+  .lobby__teamcontainer {
+    margin-top: 15px;
   }
   .lobby__codediv {
     font-size: 20px;
@@ -123,12 +136,15 @@
     background-size: 300px;
     width: 300px;
     height: 80px;
-    transform: translateX(370px);
+    transform: translateX(345px);
   }
 }
 @media only screen and (max-width: 1100px), screen and (max-height: 800px) {
   .lobby__codediv {
     transform: translate(400px, -40px);
+  }
+  .lobby__code {
+    font-size: 16px;
   }
   .lobby__teamtable {
     top: 35%;

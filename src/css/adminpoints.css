@@ -17,7 +17,7 @@
 }
 .point__controls {
   margin-top: 100px;
-  width: 900px;
+  width: 1100px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -34,15 +34,23 @@
   align-items: flex-end;
 }
 .point__teamscores {
+  font-size: 20px;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
   width: 500px;
   transform: translateY(40px);
 }
-
+.point__mainword {
+  font-size: 24px !important;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
 .point__controls > div > div {
   margin: 10px 0px;
+}
+.point__endgame {
+  width: 190px;
 }
 .point__board {
   position: absolute;
@@ -88,7 +96,6 @@
 .point__randomword {
   color: #34c78f;
 }
-
 .point__timer,
 .point__round {
   background: url('../images/timer.svg');
@@ -129,16 +136,53 @@
   cursor: pointer;
   transform: translate(200px, -43px);
 }
+@media only screen and (max-width: 1920px) {
+  .point__teamscores {
+    transform: translateY(140px);
+  }
+  .point__board {
+    margin-top: 80px;
+  }
+}
 @media only screen and (max-width: 1610px), screen and (max-height: 910) {
   .point__endgame {
     width: 150px;
   }
+  .point__board {
+    margin-top: 80px !important;
+  }
+  .point__teamscores {
+    margin-top: -50px;
+  }
 }
 @media only screen and (max-width: 1280px), screen and (max-height: 720px) {
   .point__board {
-    margin-top: 15px;
+    margin-top: 30px !important;
   }
-  .point__endgame {
-    width: 150px;
+  .point__teamscores {
+    margin-top: 0px;
+  }
+}
+@media only screen and (max-width: 1366), screen and (max-height: 768px) {
+  .point__teamscores {
+    font-size: 18px !important;
+    transform: translateY(-2px) !important;
+  }
+  .point__controls {
+    width: 1000px;
+    margin-top: 80px !important;
+  }
+}
+@media only screen and (max-width: 1024px), screen and (max-height: 800px) {
+  .point__board {
+    margin-top: 45px;
+  }
+  .point__teamscores {
+    font-size: 16px;
+    transform: translateY(20px);
+  }
+  .point__controls {
+    width: 1000px;
+    margin-top: 130px;
   }
 }

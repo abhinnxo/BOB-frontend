@@ -29,11 +29,11 @@ ul {
 }
 @media only screen and (max-width: 1610px), screen and (max-height: 910) {
   .blueblock > img {
-    width: 500px;
-    height: 313px;
+    width: 600px;
+    height: 413px;
   }
   .blueblock__ul {
-    font-size: 16px;
+    font-size: 24px;
     transform: translate(-20px, -50px);
     height: 180px;
     width: 450px;

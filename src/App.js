@@ -18,8 +18,20 @@ import PageNotFound from './components/PageNotFound';
 function App() {
   const [socket, setSocket] = useState(null);
 
+  // Prompt when the user tries to close/leave the tab
+  window.onbeforeunload = (event) => {
+    const e = event || window.event;
+    // Cancel the event
+    e.preventDefault();
+    if (e) {
+      e.returnValue =
+        "Leaving this Page will kill all of your game progress and you can't rejoin."; // Legacy method for cross browser support
+    }
+    return ''; // Legacy method for cross browser support
+  };
+
   useEffect(() => {
-    const newSocket = io('https://bob-backend-madiee-h.herokuapp.com/');
+    const newSocket = io('https://bob-backend-madiee-h.herokuapp.com');
     console.log(newSocket);
     newSocket.on('confirmation', function (message) {
       console.log(message);

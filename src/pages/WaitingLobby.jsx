@@ -11,9 +11,6 @@ const axios = require('axios');
 const WaitingLobby = ({ socket }) => {
   const [username, setUsername] = useState('');
   const [team, setTeam] = useState('');
-  // Current Player name
-  const [redPlayer, setRedPlayer] = useState('');
-  const [bluePlayer, setBluePlayer] = useState('');
   // comming from server
   const [blueplayerlist, setBluePlayerList] = useState([]);
   const [redplayerlist, setRedPlayerList] = useState([]);
@@ -28,7 +25,7 @@ const WaitingLobby = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com/lobby`,
+      url: `https://bob-backend-madiee-h.herokuapp.comlobby`,
     })
       .then((res) => {
         console.log('axios ', res.data);
@@ -98,15 +95,20 @@ const WaitingLobby = ({ socket }) => {
   const startgame = () => {
     socket.emit('hostStartedGame', true);
   };
+  // copy game code
   const copyGameCode = () => {
     navigator.clipboard.writeText(localStorage.getItem('roomid'));
+    document.querySelector('.lobby__code').innerHTML = 'copied';
+    setTimeout(() => {
+      document.querySelector('.lobby__code').innerHTML = `${code}
+            <img src=${CopyCode} alt="copy code" />`;
+    }, 1000);
   };
 
   function teamselection(e) {
     if (e === 'red') {
       setTeam('red');
       localStorage.setItem('team', 'red');
-      setRedPlayer(localStorage.getItem('nickname'));
       document.querySelector('.lobby__redteam').style.display = 'none';
       document.querySelector('.lobby__blueteam').style.display = 'none';
       socket.emit('joinRoom', { username, room: 'Team Red' });
@@ -114,7 +116,6 @@ const WaitingLobby = ({ socket }) => {
     if (e === 'blue') {
       setTeam('blue');
       localStorage.setItem('team', 'blue');
-      setBluePlayer(localStorage.getItem('nickname'));
       document.querySelector('.lobby__redteam').style.display = 'none';
       document.querySelector('.lobby__blueteam').style.display = 'none';
       socket.emit('joinRoom', { username, room: 'Team Blue' });
@@ -136,7 +137,7 @@ const WaitingLobby = ({ socket }) => {
             <img src={CopyCode} alt="copy code" />
           </div>
         </div>
-        <div className="d-flex">
+        <div className="d-flex lobby__teamcontainer">
           {/* Red Box */}
           <RedTeam playerList={redplayerlist} />
           <input
@@ -168,7 +169,9 @@ const WaitingLobby = ({ socket }) => {
             />
           </div>
         ) : (
-          <div></div>
+          <h3 className="lobby__playermsg">
+            Waiting for the host to start the game...
+          </h3>
         )}
       </div>
     </div>

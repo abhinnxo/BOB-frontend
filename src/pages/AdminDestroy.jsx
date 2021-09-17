@@ -141,14 +141,14 @@ const AdminDestroy = ({ socket }) => {
           />
         }
         <div>
-          <img src={settingsImg} alt="" className="settings" />
-          <p className="admin__round">Round {roundNumber}</p>
+          {/* <img src={settingsImg} alt="" className="settings" /> */}
           <img
             src={endGameImg}
             className="endGame"
             onClick={endGame}
             alt="End Game Button"
           />
+          <p className="admin__round">Round {roundNumber}</p>
         </div>
       </div>
       <div className="players">
@@ -158,7 +158,9 @@ const AdminDestroy = ({ socket }) => {
             Team Blue {roundNumber % 2 === 0 ? '(E)' : '(G)'}
           </span>
           <div className="seperateBoard">
-            <h4>Select the simmilar words and destroy them</h4>
+            <h4 className="admin__similar">
+              Select similar words and destroy them
+            </h4>
             <div className="team">
               {/* Blue Team Words */}
               <div className="eachTeam">

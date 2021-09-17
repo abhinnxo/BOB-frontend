@@ -21,6 +21,7 @@ const TeamRed = ({ socket }) => {
   const [wordError, setWordError] = useState('');
   const [min, setMin] = useState(0);
   const [sec, setSec] = useState(0);
+  const [guesserName, setGuesserName] = useState('');
 
   useEffect(() => {
     // getting the round number
@@ -65,6 +66,10 @@ const TeamRed = ({ socket }) => {
       .catch((err) => console.error(err));
   });
 
+  // getting the guesser name
+  socket.on('guesserName', (name) => {
+    setGuesserName(name);
+  });
   // setting the round number
   socket.on('current-round', (round) => {
     console.log('xyz round', round);
@@ -169,7 +174,7 @@ const TeamRed = ({ socket }) => {
         <h3>
           Enter a Word similar to{' '}
           <span className="red__randomword" style={{ color: 'red' }}>
-            " {randomword} "
+            "{randomword}"
           </span>
         </h3>
         <br />
@@ -178,6 +183,7 @@ const TeamRed = ({ socket }) => {
         ) : (
           <div>
             <h6 style={{ color: 'red' }}>{wordError}</h6>
+            <h5>{guesserName} is the guesser currently...</h5>
             <ImageInput
               text="Type your word here..."
               change={(e) => setHint(e.target.value)}
@@ -200,16 +206,24 @@ const TeamRed = ({ socket }) => {
           </span>
         </h3>
       </div>
-      <h3 className="red__title">Team Red</h3>
       <div className="red__teamranks d-flex justify-content-between px-3">
-        <h3 className="my-auto" style={{ color: '#ffffff' }}>
-          Score: {redTeamScore}
+        <h3 className="my-auto mx-auto" style={{ color: '#9b5825' }}>
+          Team Red: &nbsp;{' '}
+          <span style={{ color: '#ffffff' }}>{redTeamScore}</span>
         </h3>
-        <h3 className="my-auto" style={{ color: '#603913' }}>
+        {/* <h3 className="my-auto" style={{ color: '#603913' }}>
           Round: <span>{roundfromBackend}</span>
-        </h3>
+        </h3> */}
       </div>
-      <h3 className="red__bluescore">Blue Team Score: {blueTeamScore}</h3>
+      <div className="red__blueranks d-flex justify-content-between px-3">
+        <h3 className="my-auto mx-auto" style={{ color: '#9b5825' }}>
+          Team Blue: &nbsp;{' '}
+          <span style={{ color: '#ffffff' }}>{blueTeamScore}</span>
+        </h3>
+        {/* <h3 className="my-auto" style={{ color: '#603913' }}>
+          Round: <span>{roundfromBackend}</span>
+        </h3> */}
+      </div>
     </div>
   );
 };

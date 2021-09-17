@@ -21,9 +21,10 @@ function TeamBlue({ socket }) {
   const [usermsgsent, setUserMagSent] = useState(0);
   const [min, setMin] = useState(1);
   const [sec, setSec] = useState(30);
+  const [guesserName, setGuesserName] = useState('');
 
+  // getting the round number
   useEffect(() => {
-    // getting the round number
     axios({
       method: 'get',
       url: `https://bob-backend-madiee-h.herokuapp.com/roundNo`,
@@ -50,8 +51,8 @@ function TeamBlue({ socket }) {
       .catch((err) => console.error(err));
   }, [guesserId]);
 
+  // getting the  random word
   useEffect(() => {
-    // getting the  random word
     axios({
       method: 'get',
       url: `https://bob-backend-madiee-h.herokuapp.com/randomword`,
@@ -61,6 +62,11 @@ function TeamBlue({ socket }) {
         setRandomWord(res.data);
       })
       .catch((err) => console.error(err));
+  });
+
+  // getting the guesser name
+  socket.on('guesserName', (name) => {
+    setGuesserName(name);
   });
 
   // setting the round number
@@ -169,7 +175,7 @@ function TeamBlue({ socket }) {
         <h3>
           Enter a Word similar to{' '}
           <span className="blue__randomword" style={{ color: 'red' }}>
-            " {randomword} "
+            "{randomword}"
           </span>
         </h3>
         <br />
@@ -178,6 +184,7 @@ function TeamBlue({ socket }) {
         ) : (
           <div>
             <h6 style={{ color: 'red' }}>{wordError}</h6>
+            <h5>{guesserName} is the guesser currently...</h5>
             <ImageInput
               text="Type your word here..."
               change={(e) => setHint(e.target.value)}

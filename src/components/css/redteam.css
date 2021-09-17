@@ -8,7 +8,7 @@
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
-  line-height: 30 px;
+  line-height: 30px;
   letter-spacing: 0.1em;
   color: rgba(0, 0, 0, 0.5);
   display: flex;
@@ -27,11 +27,11 @@ ul {
 }
 @media only screen and (max-width: 1610px), screen and (max-height: 910) {
   .redblock > img {
-    width: 500px;
-    height: 313px;
+    width: 600px;
+    height: 413px;
   }
   .redblock__ul {
-    font-size: 16px;
+    font-size: 24px;
     transform: translate(-25px, 95px);
     height: 180px;
     width: 450px;

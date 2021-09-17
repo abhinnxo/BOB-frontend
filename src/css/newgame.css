@@ -88,7 +88,7 @@ input[type='password'] {
     overflow-y: hidden;
   }
   .newgame__box {
-    transform: translateY(-80px);
+    transform: translateY(-40px);
     width: 703px;
     height: 549px;
     background-size: 703px 549px;
@@ -97,14 +97,9 @@ input[type='password'] {
     width: 620px;
   }
 }
-@media only screen and (max-width: 1500px) {
-  .newgame__box {
-    margin-top: 250px;
-  }
-}
 @media only screen and (max-width: 1400px), screen and (max-height: 800px) {
   .newgame__box {
-    margin-top: 210px;
+    margin-top: 270px !important;
     width: 654px;
     height: 500px;
     background-size: 654px 500px;
@@ -114,17 +109,7 @@ input[type='password'] {
     transform: translate(-5px, -4px);
   }
 }
-@media only screen and (max-height: 1300px) {
-  .newgame__box {
-    margin-top: 300px;
-  }
-}
-@media only screen and (max-width: 1024), screen and (max-height: 810px) {
-  .newgame__box {
-    margin-top: 230px;
-  }
-}
-@media only screen and (max-width: 1360), screen and (max-height: 682px) {
+@media only screen and (max-width: 1360px), screen and (max-height: 768px) {
   .newgame__box {
     margin-top: 210px;
     width: 554px;
@@ -150,5 +135,17 @@ input[type='password'] {
     height: 3rem;
     padding: 5px 0px;
     font-size: 18px;
+  }
+}
+@media only screen and (max-width: 1024px), screen and (max-height: 720px) {
+  .newgame__joinbtn,
+  .newgame__hostbtn {
+    transform: translateY(-25px);
+  }
+}
+
+@media only screen and (max-width: 1024px), screen and (max-height: 810px) {
+  .newgame__box {
+    margin-top: 230px;
   }
 }
