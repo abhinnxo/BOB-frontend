@@ -83,19 +83,18 @@
   letter-spacing: 0.1em;
   text-align: center;
 }
-@media only screen and (max-width: 1610px), screen and (max-height: 910) {
+@media only screen and (max-width: 1610px), screen and (max-height: 910px) {
   .lobby__teamtable {
     position: absolute;
     width: 62rem;
     top: 35%;
     left: 52%;
-    /* margin-left: -400px; */
   }
   .lobby__blueteam {
-    transform: translate(850px, -10px);
+    transform: translate(1025px, 0px);
   }
   .lobby__redteam {
-    transform: translate(350px, -10px);
+    transform: translate(425px, 0px);
   }
   .lobby__codediv {
     font-size: 16px;
@@ -111,6 +110,14 @@
     width: 250px;
     height: 70px;
     transform: translateX(470px);
+  }
+}
+@media only screen and (max-width: 1366px), screen and (max-height: 768px) {
+  .lobby__blueteam {
+    transform: translate(850px, 0px) !important;
+  }
+  .lobby__redteam {
+    transform: translate(350px, 0px) !important;
   }
 }
 @media only screen and (max-width: 1400px), screen and (max-height: 800px) {
@@ -156,5 +163,11 @@
   }
   .lobby__redteam {
     transform: translate(360px, -12px);
+  }
+}
+@media only screen and (max-width: 1024px), screen and (max-height: 600px) {
+  .lobby__codediv {
+    transform: translate(25rem, -2.5rem);
+    margin-top: 10px;
   }
 }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import '../css/admindestroy.css';
-import settingsImg from '../images/settings.svg';
 import endGameImg from '../images/end_game.svg';
 import destroyButton from '../images/destroy_button.svg';
 import MyTimer from '../components/MyTimer';
@@ -85,7 +84,7 @@ const AdminDestroy = ({ socket }) => {
     });
     socket.on('game-ended', (gameValue) => {
       if (gameValue === 1) {
-        window.location.href = '/';
+        history.push('/endgame');
       }
     });
     socket.on('guessID', (guesserID) => {
@@ -119,15 +118,6 @@ const AdminDestroy = ({ socket }) => {
   function endGame() {
     socket.emit('game-end-clicked', 0);
     localStorage.clear();
-  }
-
-  function nextRound() {
-    socket.emit('change-score', 0);
-    socket.emit('change-round', roundNumber + 1);
-    setRoundNumber(roundNumber + 1);
-    var count = 0;
-    socket.emit('timer-start', count);
-    alert('Round Changed');
   }
 
   return (

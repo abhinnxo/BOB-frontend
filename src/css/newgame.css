@@ -143,7 +143,6 @@ input[type='password'] {
     transform: translateY(-25px);
   }
 }
-
 @media only screen and (max-width: 1024px), screen and (max-height: 810px) {
   .newgame__box {
     margin-top: 230px;

@@ -23,9 +23,11 @@ function TeamBlue({ socket }) {
   const [min, setMin] = useState(1);
   const [sec, setSec] = useState(30);
   const [guesserName, setGuesserName] = useState('');
+  const [guessedWord, setGuessedWord] = useState('"..."');
 
   const location = useLocation();
 
+  // Round number
   useEffect(() => {
     axios({
       method: 'get',
@@ -67,9 +69,10 @@ function TeamBlue({ socket }) {
   });
 
   // getting the guesser name
-  socket.on('guesserName', (name) => {
-    setGuesserName(name);
-  });
+  // socket.on('guesserName', (name) => {
+  //   setGuesserName(name);
+  //   console.log('<<<GUESSER NAME>>>', name);
+  // });
 
   // setting the round number
   socket.on('current-round', (round) => {
@@ -82,7 +85,7 @@ function TeamBlue({ socket }) {
     socket.on('game-ended', (gameValue) => {
       if (gameValue == 1) {
         localStorage.clear();
-        window.location.href = '/';
+        history.push('/endgame');
       }
     });
 
@@ -102,7 +105,7 @@ function TeamBlue({ socket }) {
     });
 
     socket.on('guessed-wrong', (wrong) => {
-      setChance(`Guesser guessed wrong, ${2 - wrong} chances are left...`);
+      setChance(`Guesser guessed wrong, ${2 - wrong} chance(s) are left...`);
     });
 
     socket.on('guessID', (guesserID) => {
@@ -174,6 +177,12 @@ function TeamBlue({ socket }) {
     }
   });
 
+  //  Word submitted by the guesser
+  socket.on('guessToHost', (guessSubmitted) => {
+    console.log('guessSubmitted', guessSubmitted);
+    setGuessedWord(guessSubmitted);
+  });
+
   return (
     <div className="blue__bg">
       {!location.state.clueGiven ? (
@@ -182,7 +191,7 @@ function TeamBlue({ socket }) {
           <h3>
             Enter a Word similar to{' '}
             <span className="blue__randomword" style={{ color: 'red' }}>
-              " {randomword} "
+              "{randomword}"
             </span>
           </h3>
           <br />
@@ -206,17 +215,16 @@ function TeamBlue({ socket }) {
           )}
         </div>
       ) : (
-        <div className="blue__enterhint text-center">
-          <h4>Guesser is currently submitting guesses</h4>
-          <h4>
-            Clue for word{' '}
-            <span className="blue__randomword" style={{ color: 'red' }}>
-              " {randomword} "
+        <div className="blue__wait text-center">
+          <h2>
+            Your Clue for the word{' '}
+            <span className="red__randomword" style={{ color: 'red' }}>
+              "{randomword}"{' '}
             </span>
-            submitted
-          </h4>
-
-          <h4>{chance} </h4>
+            has been submitted
+          </h2>
+          <p>Guesser is currently submitting thier guesses:</p>
+          <h4>{guessedWord}</h4>
         </div>
       )}
       <div className="blue__timer d-flex align-items-baseline">
@@ -227,16 +235,26 @@ function TeamBlue({ socket }) {
           </span>
         </h3>
       </div>
-      <h3 className="blue__title">Team Blue</h3>
-      <div className="blue__teamranks d-flex justify-content-between px-3">
-        <h3 className="my-auto" style={{ color: '#ffffff' }}>
-          Score: {blueTeamScore}
-        </h3>
-        <h3 className="my-auto" style={{ color: '#603913' }}>
+      <div className="blue__rank">
+        <div className="blue__blue d-flex justify-content-between px-3">
+          <h3 className="my-auto mx-auto" style={{ color: '#9b5825' }}>
+            Team Blue: &nbsp;{' '}
+            <span style={{ color: '#ffffff' }}>{blueTeamScore}</span>
+          </h3>
+        </div>
+        <div className="blue__red d-flex justify-content-between px-3">
+          <h3 className="my-auto mx-auto" style={{ color: '#9b5825' }}>
+            Team Red: &nbsp;{' '}
+            <span style={{ color: '#ffffff' }}>{redTeamScore}</span>
+          </h3>
+        </div>
+      </div>
+
+      <div className="round__number">
+        <h3>
           Round: <span>{roundfromBackend}</span>
         </h3>
       </div>
-      <h3 className="blue__redscore">Red Team Score: {redTeamScore}</h3>
     </div>
   );
 }

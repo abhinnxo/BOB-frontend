@@ -8,10 +8,10 @@ const axios = require('axios');
 const AdminPoints = ({ socket }) => {
   const [score, setScore] = useState(0);
   const [gameStatus, setGameStatus] = useState(0);
-  const [guess, setGusser] = useState('" ... "');
+  const [guess, setGusser] = useState('"..."');
   const [wrong, setWrong] = useState(0);
   const [roundNumber, setRoundNumber] = useState(1);
-  const [randomWord, setRandomWord] = useState('Main Word');
+  const [randomWord, setRandomWord] = useState('"..."');
   // Show players score
   const [redTeamScore, setRedTeamScore] = useState(0);
   const [blueTeamScore, setBlueTeamScore] = useState(0);
@@ -63,7 +63,7 @@ const AdminPoints = ({ socket }) => {
   socket.on('game-ended', (gameValue) => {
     localStorage.clear();
     if (gameValue === 1) {
-      window.location.href = '/';
+      history.push('/endgame');
     }
   });
 
@@ -112,6 +112,7 @@ const AdminPoints = ({ socket }) => {
   function wrongFxn() {
     setWrong(wrong + 1);
     socket.emit('wrong-guess', wrong);
+    setGusser('"..."');
     if (wrong == 2) {
       setScore(0);
       socket.emit('change-score', 0);

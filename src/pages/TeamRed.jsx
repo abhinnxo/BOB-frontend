@@ -69,10 +69,11 @@ const TeamRed = ({ socket }) => {
       .catch((err) => console.error(err));
   });
 
-  // getting the guesser name
-  socket.on('guesserName', (name) => {
-    setGuesserName(name);
-  });
+  // // getting the guesser name
+  // socket.on('guesserName', (name) => {
+  //   setGuesserName(name);
+  //   console.log('<<<GUESSER NAME>>>', name);
+  // });
   // setting the round number
   socket.on('current-round', (round) => {
     console.log('xyz round', round);
@@ -83,7 +84,7 @@ const TeamRed = ({ socket }) => {
     socket.on('game-ended', (gameValue) => {
       if (gameValue == 1) {
         localStorage.clear();
-        window.location.href = '/';
+        history.push('/endgame');
       }
     });
 
@@ -103,7 +104,7 @@ const TeamRed = ({ socket }) => {
     });
 
     socket.on('guessed-wrong', (wrong) => {
-      setChance(`Guesser guessed wrong,Now ${2 - wrong} chances left`);
+      setChance(`Guesser guessed wrong, Now ${2 - wrong} chance(s) left`);
     });
 
     socket.on('guessID', (guesserID) => {
@@ -182,7 +183,7 @@ const TeamRed = ({ socket }) => {
           <h3>
             Enter a Word similar to{' '}
             <span className="red__randomword" style={{ color: 'red' }}>
-              " {randomword} "
+              "{randomword}"
             </span>
           </h3>
           <br />
@@ -206,17 +207,16 @@ const TeamRed = ({ socket }) => {
           )}
         </div>
       ) : (
-        <div className="red__enterhint text-center">
-          <h4>Guesser is currently submitting guesses</h4>
+        <div className="red__wait text-center">
           <h4>
-            Clue for word{' '}
+            Your Clue for the word{' '}
             <span className="red__randomword" style={{ color: 'red' }}>
-              " {randomword} "
+              "{randomword}"{' '}
             </span>
-            submitted
+            has been submitted
           </h4>
-
-          <h4>{chance} </h4>
+          <h4>Guesser is currently submitting thier guesses</h4>
+          <h4>{chance}</h4>
         </div>
       )}
       <div className="red__timer d-flex align-items-baseline">
@@ -232,18 +232,17 @@ const TeamRed = ({ socket }) => {
           Team Red: &nbsp;{' '}
           <span style={{ color: '#ffffff' }}>{redTeamScore}</span>
         </h3>
-        {/* <h3 className="my-auto" style={{ color: '#603913' }}>
-          Round: <span>{roundfromBackend}</span>
-        </h3> */}
       </div>
       <div className="red__blueranks d-flex justify-content-between px-3">
         <h3 className="my-auto mx-auto" style={{ color: '#9b5825' }}>
           Team Blue: &nbsp;{' '}
           <span style={{ color: '#ffffff' }}>{blueTeamScore}</span>
         </h3>
-        {/* <h3 className="my-auto" style={{ color: '#603913' }}>
+      </div>
+      <div className="round__number">
+        <h3>
           Round: <span>{roundfromBackend}</span>
-        </h3> */}
+        </h3>
       </div>
     </div>
   );

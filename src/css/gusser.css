@@ -12,11 +12,16 @@
   background-size: cover;
   overflow: hidden;
 }
-.gusser__back {
-  position: absolute;
-  top: 15%;
-  left: 20%;
-  cursor: pointer;
+.round__number {
+  background: url('../images/timer.svg');
+  font-family: 'PaytoneOne';
+  height: 45px;
+  width: 170px;
+  color: white;
+  font-size: 20px;
+  padding: 5px 0 4px 15px;
+  margin-top: 250px;
+  margin-left: 265px;
 }
 .guesser__title {
   position: absolute;

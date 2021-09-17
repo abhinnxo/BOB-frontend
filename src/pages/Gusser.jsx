@@ -21,7 +21,7 @@ const Gusser = ({ socket }) => {
   const [guessSend, setGuessSend] = useState(0);
   const [chance, setChance] = useState('');
 
-  let v = 0;
+  var v = 0;
 
   useEffect(() => {
     socket.emit('gusserid', location.state.gusserid);
@@ -89,6 +89,18 @@ const Gusser = ({ socket }) => {
       .catch((err) => console.error(err));
   }, []);
 
+  //  Round from axios
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/roundNo`,
+    })
+      .then((res) => {
+        setRoundFromBackend(res.data.round);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
   //  On clickong Enter button
   const guessSubmitted = () => {
     socket.emit('guessSubmission', guess);
@@ -114,13 +126,13 @@ const Gusser = ({ socket }) => {
     socket.on('game-ended', (gameValue) => {
       if (gameValue == 1) {
         localStorage.clear();
-        window.location.href = '/';
+        history.push('/endgame');
       }
     });
 
     socket.on('guessed-wrong', (wrong) => {
       setGuessSend(0);
-      setChance(`You guessed wrong, you have ${2 - wrong} chances left`);
+      setChance(`You guessed wrong, you have ${2 - wrong} chance(s) left`);
     });
   }, [socket]);
 
@@ -154,13 +166,16 @@ const Gusser = ({ socket }) => {
         </h3>
       </div>
       <div className="gusser__enterdiv">
-        <h3 className="fw-bold">Guess the Word</h3>
+        <h3 className="fw-bold">You're the Guesser now</h3>
         <br />
         <h5>{chance}</h5>
         <br />
         {guessSend ? (
-          <div>
-            <h5>Guess sent...</h5>
+          <div className="text-center">
+            <h5>
+              <span style={{ color: 'red' }}>Guess sent</span>, waiting for
+              host's response...
+            </h5>
           </div>
         ) : (
           <div>
@@ -176,6 +191,11 @@ const Gusser = ({ socket }) => {
             />
           </div>
         )}
+      </div>
+      <div className="round__number">
+        <h3>
+          Round: <span>{roundfromBackend}</span>
+        </h3>
       </div>
     </div>
   );

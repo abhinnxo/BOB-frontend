@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory } from 'react-router';
 import '../css/admindestroy.css';
 const axios = require('axios');
 
 function Animation({ socket }) {
-  const history = useHistory();
-
-  const [team, setTeam] = useState('');
-  const [randomword, setRandomWord] = useState('MainWord');
+  const [randomword, setRandomWord] = useState('"..."');
   const [bluearr, setBluearr] = useState([]);
   const [redarr, setRedarr] = useState([]);
   const [roundNumber, setRoundNumber] = useState(1);
   const [guessingTeam, setGuessingTeam] = useState('blue');
 
-  var v = 0;
+  const history = useHistory();
 
+  // get the Word
   useEffect(() => {
     axios({
       method: 'get',
@@ -27,6 +25,21 @@ function Animation({ socket }) {
       .catch((err) => console.error(err));
   }, []);
 
+  // getting the round number
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/roundNo`,
+    })
+      .then((res) => {
+        console.log('axios ', res.data);
+        console.log('ad des,  ', res.data.round);
+        setRoundNumber(res.data.round);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  //  Routing
   useEffect(() => {
     socket.on('show-previous-screen', (value) => {
       let teamName = localStorage.getItem('team');
@@ -54,6 +67,14 @@ function Animation({ socket }) {
     });
   }, [socket]);
 
+  // when game is ended route everyone to main screen
+  socket.on('game-ended', (gameValue) => {
+    localStorage.clear();
+    if (gameValue === 1) {
+      history.push('/endgame');
+    }
+  });
+
   return (
     <div style={{ marginTop: '20%' }}>
       <section className="hostWaitingLobby">
@@ -66,7 +87,9 @@ function Animation({ socket }) {
               Team Blue {roundNumber % 2 === 0 ? '(E)' : '(G)'}
             </span>
             <div className="seperateBoard">
-              <h4>Select the simmilar words and destroy them</h4>
+              <h4 className="admin__similar">
+                Clues Submitted by other Players
+              </h4>
               <div className="team">
                 {/* Blue Team Words */}
                 <div className="eachTeam">

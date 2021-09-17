@@ -25,7 +25,7 @@ const WaitingLobby = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.comlobby`,
+      url: `https://bob-backend-madiee-h.herokuapp.com/lobby`,
     })
       .then((res) => {
         console.log('axios ', res.data);

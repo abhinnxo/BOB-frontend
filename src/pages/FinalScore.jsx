@@ -1,8 +1,8 @@
 import React from 'react';
-import '../css/scorepresent.css';
+import '../css/finalscore.css';
 import '../images/bluescore.webp';
 
-const ScorePresent = () => {
+const FinalScore = () => {
   return (
     <div>
       <div className="score__bg"></div>
@@ -18,4 +18,4 @@ const ScorePresent = () => {
   );
 };
 
-export default ScorePresent;
+export default FinalScore;

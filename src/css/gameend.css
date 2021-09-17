@@ -3,7 +3,7 @@
   left: 0px;
   top: 0px;
   z-index: -3;
-  background: url("../images/map1.webp");
+  background: url('../images/bglogo.webp');
   height: 100%;
   width: 100%;
   background-position: center center;
@@ -12,26 +12,36 @@
   background-size: cover;
   overflow: hidden;
 }
+.end__thanks {
+  color: red;
+}
 .gameend {
-  font-family: "PaytoneOne";
-  font-style: normal;
-  font-weight: normal;
-  font-size: 36px;
+  font-family: 'PaytoneOne';
   line-height: 50px;
   text-align: center;
   letter-spacing: 0.03em;
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 .end__text {
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-top: -62.4px;
-  margin-left: -210px;
+  margin-top: -150px;
+  margin-left: -310px;
 }
 .end__btn {
-  background: url("../images/button.png") no-repeat;
+  background: url('../images/button.png') no-repeat;
+  color: white;
+  font-family: 'caesar';
+  font-size: 25px;
+  width: 400px;
+  height: 110px;
+  cursor: pointer;
+  border: none;
+}
+.end__score {
+  background: url('../images/teamrank.svg') no-repeat;
+  width: 306px;
+  height: 60px;
+  margin: 0 5px;
+  padding-top: 12px;
 }

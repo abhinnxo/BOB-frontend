@@ -20,6 +20,10 @@
   left: 50%;
   margin-left: -233.5px;
 }
+.red__wait {
+  margin-top: 20%;
+  font-family: 'PaytoneOne';
+}
 .red__enterbtn {
   background: url('../images/button.png') no-repeat;
   color: white;
@@ -40,41 +44,16 @@
   transform: translate(-73px, -41px);
   color: white;
 }
-.red__teamranks {
+.round__number {
+  background: url('../images/timer.svg');
   font-family: 'PaytoneOne';
-  background: url('../images/teamrank.svg') no-repeat;
-  position: absolute;
-  width: 306px;
-  height: 60px;
-  top: 15%;
-  right: 10%;
-}
-.red__blueranks {
-  font-family: 'PaytoneOne';
-  background: url('../images/teamrank.svg') no-repeat;
-  position: absolute;
-  width: 240px;
-  background-size: 240px;
-  top: 22%;
-  right: 11.5%;
-}
-.red__blueranks h3 {
-  font-size: 24px;
-  padding: 7px 0 30px 0;
-}
-.red__title {
-  position: absolute;
-  color: #9b5825;
-  font-family: 'PaytoneOne';
-  top: 110px;
-  right: 475px;
-}
-.red__bluescore {
-  position: absolute;
-  color: #9b5825;
-  font-family: 'PaytoneOne';
-  top: 210px;
-  right: 400px;
+  height: 45px;
+  width: 170px;
+  color: white;
+  font-size: 20px;
+  padding: 5px 0 4px 15px;
+  margin-top: 250px;
+  margin-left: 265px;
 }
 @media only screen and (max-width: 1280px), screen and (max-height: 720px) {
   .red__timer {
@@ -86,38 +65,56 @@
     transform: translate(-60px, -30px);
     font-size: 24px;
   }
-  .red__title {
+  .red__rank {
     top: 75px;
-    right: 175px;
+    right: 80px;
   }
-  .red__teamranks {
-    background-size: 250px;
-    width: 250px;
-    height: 60px;
-    top: 15%;
-    right: 125px;
-  }
-  .red__teamranks h3 {
-    font-size: 18px;
-    transform: translateY(-7px);
-  }
-  .red__bluescore {
-    font-size: 20px;
-    top: 160px;
-    right: 155px;
+  .round__number {
+    margin-top: 200px;
+    margin-left: 110px;
   }
 }
-@media only screen and (max-width: 1360), screen and (max-height: 682px) {
-  .red__title {
-    top: 68px;
-    right: 175px;
+@media only screen and (max-width: 1440px), screen and (max-height: 900px) {
+  .red__timer {
+    width: 75px;
+    top: 100px;
+    left: 100px;
   }
-  .red__bluescore {
-    font-size: 20px;
-    top: 155px;
-    right: 155px;
+  .red__timer h3 {
+    transform: translate(-58px, -29px);
+    font-size: 24px;
   }
-  .red__teamranks h3 {
-    font-size: 18px;
+  .round__number {
+    margin-top: 200px;
+    margin-left: 60px;
+  }
+  .red__rank {
+    top: 100px;
+    right: 60px;
+  }
+}
+@media only screen and (max-width: 1360px), screen and (max-height: 682px) {
+}
+@media only screen and (max-width: 1024px), screen and (max-height: 800px) {
+  .red__rank {
+    top: 100px;
+    right: 25px;
+  }
+  .red__timer {
+    width: 75px;
+    top: 100px;
+    left: 75px;
+  }
+  .round__number {
+    margin-top: 200px;
+    margin-left: 30px;
+  }
+}
+@media only screen and (max-width: 1024px), screen and (max-height: 600px) {
+  .red__enterbtn {
+    width: 300px;
+    height: 75px;
+    padding-top: 3px;
+    background-size: 300px;
   }
 }
