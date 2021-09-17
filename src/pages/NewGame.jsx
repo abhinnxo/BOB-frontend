@@ -81,8 +81,8 @@ const NewGame = ({ socket }) => {
       alert('Enter Game Code');
     } else if (nickname === '') {
       alert('Enter Nickrname');
-    } else if (nickname.length > 8) {
-      alert("Nickname can't be more then 8 characters");
+    } else if (nickname.length > 16) {
+      alert("Nickname can't be more then 16 characters");
     } else if (sameNickname) {
       sameNickname = false;
       alert('A Player with same Nick has already joined...');

@@ -81,7 +81,13 @@ const WaitingLobby = ({ socket }) => {
             gusserid: guesser,
           },
         });
-      } else history.push(`/${team}`);
+      } else
+        history.push({
+          pathname: `/${team}`,
+          state: {
+            clueGiven: 0,
+          },
+        });
     }
   });
 

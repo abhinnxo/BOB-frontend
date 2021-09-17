@@ -5,6 +5,7 @@ import ImageButton from '../components/ImageButton';
 import ImageInput from '../components/ImageInput';
 import Clock from '../images/clock.svg';
 import '../css/teamblue.css';
+import { useLocation } from 'react-router';
 const axios = require('axios');
 
 function TeamBlue({ socket }) {
@@ -23,7 +24,8 @@ function TeamBlue({ socket }) {
   const [sec, setSec] = useState(30);
   const [guesserName, setGuesserName] = useState('');
 
-  // getting the round number
+  const location = useLocation();
+
   useEffect(() => {
     axios({
       method: 'get',
@@ -96,6 +98,7 @@ function TeamBlue({ socket }) {
       setUserMagSent(0);
       setChance('');
       setRoundFromBackend(round);
+      location.state.clueGiven = 0;
     });
 
     socket.on('guessed-wrong', (wrong) => {
@@ -137,6 +140,9 @@ function TeamBlue({ socket }) {
       setUserMagSent(1);
       // socket.emit('msgListMake', { hint, room: 'Team Blue' });
       document.querySelector('.blue__input').value = '';
+      history.push({
+        pathname: '/blue/animation',
+      });
     }
   };
 
@@ -170,35 +176,49 @@ function TeamBlue({ socket }) {
 
   return (
     <div className="blue__bg">
-      <div className="blue__enterhint text-center">
-        <h5>{chance}</h5>
-        <h3>
-          Enter a Word similar to{' '}
-          <span className="blue__randomword" style={{ color: 'red' }}>
-            "{randomword}"
-          </span>
-        </h3>
-        <br />
-        {usermsgsent ? (
-          <div>Word submitted</div>
-        ) : (
-          <div>
-            <h6 style={{ color: 'red' }}>{wordError}</h6>
-            <h5>{guesserName} is the guesser currently...</h5>
-            <ImageInput
-              text="Type your word here..."
-              change={(e) => setHint(e.target.value)}
-              classList="blue__input"
-            />
-            <br />
-            <ImageButton
-              value="ENTER"
-              classlist="blue__enterbtn"
-              clickMe={sendHint}
-            />
-          </div>
-        )}
-      </div>
+      {!location.state.clueGiven ? (
+        <div className="blue__enterhint text-center">
+          <h5>{chance}</h5>
+          <h3>
+            Enter a Word similar to{' '}
+            <span className="blue__randomword" style={{ color: 'red' }}>
+              " {randomword} "
+            </span>
+          </h3>
+          <br />
+          {usermsgsent ? (
+            <div>Word submitted</div>
+          ) : (
+            <div>
+              <h6 style={{ color: 'red' }}>{wordError}</h6>
+              <ImageInput
+                text="Type your word here..."
+                change={(e) => setHint(e.target.value)}
+                classList="blue__input"
+              />
+              <br />
+              <ImageButton
+                value="ENTER"
+                classlist="blue__enterbtn"
+                clickMe={sendHint}
+              />
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="blue__enterhint text-center">
+          <h4>Guesser is currently submitting guesses</h4>
+          <h4>
+            Clue for word{' '}
+            <span className="blue__randomword" style={{ color: 'red' }}>
+              " {randomword} "
+            </span>
+            submitted
+          </h4>
+
+          <h4>{chance} </h4>
+        </div>
+      )}
       <div className="blue__timer d-flex align-items-baseline">
         <img src={Clock} alt="time" />
         <h3>

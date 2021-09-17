@@ -47,13 +47,25 @@ const Gusser = ({ socket }) => {
             pathname: `/${teamName}/guess`,
             state: {
               gusserid: guesserID,
+              clueGiven: 0,
             },
           });
         } else {
           console.log('History', history);
           if (teamName === 'blue') {
-            history.push({ pathname: '/blue' });
-          } else history.push({ pathname: '/red' });
+            history.push({
+              pathname: '/blue',
+              state: {
+                clueGiven: 0,
+              },
+            });
+          } else
+            history.push({
+              pathname: '/red',
+              state: {
+                clueGiven: 0,
+              },
+            });
         }
       });
     });

@@ -109,7 +109,8 @@ const AdminDestroy = ({ socket }) => {
   const sendClues = () => {
     if (guessingArr.length === 0) socket.emit('showToGuesser', finalArr);
     else socket.emit('showToGuesser', guessingArr);
-
+    var value = 1;
+    socket.emit('team-screen', value);
     console.log('<<<GYES ARR>>>', guessingArr);
 
     history.push('/admin/points');

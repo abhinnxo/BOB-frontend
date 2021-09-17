@@ -14,6 +14,7 @@ import AdminDestroy from './pages/AdminDestroy';
 import HostWaitingLobby from './pages/HostWaitingLobby';
 import io from 'socket.io-client';
 import PageNotFound from './components/PageNotFound';
+import Animation from '../src/pages/Animation';
 
 function App() {
   const [socket, setSocket] = useState(null);
@@ -102,6 +103,16 @@ function App() {
         exact
         path="/gameend"
         render={(props) => <GameEnd {...props} socket={socket} />}
+      />
+      <Route
+        exact
+        path="/red/animation"
+        render={(props) => <Animation {...props} socket={socket} />}
+      />
+      <Route
+        exact
+        path="/blue/animation"
+        render={(props) => <Animation {...props} socket={socket} />}
       />
       {/* <Route exact path='*' component={PageNotFound} /> */}
     </BrowserRouter>
