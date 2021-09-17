@@ -227,17 +227,19 @@ const TeamRed = ({ socket }) => {
           </span>
         </h3>
       </div>
-      <div className="red__teamranks d-flex justify-content-between px-3">
-        <h3 className="my-auto mx-auto" style={{ color: '#9b5825' }}>
-          Team Red: &nbsp;{' '}
-          <span style={{ color: '#ffffff' }}>{redTeamScore}</span>
-        </h3>
-      </div>
-      <div className="red__blueranks d-flex justify-content-between px-3">
-        <h3 className="my-auto mx-auto" style={{ color: '#9b5825' }}>
-          Team Blue: &nbsp;{' '}
-          <span style={{ color: '#ffffff' }}>{blueTeamScore}</span>
-        </h3>
+      <div className="red__rank">
+        <div className="red__red d-flex justify-content-between px-3">
+          <h3 className="my-auto mx-auto" style={{ color: '#9b5825' }}>
+            Team Red: &nbsp;{' '}
+            <span style={{ color: '#ffffff' }}>{redTeamScore}</span>
+          </h3>
+        </div>
+        <div className="red__blue d-flex justify-content-between px-3">
+          <h3 className="my-auto mx-auto" style={{ color: '#9b5825' }}>
+            Team Blue: &nbsp;{' '}
+            <span style={{ color: '#ffffff' }}>{blueTeamScore}</span>
+          </h3>
+        </div>
       </div>
       <div className="round__number">
         <h3>

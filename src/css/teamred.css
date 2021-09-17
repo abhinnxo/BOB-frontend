@@ -44,6 +44,27 @@
   transform: translate(-73px, -41px);
   color: white;
 }
+.red__rank {
+  position: absolute;
+  top: 150px;
+  right: 200px;
+}
+.red__red {
+  font-family: 'PaytoneOne';
+  background: url('../images/teamrank.svg') no-repeat;
+  width: 306px;
+  height: 60px;
+  margin-bottom: 10px;
+}
+.red__blue {
+  font-family: 'PaytoneOne';
+  background: url('../images/teamrank.svg') no-repeat;
+  width: 250px;
+  height: 60px;
+  background-size: 250px;
+  padding-bottom: 12px;
+  transform: translateX(20px);
+}
 .round__number {
   background: url('../images/timer.svg');
   font-family: 'PaytoneOne';
@@ -92,8 +113,6 @@
     top: 100px;
     right: 60px;
   }
-}
-@media only screen and (max-width: 1360px), screen and (max-height: 682px) {
 }
 @media only screen and (max-width: 1024px), screen and (max-height: 800px) {
   .red__rank {

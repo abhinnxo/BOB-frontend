@@ -114,8 +114,6 @@
     right: 60px;
   }
 }
-@media only screen and (max-width: 1360px), screen and (max-height: 682px) {
-}
 @media only screen and (max-width: 1024px), screen and (max-height: 800px) {
   .blue__rank {
     top: 100px;
