@@ -19,7 +19,6 @@ function Animation({ socket }) {
       url: `https://bob-backend-madiee-h.herokuapp.com/randomword`,
     })
       .then((res) => {
-        console.log('axios ', res.data);
         setRandomWord(res.data);
       })
       .catch((err) => console.error(err));
@@ -32,8 +31,6 @@ function Animation({ socket }) {
       url: `https://bob-backend-madiee-h.herokuapp.com/roundNo`,
     })
       .then((res) => {
-        console.log('axios ', res.data);
-        console.log('ad des,  ', res.data.round);
         setRoundNumber(res.data.round);
       })
       .catch((err) => console.error(err));
@@ -57,13 +54,11 @@ function Animation({ socket }) {
 
   useEffect(() => {
     socket.on('Team-BlueWordList', (bluearr) => {
-      console.log('blue word array', bluearr);
       setBluearr(bluearr);
     });
 
     socket.on('Team-RedWordList', (redarr) => {
       setRedarr(redarr);
-      console.log(('red word array', redarr));
     });
   }, [socket]);
 

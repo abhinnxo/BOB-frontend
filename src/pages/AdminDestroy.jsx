@@ -53,7 +53,6 @@ const AdminDestroy = ({ socket }) => {
       url: `https://bob-backend-madiee-h.herokuapp.com/randomword`,
     })
       .then((res) => {
-        console.log('axios ', res.data);
         setRandomWord(res.data);
       })
       .catch((err) => console.error(err));
@@ -64,8 +63,6 @@ const AdminDestroy = ({ socket }) => {
       url: `https://bob-backend-madiee-h.herokuapp.com/roundNo`,
     })
       .then((res) => {
-        console.log('axios ', res.data);
-        console.log('ad des,  ', res.data.round);
         setRoundNumber(res.data.round);
       })
       .catch((err) => console.error(err));
@@ -74,13 +71,11 @@ const AdminDestroy = ({ socket }) => {
   useEffect(() => {
     //  On clicking proceed button
     socket.on('Team-BlueWordList', (bluearr) => {
-      console.log('blue word array', bluearr);
       setBluearr(bluearr);
     });
 
     socket.on('Team-RedWordList', (redarr) => {
       setRedarr(redarr);
-      console.log(('red word array', redarr));
     });
     socket.on('game-ended', (gameValue) => {
       if (gameValue === 1) {
@@ -100,7 +95,6 @@ const AdminDestroy = ({ socket }) => {
   }, [socket]);
 
   socket.on('final-Array', (arr) => {
-    console.log('final-array', arr);
     setFinalArr(arr);
   });
 
@@ -108,9 +102,9 @@ const AdminDestroy = ({ socket }) => {
   const sendClues = () => {
     if (guessingArr.length === 0) socket.emit('showToGuesser', finalArr);
     else socket.emit('showToGuesser', guessingArr);
+
     var value = 1;
     socket.emit('team-screen', value);
-    console.log('<<<GYES ARR>>>', guessingArr);
 
     history.push('/admin/points');
   };

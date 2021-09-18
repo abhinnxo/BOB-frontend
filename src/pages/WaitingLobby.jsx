@@ -21,6 +21,32 @@ const WaitingLobby = ({ socket }) => {
   const location = useLocation();
   const roomid = localStorage.getItem('roomid');
 
+  // set guesser id
+  // useEffect(() => {
+  //   socket.on('guesser', (id) => {
+  //     setGuesser(id);
+  //   });
+  // });
+  // useEffect(() => {
+  //   axios({
+  //     method: 'get',
+  //     url: `https://bob-backend-madiee-h.herokuapp.com/guesserid`,
+  //   })
+  //     .then((res) => {
+  //       console.log('guesser id ', res.data);
+  //       setGuesser(res.data);
+  //     })
+  //     .catch((err) => console.error(err));
+  // }, [blueplayerlist, redplayerlist]);
+
+  //  set guesser ID
+  useEffect(() => {
+    socket.on('guesser', (id) => {
+      console.log('<<<< line 45 lobby >>> ', id);
+      setGuesser(id);
+    });
+  });
+
   // fill teams with existing players
   useEffect(() => {
     axios({
@@ -28,7 +54,6 @@ const WaitingLobby = ({ socket }) => {
       url: `https://bob-backend-madiee-h.herokuapp.com/lobby`,
     })
       .then((res) => {
-        console.log('axios ', res.data);
         setRedPlayerList(res.data.teamredplayer);
         setBluePlayerList(res.data.teamblueplayer);
       })
@@ -46,13 +71,13 @@ const WaitingLobby = ({ socket }) => {
   useEffect(() => {
     setCode(roomid);
   }, []);
+
   useEffect(() => {
-    setUsername(localStorage.getItem('nickname').trim());
+    setUsername(localStorage.getItem('nickname'));
   }, []);
 
   useEffect(() => {
     socket.emit('hostId', location.state.hostId);
-    console.log('Host: ', location.state.hostId);
   }, []);
 
   //  Team red Players
@@ -65,36 +90,35 @@ const WaitingLobby = ({ socket }) => {
   });
 
   const history = useHistory();
-  var count = 0;
 
   // Start Game when event is emitted
-  socket.on('startGameForAll', function (value) {
-    socket.emit('timer-start', count);
-    if (value) {
-      console.log('startGameForAll', value);
-      if (socket.id === location.state.hostId) {
-        history.push('/admin/destroy');
-      } else if (socket.id === guesser) {
-        history.push({
-          pathname: `/${team}/guess`,
-          state: {
-            gusserid: guesser,
-          },
-        });
-      } else
-        history.push({
-          pathname: `/${team}`,
-          state: {
-            clueGiven: 0,
-          },
-        });
-    }
-  });
-
   useEffect(() => {
-    socket.on('guesser', (id) => {
-      setGuesser(id);
+    socket.on('startGameForAll', function (value) {
+      if (value) {
+        if (socket.id === location.state.hostId) {
+          history.push('/admin/destroy');
+        } else if (socket.id === guesser) {
+          history.push({
+            pathname: `/${team}/guess`,
+            state: {
+              gusserid: guesser,
+            },
+          });
+        } else {
+          history.push({
+            pathname: `/${team}`,
+            state: {
+              clueGiven: 0,
+            },
+          });
+        }
+      }
     });
+    if (window.location.href !== 'http://localhost:3000/lobby') {
+      return () => {
+        console.log('cleaned up');
+      };
+    }
   });
 
   // On clicking start button

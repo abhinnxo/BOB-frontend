@@ -18,10 +18,59 @@ const Gusser = ({ socket }) => {
   const [min, setMin] = useState(1);
   const [sec, setSec] = useState(30);
   const [wordError, setWordError] = useState('');
+  const [guesserID, setGuesserID] = useState('');
   const [guessSend, setGuessSend] = useState(0);
   const [chance, setChance] = useState('');
 
   var v = 0;
+
+  // get guesser id
+  // socket.on('change-guesser', (value) => {
+  //   if (value) {
+  //     axios({
+  //       method: 'get',
+  //       url: `https://bob-backend-madiee-h.herokuapp.com/guesserid`,
+  //     })
+  //       .then((res) => {
+  //         setGuesserID(res.data);
+  //       })
+  //       .catch((err) => console.error(err));
+  //   }
+  // });
+
+  socket.on('guessID', (guesserID) => {
+    console.log('guesser ID from backend', guesserID);
+    setTeam(localStorage.getItem('team'));
+    let teamName = localStorage.getItem('team');
+
+    if (socket.id === guesserID) {
+      v = 1;
+
+      history.push({
+        pathname: `/${teamName}/guess`,
+        state: {
+          gusserid: guesserID,
+          clueGiven: 0,
+        },
+      });
+    } else {
+      console.log('History', history);
+      if (teamName === 'blue') {
+        history.push({
+          pathname: '/blue',
+          state: {
+            clueGiven: 0,
+          },
+        });
+      } else
+        history.push({
+          pathname: '/red',
+          state: {
+            clueGiven: 0,
+          },
+        });
+    }
+  });
 
   useEffect(() => {
     socket.emit('gusserid', location.state.gusserid);
@@ -34,45 +83,10 @@ const Gusser = ({ socket }) => {
       } else {
         setTeam('blue');
       }
-
-      socket.on('guessID', (guesserID) => {
-        console.log('guesser ID from backend', guesserID);
-        setTeam(localStorage.getItem('team'));
-        let teamName = localStorage.getItem('team');
-
-        if (socket.id === guesserID) {
-          v = 1;
-
-          history.push({
-            pathname: `/${teamName}/guess`,
-            state: {
-              gusserid: guesserID,
-              clueGiven: 0,
-            },
-          });
-        } else {
-          console.log('History', history);
-          if (teamName === 'blue') {
-            history.push({
-              pathname: '/blue',
-              state: {
-                clueGiven: 0,
-              },
-            });
-          } else
-            history.push({
-              pathname: '/red',
-              state: {
-                clueGiven: 0,
-              },
-            });
-        }
-      });
     });
 
     // sync-timer-to-frontend
     socket.on('sync-timer-to-frontend', (time) => {
-      console.info('guesser timer', time);
       setMin(time.minutes);
       setSec(time.seconds);
     });
@@ -82,7 +96,6 @@ const Gusser = ({ socket }) => {
       url: `https://bob-backend-madiee-h.herokuapp.com/score`,
     })
       .then((res) => {
-        console.log('guesserID from backend: ', res.data);
         setRedTeamScore(res.data[0].TeamScore);
         setBlueTeamScore(res.data[1].TeamScore);
       })
@@ -104,7 +117,6 @@ const Gusser = ({ socket }) => {
   //  On clickong Enter button
   const guessSubmitted = () => {
     socket.emit('guessSubmission', guess);
-    console.log(guess);
     setGuessSend(1);
     let len = guess.length;
     var flag = 0;
@@ -136,9 +148,12 @@ const Gusser = ({ socket }) => {
     });
   }, [socket]);
 
+  // send guesserid to backend
+
+  socket.emit('guesserid-from-frontend', socket.id);
+
   // final array from host
   socket.on('gusserHints', (arr) => {
-    console.log('HINT LIST ', arr);
     setHintList(arr);
   });
 

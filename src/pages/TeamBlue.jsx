@@ -27,15 +27,13 @@ function TeamBlue({ socket }) {
 
   const location = useLocation();
 
-  // Round number
+  // getting the round number
   useEffect(() => {
     axios({
       method: 'get',
       url: `https://bob-backend-madiee-h.herokuapp.com/roundNo`,
     })
       .then((res) => {
-        console.log('axios ', res.data);
-        console.log('ad des,  ', res.data.round);
         setRoundFromBackend(res.data.round);
       })
       .catch((err) => console.error(err));
@@ -48,7 +46,6 @@ function TeamBlue({ socket }) {
       url: `https://bob-backend-madiee-h.herokuapp.com/score`,
     })
       .then((res) => {
-        console.log('score from backend: ', res.data);
         setRedTeamScore(res.data[0].TeamScore);
         setBlueTeamScore(res.data[1].TeamScore);
       })
@@ -62,21 +59,26 @@ function TeamBlue({ socket }) {
       url: `https://bob-backend-madiee-h.herokuapp.com/randomword`,
     })
       .then((res) => {
-        console.log('axios ', res.data);
         setRandomWord(res.data);
       })
       .catch((err) => console.error(err));
   });
 
   // getting the guesser name
-  // socket.on('guesserName', (name) => {
-  //   setGuesserName(name);
-  //   console.log('<<<GUESSER NAME>>>', name);
-  // });
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/guesserName`,
+    })
+      .then((res) => {
+        console.log('guessername', res.data);
+        if (res.data !== null && res.data !== '') setGuesserName(res.data);
+      })
+      .catch((err) => console.error(err));
+  });
 
   // setting the round number
   socket.on('current-round', (round) => {
-    console.log('xyz round', round);
     setRoundFromBackend(round);
   });
 
@@ -91,7 +93,6 @@ function TeamBlue({ socket }) {
 
     // sync-timer-to-frontend
     socket.on('sync-timer-to-frontend', (time) => {
-      console.info('guesser timer', time);
       setMin(time.minutes);
       setSec(time.seconds);
     });
@@ -105,7 +106,7 @@ function TeamBlue({ socket }) {
     });
 
     socket.on('guessed-wrong', (wrong) => {
-      setChance(`Guesser guessed wrong, ${2 - wrong} chance(s) are left...`);
+      setChance(`Guesser guessed wrong, Now ${2 - wrong} chance(s) left...`);
     });
 
     socket.on('guessID', (guesserID) => {
@@ -158,7 +159,7 @@ function TeamBlue({ socket }) {
       })
         .then((res) => {
           console.log('guesserID from backend: ', res.data);
-          if (socket.id === res.data.gusserSocketID) {
+          if (socket.id === res.data) {
             history.push('/blue/guess');
           }
         })
@@ -170,7 +171,6 @@ function TeamBlue({ socket }) {
         url: `https://bob-backend-madiee-h.herokuapp.com/randomword`,
       })
         .then((res) => {
-          console.log('axios ', res.data);
           setRandomWord(res.data);
         })
         .catch((err) => console.error(err));
@@ -195,6 +195,8 @@ function TeamBlue({ socket }) {
             </span>
           </h3>
           <br />
+          <h4>{guesserName} is guessing currently...</h4>
+
           {usermsgsent ? (
             <div>Word submitted</div>
           ) : (
@@ -225,6 +227,7 @@ function TeamBlue({ socket }) {
           </h2>
           <p>Guesser is currently submitting thier guesses:</p>
           <h4>{guessedWord}</h4>
+          <h6>{chance}</h6>
         </div>
       )}
       <div className="blue__timer d-flex align-items-baseline">
@@ -249,7 +252,6 @@ function TeamBlue({ socket }) {
           </h3>
         </div>
       </div>
-
       <div className="round__number">
         <h3>
           Round: <span>{roundfromBackend}</span>

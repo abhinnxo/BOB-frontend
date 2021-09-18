@@ -23,18 +23,17 @@ const TeamRed = ({ socket }) => {
   const [min, setMin] = useState(0);
   const [sec, setSec] = useState(0);
   const [guesserName, setGuesserName] = useState('');
+  const [guessedWord, setGuessedWord] = useState('"..."');
 
   const location = useLocation();
 
+  // getting the round number
   useEffect(() => {
-    // getting the round number
     axios({
       method: 'get',
       url: `https://bob-backend-madiee-h.herokuapp.com/roundNo`,
     })
       .then((res) => {
-        console.log('axios ', res.data);
-        console.log('ad des,  ', res.data.round);
         setRoundFromBackend(res.data.round);
       })
       .catch((err) => console.error(err));
@@ -47,8 +46,6 @@ const TeamRed = ({ socket }) => {
       url: `https://bob-backend-madiee-h.herokuapp.com/score`,
     })
       .then((res) => {
-        console.log('score from backend: ', res.data);
-
         setRedTeamScore(res.data[0].TeamScore);
         setBlueTeamScore(res.data[1].TeamScore);
       })
@@ -57,29 +54,35 @@ const TeamRed = ({ socket }) => {
 
   //  get random word
   useEffect(() => {
-    // getting the random word
     axios({
       method: 'get',
       url: `https://bob-backend-madiee-h.herokuapp.com/randomword`,
     })
       .then((res) => {
-        console.log('axios ', res.data);
         setRandomWord(res.data);
       })
       .catch((err) => console.error(err));
   });
 
-  // // getting the guesser name
-  // socket.on('guesserName', (name) => {
-  //   setGuesserName(name);
-  //   console.log('<<<GUESSER NAME>>>', name);
-  // });
+  // getting the guesser name
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/guesserName`,
+    })
+      .then((res) => {
+        console.log('guessername', res.data);
+        if (res.data !== null && res.data !== '') setGuesserName(res.data);
+      })
+      .catch((err) => console.error(err));
+  });
+
   // setting the round number
   socket.on('current-round', (round) => {
-    console.log('xyz round', round);
     setRoundFromBackend(round);
   });
 
+  //  end game button
   useEffect(() => {
     socket.on('game-ended', (gameValue) => {
       if (gameValue == 1) {
@@ -90,7 +93,6 @@ const TeamRed = ({ socket }) => {
 
     // sync-timer-to-frontend
     socket.on('sync-timer-to-frontend', (time) => {
-      console.info('guesser timer', time);
       setMin(time.minutes);
       setSec(time.seconds);
     });
@@ -156,7 +158,8 @@ const TeamRed = ({ socket }) => {
         url: `https://bob-backend-madiee-h.herokuapp.com/guesserid`,
       })
         .then((res) => {
-          if (socket.id === res.data.gusserSocketID) {
+          console.log('<<< fucking guesser ID >>> ', res.data);
+          if (socket.id === res.data) {
             history.push('/red/guess');
           }
         })
@@ -168,11 +171,16 @@ const TeamRed = ({ socket }) => {
         url: `https://bob-backend-madiee-h.herokuapp.com/randomword`,
       })
         .then((res) => {
-          console.log('axios ', res.data);
           setRandomWord(res.data);
         })
         .catch((err) => console.error(err));
     }
+  });
+
+  //  Word submitted by the guesser
+  socket.on('guessToHost', (guessSubmitted) => {
+    console.log('guessSubmitted', guessSubmitted);
+    setGuessedWord(guessSubmitted);
   });
 
   return (
@@ -187,6 +195,8 @@ const TeamRed = ({ socket }) => {
             </span>
           </h3>
           <br />
+          <h4>{guesserName} is guessing currently...</h4>
+
           {usermsgsent ? (
             <div>Word submitted</div>
           ) : (
@@ -208,15 +218,16 @@ const TeamRed = ({ socket }) => {
         </div>
       ) : (
         <div className="red__wait text-center">
-          <h4>
+          <h2>
             Your Clue for the word{' '}
             <span className="red__randomword" style={{ color: 'red' }}>
               "{randomword}"{' '}
             </span>
             has been submitted
-          </h4>
-          <h4>Guesser is currently submitting thier guesses</h4>
-          <h4>{chance}</h4>
+          </h2>
+          <p>Guesser is currently submitting thier guesses</p>
+          <h4>{guessedWord}</h4>
+          <h6>{chance}</h6>
         </div>
       )}
       <div className="red__timer d-flex align-items-baseline">

@@ -28,7 +28,6 @@ const AdminPoints = ({ socket }) => {
       url: `https://bob-backend-madiee-h.herokuapp.com/randomword`,
     })
       .then((res) => {
-        console.log('axios ', res.data);
         setRandomWord(res.data);
       })
       .catch((err) => console.error(err));
@@ -39,7 +38,6 @@ const AdminPoints = ({ socket }) => {
       url: `https://bob-backend-madiee-h.herokuapp.com/roundNo`,
     })
       .then((res) => {
-        console.log('axios ', res.data);
         setRoundNumber(res.data.round);
       })
       .catch((err) => console.error(err));
@@ -51,8 +49,6 @@ const AdminPoints = ({ socket }) => {
       url: `https://bob-backend-madiee-h.herokuapp.com/score`,
     })
       .then((res) => {
-        console.log('score from backend: ', res.data);
-
         setRedTeamScore(res.data[0].TeamScore);
         setBlueTeamScore(res.data[1].TeamScore);
       })
@@ -67,19 +63,12 @@ const AdminPoints = ({ socket }) => {
     }
   });
 
-  socket.on('random-word', (value) => {
-    console.log('Hey ReachedPOINT', value);
-    setRandomWord(value);
-  });
-
   socket.on('guessToHost', (guessSubmitted) => {
-    console.log('guessSubmitted', guessSubmitted);
     setGusser(guessSubmitted);
   });
 
   function score5() {
     setScore(5);
-    console.log('5 score button clicked....', score);
     socket.emit('change-score', 5);
     setRoundNumber(roundNumber + 1);
     socket.emit('change-round', roundNumber);
@@ -88,7 +77,6 @@ const AdminPoints = ({ socket }) => {
 
   function score4() {
     setScore(4);
-    console.log('4 score button clicked');
     socket.emit('change-score', 4);
     setRoundNumber(roundNumber + 1);
     socket.emit('change-round', roundNumber);
@@ -97,7 +85,6 @@ const AdminPoints = ({ socket }) => {
 
   function score3() {
     setScore(3);
-    console.log('3 score button clicked');
     socket.emit('change-score', 3);
     setRoundNumber(roundNumber + 1);
     socket.emit('change-round', roundNumber);
