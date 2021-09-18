@@ -122,9 +122,9 @@ const WaitingLobby = ({ socket }) => {
   });
 
   // On clicking start button
-  const startgame = () => {
+  function startgame() {
     socket.emit('hostStartedGame', true);
-  };
+  }
   // copy game code
   const copyGameCode = () => {
     navigator.clipboard.writeText(localStorage.getItem('roomid'));

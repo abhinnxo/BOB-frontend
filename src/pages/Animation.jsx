@@ -43,8 +43,9 @@ function Animation({ socket }) {
       console.log('value from backend:', value);
       if (
         value &&
-        window.location.href !== 'http://localhost:3000/red/guess' &&
-        window.location.href !== 'http://localhost:3000/blue/guess'
+        window.location.href !==
+          'https://battleofbrains.netlify.app/red/guess' &&
+        window.location.href !== 'https://battleofbrains.netlify.app/blue/guess'
       ) {
         history.push({
           pathname: `/${teamName}`,

@@ -74,7 +74,8 @@ function TeamBlue({ socket }) {
     })
       .then((res) => {
         console.log('guessername', res.data);
-        if (res.data !== null && res.data !== '') setGuesserName(res.data);
+        if (res.data.guesserNameRed !== '' && res.data.guesserNameBlue !== '')
+          setGuesserName(res.data);
       })
       .catch((err) => console.error(err));
   });
@@ -127,7 +128,7 @@ function TeamBlue({ socket }) {
     });
   }, [socket]);
 
-  socket.emit('guessingTeam', roundfromBackend);
+  // socket.emit('guessingTeam', roundfromBackend);
 
   const sendHint = () => {
     setUserMagSent(1);
@@ -197,7 +198,12 @@ function TeamBlue({ socket }) {
             </span>
           </h3>
           <br />
-          <h4>{guesserName} is guessing currently...</h4>
+          <h4>
+            {roundfromBackend % 2 === 0
+              ? guesserName.guesserNameRed
+              : guesserName.guesserNameBlue}{' '}
+            is guessing currently...
+          </h4>
 
           {usermsgsent ? (
             <div>Word submitted</div>
