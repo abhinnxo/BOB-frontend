@@ -41,7 +41,11 @@ function Animation({ socket }) {
     socket.on('show-previous-screen', (value) => {
       let teamName = localStorage.getItem('team');
       console.log('value from backend:', value);
-      if (value) {
+      if (
+        value &&
+        window.location.href !== 'http://localhost:3000/red/guess' &&
+        window.location.href !== 'http://localhost:3000/blue/guess'
+      ) {
         history.push({
           pathname: `/${teamName}`,
           state: {
