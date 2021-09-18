@@ -24,8 +24,9 @@ const TeamRed = ({ socket }) => {
   const [sec, setSec] = useState(0);
   const [guesserName, setGuesserName] = useState('');
   const [guessedWord, setGuessedWord] = useState('"..."');
-
+  const [clue, setClue] = useState(0);
   const location = useLocation();
+  setClue(location.state.clueGiven);
 
   // getting the round number
   useEffect(() => {
@@ -102,7 +103,7 @@ const TeamRed = ({ socket }) => {
       setchatmsgSent(1);
       setChance('');
       setRoundFromBackend(round);
-      location.state.clueGiven = 0;
+      setClue(0);
     });
 
     socket.on('guessed-wrong', (wrong) => {
@@ -185,7 +186,7 @@ const TeamRed = ({ socket }) => {
 
   return (
     <div className="red__bg">
-      {!location.state.clueGiven ? (
+      {!clue ? (
         <div className="red__enterhint text-center">
           <h5>{chance}</h5>
           <h3>

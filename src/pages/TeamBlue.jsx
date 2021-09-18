@@ -24,8 +24,10 @@ function TeamBlue({ socket }) {
   const [sec, setSec] = useState(30);
   const [guesserName, setGuesserName] = useState('');
   const [guessedWord, setGuessedWord] = useState('"..."');
-
   const location = useLocation();
+
+  const [clue, setClue] = useState(0);
+  setClue(location.state.clueGiven);
 
   // getting the round number
   useEffect(() => {
@@ -102,7 +104,7 @@ function TeamBlue({ socket }) {
       setUserMagSent(0);
       setChance('');
       setRoundFromBackend(round);
-      location.state.clueGiven = 0;
+      setClue(0);
     });
 
     socket.on('guessed-wrong', (wrong) => {
@@ -185,7 +187,7 @@ function TeamBlue({ socket }) {
 
   return (
     <div className="blue__bg">
-      {!location.state.clueGiven ? (
+      {!clue ? (
         <div className="blue__enterhint text-center">
           <h5>{chance}</h5>
           <h3>
