@@ -42,7 +42,7 @@ const MyTimer = ({ expiryTimestamp, socket, showNextRound }) => {
     // getting the round number
     axios({
       method: 'get',
-      url: `${process.env.REACT_APP_LOCALHOST}/roundNo`,
+      url: `https://bob-backend-madiee-h.herokuapp.com/roundNo`,
     })
       .then((res) => {
         console.log('axios ', res.data);

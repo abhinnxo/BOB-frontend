@@ -200,10 +200,14 @@ const TeamRed = ({ socket }) => {
           </h3>
           <br />
           <h4>
-            {roundfromBackend % 2 === 0
-              ? guesserName.guesserNameRed
-              : guesserName.guesserNameBlue}{' '}
-            is guessing currently...
+            {roundfromBackend % 2 === 0 ? (
+              <span style={{ color: 'red' }}>{guesserName.guesserNameRed}</span>
+            ) : (
+              <span style={{ color: 'blue' }}>
+                {guesserName.guesserNameBlue}
+              </span>
+            )}
+            &nbsp;is the guesser...
           </h4>
 
           {usermsgsent ? (
