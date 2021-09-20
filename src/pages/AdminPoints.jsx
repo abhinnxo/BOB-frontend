@@ -12,6 +12,7 @@ const AdminPoints = ({ socket }) => {
   const [wrong, setWrong] = useState(0);
   const [roundNumber, setRoundNumber] = useState(1);
   const [randomWord, setRandomWord] = useState('"..."');
+  const [guesserName, setGuesserName] = useState('');
   // Show players score
   const [redTeamScore, setRedTeamScore] = useState(0);
   const [blueTeamScore, setBlueTeamScore] = useState(0);
@@ -109,6 +110,19 @@ const AdminPoints = ({ socket }) => {
       history.push('/admin/destroy');
     }
   }
+  // getting the guesser name
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/guesserName`,
+    })
+      .then((res) => {
+        console.log('guessername', res.data);
+        if (res.data.guesserNameRed !== '' && res.data.guesserNameBlue !== '')
+          setGuesserName(res.data);
+      })
+      .catch((err) => console.error(err));
+  });
 
   return (
     <div className="point">
@@ -149,7 +163,15 @@ const AdminPoints = ({ socket }) => {
         <h3>
           Guess - <span>{wrong + 1}</span>
         </h3>
-        <h6>The Answer submitted is</h6>
+        <h6 style={{ fontFamily: 'PaytoneOne' }}>
+          The Answer submitted by&nbsp;
+          {roundNumber % 2 === 0 ? (
+            <span style={{ color: 'red' }}>{guesserName.guesserNameRed}</span>
+          ) : (
+            <span style={{ color: 'blue' }}>{guesserName.guesserNameBlue}</span>
+          )}
+          &nbsp;is...
+        </h6>
         <h1 className="point__randomword" id="randomWord">
           {guess}
         </h1>

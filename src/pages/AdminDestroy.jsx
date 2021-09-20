@@ -17,6 +17,8 @@ const AdminDestroy = ({ socket }) => {
   const [finalArr, setFinalArr] = useState([]);
   // set guessing team
   const [guessingTeam, setGuessingTeam] = useState('blue');
+  const [guesserName, setGuesserName] = useState('');
+
   const history = useHistory();
 
   const time = new Date();
@@ -29,6 +31,20 @@ const AdminDestroy = ({ socket }) => {
       setGuessingTeam('blue');
     }
   }, [round]);
+
+  // getting the guesser name
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/guesserName`,
+    })
+      .then((res) => {
+        console.log('guessername', res.data);
+        if (res.data.guesserNameRed !== '' && res.data.guesserNameBlue !== '')
+          setGuesserName(res.data);
+      })
+      .catch((err) => console.error(err));
+  });
 
   //remove enemy team checkboxes
   const destroyWords = () => {
@@ -199,6 +215,14 @@ const AdminDestroy = ({ socket }) => {
           </span>
         </div>
       </div>
+      <h4 style={{ fontFamily: 'PaytoneOne' }}>
+        {roundNumber % 2 === 0 ? (
+          <span style={{ color: 'red' }}>{guesserName.guesserNameRed}</span>
+        ) : (
+          <span style={{ color: 'blue' }}>{guesserName.guesserNameBlue}</span>
+        )}
+        &nbsp;is the guesser...
+      </h4>
       <button className="admin__destroy" onClick={sendClues}>
         Proceed
       </button>
