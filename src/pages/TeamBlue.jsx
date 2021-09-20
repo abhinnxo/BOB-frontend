@@ -147,7 +147,7 @@ function TeamBlue({ socket }) {
     }
     if (flag === 0) {
       setUserMagSent(1);
-      // socket.emit('msgListMake', { hint, room: 'Team Red' });
+      socket.emit('msgListMake', { hint, room: 'Team Blue' });
       document.querySelector('.blue__input').value = '';
       history.push({
         pathname: '/blue/animation',

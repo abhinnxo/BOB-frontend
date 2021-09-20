@@ -72,10 +72,12 @@ const AdminDestroy = ({ socket }) => {
     //  On clicking proceed button
     socket.on('Team-BlueWordList', (bluearr) => {
       setBluearr(bluearr);
+      console.log(bluearr);
     });
 
     socket.on('Team-RedWordList', (redarr) => {
       setRedarr(redarr);
+      console.log(redarr);
     });
     socket.on('game-ended', (gameValue) => {
       if (gameValue === 1) {
