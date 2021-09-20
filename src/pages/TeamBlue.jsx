@@ -27,7 +27,10 @@ function TeamBlue({ socket }) {
   const location = useLocation();
 
   const [clue, setClue] = useState(0);
-  setClue(location.state.clueGiven);
+
+  useEffect(() => {
+    setClue(location.state.clueGiven);
+  }, []);
 
   // getting the round number
   useEffect(() => {
@@ -131,21 +134,20 @@ function TeamBlue({ socket }) {
   // socket.emit('guessingTeam', roundfromBackend);
 
   const sendHint = () => {
-    setUserMagSent(1);
-    socket.emit('msgListMake', { hint, room: 'Team Blue' });
-    document.querySelector('.blue__input').value = '';
-    let len = hint.length;
     var flag = 0;
-    for (var i = 0; i < len; i++) {
-      if (hint[i] === ' ') {
-        setWordError('Please enter a clue with single word only');
-        flag = 1;
-        break;
-      }
+
+    var wordArr = hint.split(' ');
+    console.log('[<<<<< WORD ARR >>>>> ', wordArr);
+    if (wordArr.length > 1) {
+      flag = 1;
+      setWordError('Please enter a clue with single word only');
+      setTimeout(() => {
+        setWordError('');
+      }, 5000);
     }
-    if (flag == 0) {
+    if (flag === 0) {
       setUserMagSent(1);
-      // socket.emit('msgListMake', { hint, room: 'Team Blue' });
+      // socket.emit('msgListMake', { hint, room: 'Team Red' });
       document.querySelector('.blue__input').value = '';
       history.push({
         pathname: '/blue/animation',

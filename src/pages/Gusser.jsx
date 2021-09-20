@@ -21,6 +21,7 @@ const Gusser = ({ socket }) => {
   const [guesserID, setGuesserID] = useState('');
   const [guessSend, setGuessSend] = useState(0);
   const [chance, setChance] = useState('');
+  const [showGuesserbtn, setGuesserbtn] = useState(false);
 
   var v = 0;
 
@@ -37,6 +38,12 @@ const Gusser = ({ socket }) => {
   //       .catch((err) => console.error(err));
   //   }
   // });
+
+  useEffect(() => {
+    socket.on('show-previous-screen', (value) => {
+      setGuesserbtn(true);
+    });
+  });
 
   socket.on('guessID', (guesserID) => {
     console.log('guesser ID from backend', guesserID);
@@ -199,11 +206,15 @@ const Gusser = ({ socket }) => {
               text="Enter your Guess"
               change={(e) => setGuess(e.target.value)}
             />
-            <ImageButton
-              value="SEND"
-              clickMe={guessSubmitted}
-              classlist="mt-3 gusser__enterbtn"
-            />
+            {showGuesserbtn ? (
+              <ImageButton
+                value="SEND"
+                clickMe={guessSubmitted}
+                classlist="mt-3 gusser__enterbtn"
+              />
+            ) : (
+              <></>
+            )}
           </div>
         )}
       </div>
