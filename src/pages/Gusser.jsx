@@ -18,7 +18,6 @@ const Gusser = ({ socket }) => {
   const [min, setMin] = useState(1);
   const [sec, setSec] = useState(30);
   const [wordError, setWordError] = useState('');
-  const [guesserID, setGuesserID] = useState('');
   const [guessSend, setGuessSend] = useState(0);
   const [chance, setChance] = useState('');
   const [showGuesserbtn, setGuesserbtn] = useState(false);
@@ -141,6 +140,7 @@ const Gusser = ({ socket }) => {
     }
   };
 
+  // game end
   useEffect(() => {
     socket.on('game-ended', (gameValue) => {
       if (gameValue == 1) {
@@ -156,12 +156,12 @@ const Gusser = ({ socket }) => {
   }, [socket]);
 
   // send guesserid to backend
-
   socket.emit('guesserid-from-frontend', socket.id);
 
   // final array from host
   socket.on('gusserHints', (arr) => {
-    setHintList(arr);
+    if (arr == []) setHintList(['OPPSS...All the words got destroyed']);
+    else setHintList(arr);
   });
 
   return (

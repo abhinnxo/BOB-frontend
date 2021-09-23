@@ -114,16 +114,17 @@ const WaitingLobby = ({ socket }) => {
         }
       }
     });
-    if (window.location.href !== 'http://localhost:3000/lobby') {
-      return () => {
-        console.log('cleaned up');
-      };
-    }
+    // if (window.location.href !== 'http://localhost:3000/lobby') {
+    //   return () => {
+    //     console.log('cleaned up');
+    //   };
+    // }
   });
 
   // On clicking start button
   function startgame() {
     socket.emit('hostStartedGame', true);
+    console.log('START CLICKED');
   }
   // copy game code
   const copyGameCode = () => {

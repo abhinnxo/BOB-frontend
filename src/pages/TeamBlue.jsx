@@ -239,7 +239,7 @@ function TeamBlue({ socket }) {
             </span>
             has been submitted
           </h2>
-          <p>Guesser is currently submitting thier guesses:</p>
+          <h4>Guesser is currently submitting thier guesses:</h4>
           <h4>{guessedWord}</h4>
           <h6>{chance}</h6>
         </div>
