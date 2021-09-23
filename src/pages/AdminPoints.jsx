@@ -163,15 +163,15 @@ const AdminPoints = ({ socket }) => {
         <h3>
           Guess - <span>{wrong + 1}</span>
         </h3>
-        <h6 style={{ fontFamily: 'PaytoneOne' }}>
-          The Answer submitted by&nbsp;
+        <h5 style={{ fontFamily: 'PaytoneOne' }}>
+          The Answer submitted by &nbsp;
           {roundNumber % 2 === 0 ? (
             <span style={{ color: 'red' }}>{guesserName.guesserNameRed}</span>
           ) : (
             <span style={{ color: 'blue' }}>{guesserName.guesserNameBlue}</span>
           )}
-          &nbsp;is...
-        </h6>
+          &nbsp; is...
+        </h5>
         <h1 className="point__randomword" id="randomWord">
           {guess}
         </h1>

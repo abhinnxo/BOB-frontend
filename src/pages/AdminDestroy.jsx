@@ -9,8 +9,9 @@ const axios = require('axios');
 const AdminDestroy = ({ socket }) => {
   const [bluearr, setBluearr] = useState([]);
   const [redarr, setRedarr] = useState([]);
+  // word
   const [randomword, setRandomWord] = useState('MainWord');
-  const [round, setRound] = useState(1);
+  // const [round, setRound] = useState(1);
   const [roundNumber, setRoundNumber] = useState(1);
   // set array for the team
   const [guessingArr, setGuessingArr] = useState([]);
@@ -25,12 +26,12 @@ const AdminDestroy = ({ socket }) => {
   time.setSeconds(time.getSeconds() + 90);
 
   useEffect(() => {
-    if (round % 2 === 0) {
+    if (roundNumber % 2 === 0) {
       setGuessingTeam('red');
     } else {
       setGuessingTeam('blue');
     }
-  }, [round]);
+  }, [roundNumber]);
 
   // getting the guesser name
   useEffect(() => {
@@ -48,18 +49,18 @@ const AdminDestroy = ({ socket }) => {
 
   //remove enemy team checkboxes
   const destroyWords = () => {
-    let allWords = document.querySelectorAll('.guessingTeam > input');
+    console.log('distroy clicked');
+
+    let allWords = document.querySelectorAll('.guessingTeam input');
     allWords.forEach((word) => {
       if (!word.checked) {
         setGuessingArr([...guessingArr, word.value]);
         document.querySelector('.word').classList.add('admindestroy__hide');
       }
     });
-    document.querySelector('.destroyButton').style.display = 'none';
 
-    alert(
-      'Your Selected Words are removed, Click Proceed to send the clues to the Guesser...'
-    );
+    // Show Info that the words have been destroyed sucessfully
+    document.querySelector('.destroyButton img').style.display = 'none';
   };
 
   useEffect(() => {
@@ -112,13 +113,12 @@ const AdminDestroy = ({ socket }) => {
     });
   }, [socket]);
 
-  socket.on('final-Array', (arr) => {
-    setFinalArr(arr);
-  });
-
   // send clues to the guesser
   const sendClues = () => {
-    if (guessingArr.length === 0) socket.emit('showToGuesser', finalArr);
+    if (guessingArr.length === 0)
+      socket.emit('showToGuesser', [
+        'Alas! The enemy team managed to cancel out all your clues...',
+      ]);
     else socket.emit('showToGuesser', guessingArr);
 
     var value = 1;
@@ -127,6 +127,7 @@ const AdminDestroy = ({ socket }) => {
     history.push('/admin/points');
   };
 
+  // push people to score screen when end game is clicked
   function endGame() {
     socket.emit('game-end-clicked', 0);
     localStorage.clear();
@@ -155,7 +156,9 @@ const AdminDestroy = ({ socket }) => {
         </div>
       </div>
       <div className="players">
-        <h2 className="mainWord">{randomword}</h2>
+        <h2 className="mainWord">
+          <span>{randomword}</span>
+        </h2>
         <div className="join">
           <span className="teamNameBlue">
             Team Blue {roundNumber % 2 === 0 ? '(E)' : '(G)'}
@@ -175,12 +178,14 @@ const AdminDestroy = ({ socket }) => {
                       }`}
                     >
                       <label for={word}>{word}</label>
-                      <input
-                        type="checkbox"
-                        name={word}
-                        id={word}
-                        value={word}
-                      />
+                      {roundNumber % 2 !== 0 && (
+                        <input
+                          type="checkbox"
+                          name={word}
+                          id={word}
+                          value={word}
+                        />
+                      )}
                     </div>
                   );
                 })}
@@ -195,12 +200,14 @@ const AdminDestroy = ({ socket }) => {
                       }`}
                     >
                       <label for={word}>{word}</label>
-                      <input
-                        type="checkbox"
-                        name={word}
-                        id={word}
-                        value={word}
-                      />
+                      {roundNumber % 2 === 0 && (
+                        <input
+                          type="checkbox"
+                          name={word}
+                          id={word}
+                          value={word}
+                        />
+                      )}
                     </div>
                   );
                 })}

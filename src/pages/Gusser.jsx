@@ -122,18 +122,18 @@ const Gusser = ({ socket }) => {
 
   //  On clickong Enter button
   const guessSubmitted = () => {
-    socket.emit('guessSubmission', guess);
-    setGuessSend(1);
-    let len = guess.length;
     var flag = 0;
-    for (var i = 0; i < len; i++) {
-      if (guess[i] === ' ') {
-        setWordError('Please enter a guess with single word only');
-        flag = 1;
-        break;
-      }
+
+    var guessCheck = guess.split(' ');
+    if (guessCheck.length > 1) {
+      flag = 1;
+      setWordError('Please enter a guess with single word only');
+      setTimeout(() => {
+        setWordError('');
+      }, 5000);
     }
-    if (flag == 0) {
+
+    if (flag === 0) {
       socket.emit('guessSubmission', guess);
       console.log(guess);
       setGuessSend(1);
@@ -160,8 +160,7 @@ const Gusser = ({ socket }) => {
 
   // final array from host
   socket.on('gusserHints', (arr) => {
-    if (arr == []) setHintList(['OPPSS...All the words got destroyed']);
-    else setHintList(arr);
+    setHintList(arr);
   });
 
   return (
@@ -190,8 +189,7 @@ const Gusser = ({ socket }) => {
       <div className="gusser__enterdiv">
         <h3 className="fw-bold">You're the Guesser now</h3>
         <br />
-        <h5>{chance}</h5>
-        <br />
+        <h6>{chance}</h6>
         {guessSend ? (
           <div className="text-center">
             <h5>

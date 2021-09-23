@@ -56,12 +56,12 @@
   position: absolute;
   left: 50%;
   margin-top: 50px;
-  margin-left: -155px;
+  margin-left: -178px;
   top: 43%;
 }
 
 .point__board > h3,
-.point__board > h6 {
+.point__board > h5 {
   color: white;
 }
 .point__board button {
