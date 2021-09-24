@@ -7,6 +7,7 @@ import '../css/gameend.css';
 const GameEnd = () => {
   const [redTeamScore, setRedTeamScore] = useState(0);
   const [blueTeamScore, setBlueTeamScore] = useState(0);
+  const [winningStatus, setWiningStatus] = useState('');
   const history = useHistory();
 
   // getting the score
@@ -24,6 +25,13 @@ const GameEnd = () => {
       .catch((err) => console.error(err));
   });
 
+  // show winning status
+  useEffect(() => {
+    if (redTeamScore > blueTeamScore) setWiningStatus('Red Team Wins');
+    if (blueTeamScore > redTeamScore) setWiningStatus('Blue Team Wins');
+    if (redTeamScore === blueTeamScore) setWiningStatus('Draw');
+  }, [redTeamScore, blueTeamScore]);
+
   const gotoMainScreen = () => {
     history.push('/');
   };
@@ -36,11 +44,7 @@ const GameEnd = () => {
           <h1 className="end__thanks">Thank You for playing...</h1>
           <br />
           <div>
-            {redTeamScore > blueTeamScore ? (
-              <h3>Team Red Wins</h3>
-            ) : (
-              <h3>Team Blue Wins</h3>
-            )}
+            <h3>{winningStatus}</h3>
           </div>
         </div>
         <br />

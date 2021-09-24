@@ -15,7 +15,6 @@ const AdminDestroy = ({ socket }) => {
   const [roundNumber, setRoundNumber] = useState(1);
   // set array for the team
   const [guessingArr, setGuessingArr] = useState([]);
-  const [finalArr, setFinalArr] = useState([]);
   // set guessing team
   const [guessingTeam, setGuessingTeam] = useState('blue');
   const [guesserName, setGuesserName] = useState('');
@@ -34,6 +33,7 @@ const AdminDestroy = ({ socket }) => {
   }, [roundNumber]);
 
   // getting the guesser name
+  // guesserNameBlue
   useEffect(() => {
     axios({
       method: 'get',
@@ -41,7 +41,13 @@ const AdminDestroy = ({ socket }) => {
     })
       .then((res) => {
         console.log('guessername', res.data);
-        if (res.data.guesserNameRed !== '' && res.data.guesserNameBlue !== '')
+
+        // blue gyesser
+        if (roundNumber % 2 !== 0 && res.data.guesserNameBlue !== '')
+          setGuesserName(res.data);
+
+        // red guesser
+        if (roundNumber % 2 === 0 && res.data.guesserNameRed !== '')
           setGuesserName(res.data);
       })
       .catch((err) => console.error(err));

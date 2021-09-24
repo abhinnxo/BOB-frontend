@@ -76,7 +76,13 @@ const TeamRed = ({ socket }) => {
     })
       .then((res) => {
         console.log('guessername', res.data);
-        if (res.data.guesserNameRed !== '' && res.data.guesserNameBlue !== '')
+
+        // blue gyesser
+        if (roundfromBackend % 2 !== 0 && res.data.guesserNameBlue !== '')
+          setGuesserName(res.data);
+
+        // red guesser
+        if (roundfromBackend % 2 === 0 && res.data.guesserNameRed !== '')
           setGuesserName(res.data);
       })
       .catch((err) => console.error(err));
