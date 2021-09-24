@@ -259,10 +259,10 @@ function TeamBlue({ socket }) {
         </h3>
       </div>
       <div className="blue__rank">
-        <div className="blue__blue d-flex justify-content-between px-3">
-          <h3 className="my-auto mx-auto" style={{ color: '#9b5825' }}>
+        <div className="blue__blue d-flex justify-content-between px-3 bg">
+          <h3 className="my-auto mx-auto" style={{ color: 'white' }}>
             Team Blue: &nbsp;{' '}
-            <span style={{ color: '#ffffff' }}>{blueTeamScore}</span>
+            <span style={{ color: 'white' }}>{blueTeamScore}</span>
           </h3>
         </div>
         <div className="blue__red d-flex justify-content-between px-3">

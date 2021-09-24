@@ -12,6 +12,27 @@
   background-size: cover;
   overflow: hidden;
 }
+
+.guesser_words {
+  font-family: 'PaytoneOne';
+  position: absolute;
+  left: 50%;
+  margin-left: -120px;
+  top: 50%;
+  margin-top: -180px;
+}
+
+.gusserhints {
+  display: flex;
+  justify-content: space-evenly;
+  font-family: 'PaytoneOne';
+  position: absolute;
+  left: 50%;
+  margin-left: -40px;
+  top: 50%;
+  margin-top: -150px;
+}
+
 .point {
   font-family: 'PaytoneOne';
 }

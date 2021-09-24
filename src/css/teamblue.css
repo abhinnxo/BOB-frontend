@@ -12,6 +12,7 @@
   background-size: cover;
   overflow: hidden;
 }
+
 .blue__enterhint {
   font-family: 'PaytoneOne';
   position: absolute;
@@ -51,7 +52,7 @@
 }
 .blue__blue {
   font-family: 'PaytoneOne';
-  background: url('../images/teamrank.svg') no-repeat;
+  background: url('../images/Blue_team_points_old.webp') no-repeat;
   width: 306px;
   height: 60px;
   margin-bottom: 10px;

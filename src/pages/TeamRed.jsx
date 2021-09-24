@@ -259,9 +259,9 @@ const TeamRed = ({ socket }) => {
       </div>
       <div className="red__rank">
         <div className="red__red d-flex justify-content-between px-3">
-          <h3 className="my-auto mx-auto" style={{ color: '#9b5825' }}>
+          <h3 className="my-auto mx-auto" style={{ color: 'white' }}>
             Team Red: &nbsp;{' '}
-            <span style={{ color: '#ffffff' }}>{redTeamScore}</span>
+            <span style={{ color: 'white' }}>{redTeamScore}</span>
           </h3>
         </div>
         <div className="red__blue d-flex justify-content-between px-3">

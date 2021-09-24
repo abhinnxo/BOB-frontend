@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import EndGame from '../images/end_game.svg';
 import '../css/adminpoints.css';
 import MyTimer from '../components/MyTimer';
@@ -21,6 +21,9 @@ const AdminPoints = ({ socket }) => {
   time.setSeconds(time.getSeconds() + 90);
 
   const history = useHistory();
+  const location = useLocation();
+  const [guessingArr, setGuessingArr] = useState(location.state.arr);
+  console.log('Guesser Array:', location.state.arr);
 
   // getting the random word
   useEffect(() => {
@@ -122,7 +125,7 @@ const AdminPoints = ({ socket }) => {
           setGuesserName(res.data);
       })
       .catch((err) => console.error(err));
-  });
+  }, [roundNumber]);
 
   return (
     <div className="point">
@@ -157,6 +160,12 @@ const AdminPoints = ({ socket }) => {
         <div className="point__blueteamscore">
           Blue Team Score: {blueTeamScore}
         </div>
+      </div>
+      <h4 className="guesser_words">Words sent to guesser</h4>
+      <div className="gusserhints">
+        {guessingArr.map(function (item, i) {
+          return <h4 key={i}>{item}</h4>;
+        })}
       </div>
       <div className="point__board text-center">
         <h4 className="point__mainword">{randomWord}</h4>

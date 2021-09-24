@@ -33,7 +33,17 @@ const AdminDestroy = ({ socket }) => {
   }, [roundNumber]);
 
   // getting the guesser name
-  // guesserNameBlue
+  axios({
+    method: 'get',
+    url: `https://bob-backend-madiee-h.herokuapp.com/guesserName`,
+  })
+    .then((res) => {
+      console.log('guessername', res.data);
+      if (res.data.guesserNameRed !== '' && res.data.guesserNameBlue !== '')
+        setGuesserName(res.data);
+    })
+    .catch((err) => console.error(err));
+
   useEffect(() => {
     axios({
       method: 'get',
@@ -51,7 +61,7 @@ const AdminDestroy = ({ socket }) => {
           setGuesserName(res.data);
       })
       .catch((err) => console.error(err));
-  });
+  }, [roundNumber]);
 
   //remove enemy team checkboxes
   const destroyWords = () => {
@@ -130,7 +140,12 @@ const AdminDestroy = ({ socket }) => {
     var value = 1;
     socket.emit('team-screen', value);
 
-    history.push('/admin/points');
+    history.push({
+      pathname: '/admin/points',
+      state: {
+        arr: guessingArr,
+      },
+    });
   };
 
   // push people to score screen when end game is clicked
@@ -161,6 +176,21 @@ const AdminDestroy = ({ socket }) => {
           <p className="admin__round">Round {roundNumber}</p>
         </div>
       </div>
+      <h4
+        style={{
+          fontFamily: 'PaytoneOne',
+          zIndex: '100',
+          position: 'absolute',
+          marginTop: '7%',
+        }}
+      >
+        {roundNumber % 2 === 0 ? (
+          <span style={{ color: 'red' }}>{guesserName.guesserNameRed}</span>
+        ) : (
+          <span style={{ color: 'blue' }}>{guesserName.guesserNameBlue}</span>
+        )}
+        &nbsp;is the guesser...
+      </h4>
       <div className="players">
         <h2 className="mainWord">
           <span>{randomword}</span>
@@ -228,17 +258,11 @@ const AdminDestroy = ({ socket }) => {
           </span>
         </div>
       </div>
-      <h4 style={{ fontFamily: 'PaytoneOne' }}>
-        {roundNumber % 2 === 0 ? (
-          <span style={{ color: 'red' }}>{guesserName.guesserNameRed}</span>
-        ) : (
-          <span style={{ color: 'blue' }}>{guesserName.guesserNameBlue}</span>
-        )}
-        &nbsp;is the guesser...
-      </h4>
-      <button className="admin__destroy" onClick={sendClues}>
-        Proceed
-      </button>
+      <div>
+        <button className="admin__destroy" onClick={sendClues}>
+          Proceed
+        </button>
+      </div>
     </section>
   );
 };
