@@ -33,17 +33,6 @@ const AdminDestroy = ({ socket }) => {
   }, [roundNumber]);
 
   // getting the guesser name
-  axios({
-    method: 'get',
-    url: `https://bob-backend-madiee-h.herokuapp.com/guesserName`,
-  })
-    .then((res) => {
-      console.log('guessername', res.data);
-      if (res.data.guesserNameRed !== '' && res.data.guesserNameBlue !== '')
-        setGuesserName(res.data);
-    })
-    .catch((err) => console.error(err));
-
   useEffect(() => {
     axios({
       method: 'get',
