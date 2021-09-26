@@ -18,6 +18,8 @@ const AdminDestroy = ({ socket }) => {
   // set guessing team
   const [guessingTeam, setGuessingTeam] = useState('blue');
   const [guesserName, setGuesserName] = useState('');
+  // Proceed
+  const [destroyClicked, setDestroyClicked] = useState(false);
 
   const history = useHistory();
 
@@ -39,8 +41,6 @@ const AdminDestroy = ({ socket }) => {
       url: `https://bob-backend-madiee-h.herokuapp.com/guesserName`,
     })
       .then((res) => {
-        console.log('guessername', res.data);
-
         // blue gyesser
         if (roundNumber % 2 !== 0 && res.data.guesserNameBlue !== '')
           setGuesserName(res.data);
@@ -50,11 +50,11 @@ const AdminDestroy = ({ socket }) => {
           setGuesserName(res.data);
       })
       .catch((err) => console.error(err));
-  }, [roundNumber]);
+  });
 
   //remove enemy team checkboxes
   const destroyWords = () => {
-    console.log('distroy clicked');
+    setDestroyClicked(true);
 
     let allWords = document.querySelectorAll('.guessingTeam input');
     allWords.forEach((word) => {
@@ -90,8 +90,8 @@ const AdminDestroy = ({ socket }) => {
       .catch((err) => console.error(err));
   }, []);
 
+  //  On clicking proceed button
   useEffect(() => {
-    //  On clicking proceed button
     socket.on('Team-BlueWordList', (bluearr) => {
       setBluearr(bluearr);
       console.log(bluearr);
@@ -120,11 +120,19 @@ const AdminDestroy = ({ socket }) => {
 
   // send clues to the guesser
   const sendClues = () => {
-    if (guessingArr.length === 0)
-      socket.emit('showToGuesser', [
-        'Alas! The enemy team managed to cancel out all your clues...',
-      ]);
-    else socket.emit('showToGuesser', guessingArr);
+    if (destroyClicked) {
+      if (guessingArr.length === 0)
+        socket.emit('showToGuesser', [
+          'Alas! The enemy team managed to destroy all your clues...',
+        ]);
+      else socket.emit('showToGuesser', guessingArr);
+    } else {
+      if (roundNumber % 2 === 0) {
+        setGuessingArr(redarr);
+      } else setGuessingArr(bluearr);
+
+      socket.emit('showToGuesser', guessingArr);
+    }
 
     var value = 1;
     socket.emit('team-screen', value);

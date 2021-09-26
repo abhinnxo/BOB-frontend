@@ -34,7 +34,7 @@ function App() {
   useEffect(() => {
     const newSocket = io('https://bob-backend-madiee-h.herokuapp.com');
     console.log(newSocket);
-    newSocket.on('confirmation', function (message) {
+    newSocket.on('confirmation', (message) => {
       console.log(message);
     });
     setSocket(newSocket);

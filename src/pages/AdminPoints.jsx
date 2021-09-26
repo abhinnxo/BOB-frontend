@@ -125,7 +125,7 @@ const AdminPoints = ({ socket }) => {
           setGuesserName(res.data);
       })
       .catch((err) => console.error(err));
-  }, [roundNumber]);
+  });
 
   return (
     <div className="point">

@@ -75,8 +75,6 @@ const TeamRed = ({ socket }) => {
       url: `https://bob-backend-madiee-h.herokuapp.com/guesserName`,
     })
       .then((res) => {
-        console.log('guessername', res.data);
-
         // blue gyesser
         if (roundfromBackend % 2 !== 0 && res.data.guesserNameBlue !== '')
           setGuesserName(res.data);

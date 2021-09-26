@@ -24,20 +24,6 @@ const Gusser = ({ socket }) => {
 
   var v = 0;
 
-  // get guesser id
-  // socket.on('change-guesser', (value) => {
-  //   if (value) {
-  //     axios({
-  //       method: 'get',
-  //       url: `https://bob-backend-madiee-h.herokuapp.com/guesserid`,
-  //     })
-  //       .then((res) => {
-  //         setGuesserID(res.data);
-  //       })
-  //       .catch((err) => console.error(err));
-  //   }
-  // });
-
   useEffect(() => {
     socket.on('show-previous-screen', (value) => {
       setGuesserbtn(true);
@@ -124,6 +110,9 @@ const Gusser = ({ socket }) => {
   const guessSubmitted = () => {
     var flag = 0;
 
+    // TODO: if the input is empty then don't send
+
+    // more than one word
     var guessCheck = guess.split(' ');
     if (guessCheck.length > 1) {
       flag = 1;

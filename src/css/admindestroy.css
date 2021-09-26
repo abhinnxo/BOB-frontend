@@ -176,7 +176,7 @@
   background-size: cover;
   width: 120px;
 }
-.mainWord,
+/* .mainWord,
 .teamNameBlue,
 .teamNameRed {
   background-size: cover !important;
@@ -188,18 +188,18 @@
   font-weight: 700;
   color: #ffffff;
   position: relative;
-}
+} */
 .teamNameBlue {
-  background: url('../images//team_name_blue.svg');
+  background: url('../images/team_name_blue.svg');
   transform: translate(100px, -100px);
 }
 .teamNameRed {
-  background: url('../images//team_nam_red.svg');
+  background: url('../images/team_nam_red.svg');
   transform: translate(-100px, 100px);
 }
 .mainWord {
   font-size: medium;
-  /* background: url('../images/mainword.svg'); */
+  background: url('../images/mainword.webp') !important;
   width: 200px;
   height: 50px;
   margin: 10px auto -40px auto;
@@ -304,13 +304,13 @@
   background: url('../images/timer.svg');
   background-size: cover;
   height: 25px;
-  min-width: 100px;
+  min-width: 125px;
   width: fit-content;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 5px;
-  font-size: small;
+  font-size: 10px;
 }
 .wprd input {
   z-index: 5;
