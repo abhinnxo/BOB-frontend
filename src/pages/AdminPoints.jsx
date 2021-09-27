@@ -3,6 +3,7 @@ import { useHistory, useLocation } from 'react-router';
 import EndGame from '../images/end_game.svg';
 import '../css/adminpoints.css';
 import MyTimer from '../components/MyTimer';
+import { Button, Modal } from 'react-bootstrap';
 const axios = require('axios');
 
 const AdminPoints = ({ socket }) => {
@@ -16,7 +17,11 @@ const AdminPoints = ({ socket }) => {
   // Show players score
   const [redTeamScore, setRedTeamScore] = useState(0);
   const [blueTeamScore, setBlueTeamScore] = useState(0);
+  const [show, setShow] = useState(false);
+  const [guesserTeam, setGuesserTeam] = useState('');
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const time = new Date();
   time.setSeconds(time.getSeconds() + 90);
 
@@ -73,26 +78,26 @@ const AdminPoints = ({ socket }) => {
 
   function score5() {
     setScore(5);
+    setShow(true);
     socket.emit('change-score', 5);
     setRoundNumber(roundNumber + 1);
     socket.emit('change-round', roundNumber);
-    history.push('/admin/destroy');
   }
 
   function score4() {
     setScore(4);
+    setShow(true);
     socket.emit('change-score', 4);
     setRoundNumber(roundNumber + 1);
     socket.emit('change-round', roundNumber);
-    history.push('/admin/destroy');
   }
 
   function score3() {
     setScore(3);
+    setShow(true);
     socket.emit('change-score', 3);
     setRoundNumber(roundNumber + 1);
     socket.emit('change-round', roundNumber);
-    history.push('/admin/destroy');
   }
 
   function endGame() {
@@ -106,11 +111,11 @@ const AdminPoints = ({ socket }) => {
     setGusser('"..."');
     if (wrong == 2) {
       setScore(0);
+      setShow(true);
       socket.emit('change-score', 0);
       setRoundNumber(roundNumber + 1);
       socket.emit('change-round', roundNumber);
       setWrong(1);
-      history.push('/admin/destroy');
     }
   }
   // getting the guesser name
@@ -127,8 +132,28 @@ const AdminPoints = ({ socket }) => {
       .catch((err) => console.error(err));
   });
 
+  function changeScreen() {
+    history.push('/admin/destroy');
+  }
+
   return (
     <div className="point">
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Round {roundNumber - 1} Scorecard</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Scored {score} points for his team.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={changeScreen}>
+            Understood
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <div className="point__bg"></div>
       <div className="point__controls d-flex justify-content-between">
         <div>

@@ -4,6 +4,7 @@ import CopyCode from '../images/copy.svg';
 import RedTeam from '../components/RedTeam';
 import BlueTeam from '../components/BlueTeam';
 import ImageButton from '../components/ImageButton';
+import Modal from '../components/Modal';
 import { useHistory, useLocation } from 'react-router-dom';
 
 const axios = require('axios');
@@ -161,6 +162,22 @@ const WaitingLobby = ({ socket }) => {
   return (
     <div className="lobby">
       <div className="lobby__bg"></div>
+      <Modal
+        content="You belong to an army of soldiers trapped inside the enemy premises. Your
+        position is encoded in a secret word, and it has to be shared with your commander. 
+        Messages are transported via scrolls attached to war pigeons. But the ‘secret word’
+        can’t be shared directly, and hence each one of you has to come up with a one word 
+        clue similar to the secret word, and send it via pigeons.Remember, the enemy 
+        soldiers are trying to stop you from reaching your commander. They are also 
+        sending war pigeons with ‘one word’ similar to the secret word. If your pigeons and
+        enemy pigeons carry the same word, the scroll gets destroyed, and only the scrolls 
+        that are not destroyed reach the Commander.Using the scrolls received from their 
+        soldiers, the commander in chief should decipher those words, and figure out the 
+        secret word in 3 attempts. If not, the soldiers are trapped forever.After the round 
+        ends, you switch roles and the game continues."
+        buttonTitle="About"
+        heading="Stroyline"
+      />
       <div className="lobby__teamtable">
         <div className="lobby__codediv" onClick={GenerateCode}>
           <div className="lobby__code" onClick={copyGameCode}>
