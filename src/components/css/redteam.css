@@ -13,6 +13,22 @@
   color: rgba(0, 0, 0, 0.5);
   display: flex;
 }
+#teamredname {
+  position: absolute;
+  z-index: 5;
+  height: 50px;
+  width: 250px;
+  color: white;
+  font-weight: 600;
+  padding: 0px 5px !important;
+  transform: translate(195px, 60px);
+}
+h5.redblock__teamname {
+  z-index: 5 !important;
+  color: white;
+  font-weight: 800;
+  transform: translate(900px, -470px);
+}
 ul,
 li {
   list-style: none;
@@ -25,14 +41,21 @@ ul {
   flex-direction: column;
   flex-wrap: wrap;
 }
-@media only screen and (max-width: 1610px), screen and (max-height: 910) {
+@media only screen and (max-width: 1600px), screen and (max-height: 900) {
   .redblock > img {
     width: 600px;
     height: 413px;
   }
+  #teamredname {
+    height: 45px;
+    width: 230px;
+    transform: translate(195px, 53px);
+  }
+  .redblock__teamname {
+    transform: translate(235px, -345px);
+  }
   .redblock__ul {
-    font-size: 24px;
-    transform: translate(-25px, 95px);
+    transform: translate(-25px, 25px);
     height: 180px;
     width: 450px;
   }
@@ -46,16 +69,33 @@ ul {
     font-size: 16px;
     line-height: 20px;
   }
+  .redblock__teamname {
+    transform: translate(170px, -268px);
+  }
   .redblock__ul {
     height: 200px;
     width: 500px;
     transform: translate(-20px, 68px);
   }
 }
-@media only screen and (max-width: 1100px), screen and (max-height: 800px) {
+@media only screen and (max-width: 1366), screen and (max-height: 768px) {
+  #teamredname {
+    height: 30px;
+    padding-bottom: 5px !important;
+    width: 200px;
+    transform: translate(150px, 45px);
+  }
+}
+@media only screen and (max-width: 1024px), screen and (max-height: 800px) {
   .redblock > img {
     width: 500px;
     height: 313px;
+  }
+  #teamredname {
+    height: 30px;
+    padding-bottom: 5px !important;
+    width: 200px;
+    transform: translate(150px, 45px);
   }
   .redblock__ul {
     transform: translate(-25px, 95px);

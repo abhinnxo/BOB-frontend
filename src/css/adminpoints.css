@@ -71,7 +71,7 @@
   margin: 10px 0px;
 }
 .point__endgame {
-  width: 190px;
+  width: 50px;
 }
 .point__board {
   position: absolute;
@@ -167,7 +167,7 @@
 }
 @media only screen and (max-width: 1610px), screen and (max-height: 910) {
   .point__endgame {
-    width: 150px;
+    width: 50px;
   }
   .point__board {
     margin-top: 80px !important;

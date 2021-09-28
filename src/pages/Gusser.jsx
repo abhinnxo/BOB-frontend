@@ -31,7 +31,6 @@ const Gusser = ({ socket }) => {
   });
 
   socket.on('guessID', (guesserID) => {
-    console.log('guesser ID from backend', guesserID);
     setTeam(localStorage.getItem('team'));
     let teamName = localStorage.getItem('team');
 
@@ -46,7 +45,6 @@ const Gusser = ({ socket }) => {
         },
       });
     } else {
-      console.log('History', history);
       if (teamName === 'blue') {
         history.push({
           pathname: '/blue',

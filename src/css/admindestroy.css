@@ -32,7 +32,7 @@
 }
 .endGame {
   margin-bottom: 50px;
-  width: 200px;
+  width: 50px !important;
   cursor: pointer;
 }
 .settings {
@@ -158,9 +158,6 @@
   width: 900px;
   margin-bottom: 5px;
 }
-.endGame {
-  width: 200px;
-}
 .timer_round > p {
   background: url('../images/timer.svg');
   background-size: cover;
@@ -176,19 +173,6 @@
   background-size: cover;
   width: 120px;
 }
-/* .mainWord,
-.teamNameBlue,
-.teamNameRed {
-  background-size: cover !important;
-  display: grid;
-  place-items: center;
-  min-width: 190px;
-  min-height: 45px;
-  width: fit-content;
-  font-weight: 700;
-  color: #ffffff;
-  position: relative;
-} */
 .teamNameBlue {
   background: url('../images/team_name_blue.svg');
   transform: translate(100px, -100px);
@@ -323,9 +307,14 @@
   background-color: #ff0000;
   border: 3px solid #ffffff;
 }
+
+.admindestroy__hide {
+  display: none;
+}
+
 @media only screen and (max-width: 1610px), screen and (max-height: 910) {
   img.endgame {
-    width: 150px;
+    /* width: 150px; */
   }
   .seperateBoard {
     transform: translateY(-110px);

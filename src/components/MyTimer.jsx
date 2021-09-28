@@ -15,6 +15,11 @@ const style = {
   border: 'none',
   borderRadius: '20px',
 };
+
+const clockStyle = {
+  cursor: 'pointer',
+};
+
 const timeStyle = {
   zIndex: '3',
   color: 'white',
@@ -25,9 +30,7 @@ const timeStyle = {
   lineHeight: '50px',
   letterSpacing: '0.05em',
   transform: 'translate(17px, -73px)',
-};
-const controlStyle = {
-  transform: 'translateY(-50px)',
+  cursor: 'pointer',
 };
 
 const MyTimer = ({ expiryTimestamp, socket, showNextRound }) => {
@@ -58,17 +61,21 @@ const MyTimer = ({ expiryTimestamp, socket, showNextRound }) => {
 
   if (seconds < 10) seconds = seconds < 10 ? '0' + seconds : seconds;
 
-  const pausedfn = () => {
-    pause();
-    setPaused(true);
-  };
-
-  const resumedfn = () => {
-    resume();
-    setPaused(false);
+  const togglePauseResume = () => {
+    if (!paused) {
+      // pause
+      pause();
+      setPaused(true);
+    } else {
+      // resume
+      resume();
+      setPaused(false);
+    }
   };
 
   const nextRound = () => {
+    alert('Skipped to the Next Round...');
+
     const time = new Date();
     time.setSeconds(time.getSeconds() + 90);
     restart(time);
@@ -78,7 +85,6 @@ const MyTimer = ({ expiryTimestamp, socket, showNextRound }) => {
     setRoundNumber(roundNumber + 1);
     var count = 0;
     socket.emit('timer-start', count);
-    alert('Round Changed');
   };
 
   useEffect(() => {
@@ -88,36 +94,23 @@ const MyTimer = ({ expiryTimestamp, socket, showNextRound }) => {
   return (
     <div>
       <div>
-        <img src={ClockImg} width="90px" alt="clock_image" />
-        <p style={timeStyle}>
+        <img
+          src={ClockImg}
+          onClick={togglePauseResume}
+          style={clockStyle}
+          width="90px"
+          alt="clock_image"
+        />
+        <p style={timeStyle} onClick={togglePauseResume}>
           {minutes}:{seconds}
         </p>
-      </div>
-      <div style={controlStyle}>
-        {!paused ? (
-          <input
-            type="button"
-            name="button"
-            value="Pause"
-            style={style}
-            onClick={pausedfn}
-          />
-        ) : (
-          <input
-            type="button"
-            name="button"
-            value="Resume"
-            style={style}
-            onClick={resumedfn}
-          />
-        )}
       </div>
       {showNextRound ? (
         <div>
           <input
             type="button"
             name="button"
-            value="Next Round"
+            value="Skip Round >"
             style={style}
             onClick={nextRound}
           />

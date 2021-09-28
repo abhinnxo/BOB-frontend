@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router';
-import EndGame from '../images/end_game.svg';
+import EndGame from '../images/cross.png';
 import '../css/adminpoints.css';
 import MyTimer from '../components/MyTimer';
 const axios = require('axios');
@@ -96,8 +96,10 @@ const AdminPoints = ({ socket }) => {
   }
 
   function endGame() {
-    socket.emit('game-end-clicked', gameStatus);
-    localStorage.clear();
+    if (window.confirm('Are you sure you want to end the game for everyone?')) {
+      socket.emit('game-end-clicked', gameStatus);
+      localStorage.clear();
+    }
   }
 
   function wrongFxn() {
@@ -148,9 +150,9 @@ const AdminPoints = ({ socket }) => {
               className="point__endgame"
             />
           </div>
-          <div className="point__round">
+          {/* <div className="point__round">
             <div>Round {roundNumber}</div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="d-flex justify-content-between point__teamscores">
@@ -168,7 +170,10 @@ const AdminPoints = ({ socket }) => {
         })}
       </div>
       <div className="point__board text-center">
-        <h4 className="point__mainword">{randomWord}</h4>
+        <h4 className="point__mainword">
+          #{roundNumber}
+          &nbsp;{randomWord}
+        </h4>
         <h3>
           Guess - <span>{wrong + 1}</span>
         </h3>

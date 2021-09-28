@@ -4,6 +4,9 @@
   height: 3.75rem;
   padding: 5px 50px;
 }
+::placeholder {
+  color: #5e3812;
+}
 
 @media only screen and (max-width: 1360), screen and (max-height: 682px) {
   #ImageInput {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import '../css/admindestroy.css';
-import endGameImg from '../images/end_game.svg';
+import endGameImg from '../images/cross.png';
 import destroyButton from '../images/destroy_button.svg';
 import MyTimer from '../components/MyTimer';
 const axios = require('axios');
@@ -51,22 +51,6 @@ const AdminDestroy = ({ socket }) => {
       })
       .catch((err) => console.error(err));
   });
-
-  //remove enemy team checkboxes
-  const destroyWords = () => {
-    setDestroyClicked(true);
-
-    let allWords = document.querySelectorAll('.guessingTeam input');
-    allWords.forEach((word) => {
-      if (!word.checked) {
-        setGuessingArr([...guessingArr, word.value]);
-        document.querySelector('.word').classList.add('admindestroy__hide');
-      }
-    });
-
-    // Show Info that the words have been destroyed sucessfully
-    document.querySelector('.destroyButton img').style.display = 'none';
-  };
 
   useEffect(() => {
     // getting the random word
@@ -118,20 +102,35 @@ const AdminDestroy = ({ socket }) => {
     });
   }, [socket]);
 
+  //remove enemy team checkboxes
+  const destroyWords = () => {
+    setDestroyClicked(true);
+
+    let allWords = document.querySelectorAll('.guessingTeam input');
+    allWords.forEach((word) => {
+      if (!word.checked) {
+        setGuessingArr([...guessingArr, word.value]);
+        document
+          .querySelector('.hidedestroyed')
+          .classList.add('admindestroy__hide');
+      }
+    });
+
+    // Show Info that the words have been destroyed sucessfully
+    document.querySelector('.destroyButton img').style.display = 'none';
+  };
+
   // send clues to the guesser
   const sendClues = () => {
     if (destroyClicked) {
       if (guessingArr.length === 0)
         socket.emit('showToGuesser', [
-          'Alas! The enemy team managed to destroy all your clues...',
+          'Alas! The enemy soldiers managed to destroy all your clues...',
         ]);
       else socket.emit('showToGuesser', guessingArr);
     } else {
-      if (roundNumber % 2 === 0) {
-        setGuessingArr(redarr);
-      } else setGuessingArr(bluearr);
-
-      socket.emit('showToGuesser', guessingArr);
+      if (roundNumber % 2 === 0) socket.emit('showToGuesser', redarr);
+      else socket.emit('showToGuesser', bluearr);
     }
 
     var value = 1;
@@ -147,8 +146,10 @@ const AdminDestroy = ({ socket }) => {
 
   // push people to score screen when end game is clicked
   function endGame() {
-    socket.emit('game-end-clicked', 0);
-    localStorage.clear();
+    if (window.confirm('Are you sure you want to end the game for everyone?')) {
+      socket.emit('game-end-clicked', 0);
+      localStorage.clear();
+    }
   }
 
   return (
@@ -163,14 +164,12 @@ const AdminDestroy = ({ socket }) => {
           />
         }
         <div>
-          {/* <img src={settingsImg} alt="" className="settings" /> */}
           <img
             src={endGameImg}
             className="endGame"
             onClick={endGame}
             alt="End Game Button"
           />
-          <p className="admin__round">Round {roundNumber}</p>
         </div>
       </div>
       <h4
@@ -190,7 +189,9 @@ const AdminDestroy = ({ socket }) => {
       </h4>
       <div className="players">
         <h2 className="mainWord">
-          <span>{randomword}</span>
+          <span>
+            #{roundNumber}&nbsp;{randomword}
+          </span>
         </h2>
         <div className="join">
           <span className="teamNameBlue">
@@ -206,17 +207,20 @@ const AdminDestroy = ({ socket }) => {
                 {bluearr.map((word) => {
                   return (
                     <div
-                      className={`word ${
+                      className={`word hidedestroyed ${
                         guessingTeam === 'blue' ? 'guessingTeam' : ''
                       }`}
                     >
-                      <label for={word}>{word}</label>
+                      <label className="hidedestroyed" for={word}>
+                        {word}
+                      </label>
                       {roundNumber % 2 !== 0 && (
                         <input
                           type="checkbox"
                           name={word}
                           id={word}
                           value={word}
+                          className="hidedestroyed"
                         />
                       )}
                     </div>
@@ -228,17 +232,20 @@ const AdminDestroy = ({ socket }) => {
                 {redarr.map((word) => {
                   return (
                     <div
-                      className={`word ${
+                      className={`word hidedestroyed ${
                         guessingTeam === 'red' ? 'guessingTeam' : ''
                       }`}
                     >
-                      <label for={word}>{word}</label>
+                      <label className="hidedestroyed" for={word}>
+                        {word}
+                      </label>
                       {roundNumber % 2 === 0 && (
                         <input
                           type="checkbox"
                           name={word}
                           id={word}
                           value={word}
+                          className="hidedestroyed"
                         />
                       )}
                     </div>

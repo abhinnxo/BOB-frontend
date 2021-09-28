@@ -81,7 +81,9 @@ function Animation({ socket }) {
         <div className="admindestroy__bg"></div>
         <div className="timer__round"></div>
         <div className="players">
-          <h2 className="mainWord">{randomword}</h2>
+          <h2 className="mainWord">
+            #{roundNumber}&nbsp;{randomword}
+          </h2>
           <div className="join">
             <span className="teamNameBlue">
               Team Blue {roundNumber % 2 === 0 ? '(E)' : '(G)'}

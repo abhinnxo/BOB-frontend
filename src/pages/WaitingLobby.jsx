@@ -21,24 +21,6 @@ const WaitingLobby = ({ socket }) => {
   const location = useLocation();
   const roomid = localStorage.getItem('roomid');
 
-  // set guesser id
-  // useEffect(() => {
-  //   socket.on('guesser', (id) => {
-  //     setGuesser(id);
-  //   });
-  // });
-  // useEffect(() => {
-  //   axios({
-  //     method: 'get',
-  //     url: `https://bob-backend-madiee-h.herokuapp.com/guesserid`,
-  //   })
-  //     .then((res) => {
-  //       console.log('guesser id ', res.data);
-  //       setGuesser(res.data);
-  //     })
-  //     .catch((err) => console.error(err));
-  // }, [blueplayerlist, redplayerlist]);
-
   //  set guesser ID
   useEffect(() => {
     socket.on('guesser', (id) => {
@@ -114,11 +96,6 @@ const WaitingLobby = ({ socket }) => {
         }
       }
     });
-    // if (window.location.href !== 'http://localhost:3000/lobby') {
-    //   return () => {
-    //     console.log('cleaned up');
-    //   };
-    // }
   });
 
   // On clicking start button
@@ -136,6 +113,7 @@ const WaitingLobby = ({ socket }) => {
     }, 1000);
   };
 
+  // Join team
   function teamselection(e) {
     if (e === 'red') {
       setTeam('red');
@@ -170,7 +148,11 @@ const WaitingLobby = ({ socket }) => {
         </div>
         <div className="d-flex lobby__teamcontainer">
           {/* Red Box */}
-          <RedTeam playerList={redplayerlist} />
+          <RedTeam
+            playerList={redplayerlist}
+            hostId={location.state.hostId}
+            socket={socket}
+          />
           <input
             type="button"
             name="button"
@@ -180,7 +162,11 @@ const WaitingLobby = ({ socket }) => {
             }}
           />
           {/* Blue Box */}
-          <BlueTeam playerListBlue={blueplayerlist} />
+          <BlueTeam
+            playerListBlue={blueplayerlist}
+            hostId={location.state.hostId}
+            socket={socket}
+          />
           <input
             type="button"
             name="button"

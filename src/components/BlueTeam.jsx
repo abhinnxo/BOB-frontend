@@ -1,12 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import BlueBlock from '../images/blueblock.webp';
 import './css/blueteam.css';
 
-function BlueTeam({ playerListBlue }) {
+function BlueTeam({ playerListBlue, hostId, socket }) {
+  const [teamName, setTeamName] = useState('Team  Red');
+  const [newTeamName, setNewTeamName] = useState('Team Red');
+
+  // emit changing team name
+  useEffect(() => {
+    if (teamName === '') socket.emit('teambluename', 'Team Red');
+    else socket.emit('teambluename', teamName);
+  }, [teamName]);
+
+  useEffect(() => {
+    socket.on('newTeamBlueName', (name) => {
+      setNewTeamName(name);
+    });
+  });
+
   return (
     <div>
       <div className="blueblock">
         <img src={BlueBlock} alt="Team Blue" className="blueblock__block" />
+        {hostId === socket.id ? (
+          <input
+            type="text"
+            name="teambluename"
+            id="teambluename"
+            value={teamName}
+            placeholder="Team Red"
+            maxLength="12"
+            onChange={(e) => setTeamName(e.target.value)}
+          />
+        ) : (
+          <h5 className="blueblock__teamname">{newTeamName}</h5>
+        )}
         <div className="blueblock__playerlist">
           <ul className="blueblock__ul">
             {playerListBlue.map((name, key) => {

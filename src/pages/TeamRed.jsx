@@ -134,8 +134,6 @@ const TeamRed = ({ socket }) => {
     });
   }, [socket]);
 
-  // socket.emit('guessingTeam', roundfromBackend);
-
   const sendHint = () => {
     var flag = 0;
 
@@ -198,7 +196,7 @@ const TeamRed = ({ socket }) => {
           <h5>{chance}</h5>
           <h3>
             Enter a Word similar to{' '}
-            <span className="red__randomword" style={{ color: 'red' }}>
+            <span className="red__randomword" style={{ color: '#844719' }}>
               "{randomword}"
             </span>
           </h3>

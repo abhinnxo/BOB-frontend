@@ -62,7 +62,9 @@
   transform: translate(32rem, -4rem);
 }
 .lobby__code {
+  font-family: 'PaytoneOne';
   letter-spacing: 5px;
+  font-weight: 200 !important;
   transform: translate(0px, -1px);
 }
 .lobby__startbtn {
