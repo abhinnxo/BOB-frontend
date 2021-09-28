@@ -4,6 +4,8 @@ import ImageButton from '../components/ImageButton';
 import ImageInput from '../components/ImageInput';
 import Clock from '../images/clock.svg';
 import '../css/gusser.css';
+import { Button, Modal } from 'react-bootstrap';
+import ModalComponent from '../components/Modal';
 const axios = require('axios');
 
 const Gusser = ({ socket }) => {
@@ -21,6 +23,12 @@ const Gusser = ({ socket }) => {
   const [guessSend, setGuessSend] = useState(0);
   const [chance, setChance] = useState('');
   const [showGuesserbtn, setGuesserbtn] = useState(false);
+  const [show, setShow] = useState(false);
+  const [modalText, setModalText] = useState('');
+  const [guesserID, setGuesserID] = useState(0);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   var v = 0;
 
@@ -32,34 +40,8 @@ const Gusser = ({ socket }) => {
 
   socket.on('guessID', (guesserID) => {
     setTeam(localStorage.getItem('team'));
-    let teamName = localStorage.getItem('team');
-
-    if (socket.id === guesserID) {
-      v = 1;
-
-      history.push({
-        pathname: `/${teamName}/guess`,
-        state: {
-          gusserid: guesserID,
-          clueGiven: 0,
-        },
-      });
-    } else {
-      if (teamName === 'blue') {
-        history.push({
-          pathname: '/blue',
-          state: {
-            clueGiven: 0,
-          },
-        });
-      } else
-        history.push({
-          pathname: '/red',
-          state: {
-            clueGiven: 0,
-          },
-        });
-    }
+    setGuesserID(guesserID);
+    setShow(true);
   });
 
   useEffect(() => {
@@ -150,8 +132,66 @@ const Gusser = ({ socket }) => {
     setHintList(arr);
   });
 
+  function changeScreen() {
+    console.log('This function called');
+    setTimeout(() => {
+      setModalText('You will automatically redirected in 5s');
+      console.log('timeout');
+    }, 5000);
+
+    let teamName = localStorage.getItem('team');
+    if (socket.id === guesserID) {
+      v = 1;
+
+      history.push({
+        pathname: `/${teamName}/guess`,
+        state: {
+          gusserid: guesserID,
+          clueGiven: 0,
+        },
+      });
+    } else {
+      console.log('History', history);
+      if (teamName === 'blue') {
+        history.push({
+          pathname: '/blue',
+          state: {
+            clueGiven: 0,
+          },
+        });
+      } else
+        history.push({
+          pathname: '/red',
+          state: {
+            clueGiven: 0,
+          },
+        });
+    }
+  }
+
   return (
     <div className="gusser">
+      <ModalComponent content={`guesser content`} heading={roundfromBackend} />
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Your Scorecard</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Scored points for his team.
+          <br></br>
+          <h3>{modalText}</h3>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={changeScreen}>
+            Understood
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <div className="gusser__bg"></div>
       <h3 className="guesser__title">Team {team === 'red' ? 'Red' : 'Blue'}</h3>
       <div className="gusser__teamranks d-flex justify-content-between px-3">

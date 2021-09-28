@@ -5,7 +5,9 @@ import ImageButton from '../components/ImageButton';
 import ImageInput from '../components/ImageInput';
 import Clock from '../images/clock.svg';
 import '../css/teamblue.css';
+import ModalComponent from '../components/Modal';
 import { useLocation } from 'react-router';
+import { Button, Modal } from 'react-bootstrap';
 const axios = require('axios');
 
 function TeamBlue({ socket }) {
@@ -25,8 +27,13 @@ function TeamBlue({ socket }) {
   const [guesserName, setGuesserName] = useState('');
   const [guessedWord, setGuessedWord] = useState('"..."');
   const location = useLocation();
-
+  const [guesserTeam, setGuesserTeam] = useState('');
+  const [enemyTeam, setEnemyTeam] = useState('');
+  const [show, setShow] = useState(false);
   const [clue, setClue] = useState(0);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     setClue(location.state.clueGiven);
@@ -77,12 +84,18 @@ function TeamBlue({ socket }) {
     })
       .then((res) => {
         // blue gyesser
-        if (roundfromBackend % 2 !== 0 && res.data.guesserNameBlue !== '')
+        if (roundfromBackend % 2 !== 0 && res.data.guesserNameBlue !== '') {
+          setGuesserTeam('Blue Spartans');
+          setEnemyTeam('Red Gladiators');
           setGuesserName(res.data);
+        }
 
         // red guesser
-        if (roundfromBackend % 2 === 0 && res.data.guesserNameRed !== '')
+        if (roundfromBackend % 2 === 0 && res.data.guesserNameRed !== '') {
+          setGuesserTeam('Red Gladiators');
+          setEnemyTeam('Blue Spartans');
           setGuesserName(res.data);
+        }
       })
       .catch((err) => console.error(err));
   });
@@ -122,16 +135,7 @@ function TeamBlue({ socket }) {
     socket.on('guessID', (guesserID) => {
       console.log('guesser ID from backend', guesserID);
       setGueserId(guesserID);
-      if (guesserID == socket.id) {
-        if (socket.id === guesserID) {
-          history.push({
-            pathname: `/blue/guess`,
-            state: {
-              gusserid: guesserID,
-            },
-          });
-        }
-      }
+      setShow(true);
     });
   }, [socket]);
 
@@ -190,8 +194,54 @@ function TeamBlue({ socket }) {
     setGuessedWord(guessSubmitted);
   });
 
+  function changeScreen() {
+    if (guesserId == socket.id) {
+      if (socket.id === guesserId) {
+        history.push({
+          pathname: `/blue/guess`,
+          state: {
+            gusserid: guesserId,
+          },
+        });
+      }
+    }
+    setShow(false);
+  }
+
   return (
     <div className="blue__bg">
+      {!clue ? (
+        <div>
+          <ModalComponent
+            content={`${guesserTeam} are trapped, and are sending messages to their commander in chief.
+        ${enemyTeam} are the enemies, and they are trying their best to stop.`}
+            buttonTitle="TeamRed"
+            heading={roundfromBackend}
+          />
+        </div>
+      ) : (
+        <div></div>
+      )}
+
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Team Red Gladiators </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Scored points for his team.
+          <br></br>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={changeScreen}>
+            Understood
+          </Button>
+        </Modal.Footer>
+      </Modal>
       {!clue ? (
         <div className="blue__enterhint text-center">
           <h5>{chance}</h5>
