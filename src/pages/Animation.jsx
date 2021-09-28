@@ -9,6 +9,9 @@ function Animation({ socket }) {
   const [redarr, setRedarr] = useState([]);
   const [roundNumber, setRoundNumber] = useState(1);
   const [guessingTeam, setGuessingTeam] = useState('blue');
+  //  new team names given by the host
+  const [bluename, setBluename] = useState('');
+  const [redname, setRedname] = useState('');
 
   const history = useHistory();
 
@@ -32,6 +35,19 @@ function Animation({ socket }) {
     })
       .then((res) => {
         setRoundNumber(res.data.round);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  // getting new team name given by the host
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/newteamnames`,
+    })
+      .then((res) => {
+        setBluename(res.data.newblueteamname);
+        setRedname(res.data.newredteamname);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -86,7 +102,7 @@ function Animation({ socket }) {
           </h2>
           <div className="join">
             <span className="teamNameBlue">
-              Team Blue {roundNumber % 2 === 0 ? '(E)' : '(G)'}
+              {bluename} {roundNumber % 2 === 0 ? '(E)' : '(G)'}
             </span>
             <div className="seperateBoard">
               <h4 className="admin__similar">
@@ -124,7 +140,7 @@ function Animation({ socket }) {
               </div>
             </div>
             <span className="teamNameRed">
-              Team Red {roundNumber % 2 !== 0 ? '(E)' : '(G)'}
+              {redname} {roundNumber % 2 !== 0 ? '(E)' : '(G)'}
             </span>
           </div>
         </div>

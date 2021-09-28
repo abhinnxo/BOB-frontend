@@ -10,7 +10,9 @@ const axios = require('axios');
 
 const Gusser = ({ socket }) => {
   const [guess, setGuess] = useState('');
-  const [hintList, setHintList] = useState(['Waiting for Clues...']);
+  const [hintList, setHintList] = useState([
+    'Waiting for pigeons with the clues to arrive...',
+  ]);
   const [redTeamScore, setRedTeamScore] = useState(0);
   const [blueTeamScore, setBlueTeamScore] = useState(0);
   const location = useLocation();
@@ -26,11 +28,11 @@ const Gusser = ({ socket }) => {
   const [show, setShow] = useState(false);
   const [modalText, setModalText] = useState('');
   const [guesserID, setGuesserID] = useState(0);
+  //  new team names given by the host
+  const [bluename, setBluename] = useState('');
+  const [redname, setRedname] = useState('');
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  var v = 0;
 
   useEffect(() => {
     socket.on('show-previous-screen', (value) => {
@@ -132,6 +134,19 @@ const Gusser = ({ socket }) => {
     setHintList(arr);
   });
 
+  // getting new team name given by the host
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/newteamnames`,
+    })
+      .then((res) => {
+        setBluename(res.data.newblueteamname);
+        setRedname(res.data.newredteamname);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
   function changeScreen() {
     console.log('This function called');
     setTimeout(() => {
@@ -141,8 +156,6 @@ const Gusser = ({ socket }) => {
 
     let teamName = localStorage.getItem('team');
     if (socket.id === guesserID) {
-      v = 1;
-
       history.push({
         pathname: `/${teamName}/guess`,
         state: {
@@ -193,7 +206,9 @@ const Gusser = ({ socket }) => {
         </Modal.Footer>
       </Modal>
       <div className="gusser__bg"></div>
-      <h3 className="guesser__title">Team {team === 'red' ? 'Red' : 'Blue'}</h3>
+      <h3 className="guesser__title">
+        Team {team === 'red' ? redname : bluename}
+      </h3>
       <div className="gusser__teamranks d-flex justify-content-between px-3">
         <h3 className="my-auto" style={{ color: '#ffffff' }}>
           Team Points:
@@ -214,13 +229,13 @@ const Gusser = ({ socket }) => {
         </h3>
       </div>
       <div className="gusser__enterdiv">
-        <h3 className="fw-bold">You're the Guesser now</h3>
+        <h3 className="fw-bold">You're the Commander in Cheif now</h3>
         <br />
         <h6>{chance}</h6>
         {guessSend ? (
           <div className="text-center">
             <h5>
-              <span style={{ color: 'red' }}>Guess sent</span>, waiting for
+              <span style={{ color: 'red' }}>Guess sent</span>, waiting for the
               host's response...
             </h5>
           </div>

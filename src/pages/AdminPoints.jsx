@@ -8,7 +8,6 @@ const axios = require('axios');
 
 const AdminPoints = ({ socket }) => {
   const [score, setScore] = useState(0);
-  const [gameStatus, setGameStatus] = useState(0);
   const [guess, setGusser] = useState('"..."');
   const [wrong, setWrong] = useState(0);
   const [roundNumber, setRoundNumber] = useState(1);
@@ -18,7 +17,7 @@ const AdminPoints = ({ socket }) => {
   const [redTeamScore, setRedTeamScore] = useState(0);
   const [blueTeamScore, setBlueTeamScore] = useState(0);
   const [show, setShow] = useState(false);
-  const [guesserTeam, setGuesserTeam] = useState('');
+  // const [guesserTeam, setGuesserTeam] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -27,8 +26,23 @@ const AdminPoints = ({ socket }) => {
 
   const history = useHistory();
   const location = useLocation();
-  const [guessingArr, setGuessingArr] = useState(location.state.arr);
-  console.log('Guesser Array:', location.state.arr);
+  const guessingArr = location.state.arr;
+  //  new team names given by the host
+  const [bluename, setBluename] = useState('');
+  const [redname, setRedname] = useState('');
+
+  // getting new team name given by the host
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/newteamnames`,
+    })
+      .then((res) => {
+        setBluename(res.data.newblueteamname);
+        setRedname(res.data.newredteamname);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   // getting the random word
   useEffect(() => {
@@ -102,7 +116,7 @@ const AdminPoints = ({ socket }) => {
 
   function endGame() {
     if (window.confirm('Are you sure you want to end the game for everyone?')) {
-      socket.emit('game-end-clicked', gameStatus);
+      socket.emit('game-end-clicked', 0);
       localStorage.clear();
     }
   }
@@ -175,17 +189,14 @@ const AdminPoints = ({ socket }) => {
               className="point__endgame"
             />
           </div>
-          {/* <div className="point__round">
-            <div>Round {roundNumber}</div>
-          </div> */}
         </div>
       </div>
       <div className="d-flex justify-content-between point__teamscores">
         <div className="point__redteamscore">
-          Red Team Score: {redTeamScore}
+          {redname} Score: {redTeamScore}
         </div>
         <div className="point__blueteamscore">
-          Blue Team Score: {blueTeamScore}
+          {bluename} Score: {blueTeamScore}
         </div>
       </div>
       <h4 className="guesser_words">Words sent to guesser</h4>

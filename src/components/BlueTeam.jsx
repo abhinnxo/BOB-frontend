@@ -1,15 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import BlueBlock from '../images/blueblock.webp';
 import './css/blueteam.css';
+import axios from 'axios';
 
-function BlueTeam({ playerListBlue, hostId, socket }) {
+const BlueTeam = ({ playerListBlue, hostId, socket }) => {
   const [teamName, setTeamName] = useState('Team  Red');
   const [newTeamName, setNewTeamName] = useState('Team Red');
 
+  // getting new team name given by the host
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/newteamnames`,
+    })
+      .then((res) => {
+        setNewTeamName(res.data.newblueteamname);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
   // emit changing team name
   useEffect(() => {
-    if (teamName === '') socket.emit('teambluename', 'Team Red');
-    else socket.emit('teambluename', teamName);
+    // if (teamName === '') socket.emit('teambluename', 'Team Red');
+    // else
+    socket.emit('teambluename', teamName);
   }, [teamName]);
 
   useEffect(() => {
@@ -45,6 +59,6 @@ function BlueTeam({ playerListBlue, hostId, socket }) {
       </div>
     </div>
   );
-}
+};
 
 export default BlueTeam;

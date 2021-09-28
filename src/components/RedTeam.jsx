@@ -1,15 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import RedBlock from '../images/redblock.webp';
 import './css/redteam.css';
+import axios from 'axios';
 
 const RedTeam = ({ playerList, hostId, socket }) => {
   const [teamName, setTeamName] = useState('Team  Blue');
-  const [newTeamName, setNewTeamName] = useState('Team Blue');
+  const [newTeamName, setNewTeamName] = useState('Team Red');
+
+  // getting new team name given by the host
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/newteamnames`,
+    })
+      .then((res) => {
+        setNewTeamName(res.data.newredteamname);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   // emit changing team name
   useEffect(() => {
-    if (teamName === '') socket.emit('teamedname', 'Team Blue');
-    else socket.emit('teamredname', teamName);
+    // if (teamName === '') socket.emit('teamedname', 'Team Blue');
+    // else
+    socket.emit('teamredname', teamName);
   }, [teamName]);
 
   useEffect(() => {

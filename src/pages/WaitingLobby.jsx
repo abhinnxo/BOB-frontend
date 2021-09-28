@@ -18,9 +18,9 @@ const WaitingLobby = ({ socket }) => {
   // Guesser id available to gusser only
   const [guesser, setGuesser] = useState('');
   const [code, setCode] = useState('...');
+  const roomid = localStorage.getItem('roomid');
 
   const location = useLocation();
-  const roomid = localStorage.getItem('roomid');
 
   //  set guesser ID
   useEffect(() => {
@@ -51,14 +51,17 @@ const WaitingLobby = ({ socket }) => {
     }
   }, []);
 
+  // set code
   useEffect(() => {
     setCode(roomid);
   }, []);
 
+  // set username of player to his localstorage
   useEffect(() => {
     setUsername(localStorage.getItem('nickname'));
   }, []);
 
+  // emit host's socket id to backend
   useEffect(() => {
     socket.emit('hostId', location.state.hostId);
   }, []);
@@ -100,10 +103,10 @@ const WaitingLobby = ({ socket }) => {
   });
 
   // On clicking start button
-  function startgame() {
+  const startgame = () => {
     socket.emit('hostStartedGame', true);
     console.log('START CLICKED');
-  }
+  };
   // copy game code
   const copyGameCode = () => {
     navigator.clipboard.writeText(localStorage.getItem('roomid'));
@@ -115,7 +118,7 @@ const WaitingLobby = ({ socket }) => {
   };
 
   // Join team
-  function teamselection(e) {
+  const teamselection = (e) => {
     if (e === 'red') {
       setTeam('red');
       localStorage.setItem('team', 'red');
@@ -130,12 +133,12 @@ const WaitingLobby = ({ socket }) => {
       document.querySelector('.lobby__blueteam').style.display = 'none';
       socket.emit('joinRoom', { username, room: 'Team Blue' });
     }
-  }
+  };
 
-  function GenerateCode() {
+  const GenerateCode = () => {
     socket.emit('Game-Code', roomid);
     localStorage.setItem('GameCode', code);
-  }
+  };
 
   return (
     <div className="lobby">

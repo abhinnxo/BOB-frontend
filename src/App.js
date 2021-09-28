@@ -8,7 +8,6 @@ import TeamRed from './pages/TeamRed';
 import TeamBlue from './pages/TeamBlue';
 import GameEnd from './pages/GameEnd';
 import AdminPoints from './pages/AdminPoints';
-import ScorePresent from './pages/FinalScore';
 // import Admin from "./pages/Admin";
 import AdminDestroy from './pages/AdminDestroy';
 import HostWaitingLobby from './pages/HostWaitingLobby';
@@ -57,11 +56,6 @@ function App() {
         exact
         path="/admin/lobby"
         render={(props) => <HostWaitingLobby {...props} socket={socket} />}
-      />
-      <Route
-        exact
-        path="/score-card"
-        render={(props) => <ScorePresent {...props} socket={socket} />}
       />
       <Route
         exact

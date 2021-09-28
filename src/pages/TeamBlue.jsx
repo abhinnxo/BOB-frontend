@@ -13,7 +13,7 @@ const axios = require('axios');
 function TeamBlue({ socket }) {
   const [hint, setHint] = useState('');
   const [roundfromBackend, setRoundFromBackend] = useState(1);
-  const [chatmsgSent, setchatmsgSent] = useState(0);
+  // const [chatmsgSent, setchatmsgSent] = useState(0);
   const [redTeamScore, setRedTeamScore] = useState(0);
   const [blueTeamScore, setBlueTeamScore] = useState(0);
   const [guesserId, setGueserId] = useState('');
@@ -31,9 +31,23 @@ function TeamBlue({ socket }) {
   const [enemyTeam, setEnemyTeam] = useState('');
   const [show, setShow] = useState(false);
   const [clue, setClue] = useState(0);
-
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  //  new team names given by the host
+  const [newredname, setNewredname] = useState('');
+  const [newbluename, setNewbluename] = useState('');
+
+  // getting new team name given by the host
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/newteamnames`,
+    })
+      .then((res) => {
+        setNewbluename(res.data.newblueteamname);
+        setNewredname(res.data.newredteamname);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   useEffect(() => {
     setClue(location.state.clueGiven);
@@ -121,7 +135,7 @@ function TeamBlue({ socket }) {
     });
 
     socket.on('round-change-from-backend', (round) => {
-      setchatmsgSent(1);
+      // setchatmsgSent(1);
       setUserMagSent(0);
       setChance('');
       setRoundFromBackend(round);
@@ -129,7 +143,7 @@ function TeamBlue({ socket }) {
     });
 
     socket.on('guessed-wrong', (wrong) => {
-      setChance(`Guesser guessed wrong, Now ${2 - wrong} chance(s) left...`);
+      setChance(`Commander guessed wrong, Now ${2 - wrong} chance(s) left...`);
     });
 
     socket.on('guessID', (guesserID) => {
@@ -246,7 +260,7 @@ function TeamBlue({ socket }) {
         <div className="blue__enterhint text-center">
           <h5>{chance}</h5>
           <h3>
-            Enter a Word similar to{' '}
+            Enter a clue similar to{' '}
             <span className="blue__randomword" style={{ color: '#844719' }}>
               "{randomword}"
             </span>
@@ -260,16 +274,16 @@ function TeamBlue({ socket }) {
                 {guesserName.guesserNameBlue}
               </span>
             )}
-            &nbsp;is the guesser...
+            &nbsp;is the Commander...
           </h4>
 
           {usermsgsent ? (
-            <div>Word submitted</div>
+            <div>Clue submitted</div>
           ) : (
             <div>
               <h6 style={{ color: 'red' }}>{wordError}</h6>
               <ImageInput
-                text="Type your word here..."
+                text="Type your clue here..."
                 change={(e) => setHint(e.target.value)}
                 classList="blue__input"
               />
@@ -289,9 +303,9 @@ function TeamBlue({ socket }) {
             <span className="red__randomword" style={{ color: 'red' }}>
               "{randomword}"{' '}
             </span>
-            has been submitted
+            has been sent off...
           </h2>
-          <h4>Guesser is currently submitting thier guesses:</h4>
+          <h4>Commander is currently submitting thier guesses:</h4>
           <h4>{guessedWord}</h4>
           <h6>{chance}</h6>
         </div>
@@ -307,13 +321,13 @@ function TeamBlue({ socket }) {
       <div className="blue__rank">
         <div className="blue__blue d-flex justify-content-between px-3 bg">
           <h3 className="my-auto mx-auto" style={{ color: 'white' }}>
-            Team Blue: &nbsp;{' '}
+            {newbluename}: &nbsp;{' '}
             <span style={{ color: 'white' }}>{blueTeamScore}</span>
           </h3>
         </div>
         <div className="blue__red d-flex justify-content-between px-3">
           <h3 className="my-auto mx-auto" style={{ color: '#9b5825' }}>
-            Team Red: &nbsp;{' '}
+            {newredname}: &nbsp;{' '}
             <span style={{ color: '#ffffff' }}>{redTeamScore}</span>
           </h3>
         </div>

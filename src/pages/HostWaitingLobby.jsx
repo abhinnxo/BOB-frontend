@@ -8,12 +8,6 @@ import ImageInput from '../components/ImageInput';
 import Send from '../images/send.svg';
 
 const HostWaitingLobby = () => {
-  // useEffect(() => {
-  //   socket.on("random-word", (word) => {
-  //     console.log("randomWord", word);
-  //     document.querySelector(".mainWord").innerHTML = word;
-  //   });
-  // }, [])
   return (
     <section className="hostWaitingLobby">
       <div className="hostwaitinglobby__bg"></div>

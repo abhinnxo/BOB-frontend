@@ -20,6 +20,9 @@ const AdminDestroy = ({ socket }) => {
   const [guesserName, setGuesserName] = useState('');
   // Proceed
   const [destroyClicked, setDestroyClicked] = useState(false);
+  //  new team names given by the host
+  const [bluename, setBluename] = useState('');
+  const [redname, setRedname] = useState('');
 
   const history = useHistory();
 
@@ -70,6 +73,19 @@ const AdminDestroy = ({ socket }) => {
     })
       .then((res) => {
         setRoundNumber(res.data.round);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  // getting new team name given by the host
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/newteamnames`,
+    })
+      .then((res) => {
+        setBluename(res.data.newblueteamname);
+        setRedname(res.data.newredteamname);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -145,12 +161,12 @@ const AdminDestroy = ({ socket }) => {
   };
 
   // push people to score screen when end game is clicked
-  function endGame() {
+  const endGame = () => {
     if (window.confirm('Are you sure you want to end the game for everyone?')) {
       socket.emit('game-end-clicked', 0);
       localStorage.clear();
     }
-  }
+  };
 
   return (
     <section className="hostWaitingLobby">
@@ -195,11 +211,11 @@ const AdminDestroy = ({ socket }) => {
         </h2>
         <div className="join">
           <span className="teamNameBlue">
-            Team Blue {roundNumber % 2 === 0 ? '(E)' : '(G)'}
+            {bluename} {roundNumber % 2 === 0 ? '(E)' : '(G)'}
           </span>
           <div className="seperateBoard">
             <h4 className="admin__similar">
-              Select similar words and destroy them
+              Select similar clues and destroy them
             </h4>
             <div className="team">
               {/* Blue Team Words */}
@@ -258,7 +274,7 @@ const AdminDestroy = ({ socket }) => {
             </div>
           </div>
           <span className="teamNameRed">
-            Team Red {roundNumber % 2 !== 0 ? '(E)' : '(G)'}
+            {redname} {roundNumber % 2 !== 0 ? '(E)' : '(G)'}
           </span>
         </div>
       </div>

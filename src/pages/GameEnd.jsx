@@ -8,6 +8,9 @@ const GameEnd = () => {
   const [redTeamScore, setRedTeamScore] = useState(0);
   const [blueTeamScore, setBlueTeamScore] = useState(0);
   const [winningStatus, setWiningStatus] = useState('');
+  //  new team names given by the host
+  const [bluename, setBluename] = useState('');
+  const [redname, setRedname] = useState('');
   const history = useHistory();
 
   // getting the score
@@ -25,10 +28,23 @@ const GameEnd = () => {
       .catch((err) => console.error(err));
   });
 
+  // getting new team name given by the host
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/newteamnames`,
+    })
+      .then((res) => {
+        setBluename(res.data.newblueteamname);
+        setRedname(res.data.newredteamname);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
   // show winning status
   useEffect(() => {
-    if (redTeamScore > blueTeamScore) setWiningStatus('Red Team Wins');
-    if (blueTeamScore > redTeamScore) setWiningStatus('Blue Team Wins');
+    if (redTeamScore > blueTeamScore) setWiningStatus(`${redname} Wins`);
+    if (blueTeamScore > redTeamScore) setWiningStatus(`${bluename} Wins`);
     if (redTeamScore === blueTeamScore) setWiningStatus('Draw');
   }, [redTeamScore, blueTeamScore]);
 
@@ -50,11 +66,11 @@ const GameEnd = () => {
         <br />
         <div className="d-flex">
           <h3 className="end__score" style={{ color: '#9b5825' }}>
-            Team Red: &nbsp;{' '}
+            {redname}: &nbsp;{' '}
             <span style={{ color: '#ffffff' }}>{redTeamScore}</span>
           </h3>
           <h3 className="end__score" style={{ color: '#9b5825' }}>
-            Team Blue: &nbsp;{' '}
+            {bluename}: &nbsp;{' '}
             <span style={{ color: '#ffffff' }}>{blueTeamScore}</span>
           </h3>
         </div>
