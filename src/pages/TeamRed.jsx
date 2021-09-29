@@ -271,7 +271,7 @@ const TeamRed = ({ socket }) => {
             </span>
           </h1>
           <br />
-          <h1>
+          <h3>
             {roundfromBackend % 2 === 0 ? (
               <p>
                 Type your one word clue similar to
@@ -293,7 +293,7 @@ const TeamRed = ({ socket }) => {
               </p>
             )}
             {/* &nbsp;is the Commander... */}
-          </h1>
+          </h3>
 
           {usermsgsent ? (
             <div>Clue submitted</div>
@@ -316,12 +316,12 @@ const TeamRed = ({ socket }) => {
         </div>
       ) : (
         <div className="red__wait text-center">
-          <h1>
+          <h3>
             Secret Word:&nbsp;
             <span className="red__randomword" style={{ color: 'red' }}>
               "{randomword}"{' '}
             </span>
-          </h1>
+          </h3>
           {roundfromBackend % 2 === 0 ? (
             <>
               <h3>

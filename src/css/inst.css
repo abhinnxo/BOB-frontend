@@ -1,7 +1,18 @@
 .instimg {
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
 }
 .caro {
   margin-top: 80px;
+}
+@media only screen and (max-width: 1440px), screen and (max-height: 900px) {
+  .instimg {
+    height: 650px;
+  }
+}
+@media only screen and (max-width: 1366px), screen and (max-height: 768px) {
+  .instimg {
+    height: 550px;
+  }
 }

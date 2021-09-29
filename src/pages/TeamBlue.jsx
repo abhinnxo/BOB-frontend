@@ -263,13 +263,13 @@ function TeamBlue({ socket }) {
           <h1>
             Hello Soldier,
             <br />
-            The secret word is
+            The secret word is&nbsp;
             <span className="blue__randomword" style={{ color: '#844719' }}>
               "{randomword}"
             </span>
           </h1>
           <br />
-          <h1>
+          <h3>
             {roundfromBackend % 2 !== 0 ? (
               <p>
                 Type your one word clue similar to
@@ -290,7 +290,7 @@ function TeamBlue({ socket }) {
                 </span>
               </p>
             )}
-          </h1>
+          </h3>
 
           {usermsgsent ? (
             <div>Clue submitted</div>
@@ -313,12 +313,12 @@ function TeamBlue({ socket }) {
         </div>
       ) : (
         <div className="blue__wait text-center">
-          <h1>
+          <h3>
             Secret Word:&nbsp;
             <span className="red__randomword" style={{ color: 'red' }}>
               "{randomword}"{' '}
             </span>
-          </h1>
+          </h3>
           {roundfromBackend % 2 === 0 ? (
             <>
               <h3>
