@@ -105,9 +105,20 @@ function Animation({ socket }) {
               {bluename} {roundNumber % 2 === 0 ? '(E)' : '(G)'}
             </span>
             <div className="seperateBoard">
-              <h4 className="admin__similar">
-                Clues Submitted by other Players
-              </h4>
+              {roundNumber % 2 !== 0 ? (
+                <h3 className="admin__similar">
+                  ‘Helping Clues’
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  ‘Stopping Clues’
+                </h3>
+              ) : (
+                <h3 className="admin__similar">
+                  ‘Stopping Clues’
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  ‘Helping Clues’
+                </h3>
+              )}
+
               <div className="team">
                 {/* Blue Team Words */}
                 <div className="eachTeam">

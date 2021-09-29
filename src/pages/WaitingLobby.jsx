@@ -143,7 +143,7 @@ const WaitingLobby = ({ socket }) => {
   return (
     <div className="lobby">
       <div className="lobby__bg"></div>
-      <Modal
+      {/* <Modal
         content="You belong to an army of soldiers trapped inside the enemy premises. Your
         position is encoded in a secret word, and it has to be shared with your commander. 
         Messages are transported via scrolls attached to war pigeons. But the ‘secret word’
@@ -158,7 +158,7 @@ const WaitingLobby = ({ socket }) => {
         ends, you switch roles and the game continues."
         buttonTitle="About"
         heading="Stroyline"
-      />
+      /> */}
       <div className="lobby__teamtable">
         <div className="lobby__codediv" onClick={GenerateCode}>
           <div className="lobby__code" onClick={copyGameCode}>
