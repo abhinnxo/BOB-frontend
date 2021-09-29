@@ -12,13 +12,14 @@
   background-size: cover;
   overflow: hidden;
 }
+
 .hostWaitingLobby {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: auto;
   width: max-content;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 .end_settings > img {
   cursor: pointer;
@@ -28,7 +29,7 @@
   justify-content: space-between;
   align-items: center;
   width: 1300px;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
 .endGame {
   margin-bottom: 50px;
@@ -250,8 +251,8 @@
   color: #ffffff;
   background: url('../images/centre_box_with_partition.svg');
   background-size: cover !important;
-  width: 900px !important;
-  height: 500px !important;
+  width: 850px !important;
+  height: 470px !important;
   /* width: 750px;
   height: 400px; */
   padding: 60px;
