@@ -206,12 +206,9 @@ const Gusser = ({ socket }) => {
         </Modal.Footer>
       </Modal>
       <div className="gusser__bg"></div>
-      <h3 className="guesser__title">
-        Team {team === 'red' ? redname : bluename}
-      </h3>
       <div className="gusser__teamranks d-flex justify-content-between px-3">
         <h3 className="my-auto" style={{ color: '#ffffff' }}>
-          Team Points:
+          Team {team === 'red' ? redname : bluename}:
         </h3>
         <h3 className="my-auto" style={{ color: '#603913' }}>
           {team === 'red' ? redTeamScore : blueTeamScore}

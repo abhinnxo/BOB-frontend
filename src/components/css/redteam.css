@@ -3,8 +3,9 @@
 }
 .redblock__playerlist {
   position: absolute;
+  z-index: 3 !important ;
   transform: translate(40px, -320px);
-  font-family: PaytoneOne;
+  font-family: 'PaytoneOne';
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
@@ -27,7 +28,7 @@ h5.redblock__teamname {
   z-index: 5 !important;
   color: white;
   font-weight: 800;
-  transform: translate(900px, -470px);
+  transform: translate(215px, -385px);
 }
 ul,
 li {

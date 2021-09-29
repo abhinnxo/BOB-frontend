@@ -199,10 +199,10 @@ const AdminPoints = ({ socket }) => {
           {bluename} Score: {blueTeamScore}
         </div>
       </div>
-      <h4 className="guesser_words">Words sent to guesser</h4>
+      <h4 className="guesser_words">Clues sent to the Commander</h4>
       <div className="gusserhints">
         {guessingArr.map(function (item, i) {
-          return <h4 key={i}>{item}</h4>;
+          return <p key={i}>{item}</p>;
         })}
       </div>
       <div className="point__board text-center">

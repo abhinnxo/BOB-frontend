@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const RedTeam = ({ playerList, hostId, socket }) => {
   const [teamName, setTeamName] = useState('Team  Blue');
-  const [newTeamName, setNewTeamName] = useState('Team Red');
+  const [newTeamName, setNewTeamName] = useState('Team Blue');
 
   // getting new team name given by the host
   useEffect(() => {
@@ -21,8 +21,6 @@ const RedTeam = ({ playerList, hostId, socket }) => {
 
   // emit changing team name
   useEffect(() => {
-    // if (teamName === '') socket.emit('teamedname', 'Team Blue');
-    // else
     socket.emit('teamredname', teamName);
   }, [teamName]);
 

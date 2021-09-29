@@ -89,20 +89,15 @@
   transform: translate(-100px, 100px);
   padding-bottom: 5px;
 }
-.mainWord {
-  font-size: 20px !important;
-  letter-spacing: 1.5px;
-  width: 200px;
-  height: 40px;
-  padding-bottom: 10px;
-  text-transform: uppercase;
-}
 .admin__similar {
   font-weight: bolder;
   text-shadow: 10px solid black;
 }
 .destroy {
   width: 150px;
+}
+.admindestroy__guessername {
+  transform: translateY(35px);
 }
 .join {
   display: flex;
@@ -182,11 +177,14 @@
   transform: translate(-100px, 100px);
 }
 .mainWord {
-  font-size: medium;
   background: url('../images/mainword.webp') !important;
-  width: 200px;
-  height: 50px;
+  width: 220px !important;
+  height: 50px !important;
   margin: 10px auto -40px auto;
+  text-transform: uppercase;
+  font-size: 20px !important;
+  letter-spacing: 1.5px;
+  padding-bottom: 5px;
 }
 .destroy {
   width: 150px;
@@ -251,10 +249,11 @@
 .seperateBoard {
   color: #ffffff;
   background: url('../images/centre_box_with_partition.svg');
-  /* z-index: -2; */
   background-size: cover !important;
-  width: 750px;
-  height: 400px;
+  width: 900px !important;
+  height: 500px !important;
+  /* width: 750px;
+  height: 400px; */
   padding: 60px;
   display: flex;
   flex-direction: column;
@@ -275,10 +274,12 @@
 }
 
 .eachTeam {
-  width: 100%;
+  width: 350px !important;
+  height: 280px !important;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  transform: translateX(-85px);
 }
 
 .word {
@@ -312,15 +313,12 @@
   display: none;
 }
 
-@media only screen and (max-width: 1610px), screen and (max-height: 910) {
-  img.endgame {
-    /* width: 150px; */
-  }
+@media only screen and (max-width: 1600px), screen and (max-height: 900px) {
   .seperateBoard {
-    transform: translateY(-110px);
+    transform: translateY(-60px);
   }
   .mainWord {
-    transform: translateY(-100px);
+    transform: translateY(-40px);
     z-index: 3;
   }
   span.teamNameBlue {
@@ -328,10 +326,24 @@
     z-index: 3;
   }
   span.teamNameRed {
-    transform: translate(-100px, -25px);
+    transform: translate(-100px, 60px);
   }
   .admin__destroy {
-    transform: translateY(-100px);
+    transform: translateY(-80px);
+  }
+  .admindestroy__guessername {
+    transform: translateY(25px);
+  }
+}
+@media only screen and (max-width: 1366px), screen and (max-height: 768px) {
+  .seperateBoard {
+    transform: translateY(-90px);
+  }
+  .mainWord {
+    transform: translateY(-65px);
+  }
+  .admindestroy__guessername {
+    transform: translateY(20px);
   }
 }
 @media only screen and (max-width: 1280px), screen and (max-height: 720px) {
@@ -340,6 +352,16 @@
   }
   .seperateBoard {
     transform: translateY(-70px);
+  }
+
+  .seperateBoard {
+    width: 700px !important;
+    height: 370px !important;
+  }
+  .eachTeam {
+    width: 220px !important;
+    height: 180px !important;
+    transform: translateX(25px);
   }
   .mainWord {
     transform: translateY(-60px);
@@ -354,11 +376,27 @@
   }
   .destroyButton > img {
     transform: translateY(20px);
-
     cursor: pointer;
     width: 150px;
   }
   .admin__destroy {
-    transform: translateY(-75px);
+    transform: translateY(-8 0px);
+  }
+}
+@media only screen and (max-width: 1024px), screen and (max-height: 600px) {
+  .seperateBoard {
+    transform: translateY(-150px) !important;
+  }
+  .admin__destroy {
+    transform: translateY(-150px) !important;
+  }
+  span.teamNameBlue {
+    transform: translate(110px, -50px);
+  }
+  span.teamNameRed {
+    transform: translate(-100px, -45px);
+  }
+  .mainWord {
+    transform: translateY(-135px);
   }
 }

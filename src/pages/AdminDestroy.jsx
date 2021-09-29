@@ -106,13 +106,9 @@ const AdminDestroy = ({ socket }) => {
         history.push('/endgame');
       }
     });
-    socket.on('guessID', (guesserID) => {
-      console.log('guesser ID from backend', guesserID);
-    });
     socket.on('current-round', (round) => {
       setRoundNumber(round);
     });
-
     socket.on('random-word', (word) => {
       setRandomWord(word);
     });
@@ -145,8 +141,13 @@ const AdminDestroy = ({ socket }) => {
         ]);
       else socket.emit('showToGuesser', guessingArr);
     } else {
-      if (roundNumber % 2 === 0) socket.emit('showToGuesser', redarr);
-      else socket.emit('showToGuesser', bluearr);
+      if (roundNumber % 2 === 0) {
+        setGuessingArr(redarr);
+        socket.emit('showToGuesser', redarr);
+      } else {
+        setGuessingArr(bluearr);
+        socket.emit('showToGuesser', bluearr);
+      }
     }
 
     var value = 1;
@@ -189,6 +190,7 @@ const AdminDestroy = ({ socket }) => {
         </div>
       </div>
       <h4
+        className="admindestroy__guessername"
         style={{
           fontFamily: 'PaytoneOne',
           zIndex: '100',
@@ -201,7 +203,7 @@ const AdminDestroy = ({ socket }) => {
         ) : (
           <span style={{ color: 'blue' }}>{guesserName.guesserNameBlue}</span>
         )}
-        &nbsp;is the guesser...
+        &nbsp;is the Commander...
       </h4>
       <div className="players">
         <h2 className="mainWord">
