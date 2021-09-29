@@ -289,17 +289,20 @@
   padding: 0px 10px;
   background: url('../images/timer.svg');
   background-size: cover;
-  height: 25px;
-  min-width: 125px;
-  width: fit-content;
+  height: 40px !important;
+  width: fit-content !important;
+  /* width: fit-content; */
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 5px;
   font-size: 10px;
 }
-.wprd input {
+/* .wprd input {
   z-index: 5;
+} */
+.word > label {
+  font-size: 18px;
 }
 .word > span:last-child {
   cursor: pointer;

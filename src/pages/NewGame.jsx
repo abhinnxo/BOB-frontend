@@ -98,7 +98,7 @@ const NewGame = ({ socket }) => {
             localStorage.setItem('roomid', roomid);
             socket.emit('joining-players-to-backend', nickname.trim());
             history.push({
-              pathname: '/lobby',
+              pathname: '/instructions',
               state: {
                 xyz: 0,
               },

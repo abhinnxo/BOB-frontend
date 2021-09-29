@@ -14,6 +14,7 @@ import HostWaitingLobby from './pages/HostWaitingLobby';
 import io from 'socket.io-client';
 // import PageNotFound from './components/PageNotFound';
 import Animation from '../src/pages/Animation';
+import Instructions from '../src/pages/Instructions';
 
 function App() {
   const [socket, setSocket] = useState(null);
@@ -102,6 +103,7 @@ function App() {
         path="/blue/animation"
         render={(props) => <Animation {...props} socket={socket} />}
       />
+      <Route component={Instructions} exact path="/instructions" />
       {/* <Route exact path='*' component={PageNotFound} /> */}
     </BrowserRouter>
   );

@@ -256,26 +256,41 @@ function TeamBlue({ socket }) {
           </Button>
         </Modal.Footer>
       </Modal>
+
       {!clue ? (
         <div className="blue__enterhint text-center">
           <h5>{chance}</h5>
-          <h3>
-            Enter a clue similar to{' '}
+          <h1>
+            Hello Soldier,
+            <br />
+            The secret word is
             <span className="blue__randomword" style={{ color: '#844719' }}>
               "{randomword}"
             </span>
-          </h3>
+          </h1>
           <br />
-          <h4>
-            {roundfromBackend % 2 === 0 ? (
-              <span style={{ color: 'red' }}>{guesserName.guesserNameRed}</span>
+          <h1>
+            {roundfromBackend % 2 !== 0 ? (
+              <p>
+                Type your one word clue similar to
+                <br />
+                the secret word to help your commander ‘
+                <span style={{ color: 'red' }}>
+                  {guesserName.guesserNameRed}
+                </span>
+                ’ locate you.
+              </p>
             ) : (
-              <span style={{ color: 'blue' }}>
-                {guesserName.guesserNameBlue}
-              </span>
+              <p>
+                {' '}
+                Type your one word clue similar to the secret word to stop{' '}
+                <br />
+                <span style={{ color: 'blue' }}>
+                  {guesserName.guesserNameBlue}
+                </span>
+              </p>
             )}
-            &nbsp;is the Commander...
-          </h4>
+          </h1>
 
           {usermsgsent ? (
             <div>Clue submitted</div>
@@ -298,16 +313,30 @@ function TeamBlue({ socket }) {
         </div>
       ) : (
         <div className="blue__wait text-center">
-          <h2>
-            Your Clue for the word{' '}
+          <h1>
+            Secret Word:&nbsp;
             <span className="red__randomword" style={{ color: 'red' }}>
               "{randomword}"{' '}
             </span>
-            has been sent off...
-          </h2>
-          <h4>Commander is currently submitting thier guesses:</h4>
-          <h4>{guessedWord}</h4>
-          <h6>{chance}</h6>
+          </h1>
+          {roundfromBackend % 2 === 0 ? (
+            <>
+              <h3>
+                Word that reached the Commander in chief of "{guesserName}"
+              </h3>
+              <h3>{/* TODO: clues shown to guesser */}</h3>
+              <h4>{chance}</h4>
+            </>
+          ) : (
+            <>
+              <h3>
+                These are the words that reached your Commander in Chief "
+                {guesserName} ":
+              </h3>
+              <h3>{/* TODO: clues shown to guesser */}</h3>
+              <h4>{chance}</h4>
+            </>
+          )}
         </div>
       )}
       <div className="blue__timer d-flex align-items-baseline">
