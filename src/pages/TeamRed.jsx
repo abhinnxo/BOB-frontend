@@ -325,7 +325,8 @@ const TeamRed = ({ socket }) => {
           {roundfromBackend % 2 === 0 ? (
             <>
               <h3>
-                Word that reached the Commander in chief of "{guesserName}"
+                Word that reached the Commander in chief of "{' '}
+                {guesserName.guesserNameRed}"
               </h3>
               <h3>{/* TODO: clues shown to guesser */}</h3>
               <h4>{chance}</h4>
@@ -334,7 +335,7 @@ const TeamRed = ({ socket }) => {
             <>
               <h3>
                 These are the words that reached your Commander in Chief "
-                {guesserName} ":
+                {guesserName.guesserNameBlue} ":
               </h3>
               <h3>{/* TODO: clues shown to guesser */}</h3>
               <h4>{chance}</h4>

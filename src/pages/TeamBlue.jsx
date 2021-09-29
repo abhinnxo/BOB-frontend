@@ -35,6 +35,7 @@ function TeamBlue({ socket }) {
   //  new team names given by the host
   const [newredname, setNewredname] = useState('');
   const [newbluename, setNewbluename] = useState('');
+  const [hintList, setHintList] = useState([]);
 
   // getting new team name given by the host
   useEffect(() => {
@@ -121,6 +122,10 @@ function TeamBlue({ socket }) {
 
   //  end game button
   useEffect(() => {
+    // socket.on('gusserHints', (arr) => {
+    //   setHintList(arr);
+    // });
+
     socket.on('game-ended', (gameValue) => {
       if (gameValue == 1) {
         localStorage.clear();
@@ -322,9 +327,21 @@ function TeamBlue({ socket }) {
           {roundfromBackend % 2 === 0 ? (
             <>
               <h3>
-                Word that reached the Commander in chief of "{guesserName}"
+                {roundfromBackend % 2 === 0 ? (
+                  <h3>
+                    {' '}
+                    Word that reached the Commander in chief of "
+                    {guesserName.guesserNameRed}"
+                  </h3>
+                ) : (
+                  <h3>
+                    {' '}
+                    Word that reached the Commander in chief of "
+                    {guesserName.guesserNameBlue}"
+                  </h3>
+                )}
               </h3>
-              <h3>{/* TODO: clues shown to guesser */}</h3>
+              <h3>{hintList}</h3>
               <h4>{chance}</h4>
             </>
           ) : (
@@ -333,7 +350,7 @@ function TeamBlue({ socket }) {
                 These are the words that reached your Commander in Chief "
                 {guesserName} ":
               </h3>
-              <h3>{/* TODO: clues shown to guesser */}</h3>
+              <h3>{hintList}</h3>
               <h4>{chance}</h4>
             </>
           )}
