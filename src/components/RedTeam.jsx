@@ -17,7 +17,7 @@ const RedTeam = ({ playerList, hostId, socket }) => {
         setNewTeamName(res.data.newredteamname);
       })
       .catch((err) => console.error(err));
-  }, []);
+  });
 
   // emit changing team name
   useEffect(() => {
@@ -25,7 +25,7 @@ const RedTeam = ({ playerList, hostId, socket }) => {
   }, [teamName]);
 
   useEffect(() => {
-    socket.on('newTeamRedName', (name) => {
+    socket.on('newTeamBlueName', (name) => {
       setNewTeamName(name);
     });
   });

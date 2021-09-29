@@ -54,7 +54,7 @@ ul {
     transform: translate(-425px, 55px);
   }
   .blueblock__teamname {
-    transform: translate(-400px, 65px);
+    transform: translate(200px, 65px);
   }
   .blueblock__ul {
     transform: translate(-20px, -50px);
@@ -80,12 +80,15 @@ ul {
     transform: translate(-15px, -32px);
   }
 }
-@media only screen and (max-width: 1366), screen and (max-height: 768px) {
+@media only screen and (max-width: 1366px), screen and (max-height: 768px) {
   #teambluename {
     height: 30px;
     padding-bottom: 5px !important;
     width: 200px;
     transform: translate(-360px, 45px);
+  }
+  .blueblock__teamname {
+    transform: translate(100px, 0px) !important;
   }
 }
 @media only screen and (max-width: 1024px), screen and (max-height: 800px) {
@@ -103,5 +106,8 @@ ul {
     transform: translate(-20px, -50px);
     height: 180px;
     width: 450px;
+  }
+  .blueblock__teamname {
+    transform: translate(170px, 45px) !important;
   }
 }

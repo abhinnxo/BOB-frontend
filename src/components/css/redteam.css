@@ -53,7 +53,7 @@ ul {
     transform: translate(195px, 53px);
   }
   .redblock__teamname {
-    transform: translate(235px, -345px);
+    transform: translate(190px, -347px) !important;
   }
   .redblock__ul {
     transform: translate(-25px, 25px);
@@ -79,12 +79,15 @@ ul {
     transform: translate(-20px, 68px);
   }
 }
-@media only screen and (max-width: 1366), screen and (max-height: 768px) {
+@media only screen and (max-width: 1366px), screen and (max-height: 768px) {
   #teamredname {
     height: 30px;
     padding-bottom: 5px !important;
     width: 200px;
     transform: translate(150px, 45px);
+  }
+  .redblock__teamname {
+    transform: translate(170px, -168px);
   }
 }
 @media only screen and (max-width: 1024px), screen and (max-height: 800px) {
@@ -102,5 +105,8 @@ ul {
     transform: translate(-25px, 95px);
     height: 180px;
     width: 450px;
+  }
+  .redblock__teamname {
+    transform: translate(170px, -268px) !important;
   }
 }
