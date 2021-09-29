@@ -31,12 +31,17 @@ const Gusser = ({ socket }) => {
   //  new team names given by the host
   const [bluename, setBluename] = useState('');
   const [redname, setRedname] = useState('');
+  const [scoreChange, setScoreChange] = useState(0);
 
   const handleClose = () => setShow(false);
 
   useEffect(() => {
     socket.on('show-previous-screen', (value) => {
       setGuesserbtn(true);
+    });
+
+    socket.on('score-change', (score) => {
+      setScoreChange(score);
     });
   });
 
@@ -184,7 +189,24 @@ const Gusser = ({ socket }) => {
 
   return (
     <div className="gusser">
-      <ModalComponent content={`guesser content`} heading={roundfromBackend} />
+      {roundfromBackend % 2 == 0 ? (
+        <div>
+          {' '}
+          <ModalComponent
+            content={`Congrats you are the commander in cheif of Team Red Gladiators.Try to decipher the clues sent by your soilders. `}
+            heading={roundfromBackend}
+          />
+        </div>
+      ) : (
+        <div>
+          {' '}
+          <ModalComponent
+            content={`Congrats you are the commander in cheif of Team Blue Spartans.Try to decipher the clues sent by your soilders.`}
+            heading={roundfromBackend}
+          />
+        </div>
+      )}
+
       <Modal
         show={show}
         onHide={handleClose}
@@ -195,7 +217,16 @@ const Gusser = ({ socket }) => {
           <Modal.Title>Your Scorecard</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Scored points for his team.
+          {scoreChange > 0 ? (
+            <div>
+              Congrats!! you scored {scoreChange} points for Team {team}.
+            </div>
+          ) : (
+            <div>
+              Sorry, you were not able to identify the secret word to locate
+              your soldiers. They are trapped forever in enemy premises.
+            </div>
+          )}
           <br></br>
           <h3>{modalText}</h3>
         </Modal.Body>

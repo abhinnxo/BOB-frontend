@@ -35,6 +35,7 @@ const TeamRed = ({ socket }) => {
   //  new team names given by the host
   const [newredname, setNewredname] = useState('');
   const [newbluename, setNewbluename] = useState('');
+  const [scoreChange, setScoreChange] = useState(0);
 
   // getting new team name given by the host
   useEffect(() => {
@@ -142,6 +143,10 @@ const TeamRed = ({ socket }) => {
       setClue(0);
     });
 
+    socket.on('score-change', (score) => {
+      setScoreChange(score);
+    });
+
     socket.on('guessed-wrong', (wrong) => {
       setChance(`Commander guessed wrong, Now ${2 - wrong} chance(s) left`);
     });
@@ -247,7 +252,42 @@ const TeamRed = ({ socket }) => {
           <Modal.Title>Team Red Gladiators </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Scored points for his team.
+          {roundfromBackend % 2 === 0 ? (
+            <div>
+              {' '}
+              {scoreChange > 0 ? (
+                <div>
+                  “Congratulations, your commander in chief was able to identify
+                  the secret word, and locate your team.
+                  <br />
+                  Your team scores {scoreChange} victory points”
+                </div>
+              ) : (
+                <div>
+                  “Sorry, your commander in chief was not able to identify the
+                  secret word, and locate your team.
+                  <br />
+                  Your team scores 0 points”
+                </div>
+              )}
+            </div>
+          ) : (
+            <div>
+              {' '}
+              {scoreChange > 0 ? (
+                <div>
+                  “Whoops, The commander-in-chief of Blue Spartans are able to
+                  guess the secret word successfully. They score {scoreChange}{' '}
+                  victory points”.
+                </div>
+              ) : (
+                <div>
+                  Good news. The commander in chief of Blue Spartans was not
+                  able to identity the secret word.
+                </div>
+              )}
+            </div>
+          )}
           <br></br>
         </Modal.Body>
         <Modal.Footer>

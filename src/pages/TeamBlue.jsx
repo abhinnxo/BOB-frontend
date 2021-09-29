@@ -36,6 +36,7 @@ function TeamBlue({ socket }) {
   const [newredname, setNewredname] = useState('');
   const [newbluename, setNewbluename] = useState('');
   const [hintList, setHintList] = useState([]);
+  const [scoreChange, setScoreChange] = useState(0);
 
   // getting new team name given by the host
   useEffect(() => {
@@ -52,6 +53,9 @@ function TeamBlue({ socket }) {
 
   useEffect(() => {
     setClue(location.state.clueGiven);
+    socket.on('score-change', (score) => {
+      setScoreChange(score);
+    });
   }, []);
 
   // getting the round number
@@ -99,14 +103,20 @@ function TeamBlue({ socket }) {
     })
       .then((res) => {
         // blue gyesser
-        if (roundfromBackend % 2 !== 0 && res.data.guesserNameBlue !== '') {
+        if (
+          roundfromBackend % 2 !== 0 &&
+          res.data.guesserName.guesserNameBlue !== ''
+        ) {
           setGuesserTeam('Blue Spartans');
           setEnemyTeam('Red Gladiators');
           setGuesserName(res.data);
         }
 
         // red guesser
-        if (roundfromBackend % 2 === 0 && res.data.guesserNameRed !== '') {
+        if (
+          roundfromBackend % 2 === 0 &&
+          res.data.guesserName.guesserNameRed !== ''
+        ) {
           setGuesserTeam('Red Gladiators');
           setEnemyTeam('Blue Spartans');
           setGuesserName(res.data);
@@ -249,10 +259,46 @@ function TeamBlue({ socket }) {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Team Red Gladiators </Modal.Title>
+          <Modal.Title>Team Blue Spartans </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Scored points for his team.
+          {roundfromBackend % 2 === 0 ? (
+            <div>
+              {' '}
+              {scoreChange > 0 ? (
+                <div>
+                  “Whoops, The commander-in-chief of Red Gladiators are able to
+                  guess the secret word successfully. They score {scoreChange}{' '}
+                  victory points”.
+                </div>
+              ) : (
+                <div>
+                  Good news. The commander in chief of Red-Gladiators was not
+                  able to identity the secret word.
+                </div>
+              )}
+            </div>
+          ) : (
+            <div>
+              {' '}
+              {scoreChange > 0 ? (
+                <div>
+                  “Congratulations, your commander in chief was able to identify
+                  the secret word, and locate your team.
+                  <br />
+                  Your team scores {scoreChange} victory points”
+                </div>
+              ) : (
+                <div>
+                  “Sorry, your commander in chief was not able to identify the
+                  secret word, and locate your team.
+                  <br />
+                  Your team scores 0 points”
+                </div>
+              )}
+            </div>
+          )}
+
           <br></br>
         </Modal.Body>
         <Modal.Footer>
