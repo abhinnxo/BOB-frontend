@@ -262,6 +262,22 @@ const TeamRed = ({ socket }) => {
               {' '}
               {scoreChange > 0 ? (
                 <div>
+                  “Whoops, The commander-in-chief of Blue Spartans was able to
+                  guess the secret word successfully. They score {scoreChange}{' '}
+                  victory points”.
+                </div>
+              ) : (
+                <div>
+                  Good news. The commander in chief of Blue Spartans was not
+                  able to identity the secret word.
+                </div>
+              )}
+            </div>
+          ) : (
+            <div>
+              {' '}
+              {scoreChange > 0 ? (
+                <div>
                   “Congratulations, your commander in chief was able to identify
                   the secret word, and locate your team.
                   <br />
@@ -273,22 +289,6 @@ const TeamRed = ({ socket }) => {
                   secret word, and locate your team.
                   <br />
                   Your team scores 0 points”
-                </div>
-              )}
-            </div>
-          ) : (
-            <div>
-              {' '}
-              {scoreChange > 0 ? (
-                <div>
-                  “Whoops, The commander-in-chief of Blue Spartans are able to
-                  guess the secret word successfully. They score {scoreChange}{' '}
-                  victory points”.
-                </div>
-              ) : (
-                <div>
-                  Good news. The commander in chief of Blue Spartans was not
-                  able to identity the secret word.
                 </div>
               )}
             </div>

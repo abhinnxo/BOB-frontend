@@ -275,22 +275,6 @@ function TeamBlue({ socket }) {
               {' '}
               {scoreChange > 0 ? (
                 <div>
-                  “Whoops, The commander-in-chief of Red Gladiators are able to
-                  guess the secret word successfully. They score {scoreChange}{' '}
-                  victory points”.
-                </div>
-              ) : (
-                <div>
-                  Good news. The commander in chief of Red-Gladiators was not
-                  able to identity the secret word.
-                </div>
-              )}
-            </div>
-          ) : (
-            <div>
-              {' '}
-              {scoreChange > 0 ? (
-                <div>
                   “Congratulations, your commander in chief was able to identify
                   the secret word, and locate your team.
                   <br />
@@ -302,6 +286,22 @@ function TeamBlue({ socket }) {
                   secret word, and locate your team.
                   <br />
                   Your team scores 0 points”
+                </div>
+              )}
+            </div>
+          ) : (
+            <div>
+              {' '}
+              {scoreChange > 0 ? (
+                <div>
+                  “Whoops, The commander-in-chief of Red Gladiators was able to
+                  guess the secret word successfully. They score {scoreChange}{' '}
+                  victory points”.
+                </div>
+              ) : (
+                <div>
+                  Good news. The commander in chief of Red Gladiators was not
+                  able to identity the secret word.
                 </div>
               )}
             </div>
