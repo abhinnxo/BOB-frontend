@@ -3,6 +3,8 @@ import inst1 from '../images/i1.png';
 import O3 from '../images/i3.png';
 import O2 from '../images/i2.png';
 import bg from '../images/background.webp';
+import nextIcon from '../images/arrowright.png';
+import prevIcon from '../images/arrowright.png';
 import { useHistory } from 'react-router';
 import { Carousel } from 'react-bootstrap';
 import '../css/inst.css';
@@ -48,7 +50,10 @@ function Instructions() {
     <div>
       <div className="inst__bg" style={bgstyle}>
         <div style={caro} className="caro">
-          <Carousel style={img}>
+          <Carousel
+            style={img}
+            // nextIcon={nextIcon} prevIcon={prevIcon}
+          >
             <Carousel.Item style={img1}>
               <img className="d-block instimg" src={inst1} alt="First slide" />
             </Carousel.Item>
