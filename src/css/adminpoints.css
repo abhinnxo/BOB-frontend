@@ -3,7 +3,7 @@
   left: 0px;
   top: 0px;
   z-index: -3;
-  background: url('../images/map3.svg');
+  background: url('../images/bglogo.webp');
   height: 100%;
   width: 100%;
   background-position: center center;
@@ -60,7 +60,6 @@
   margin-left: auto;
   margin-right: auto;
   width: 500px;
-  transform: translateY(40px);
 }
 .point__mainword {
   font-size: 18px;
@@ -153,16 +152,12 @@
 .point__round > h1 {
   position: absolute;
 }
-.point__send {
-  cursor: pointer;
-  transform: translate(200px, -43px);
-}
 @media only screen and (max-width: 1920px) {
-  .point__teamscores {
+  /* .point__teamscores {
     transform: translateY(140px);
-  }
+  } */
   .point__board {
-    margin-top: 80px;
+    /* margin-top: 80px; */
   }
 }
 @media only screen and (max-width: 1610px), screen and (max-height: 910) {
@@ -170,25 +165,25 @@
     width: 50px;
   }
   .point__board {
-    margin-top: 80px !important;
+    /* margin-top: 80px !important; */
   }
-  .point__teamscores {
+  /* .point__teamscores {
     margin-top: -50px;
-  }
+  } */
 }
 @media only screen and (max-width: 1280px), screen and (max-height: 720px) {
   .point__board {
-    margin-top: 30px !important;
+    /* margin-top: 30px !important; */
   }
-  .point__teamscores {
+  /* .point__teamscores {
     margin-top: 0px;
-  }
+  } */
 }
 @media only screen and (max-width: 1366), screen and (max-height: 768px) {
-  .point__teamscores {
+  /* .point__teamscores {
     font-size: 18px !important;
     transform: translateY(-2px) !important;
-  }
+  } */
   .point__controls {
     width: 1000px;
     margin-top: 80px !important;
@@ -196,12 +191,12 @@
 }
 @media only screen and (max-width: 1024px), screen and (max-height: 800px) {
   .point__board {
-    margin-top: 45px;
+    /* margin-top: 45px; */
   }
-  .point__teamscores {
+  /* .point__teamscores {
     font-size: 16px;
     transform: translateY(20px);
-  }
+  } */
   .point__controls {
     width: 1000px;
     margin-top: 130px;

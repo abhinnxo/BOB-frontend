@@ -204,21 +204,22 @@ const AdminPoints = ({ socket }) => {
         </div>
       </div>
       <div className="d-flex justify-content-between point__teamscores">
-        <div className="point__redteamscore">
-          {redname} Score: {redTeamScore}
-        </div>
-        <div className="point__blueteamscore">
-          {bluename} Score: {blueTeamScore}
-        </div>
+        <h4 className="point__redteamscore">
+          <span style={{ color: 'red' }}>{redname}</span>: {redTeamScore}
+        </h4>
+        <h4 className="point__blueteamscore">
+          <span style={{ color: 'blue' }}>{bluename}</span>: {blueTeamScore}
+        </h4>
       </div>
       <br />
-      <h4>
+      <h3>
         <center>
-          Words that reached the Commander in Chief of
-          {roundNumber % 2 === 0 ? <h4>{redname}</h4> : <h4>{bluename}</h4>}
+          Words that reached the Commander in Chief of Team&nbsp;"
+          {roundNumber % 2 === 0 ? <>{redname}</> : <>{bluename}</>}
+          ":
           <h5>{hintList}</h5>
         </center>
-      </h4>
+      </h3>
       <div className="gusserhints">
         {guessingArr.map(function (index, item) {
           return <p key={index}>{item}</p>;
