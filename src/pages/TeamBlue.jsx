@@ -256,12 +256,25 @@ function TeamBlue({ socket }) {
     <div className="blue__bg">
       {!clue ? (
         <div>
-          <ModalComponent
-            content={`${guesserTeam} are trapped, and are sending messages to their commander in chief.
-        ${enemyTeam} are the enemies, and they are trying their best to stop.`}
-            buttonTitle="TeamRed"
-            heading={roundfromBackend}
-          />
+          {roundfromBackend % 2 === 0 ? (
+            <div>
+              <ModalComponent
+                content={`you are trapped, and you have to send messages to your commander in chief.
+            ${enemyTeam} are your enemies, and they are trying their best to stop you.`}
+                buttonTitle="TeamBlue"
+                heading={roundfromBackend}
+              />
+            </div>
+          ) : (
+            <div>
+              <ModalComponent
+                content={`${guesserTeam} are trapped, and are sending messages to their commander in chief.
+           They are your enemies, try your best to stop them.`}
+                buttonTitle="TeamBlue"
+                heading={roundfromBackend}
+              />
+            </div>
+          )}
         </div>
       ) : (
         <div></div>
