@@ -24,7 +24,7 @@ function TeamBlue({ socket }) {
   const [usermsgsent, setUserMagSent] = useState(0);
   const [min, setMin] = useState(1);
   const [sec, setSec] = useState(30);
-  const [guesserName, setGuesserName] = useState('');
+  const [guesserName, setGuesserName] = useState({});
   const [guessedWord, setGuessedWord] = useState('"..."');
   const location = useLocation();
   const [guesserTeam, setGuesserTeam] = useState('');
@@ -53,6 +53,8 @@ function TeamBlue({ socket }) {
 
   useEffect(() => {
     setClue(location.state.clueGiven);
+    console.log('clueeeee ', location.state.clueGiven);
+
     socket.on('score-change', (score) => {
       setScoreChange(score);
     });
@@ -102,7 +104,10 @@ function TeamBlue({ socket }) {
       url: `https://bob-backend-madiee-h.herokuapp.com/guesserName`,
     })
       .then((res) => {
-        console.log('<<< guesser name >>>', res.data);
+        console.log('<<< guesser name >>>', res.data.guesserNameBlue);
+        console.log('<<< guesser name >>>', res.data.guesserNameRed);
+        setGuesserName(res.data);
+
         // blue guesser
         if (
           roundfromBackend % 2 !==
@@ -329,8 +334,8 @@ function TeamBlue({ socket }) {
                 Type your one word clue similar to
                 <br />
                 the secret word to help your commander ‘
-                <span style={{ color: 'red' }}>
-                  {guesserName.guesserNameRed}
+                <span style={{ color: 'blue' }}>
+                  {guesserName.guesserNameBlue}
                 </span>
                 ’ locate you.
               </p>
@@ -339,8 +344,8 @@ function TeamBlue({ socket }) {
                 {' '}
                 Type your one word clue similar to the secret word to stop{' '}
                 <br />
-                <span style={{ color: 'blue' }}>
-                  {guesserName.guesserNameBlue}
+                <span style={{ color: 'red' }}>
+                  {guesserName.guesserNameRed}
                 </span>
               </p>
             )}
@@ -395,10 +400,18 @@ function TeamBlue({ socket }) {
             </>
           ) : (
             <>
-              <h3>
-                These are the words that reached your Commander in Chief "
-                {guesserName} ":
-              </h3>
+              {roundfromBackend % 2 !== 0 ? (
+                <h3>
+                  These are the Clues that reached your Commander in Chief "
+                  {guesserName.guesserNameRed} ":
+                </h3>
+              ) : (
+                <h3>
+                  These are the Clues that reached their Commander in
+                  Chief&nbsp;"
+                  {guesserName.guesserNameBlue} ":
+                </h3>
+              )}
               <h3>{hintList}</h3>
               <h4>{chance}</h4>
             </>

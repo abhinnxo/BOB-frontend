@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router';
-import EndGame from '../images/cross.png';
+import EndGame from '../images/close.png';
 import '../css/adminpoints.css';
 import MyTimer from '../components/MyTimer';
 import { Button, Modal } from 'react-bootstrap';
@@ -23,10 +23,9 @@ const AdminPoints = ({ socket }) => {
   const handleShow = () => setShow(true);
   const time = new Date();
   time.setSeconds(time.getSeconds() + 90);
-
+  const [guessingArr, setGuessingArray] = useState([]);
   const history = useHistory();
   const location = useLocation();
-  const guessingArr = location.state.arr;
   //  new team names given by the host
   const [bluename, setBluename] = useState('');
   const [redname, setRedname] = useState('');
@@ -76,6 +75,12 @@ const AdminPoints = ({ socket }) => {
         setBlueTeamScore(res.data[1].TeamScore);
       })
       .catch((err) => console.error(err));
+  }, []);
+
+  // setting final gueser array
+  useEffect(() => {
+    console.log('guess array  ', guessingArr);
+    setGuessingArray(location.state.arr);
   }, []);
 
   // when game is ended route everyone to main screen

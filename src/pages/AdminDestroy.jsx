@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import '../css/admindestroy.css';
-import endGameImg from '../images/cross.png';
+import endGameImg from '../images/close.png';
 import destroyButton from '../images/destroy_button.svg';
 import MyTimer from '../components/MyTimer';
 const axios = require('axios');
@@ -205,7 +205,7 @@ const AdminDestroy = ({ socket }) => {
             {guesserName.guesserNameBlue}
           </span>
         )}
-        &nbsp;is the Commander in Chief of{' '}
+        &nbsp;is the Commander in Chief of team{' '}
         {roundNumber % 2 === 0 ? (
           <span style={{ color: 'red' }}>{redname}</span>
         ) : (

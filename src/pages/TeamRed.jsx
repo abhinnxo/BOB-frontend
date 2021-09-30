@@ -24,7 +24,7 @@ const TeamRed = ({ socket }) => {
   const [wordError, setWordError] = useState('');
   const [min, setMin] = useState(0);
   const [sec, setSec] = useState(0);
-  const [guesserName, setGuesserName] = useState('');
+  const [guesserName, setGuesserName] = useState({});
   const [guessedWord, setGuessedWord] = useState('"..."');
   const [clue, setClue] = useState(0);
   const [guesserTeam, setGuesserTeam] = useState('');
@@ -35,6 +35,7 @@ const TeamRed = ({ socket }) => {
   //  new team names given by the host
   const [newredname, setNewredname] = useState('');
   const [newbluename, setNewbluename] = useState('');
+  const [hintList, setHintList] = useState([]);
   const [scoreChange, setScoreChange] = useState(0);
 
   // getting new team name given by the host
@@ -52,7 +53,11 @@ const TeamRed = ({ socket }) => {
   }, []);
 
   useEffect(() => {
+    console.log('clueeeee ', location.state.clueGiven);
     setClue(location.state.clueGiven);
+    socket.on('score-change', (score) => {
+      setScoreChange(score);
+    });
   }, []);
 
   // getting the round number
@@ -99,15 +104,16 @@ const TeamRed = ({ socket }) => {
       url: `https://bob-backend-madiee-h.herokuapp.com/guesserName`,
     })
       .then((res) => {
+        console.log('<<< guesser name >>>', res.data.guesserNameBlue);
+        console.log('<<< guesser name >>>', res.data.guesserNameRed);
+        setGuesserName(res.data);
         // blue gyesser
-        if (roundfromBackend % 2 !== 0 && res.data.guesserNameBlue !== '') {
-          setGuesserName(res.data);
+        if (roundfromBackend % 2) {
           setGuesserTeam('Blue Spartans');
           setEnemyTeam('Red Gladiators');
         }
         // red guesser
-        if (roundfromBackend % 2 === 0 && res.data.guesserNameRed !== '') {
-          setGuesserName(res.data);
+        if (roundfromBackend % 2 === 0) {
           setEnemyTeam('Blue Spartans');
           setGuesserTeam('Red Gladiators');
         }
@@ -241,7 +247,6 @@ const TeamRed = ({ socket }) => {
       ) : (
         <div></div>
       )}
-
       <Modal
         show={show}
         onHide={handleClose}
@@ -310,7 +315,6 @@ const TeamRed = ({ socket }) => {
               "{randomword}"
             </span>
           </h1>
-          <br />
           <h3>
             {roundfromBackend % 2 === 0 ? (
               <p>
@@ -332,7 +336,6 @@ const TeamRed = ({ socket }) => {
                 </span>
               </p>
             )}
-            {/* &nbsp;is the Commander... */}
           </h3>
 
           {usermsgsent ? (
@@ -365,19 +368,38 @@ const TeamRed = ({ socket }) => {
           {roundfromBackend % 2 === 0 ? (
             <>
               <h3>
-                Word that reached the Commander in chief of "{' '}
-                {guesserName.guesserNameRed}"
+                {roundfromBackend % 2 === 0 ? (
+                  <h3>
+                    {' '}
+                    Clues that reached the Commander in chief of "
+                    {guesserName.guesserNameRed}"
+                  </h3>
+                ) : (
+                  <h3>
+                    {' '}
+                    Clues that reached the Commander in chief of "
+                    {guesserName.guesserNameBlue}"
+                  </h3>
+                )}
               </h3>
-              <h3>{/* TODO: clues shown to guesser */}</h3>
+              <h3>{hintList}</h3>
               <h4>{chance}</h4>
             </>
           ) : (
             <>
-              <h3>
-                These are the words that reached your Commander in Chief "
-                {guesserName.guesserNameBlue} ":
-              </h3>
-              <h3>{/* TODO: clues shown to guesser */}</h3>
+              {roundfromBackend % 2 === 0 ? (
+                <h3>
+                  These are the Clues that reached your Commander in Chief "
+                  {guesserName.guesserNameRed} ":
+                </h3>
+              ) : (
+                <h3>
+                  These are the Clues that reached their Commander in
+                  Chief&nbsp;"
+                  {guesserName.guesserNameBlue} ":
+                </h3>
+              )}
+              <h3>{hintList}</h3>
               <h4>{chance}</h4>
             </>
           )}

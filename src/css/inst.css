@@ -22,3 +22,11 @@
     height: 550px;
   }
 }
+@media only screen and (max-width: 1024px), screen and (max-height: 600px) {
+  .instimg {
+    height: 430px;
+  }
+  .caro {
+    margin-top: 50px;
+  }
+}
