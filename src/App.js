@@ -103,8 +103,11 @@ function App() {
         path="/blue/animation"
         render={(props) => <Animation {...props} socket={socket} />}
       />
-      <Route component={Instructions} exact path="/instructions" />
-      {/* <Route exact path='*' component={PageNotFound} /> */}
+      <Route
+        exact
+        path="/instructions"
+        render={(props) => <Instructions {...props} socket={socket} />}
+      />
     </BrowserRouter>
   );
 }

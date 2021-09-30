@@ -5,7 +5,7 @@ import O2 from '../images/i2.png';
 import bg from '../images/background.webp';
 import nextIcon from '../images/arrowright.png';
 import prevIcon from '../images/arrowright.png';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import { Carousel } from 'react-bootstrap';
 import '../css/inst.css';
 
@@ -34,16 +34,27 @@ const caro = {
   textAlign: 'center',
 };
 
-function Instructions() {
+function Instructions({ socket }) {
   const history = useHistory();
+  const location = useLocation();
 
   const joinLobby = () => {
-    history.push({
-      pathname: '/lobby',
-      state: {
-        xyz: 0,
-      },
-    });
+    if (location.state.xyz) {
+      history.push({
+        pathname: '/lobby',
+        state: {
+          xyz: 1,
+          hostId: socket.id,
+        },
+      });
+    } else {
+      history.push({
+        pathname: '/lobby',
+        state: {
+          xyz: 0,
+        },
+      });
+    }
   };
 
   return (

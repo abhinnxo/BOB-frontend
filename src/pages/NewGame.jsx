@@ -118,7 +118,7 @@ const NewGame = ({ socket }) => {
       localStorage.setItem('host', true);
       localStorage.setItem('roomid', customId({}));
       history.push({
-        pathname: '/lobby',
+        pathname: '/instructions',
         state: {
           xyz: 1,
           hostId: socket.id,

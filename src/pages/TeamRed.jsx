@@ -257,7 +257,7 @@ const TeamRed = ({ socket }) => {
           ) : (
             <div>
               <ModalComponent
-                content={`you are trapped, and you have to send messages to your commander in chief.
+                content={`You are trapped, and you have to send messages to your commander in chief.
             ${enemyTeam} are your enemies, and they are trying their best to stop you.`}
                 buttonTitle="TeamRed"
                 heading={roundfromBackend}
