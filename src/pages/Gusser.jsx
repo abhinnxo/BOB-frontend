@@ -113,6 +113,7 @@ const Gusser = ({ socket }) => {
       socket.emit('guessSubmission', guess);
       console.log(guess);
       setGuessSend(1);
+      document.querySelector('#chance-msg').style.display = 'none';
     }
   };
 
@@ -246,9 +247,11 @@ const Gusser = ({ socket }) => {
         </h3>
       </div>
       <div className="gusser__hints">
-        {hintList.map((hint, index) => {
-          return <div key={index}>{hint}</div>;
-        })}
+        <h5>
+          {hintList.map((hint, index) => {
+            return <div key={index}>{hint}</div>;
+          })}
+        </h5>
       </div>
       <div className="gusser__timer d-flex align-items-baseline">
         <img src={Clock} alt="time" />
@@ -259,7 +262,9 @@ const Gusser = ({ socket }) => {
       <div className="gusser__enterdiv">
         <h3 className="fw-bold">You're the Commander in Cheif now</h3>
         <br />
-        <h6>{chance}</h6>
+        <h5 id="chance-msg" style={{ color: 'red' }}>
+          {chance}
+        </h5>
         {guessSend ? (
           <div className="text-center">
             <h5>

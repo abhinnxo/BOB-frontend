@@ -212,10 +212,9 @@ const AdminPoints = ({ socket }) => {
         })}
       </div>
       <div className="point__board text-center">
-        <h4 className="point__mainword">
-          #{roundNumber}
-          &nbsp;{randomWord}
-        </h4>
+        <div className="point__mainword">
+          #{roundNumber}&nbsp;Secret Word:&nbsp;<h3>{randomWord}</h3>
+        </div>
         <h3>
           Guess - <span>{wrong + 1}</span>
         </h3>

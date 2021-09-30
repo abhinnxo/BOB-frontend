@@ -356,12 +356,12 @@ const TeamRed = ({ socket }) => {
         </div>
       ) : (
         <div className="red__wait text-center">
-          <h3>
+          <h1>
             Secret Word:&nbsp;
             <span className="red__randomword" style={{ color: 'red' }}>
               "{randomword}"{' '}
             </span>
-          </h3>
+          </h1>
           {roundfromBackend % 2 === 0 ? (
             <>
               <h3>

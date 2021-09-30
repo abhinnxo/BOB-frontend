@@ -199,11 +199,19 @@ const AdminDestroy = ({ socket }) => {
         }}
       >
         {roundNumber % 2 === 0 ? (
-          <span style={{ color: 'red' }}>{guesserName.guesserNameRed}</span>
+          <span style={{ color: '#844719' }}>{guesserName.guesserNameRed}</span>
         ) : (
-          <span style={{ color: 'blue' }}>{guesserName.guesserNameBlue}</span>
+          <span style={{ color: '#844719' }}>
+            {guesserName.guesserNameBlue}
+          </span>
         )}
-        &nbsp;is the Commander...
+        &nbsp;is the Commander in Chief of{' '}
+        {roundNumber % 2 === 0 ? (
+          <span style={{ color: 'red' }}>{redname}</span>
+        ) : (
+          <span style={{ color: 'blue' }}>{bluename}</span>
+        )}
+        ...
       </h4>
       <div className="players">
         <h2 className="mainWord">

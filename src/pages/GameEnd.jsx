@@ -46,7 +46,7 @@ const GameEnd = () => {
     if (redTeamScore > blueTeamScore) setWiningStatus(`${redname} Wins`);
     if (blueTeamScore > redTeamScore) setWiningStatus(`${bluename} Wins`);
     if (redTeamScore === blueTeamScore) setWiningStatus('Draw');
-  }, [redTeamScore, blueTeamScore]);
+  });
 
   const gotoMainScreen = () => {
     history.push('/');

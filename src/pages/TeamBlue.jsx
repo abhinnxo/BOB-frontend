@@ -102,25 +102,28 @@ function TeamBlue({ socket }) {
       url: `https://bob-backend-madiee-h.herokuapp.com/guesserName`,
     })
       .then((res) => {
-        // blue gyesser
+        console.log('<<< guesser name >>>', res.data);
+        // blue guesser
         if (
-          roundfromBackend % 2 !== 0 &&
-          res.data.guesserName.guesserNameBlue !== ''
+          roundfromBackend % 2 !==
+          0
+          // res.data.guesserName.guesserNameBlue !== ''
         ) {
           setGuesserTeam('Blue Spartans');
           setEnemyTeam('Red Gladiators');
-          setGuesserName(res.data);
+          // setGuesserName(res.data);
         }
 
         // red guesser
         if (
-          roundfromBackend % 2 === 0 &&
-          res.data.guesserName.guesserNameRed !== ''
+          roundfromBackend % 2 ===
+          0
+          // res.data.guesserName.guesserNameRed !== ''
         ) {
           setGuesserTeam('Red Gladiators');
           setEnemyTeam('Blue Spartans');
-          setGuesserName(res.data);
         }
+        // setGuesserName(res.data);
       })
       .catch((err) => console.error(err));
   });
@@ -364,25 +367,25 @@ function TeamBlue({ socket }) {
         </div>
       ) : (
         <div className="blue__wait text-center">
-          <h3>
+          <h1>
             Secret Word:&nbsp;
             <span className="red__randomword" style={{ color: 'red' }}>
               "{randomword}"{' '}
             </span>
-          </h3>
+          </h1>
           {roundfromBackend % 2 === 0 ? (
             <>
               <h3>
                 {roundfromBackend % 2 === 0 ? (
                   <h3>
                     {' '}
-                    Word that reached the Commander in chief of "
+                    Clues that reached the Commander in chief of "
                     {guesserName.guesserNameRed}"
                   </h3>
                 ) : (
                   <h3>
                     {' '}
-                    Word that reached the Commander in chief of "
+                    Clues that reached the Commander in chief of "
                     {guesserName.guesserNameBlue}"
                   </h3>
                 )}
