@@ -51,6 +51,13 @@ const BlueTeam = ({ playerListBlue, hostId, socket }) => {
         )}
         <div className="blueblock__playerlist">
           <ul className="blueblock__ul">
+            {hostId === socket.id ? (
+              <>
+                <li>&nbsp;</li> <li>&nbsp;</li>
+              </>
+            ) : (
+              <></>
+            )}
             {playerListBlue.map((name, key) => {
               return <li key={key}>{name}</li>;
             })}

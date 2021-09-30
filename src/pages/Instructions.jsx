@@ -3,7 +3,7 @@ import inst1 from '../images/i1.png';
 import O3 from '../images/i3.png';
 import O2 from '../images/i2.png';
 import bg from '../images/background.webp';
-import nextIcon from '../images/arrowright.png';
+import nextIcon from '../images/arrowleft.png';
 import prevIcon from '../images/arrowright.png';
 import { useHistory, useLocation } from 'react-router';
 import { Carousel } from 'react-bootstrap';
@@ -57,12 +57,29 @@ function Instructions({ socket }) {
     }
   };
 
+  const directionButtons = (direction) => {
+    return (
+      <span
+        aria-hidden="true"
+        className={direction === 'Next' ? 'button-next' : 'button-prev'}
+      >
+        {direction === 'Next' ? (
+          <img src={nextIcon} alt="nextIcon" />
+        ) : (
+          <img src={prevIcon} alt="prevIcon" />
+        )}
+      </span>
+    );
+  };
+
   return (
     <div>
       <div className="inst__bg" style={bgstyle}>
         <div style={caro} className="caro">
           <Carousel
             style={img}
+            nextIcon={directionButtons('Next')}
+            prevIcon={directionButtons('Previous')}
             // nextIcon={nextIcon} prevIcon={prevIcon}
           >
             <Carousel.Item style={img1}>

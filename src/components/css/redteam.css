@@ -42,6 +42,9 @@ ul {
   flex-direction: column;
   flex-wrap: wrap;
 }
+.redblock__ul {
+  transform: translate(-25px, -35px);
+}
 @media only screen and (max-width: 1600px), screen and (max-height: 900) {
   .redblock > img {
     width: 600px;
@@ -56,9 +59,9 @@ ul {
     transform: translate(190px, -347px) !important;
   }
   .redblock__ul {
-    transform: translate(-25px, 25px);
-    height: 180px;
-    width: 450px;
+    height: 250px;
+    width: 560px;
+    transform: translate(-30px, -10px);
   }
 }
 @media only screen and (max-width: 1400px), screen and (max-height: 800px) {
@@ -74,9 +77,8 @@ ul {
     transform: translate(170px, -268px);
   }
   .redblock__ul {
-    height: 200px;
-    width: 500px;
-    transform: translate(-20px, 68px);
+    transform: translate(-35px, 65px) !important;
+    width: 470px !important;
   }
 }
 @media only screen and (max-width: 1366px), screen and (max-height: 768px) {

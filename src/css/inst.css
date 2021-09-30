@@ -29,6 +29,16 @@
   width: fit-content;
   margin-left: auto;
 }
+@media only screen and (max-width: 1680px), screen and (max-height: 1050px) {
+  .caro {
+    margin-top: 180px;
+  }
+}
+@media only screen and (max-width: 1600px), screen and (max-height: 900px) {
+  .caro {
+    margin-top: 130px;
+  }
+}
 @media only screen and (max-width: 1440px), screen and (max-height: 900px) {
   .instimg {
     height: 650px;
@@ -41,9 +51,11 @@
 }
 @media only screen and (max-width: 1024px), screen and (max-height: 600px) {
   .instimg {
-    height: 430px;
+    height: 500px;
   }
   .caro {
     margin-top: 50px;
   }
+}
+@media only screen and (max-width: 1024px), screen and (max-height: 600px) {
 }

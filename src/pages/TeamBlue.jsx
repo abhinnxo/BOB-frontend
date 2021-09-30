@@ -416,9 +416,9 @@ function TeamBlue({ socket }) {
                 )}
               </h3>
               <div>
-                {hintList.map((index, e) => {
-                  <h3 key={index}>{3}</h3>;
-                })}
+                {hintList.map((e) => (
+                  <h3 key={e.toString()}>{e}</h3>
+                ))}
               </div>
               <h4>{chance}</h4>
             </>
@@ -437,9 +437,9 @@ function TeamBlue({ socket }) {
                 </h3>
               )}
               <div>
-                {hintList.map((index, e) => {
-                  <h3 key={index}>{3}</h3>;
-                })}
+                {hintList.map((e) => (
+                  <h3 key={e.toString()}>{e}</h3>
+                ))}
               </div>
               <h4>{chance}</h4>
             </>

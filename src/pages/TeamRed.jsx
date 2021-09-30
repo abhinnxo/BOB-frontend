@@ -127,7 +127,7 @@ const TeamRed = ({ socket }) => {
       console.log('hints', list);
       setHintList(list);
     });
-  });
+  }, [socket]);
 
   // setting the round number
   socket.on('current-round', (round) => {
@@ -396,19 +396,20 @@ const TeamRed = ({ socket }) => {
                     {guesserName.guesserNameRed}"
                   </h3>
                 ) : (
-                  <h3>
-                    {' '}
-                    Clues that reached the Commander in chief of "
-                    {guesserName.guesserNameBlue}"
-                  </h3>
+                  <>
+                    <h3>
+                      These are the Clues that reached their Commander in
+                      Chief&nbsp;"
+                      {guesserName.guesserNameBlue} ":
+                    </h3>
+                    {hintList}
+
+                    {/* {hintList.map((e) => (
+                      <h3 key={e.toString()}>{e}</h3>
+                    ))} */}
+                  </>
                 )}
               </h3>
-              <div>
-                {hintList.map((index, e) => {
-                  <h3 key={index}>{3}</h3>;
-                })}
-              </div>
-
               <h4>{chance}</h4>
             </>
           ) : (
@@ -419,17 +420,18 @@ const TeamRed = ({ socket }) => {
                   {guesserName.guesserNameRed} ":
                 </h3>
               ) : (
-                <h3>
-                  These are the Clues that reached their Commander in
-                  Chief&nbsp;"
-                  {guesserName.guesserNameBlue} ":
-                </h3>
+                <>
+                  <h3>
+                    These are the Clues that reached their Commander in
+                    Chief&nbsp;"
+                    {guesserName.guesserNameBlue} ":
+                  </h3>
+                  {hintList}
+                  {/* {hintList.map((e) => (
+                    <h3 key={e.toString()}>{e}</h3>
+                  ))} */}
+                </>
               )}
-              <div>
-                {hintList.map((index, e) => {
-                  <h3 key={index}>{3}</h3>;
-                })}
-              </div>
               <h4>{chance}</h4>
             </>
           )}
