@@ -301,7 +301,7 @@
   z-index: 5;
 } */
 .word > label {
-  font-size: 18px;
+  font-size: 24px;
 }
 .word > span:last-child {
   cursor: pointer;

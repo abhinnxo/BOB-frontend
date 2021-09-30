@@ -1,9 +1,8 @@
 import React from 'react';
-import inst1 from '../images/Overlay.png';
-import O3 from '../images/Overlay3.png';
-import O2 from '../images/Overlay2.png';
+import inst1 from '../images/i1.png';
+import O3 from '../images/i3.png';
+import O2 from '../images/i2.png';
 import bg from '../images/background.webp';
-import ImageButton from '../components/ImageButton';
 import { useHistory } from 'react-router';
 import { Carousel } from 'react-bootstrap';
 import '../css/inst.css';
@@ -60,25 +59,13 @@ function Instructions() {
               <img className="d-block instimg" src={O3} alt="Third slide" />
             </Carousel.Item>
           </Carousel>
-          <ImageButton
-            clickMe={joinLobby}
-            classlist="newgame__hostbtn"
-            value="Proceed"
-          />
+        </div>
+        <div className="inst__skip_div">
+          <h6 className="inst__skip" onClick={joinLobby}>
+            SKIP
+          </h6>
         </div>
       </div>
-      {/* <div className="inst__bg" style={bgstyle}>
-        <div style={imgstyle}>
-          <img src={inst1}  alt="Instruction" />
-          <img src={O2} alt="Instruction" />
-          <img src={O3} alt="Instruction" />
-          <ImageButton
-            clickMe={joinLobby}
-            classlist="newgame__hostbtn"
-            value="Proceed"
-          />
-        </div>
-      </div> */}
     </div>
   );
 }

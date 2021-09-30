@@ -12,6 +12,23 @@
 .caro {
   margin-top: 80px;
 }
+.inst__skip_div {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+}
+.inst__skip {
+  font-size: 24px;
+  color: red;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 600;
+  justify-self: right;
+  width: fit-content;
+  margin-left: auto;
+}
 @media only screen and (max-width: 1440px), screen and (max-height: 900px) {
   .instimg {
     height: 650px;
