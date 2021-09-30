@@ -133,6 +133,13 @@ function TeamBlue({ socket }) {
       .catch((err) => console.error(err));
   });
 
+  useEffect(() => {
+    //  getting approved hint list from admkin
+    socket.on('hintList', (list) => {
+      setHintList(list);
+    });
+  });
+
   // setting the round number
   socket.on('current-round', (round) => {
     setRoundFromBackend(round);
@@ -374,7 +381,7 @@ function TeamBlue({ socket }) {
         <div className="blue__wait text-center">
           <h1>
             Secret Word:&nbsp;
-            <span className="red__randomword" style={{ color: 'red' }}>
+            <span className="red__randomword" style={{ color: '#9b5825' }}>
               "{randomword}"{' '}
             </span>
           </h1>
@@ -395,7 +402,11 @@ function TeamBlue({ socket }) {
                   </h3>
                 )}
               </h3>
-              <h3>{hintList}</h3>
+              <div>
+                {hintList.map((index, e) => {
+                  <h3 key={index}>{3}</h3>;
+                })}
+              </div>
               <h4>{chance}</h4>
             </>
           ) : (
@@ -412,7 +423,11 @@ function TeamBlue({ socket }) {
                   {guesserName.guesserNameBlue} ":
                 </h3>
               )}
-              <h3>{hintList}</h3>
+              <div>
+                {hintList.map((index, e) => {
+                  <h3 key={index}>{3}</h3>;
+                })}
+              </div>
               <h4>{chance}</h4>
             </>
           )}

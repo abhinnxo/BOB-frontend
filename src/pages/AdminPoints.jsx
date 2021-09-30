@@ -29,6 +29,7 @@ const AdminPoints = ({ socket }) => {
   //  new team names given by the host
   const [bluename, setBluename] = useState('');
   const [redname, setRedname] = useState('');
+  const [hintList, setHintList] = useState([]);
 
   // getting new team name given by the host
   useEffect(() => {
@@ -89,6 +90,12 @@ const AdminPoints = ({ socket }) => {
     if (gameValue === 1) {
       history.push('/endgame');
     }
+  });
+
+  //  getting approved hint list from admkin
+  socket.on('hintList', (list) => {
+    setHintList(list);
+    console.log('hints', list);
   });
 
   socket.on('guessToHost', (guessSubmitted) => {
@@ -209,6 +216,7 @@ const AdminPoints = ({ socket }) => {
         <center>
           Words that reached the Commander in Chief of
           {roundNumber % 2 === 0 ? <h4>{redname}</h4> : <h4>{bluename}</h4>}
+          <h5>{hintList}</h5>
         </center>
       </h4>
       <div className="gusserhints">

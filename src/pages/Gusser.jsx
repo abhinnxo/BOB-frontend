@@ -113,7 +113,6 @@ const Gusser = ({ socket }) => {
       socket.emit('guessSubmission', guess);
       console.log(guess);
       setGuessSend(1);
-      document.querySelector('#chance-msg').style.display = 'none';
     }
   };
 
