@@ -6,6 +6,7 @@ import Clock from '../images/clock.svg';
 import '../css/gusser.css';
 import { Button, Modal } from 'react-bootstrap';
 import ModalComponent from '../components/Modal';
+import image1 from '../../src/images/Popover/red4.webp';
 const axios = require('axios');
 
 const Gusser = ({ socket }) => {
@@ -213,28 +214,32 @@ const Gusser = ({ socket }) => {
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Your Scorecard</Modal.Title>
-        </Modal.Header>
         <Modal.Body>
+          <div>Your Scorecard</div>
           {scoreChange > 0 ? (
             <div>
+              <img src={image1} alt="" />
+              <br />
               Congrats!! you scored {scoreChange} points for Team {team}.
             </div>
           ) : (
             <div>
+              <img src={image1} alt="" />
+              <br />
               Sorry, you were not able to identify the secret word to locate
               your soldiers. They are trapped forever in enemy premises.
             </div>
           )}
           <br></br>
           <h3>{modalText}</h3>
+          <div>
+            <ImageButton
+              value="Proceed"
+              clickMe={changeScreen}
+              classlist="mt-3 gusser__enterbtn"
+            />
+          </div>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={changeScreen}>
-            Understood
-          </Button>
-        </Modal.Footer>
       </Modal>
       <div className="gusser__bg"></div>
       <div className="gusser__teamranks d-flex justify-content-between px-3">

@@ -8,6 +8,8 @@ import '../css/teamblue.css';
 import ModalComponent from '../components/Modal';
 import { useLocation } from 'react-router';
 import { Button, Modal } from 'react-bootstrap';
+import image1 from '../images/Popover/red4.webp';
+import image2 from '../images/Popover/red5_guesser.webp';
 const axios = require('axios');
 
 function TeamBlue({ socket }) {
@@ -259,18 +261,26 @@ function TeamBlue({ socket }) {
           {roundfromBackend % 2 === 0 ? (
             <div>
               <ModalComponent
-                content={`You are trapped, and you have to send messages to your commander in chief.
-            ${enemyTeam} are your enemies, and they are trying their best to stop you.`}
-                buttonTitle="TeamBlue"
+                content={`You ${(
+                  <h1 style={{ color: 'red' }}>The Blue Spartans</h1>
+                )} are trapped, and you have to send messages to your commander in chief.
+                ${(
+                  <h1 style={{ color: 'blue' }}>The Red Gladiators</h1>
+                )} are your enemies, and they are trying their best to stop you.`}
+                buttonTitle="TeamRed"
                 heading={roundfromBackend}
               />
             </div>
           ) : (
             <div>
               <ModalComponent
-                content={`${guesserTeam} are trapped, and are sending messages to their commander in chief.
-           They are your enemies, try your best to stop them.`}
-                buttonTitle="TeamBlue"
+                content={`You ${(
+                  <h1 style={{ color: 'blue' }}>The Blue Spartans </h1>
+                )} are trapped, and ${(
+                  <h1 style={{ color: 'red' }}>The Red Gladiators</h1>
+                )} are sending messages to their commander in chief.
+          They are your enemies, try your best to stop them.`}
+                buttonTitle="TeamRed"
                 heading={roundfromBackend}
               />
             </div>
@@ -285,16 +295,17 @@ function TeamBlue({ socket }) {
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
+        classname="special_modal"
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Team Blue Spartans </Modal.Title>
-        </Modal.Header>
         <Modal.Body>
+          <div>Team Blue Spartans</div>
           {roundfromBackend % 2 === 0 ? (
             <div>
               {' '}
               {scoreChange > 0 ? (
                 <div>
+                  <img src={image1} alt="" />
+                  <br />
                   “Congratulations, your commander in chief was able to identify
                   the secret word, and locate your team.
                   <br />
@@ -302,6 +313,8 @@ function TeamBlue({ socket }) {
                 </div>
               ) : (
                 <div>
+                  <img src={image1} alt="" />
+                  <br />
                   “Sorry, your commander in chief was not able to identify the
                   secret word, and locate your team.
                   <br />
@@ -314,12 +327,18 @@ function TeamBlue({ socket }) {
               {' '}
               {scoreChange > 0 ? (
                 <div>
+                  <img src={image1} alt="" />
+                  <br />
                   “Whoops, The commander-in-chief of Red Gladiators was able to
-                  guess the secret word successfully. They score {scoreChange}{' '}
+                  guess the secret word successfully. They score {
+                    scoreChange
+                  }{' '}
                   victory points”.
                 </div>
               ) : (
                 <div>
+                  <img src={image1} alt="" />
+                  <br />
                   Good news. The commander in chief of Red Gladiators was not
                   able to identity the secret word.
                 </div>
@@ -328,12 +347,14 @@ function TeamBlue({ socket }) {
           )}
 
           <br></br>
+          <div>
+            <ImageButton
+              value="Proceed"
+              classlist="red__enterbtn"
+              clickMe={changeScreen}
+            />
+          </div>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={changeScreen}>
-            Understood
-          </Button>
-        </Modal.Footer>
       </Modal>
 
       {!clue ? (

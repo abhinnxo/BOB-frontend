@@ -49,6 +49,19 @@
   top: 150px;
   right: 200px;
 }
+.modal
+{
+    background-image: url('../images/POPUP_SCREEN_BG.webp');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.modal-content {
+  background-image:url('../images/Player_Roles.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .red__red {
   font-family: 'PaytoneOne';
   background: url('../images/Red_team_points_old.webp') no-repeat;

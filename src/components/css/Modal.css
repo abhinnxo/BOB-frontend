@@ -1,0 +1,20 @@
+.modal
+{
+    background-image: url('../../images/POPUP_SCREEN_BG.webp');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 7%;
+    
+}
+.modal-content {
+  background-image:url('../../images/Player_Roles.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.blue__enterbtn {
+    width: 100px;
+    height: 35px;
+    padding-top: 3px;
+    background-size: 300px;
+}

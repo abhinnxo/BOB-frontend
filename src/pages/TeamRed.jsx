@@ -8,6 +8,8 @@ import '../css/teamred.css';
 import ModalComponent from '../components/Modal';
 import { Button, Modal } from 'react-bootstrap';
 import { useLocation } from 'react-router';
+import image1 from '../images/Popover/red4.webp';
+import image2 from '../images/Popover/red5_guesser.webp';
 const axios = require('axios');
 
 const TeamRed = ({ socket }) => {
@@ -248,7 +250,11 @@ const TeamRed = ({ socket }) => {
           {roundfromBackend % 2 === 0 ? (
             <div>
               <ModalComponent
-                content={`${guesserTeam} are trapped, and they are sending messages to their commander in chief.
+                content={`You ${(
+                  <h1 style={{ color: 'blue' }}>The Blue Spartans </h1>
+                )} are trapped, and ${(
+                  <h1 style={{ color: 'red' }}>The Red Gladiators</h1>
+                )} are sending messages to their commander in chief.
           They are your enemies, try your best to stop them.`}
                 buttonTitle="TeamRed"
                 heading={roundfromBackend}
@@ -257,8 +263,12 @@ const TeamRed = ({ socket }) => {
           ) : (
             <div>
               <ModalComponent
-                content={`You are trapped, and you have to send messages to your commander in chief.
-            ${enemyTeam} are your enemies, and they are trying their best to stop you.`}
+                content={`You ${(
+                  <h1 style={{ color: 'red' }}>The Red Gladiators</h1>
+                )} are trapped, and you have to send messages to your commander in chief.
+                ${(
+                  <h1 style={{ color: 'blue' }}>The Blue Spartans</h1>
+                )} are your enemies, and they are trying their best to stop you.`}
                 buttonTitle="TeamRed"
                 heading={roundfromBackend}
               />
@@ -274,53 +284,65 @@ const TeamRed = ({ socket }) => {
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Team Red Gladiators </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {roundfromBackend % 2 === 0 ? (
+        <center>
+          <Modal.Body>
+            <div>Team Red Gladiators</div>
+            {roundfromBackend % 2 === 0 ? (
+              <div>
+                {' '}
+                {scoreChange > 0 ? (
+                  <div>
+                    <img src={image2} alt="" />
+                    <br />
+                    “Whoops, The commander-in-chief of Blue Spartans was able to
+                    guess the secret word successfully. They score {
+                      scoreChange
+                    }{' '}
+                    victory points”.
+                  </div>
+                ) : (
+                  <div>
+                    <img src={image2} alt="" />
+                    <br />
+                    Good news. The commander in chief of Blue Spartans was not
+                    able to identity the secret word.
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div>
+                {' '}
+                {scoreChange > 0 ? (
+                  <div>
+                    <img src={image1} alt="" />
+                    <br />
+                    “Congratulations, your commander in chief was able to
+                    identify the secret word, and locate your team.
+                    <br />
+                    Your team scores {scoreChange} victory points”
+                  </div>
+                ) : (
+                  <div>
+                    <img src={image2} alt="" />
+                    <br />
+                    “Sorry, your commander in chief was not able to identify the
+                    secret word, and locate your team.
+                    <br />
+                    Your team scores 0 points”
+                  </div>
+                )}
+              </div>
+            )}
+            <br></br>
             <div>
-              {' '}
-              {scoreChange > 0 ? (
-                <div>
-                  “Whoops, The commander-in-chief of Blue Spartans was able to
-                  guess the secret word successfully. They score {scoreChange}{' '}
-                  victory points”.
-                </div>
-              ) : (
-                <div>
-                  Good news. The commander in chief of Blue Spartans was not
-                  able to identity the secret word.
-                </div>
-              )}
+              <ImageButton
+                value="Proceed"
+                classlist="red__enterbtn"
+                clickMe={changeScreen}
+              />
             </div>
-          ) : (
-            <div>
-              {' '}
-              {scoreChange > 0 ? (
-                <div>
-                  “Congratulations, your commander in chief was able to identify
-                  the secret word, and locate your team.
-                  <br />
-                  Your team scores {scoreChange} victory points”
-                </div>
-              ) : (
-                <div>
-                  “Sorry, your commander in chief was not able to identify the
-                  secret word, and locate your team.
-                  <br />
-                  Your team scores 0 points”
-                </div>
-              )}
-            </div>
-          )}
-          <br></br>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={changeScreen}>
-            Understood
-          </Button>
-        </Modal.Footer>
+          </Modal.Body>
+        </center>
       </Modal>
       {!clue ? (
         <div className="red__enterhint text-center">

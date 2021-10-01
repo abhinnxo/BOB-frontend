@@ -46,10 +46,18 @@
   color: white;
 }
 
-/* .modal
+.modal
 {
-    background-color: #d31a1a;
-} */
+    background-image: url('../images/POPUP_SCREEN_BG.webp');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.modal-content {
+  background-image:url('../images/Popover/BG.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
 .blue__rank {
   position: absolute;
@@ -144,3 +152,4 @@
     background-size: 300px;
   }
 }
+
