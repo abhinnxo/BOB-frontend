@@ -165,7 +165,7 @@ const TeamRed = ({ socket }) => {
     });
 
     socket.on('guessed-wrong', (wrong) => {
-      setChance(`Commander guessed wrong, Now ${2 - wrong} chance(s) left`);
+      setChance(2 - wrong);
     });
 
     socket.on('guessID', (guesserID) => {
@@ -344,7 +344,11 @@ const TeamRed = ({ socket }) => {
       </Modal>
       {!clue ? (
         <div className="red__enterhint text-center">
-          <h5>{chance}</h5>
+          <h5>
+            {' '}
+            Commander guessed wrong, Now{' '}
+            <span style={{ color: 'red' }}>{chance} chance(s)</span> left...
+          </h5>
           <h1>
             Hello Soldier,
             <br />
@@ -411,48 +415,65 @@ const TeamRed = ({ socket }) => {
               <h3>
                 {roundfromBackend % 2 === 0 ? (
                   <h3>
-                    {' '}
-                    Clues that reached the Commander in chief of "
-                    {guesserName.guesserNameRed}"
+                    Clues that reached your Commander in chief &nbsp;
+                    <span style={{ color: 'red' }}>
+                      "{guesserName.guesserNameRed}"
+                    </span>
+                    :
                   </h3>
                 ) : (
                   <>
                     <h3>
-                      These are the Clues that reached their Commander in
-                      Chief&nbsp;"
-                      {guesserName.guesserNameBlue} ":
+                      These are the Clues that reached their Commander in Chief
+                      &nbsp;
+                      <span style={{ color: 'blue' }}>
+                        "{guesserName.guesserNameBlue}"
+                      </span>
+                      :
                     </h3>
-                    {hintList}
-
-                    {/* {hintList.map((e) => (
-                      <h3 key={e.toString()}>{e}</h3>
-                    ))} */}
+                    {hintList.map((e) => (
+                      <span key={e.toString()}>{e}</span>
+                    ))}
                   </>
                 )}
               </h3>
-              <h4>{chance}</h4>
+              <h4>
+                {' '}
+                Commander guessed wrong, Now{' '}
+                <span style={{ color: 'red' }}>{chance} chance(s)</span> left...
+              </h4>
             </>
           ) : (
             <>
               {roundfromBackend % 2 === 0 ? (
                 <h3>
-                  These are the Clues that reached your Commander in Chief "
-                  {guesserName.guesserNameRed} ":
+                  These are the Clues that reached your Commander in Chief
+                  &nbsp;
+                  <span style={{ color: 'red' }}>
+                    "{guesserName.guesserNameRed}"
+                  </span>
+                  :
                 </h3>
               ) : (
                 <>
                   <h3>
-                    These are the Clues that reached their Commander in
-                    Chief&nbsp;"
-                    {guesserName.guesserNameBlue} ":
+                    These are the Clues that reached their Commander in Chief
+                    &nbsp;
+                    <span style={{ color: 'blue' }}>
+                      "{guesserName.guesserNameBlue}"
+                    </span>
+                    :
                   </h3>
-                  {hintList}
-                  {/* {hintList.map((e) => (
-                    <h3 key={e.toString()}>{e}</h3>
-                  ))} */}
+                  {hintList.map((e) => (
+                    <span key={e.toString()}>{e}</span>
+                  ))}
                 </>
               )}
-              <h4>{chance}</h4>
+              <h4>
+                {' '}
+                Commander guessed wrong, Now{' '}
+                <span style={{ color: 'red' }}>{chance} chance(s)</span> left...
+              </h4>
             </>
           )}
         </div>

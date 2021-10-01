@@ -135,10 +135,11 @@ function TeamBlue({ socket }) {
       .catch((err) => console.error(err));
   });
 
+  //  getting approved hint list from admin
   useEffect(() => {
-    //  getting approved hint list from admkin
     socket.on('hintList', (list) => {
       setHintList(list);
+      console.log(list);
     });
   });
 
@@ -175,7 +176,7 @@ function TeamBlue({ socket }) {
     });
 
     socket.on('guessed-wrong', (wrong) => {
-      setChance(`Commander guessed wrong, Now ${2 - wrong} chance(s) left...`);
+      setChance(2 - wrong);
     });
 
     socket.on('guessID', (guesserID) => {
@@ -351,7 +352,10 @@ function TeamBlue({ socket }) {
       </Modal>
       {!clue ? (
         <div className="blue__enterhint text-center">
-          <h5>{chance}</h5>
+          <h5>
+            Commander guessed wrong, Now{' '}
+            <span style={{ color: 'red' }}>{chance} chance(s)</span> left...
+          </h5>
           <h1>
             Hello Soldier,
             <br />
@@ -383,7 +387,6 @@ function TeamBlue({ socket }) {
               </p>
             )}
           </h3>
-
           {usermsgsent ? (
             <div>Clue submitted</div>
           ) : (
@@ -415,46 +418,73 @@ function TeamBlue({ socket }) {
             <>
               <h3>
                 {roundfromBackend % 2 === 0 ? (
-                  <h3>
-                    {' '}
-                    Clues that reached the Commander in chief of "
-                    {guesserName.guesserNameRed}"
-                  </h3>
+                  <>
+                    <h3>
+                      {' '}
+                      Clues that reached their Commander in chief &nbsp;
+                      <span style={{ color: 'red' }}>
+                        "{guesserName.guesserNameRed}"
+                      </span>
+                      :
+                    </h3>
+
+                    {hintList.map((item, i) => (
+                      <span key={i}>{item}</span>
+                    ))}
+                  </>
                 ) : (
                   <h3>
-                    {' '}
-                    Clues that reached the Commander in chief of "
-                    {guesserName.guesserNameBlue}"
+                    Clues that reached their Commander in chief &nbsp;
+                    <span style={{ color: 'blue' }}>
+                      "{guesserName.guesserNameBlue}"
+                    </span>
+                    :{' '}
+                    {hintList.map((item, i) => (
+                      <span key={i}>{item}</span>
+                    ))}
                   </h3>
                 )}
               </h3>
               <div>
                 {hintList.map((item, i) => (
-                  <h3 key={i}>{item}</h3>
+                  <span key={i}>{item}</span>
                 ))}
               </div>
-              <h4>{chance}</h4>
+              <h4>
+                Commander guessed wrong, Now{' '}
+                <span style={{ color: 'red' }}>{chance} chance(s)</span> left...
+              </h4>
             </>
           ) : (
             <>
               {roundfromBackend % 2 !== 0 ? (
                 <h3>
-                  These are the Clues that reached your Commander in Chief "
-                  {guesserName.guesserNameRed} ":
+                  These are the Clues that reached your Commander in Chief
+                  &nbsp;
+                  <span style={{ color: 'blue' }}>
+                    "{guesserName.guesserNameRed}"
+                  </span>
+                  :
                 </h3>
               ) : (
                 <h3>
-                  These are the Clues that reached their Commander in
-                  Chief&nbsp;"
-                  {guesserName.guesserNameBlue} ":
+                  These are the Clues that reached their Commander in Chief
+                  &nbsp;
+                  <span style={{ color: 'red' }}>
+                    "{guesserName.guesserNameBlue}"
+                  </span>
+                  :
                 </h3>
               )}
               <div>
                 {hintList.map((e) => (
-                  <h3 key={e.toString()}>{e}</h3>
+                  <span key={e.toString()}>{e}</span>
                 ))}
               </div>
-              <h4>{chance}</h4>
+              <h4>
+                Commander guessed wrong, Now{' '}
+                <span style={{ color: 'red' }}>{chance} chance(s)</span> left...
+              </h4>
             </>
           )}
         </div>
