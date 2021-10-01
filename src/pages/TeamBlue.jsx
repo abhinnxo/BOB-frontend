@@ -261,11 +261,11 @@ function TeamBlue({ socket }) {
           {roundfromBackend % 2 === 0 ? (
             <div>
               <ModalComponent
-                content={`You, the '${newbluename}' are trapped, and have 
-                to send your coded location via a secret 
-                message to your Commander in Chief ‘${guesserName}’.
-                ‘${newredname}’ are your enemies, and 
-                they are trying their best to stop you.`}
+                content={`Our enemies, the ${newredname} are trapped, and
+                are sending coded location via a secret 
+                message to their Commander in Chief ‘${guesserName.guesserNameRed}’.
+                We, the ‘${newbluename}’ have to stop them.
+                `}
                 buttonTitle="TeamRed"
                 heading={roundfromBackend}
               />
@@ -273,10 +273,10 @@ function TeamBlue({ socket }) {
           ) : (
             <div>
               <ModalComponent
-                content={`You, the ‘${newredname}’ are trapped, and have 
+                content={`You, the ‘${newbluename}’ are trapped, and have 
                 to send your coded location via a secret 
-                message to your Commander in Chief ‘${guesserName}’.
-                ‘${newbluename}’ are your enemies, and 
+                message to your Commander in Chief ‘${guesserName.guesserNameBlue}’.
+                ‘${newredname}’ are your enemies, and 
                 they are trying their best to stop you.`}
                 buttonTitle="TeamRed"
                 heading={roundfromBackend}
@@ -301,17 +301,15 @@ function TeamBlue({ socket }) {
               {scoreChange > 0 ? (
                 <div>
                   <img height="280px" src={blue_team_win} alt="" />
-                  Congratulations! Your commander in chief ‘
-                  {guesserName.guesserNameBlue}’ has successfully located your
-                  team and rescued you. You, the ‘${newbluename}’ score{' '}
-                  {scoreChange} victory points.
+                  Congratulations! Your commander in chief has successfully
+                  located your team and rescued you. You, the ‘${newbluename}’
+                  score {scoreChange} victory points.
                 </div>
               ) : (
                 <div>
                   <img src={blue_team_lost} alt="" />
                   Sorry! Your commander was unable to identity the secret word,
-                  and hence wasn’t able to locate you. “
-                  {guesserName.guesserNameBlue}” has failed to rescue you!
+                  and hence wasn’t able to locate you!
                 </div>
               )}
             </div>
@@ -321,19 +319,17 @@ function TeamBlue({ socket }) {
               {scoreChange > 0 ? (
                 <div>
                   <img src={blue_team_lost} alt="" />
-                  The commander-in-chief {guesserName.guesserNameRed} of ‘
-                  {newredname}’ was able to guess the secret location
-                  successfully and free their soldiers. Your team loses this
-                  round and {newredname} score
+                  The commander-in-chief of ‘{newredname}’ was able to guess the
+                  secret location successfully and free their soldiers. Your
+                  team loses this round and {newredname} score
                   {scoreChange} victory points.
                 </div>
               ) : (
                 <div>
                   <img height="280px" src={blue_team_win} alt="" />
-                  Congratulations! The commander in chief
-                  {guesserName.guesserNameRed} of ‘{newredname}’ was not able to
-                  identify the secret word. Your team ‘{newbluename}’ wins the
-                  round.
+                  Congratulations! The commander in chief of ‘{newredname}’ was
+                  not able to identify the secret word. Your team ‘{newbluename}
+                  ’ wins the round.
                 </div>
               )}
             </div>

@@ -251,10 +251,10 @@ const TeamRed = ({ socket }) => {
           {roundfromBackend % 2 === 0 ? (
             <div>
               <ModalComponent
-                content={`You, the ‘${newbluename}’ are trapped, and have 
+                content={`You, the ‘${newredname}’ are trapped, and have 
                           to send your coded location via a secret 
-                          message to your Commander in Chief ‘${guesserName}’.
-                          ‘${newredname}’ are your enemies, and 
+                          message to your Commander in Chief ‘${guesserName.guesserNameRed}’.
+                          ‘${newbluename}’ are your enemies, and 
                           they are trying their best to stop you.`}
                 buttonTitle="TeamRed"
                 heading={roundfromBackend}
@@ -263,11 +263,10 @@ const TeamRed = ({ socket }) => {
           ) : (
             <div>
               <ModalComponent
-                content={`You, the ‘${newredname}’ are trapped, and have 
-                to send your coded location via a secret 
-                message to your Commander in Chief ‘${guesserName}’.
-                ‘${newbluename}’ are your enemies, and 
-                they are trying their best to stop you.`}
+                content={`Our enemies, the ${newbluename} are trapped, and
+                are sending coded location via a secret 
+                message to their Commander in Chief ‘${guesserName.guesserNameBlue}’.
+                We, the ‘${newredname}’ have to stop them.`}
                 buttonTitle="TeamRed"
                 heading={roundfromBackend}
               />
@@ -294,18 +293,16 @@ const TeamRed = ({ socket }) => {
                     <div>
                       <img height="280px" src={red_team_win} alt="" />
                       <br />
-                      Congratulations! Your commander in chief ‘
-                      {guesserName.guesserNameRed}’ has successfully located
-                      your team and rescued you. You, the ‘{newredname}’ score{' '}
-                      {scoreChange} victory points.
+                      Congratulations! Your commander in chief has successfully
+                      located your team and rescued you. You, the ‘{newredname}’
+                      score {scoreChange} victory points.
                     </div>
                   ) : (
                     <div>
                       <img src={red_team_lost} alt="" />
                       <br />
                       Sorry! Your commander was unable to identity the secret
-                      word, and hence wasn’t able to locate you. “
-                      {guesserName.guesserNameRed}” has failed to rescue you!
+                      word, and hence wasn’t able to locate you!
                     </div>
                   )}
                 </div>
@@ -316,20 +313,19 @@ const TeamRed = ({ socket }) => {
                     <div>
                       <img src={red_team_lost} alt="" />
                       <br />
-                      The commander-in-chief {guesserName.guesserNameBlue} of ‘
-                      {newbluename}’ was able to guess the secret location
-                      successfully and free their soldiers. Your team loses this
-                      round and {newbluename} score
+                      The commander-in-chief of ‘{newbluename}’ was able to
+                      guess the secret location successfully and free their
+                      soldiers. Your team loses this round and {newbluename}{' '}
+                      score
                       {scoreChange} victory points.
                     </div>
                   ) : (
                     <div>
                       <img height="280px" src={red_team_win} alt="" />
                       <br />
-                      Congratulations! The commander in chief
-                      {guesserName.guesserNameBlue} of ‘{newbluename}’ was not
-                      able to identify the secret word. Your team ‘{newredname}’
-                      wins the round.
+                      Congratulations! The commander in chief of ‘{newbluename}’
+                      was not able to identify the secret word. Your team ‘
+                      {newredname}’ wins the round.
                     </div>
                   )}
                 </div>
@@ -361,7 +357,7 @@ const TeamRed = ({ socket }) => {
             </span>
           </h1>
           <h3>
-            {roundfromBackend % 2 === 0 ? (
+            {roundfromBackend % 2 !== 0 ? (
               <p>
                 Type your one word clue similar to
                 <br />
