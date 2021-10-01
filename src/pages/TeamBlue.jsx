@@ -295,49 +295,55 @@ function TeamBlue({ socket }) {
       >
         <Modal.Body>
           <div style={{ color: 'blue', fontSize: '28px' }}>{newbluename}</div>
-          {roundfromBackend % 2 !== 0 ? (
-            <div>
-              {' '}
-              {scoreChange > 0 ? (
-                <div>
-                  <img height="280px" src={blue_team_win} alt="" />
-                  Congratulations! Your commander in chief has successfully
-                  located your team and rescued you. You, the ‘${newbluename}’
-                  score {scoreChange} victory points.
-                </div>
-              ) : (
-                <div>
-                  <img src={blue_team_lost} alt="" />
-                  Sorry! Your commander was unable to identity the secret word,
-                  and hence wasn’t able to locate you!
-                </div>
-              )}
-            </div>
-          ) : (
-            <div>
-              {' '}
-              {scoreChange > 0 ? (
-                <div>
-                  <img src={blue_team_lost} alt="" />
-                  The commander-in-chief of ‘{newredname}’ was able to guess the
-                  secret location successfully and free their soldiers. Your
-                  team loses this round and {newredname} score
-                  {scoreChange} victory points.
-                </div>
-              ) : (
-                <div>
-                  <img height="280px" src={blue_team_win} alt="" />
-                  Congratulations! The commander in chief of ‘{newredname}’ was
-                  not able to identify the secret word. Your team ‘{newbluename}
-                  ’ wins the round.
-                </div>
-              )}
-            </div>
-          )}
+          <h5>
+            {roundfromBackend % 2 !== 0 ? (
+              <div>
+                {' '}
+                {scoreChange > 0 ? (
+                  <div>
+                    <img height="280px" src={blue_team_win} alt="" />
+                    <br />
+                    Congratulations! Your commander in chief has successfully
+                    located your team and rescued you. You, the ‘{newbluename}’
+                    score {scoreChange} victory points.
+                  </div>
+                ) : (
+                  <div>
+                    <img src={blue_team_lost} alt="" />
+                    <br />
+                    Sorry! Your commander was unable to identity the secret
+                    word, and hence wasn’t able to locate you!
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div>
+                {' '}
+                {scoreChange > 0 ? (
+                  <div>
+                    <img src={blue_team_lost} alt="" />
+                    <br />
+                    The commander-in-chief of ‘{newredname}’ was able to guess
+                    the secret location successfully and free their soldiers.
+                    Your team loses this round and {newredname} score
+                    {scoreChange} victory points.
+                  </div>
+                ) : (
+                  <div>
+                    <img height="280px" src={blue_team_win} alt="" />
+                    <br />
+                    Congratulations! The commander in chief of ‘{newredname}’
+                    was not able to identify the secret word. Your team ‘
+                    {newbluename}’ wins the round.
+                  </div>
+                )}
+              </div>
+            )}
+          </h5>
           <div>
             <ImageButton
               value="Proceed"
-              classlist="modal_blue_btn"
+              classlist="blue__enterbtn"
               clickMe={changeScreen}
             />
           </div>
