@@ -331,7 +331,6 @@ const TeamRed = ({ socket }) => {
                 </div>
               )}
             </h5>
-            <br></br>
             <div>
               <ImageButton
                 value="Proceed"
