@@ -152,12 +152,20 @@
 .point__round > h1 {
   position: absolute;
 }
-@media only screen and (max-width: 1920px) {
-  /* .point__teamscores {
-    transform: translateY(140px);
-  } */
+@media only screen and (max-width: 1680px), screen and (max-height: 1050px) {
+  .point__teamscores {
+    margin-top: 75px;
+  }
   .point__board {
-    /* margin-top: 80px; */
+    margin-top: 100px;
+  }
+}
+@media only screen and (max-width: 1600px), screen and (max-height: 900px) {
+  .point__teamscores {
+    margin-top: 0px;
+  }
+  .point__board {
+    margin-top: 80px;
   }
 }
 @media only screen and (max-width: 1610px), screen and (max-height: 910) {
@@ -179,26 +187,35 @@
     margin-top: 0px;
   } */
 }
-@media only screen and (max-width: 1366), screen and (max-height: 768px) {
-  /* .point__teamscores {
-    font-size: 18px !important;
-    transform: translateY(-2px) !important;
-  } */
+@media only screen and (max-width: 1366px), screen and (max-height: 768px) {
+  .point__teamscores {
+    margin-top: -50px;
+  }
   .point__controls {
     width: 1000px;
     margin-top: 80px !important;
   }
+  .point__board {
+    margin-top: 50px;
+  }
 }
 @media only screen and (max-width: 1024px), screen and (max-height: 800px) {
-  .point__board {
-    /* margin-top: 45px; */
+  .point__teamscores {
+    margin-top: 0px;
   }
-  /* .point__teamscores {
-    font-size: 16px;
-    transform: translateY(20px);
-  } */
+  .point__board {
+    margin-top: 90px;
+  }
   .point__controls {
     width: 1000px;
     margin-top: 130px;
+  }
+}
+@media only screen and (max-width: 1024px), screen and (max-height: 600px) {
+  .point__teamscores {
+    margin-top: -100px;
+  }
+  .point__board {
+    margin-top: 50px;
   }
 }
