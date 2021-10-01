@@ -5,12 +5,14 @@
     background-size: cover;
     background-repeat: no-repeat;
     padding: 7%;
-    
+    overflow: hidden;
+    font-family: 'PaytoneOne';
 }
-.modal-content {
+.mymodal .modal-content {
   background-image:url('../../images/Player_Roles.webp');
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
 }
 .blue__enterbtn {
     width: 100px;

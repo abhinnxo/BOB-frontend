@@ -55,11 +55,23 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    overflow: hidden;
+    font-family: 'PaytoneOne';
 }
+/* img{
+  height: 300px !important;
+} */
+.modal_blue_btn{
+  width: 10px;
+}
+
 .modal-content {
   background-image:url('../images/Player_Roles.webp');
   background-size: cover;
   background-repeat: no-repeat;
+  height: 550px !important;
+  width: 700px !important;
+  right: 10%;
 }
 
 .red__red {

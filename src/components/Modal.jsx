@@ -24,11 +24,12 @@ function OverScreen({ content, heading, buttonTitle }) {
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
-        className="my-modal"
+        className="mymodal"
       >
         <Modal.Body>
           <center>
-            <div>{heading}</div>
+            <div>#{heading}</div>
+            <br /> <br /> <br /> <br /> <br />
             <br /> <br /> <br /> <br /> <br />
             <h5> {content}</h5>
             <div>

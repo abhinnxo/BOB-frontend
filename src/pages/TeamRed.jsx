@@ -8,8 +8,9 @@ import '../css/teamred.css';
 import ModalComponent from '../components/Modal';
 import { Button, Modal } from 'react-bootstrap';
 import { useLocation } from 'react-router';
-import image1 from '../images/Popover/red4.webp';
-import image2 from '../images/Popover/red5_guesser.webp';
+import red_team_lost from '../images/Popover/red/red_team_lost.webp';
+import red_team_win from '../images/Popover/red/red_team_win.webp';
+
 const axios = require('axios');
 
 const TeamRed = ({ socket }) => {
@@ -250,12 +251,11 @@ const TeamRed = ({ socket }) => {
           {roundfromBackend % 2 === 0 ? (
             <div>
               <ModalComponent
-                content={`You ${(
-                  <h1 style={{ color: 'blue' }}>The Blue Spartans </h1>
-                )} are trapped, and ${(
-                  <h1 style={{ color: 'red' }}>The Red Gladiators</h1>
-                )} are sending messages to their commander in chief.
-          They are your enemies, try your best to stop them.`}
+                content={`You, the ‘${newbluename}’ are trapped, and have 
+                          to send your coded location via a secret 
+                          message to your Commander in Chief ‘${guesserName}’.
+                          ‘${newredname}’ are your enemies, and 
+                          they are trying their best to stop you.`}
                 buttonTitle="TeamRed"
                 heading={roundfromBackend}
               />
@@ -263,12 +263,11 @@ const TeamRed = ({ socket }) => {
           ) : (
             <div>
               <ModalComponent
-                content={`You ${(
-                  <h1 style={{ color: 'red' }}>The Red Gladiators</h1>
-                )} are trapped, and you have to send messages to your commander in chief.
-                ${(
-                  <h1 style={{ color: 'blue' }}>The Blue Spartans</h1>
-                )} are your enemies, and they are trying their best to stop you.`}
+                content={`You, the ‘${newredname}’ are trapped, and have 
+                to send your coded location via a secret 
+                message to your Commander in Chief ‘${guesserName}’.
+                ‘${newbluename}’ are your enemies, and 
+                they are trying their best to stop you.`}
                 buttonTitle="TeamRed"
                 heading={roundfromBackend}
               />
@@ -286,53 +285,56 @@ const TeamRed = ({ socket }) => {
       >
         <center>
           <Modal.Body>
-            <div>Team Red Gladiators</div>
-            {roundfromBackend % 2 === 0 ? (
-              <div>
-                {' '}
-                {scoreChange > 0 ? (
-                  <div>
-                    <img src={image2} alt="" />
-                    <br />
-                    “Whoops, The commander-in-chief of Blue Spartans was able to
-                    guess the secret word successfully. They score {
-                      scoreChange
-                    }{' '}
-                    victory points”.
-                  </div>
-                ) : (
-                  <div>
-                    <img src={image2} alt="" />
-                    <br />
-                    Good news. The commander in chief of Blue Spartans was not
-                    able to identity the secret word.
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div>
-                {' '}
-                {scoreChange > 0 ? (
-                  <div>
-                    <img src={image1} alt="" />
-                    <br />
-                    “Congratulations, your commander in chief was able to
-                    identify the secret word, and locate your team.
-                    <br />
-                    Your team scores {scoreChange} victory points”
-                  </div>
-                ) : (
-                  <div>
-                    <img src={image2} alt="" />
-                    <br />
-                    “Sorry, your commander in chief was not able to identify the
-                    secret word, and locate your team.
-                    <br />
-                    Your team scores 0 points”
-                  </div>
-                )}
-              </div>
-            )}
+            <div style={{ color: 'red', fontSize: '28px' }}>{newredname}</div>
+            <h5>
+              {roundfromBackend % 2 === 0 ? (
+                <div>
+                  {' '}
+                  {scoreChange > 0 ? (
+                    <div>
+                      <img height="280px" src={red_team_win} alt="" />
+                      <br />
+                      Congratulations! Your commander in chief ‘
+                      {guesserName.guesserNameRed}’ has successfully located
+                      your team and rescued you. You, the ‘{newredname}’ score{' '}
+                      {scoreChange} victory points.
+                    </div>
+                  ) : (
+                    <div>
+                      <img src={red_team_lost} alt="" />
+                      <br />
+                      Sorry! Your commander was unable to identity the secret
+                      word, and hence wasn’t able to locate you. “
+                      {guesserName.guesserNameRed}” has failed to rescue you!
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div>
+                  {' '}
+                  {scoreChange > 0 ? (
+                    <div>
+                      <img src={red_team_lost} alt="" />
+                      <br />
+                      The commander-in-chief {guesserName.guesserNameBlue} of ‘
+                      {newbluename}’ was able to guess the secret location
+                      successfully and free their soldiers. Your team loses this
+                      round and {newbluename} score
+                      {scoreChange} victory points.
+                    </div>
+                  ) : (
+                    <div>
+                      <img height="280px" src={red_team_win} alt="" />
+                      <br />
+                      Congratulations! The commander in chief
+                      {guesserName.guesserNameBlue} of ‘{newbluename}’ was not
+                      able to identify the secret word. Your team ‘{newredname}’
+                      wins the round.
+                    </div>
+                  )}
+                </div>
+              )}
+            </h5>
             <br></br>
             <div>
               <ImageButton

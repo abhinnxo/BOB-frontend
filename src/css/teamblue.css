@@ -52,11 +52,20 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    overflow: hidden;
+    font-family: 'PaytoneOne';
 }
 .modal-content {
   background-image:url('../images/Popover/BG.webp');
   background-size: cover;
   background-repeat: no-repeat;
+  text-align: center;
+  height: 550px !important;
+  width: 700px !important;
+  right: 10%;
+}
+.modal_blue_btn{
+  width: 10px;
 }
 
 .blue__rank {

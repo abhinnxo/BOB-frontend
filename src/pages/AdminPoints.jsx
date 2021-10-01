@@ -4,6 +4,7 @@ import EndGame from '../images/close.png';
 import '../css/adminpoints.css';
 import MyTimer from '../components/MyTimer';
 import { Button, Modal } from 'react-bootstrap';
+import ImageButton from '../components/ImageButton';
 const axios = require('axios');
 
 const AdminPoints = ({ socket }) => {
@@ -172,15 +173,22 @@ const AdminPoints = ({ socket }) => {
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Round {roundNumber - 1} Scorecard</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Scored {score} points for his team.</Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={changeScreen}>
-            Understood
-          </Button>
-        </Modal.Footer>
+        <Modal.Body>
+          <div style={{ marginTop: '250px', fontSize: '28px' }}>
+            Round {roundNumber - 1} Scorecard
+          </div>
+          <div>
+            <h5>Scored {score} points for his team.</h5>
+          </div>
+          <div>
+            {' '}
+            <ImageButton
+              value="Proceed"
+              clickMe={changeScreen}
+              classlist="mt-3 gusser__enterbtn"
+            />
+          </div>
+        </Modal.Body>
       </Modal>
       <div className="point__bg"></div>
       <div className="point__controls d-flex justify-content-between">

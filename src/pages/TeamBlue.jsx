@@ -8,8 +8,8 @@ import '../css/teamblue.css';
 import ModalComponent from '../components/Modal';
 import { useLocation } from 'react-router';
 import { Button, Modal } from 'react-bootstrap';
-import image1 from '../images/Popover/red4.webp';
-import image2 from '../images/Popover/red5_guesser.webp';
+import blue_team_lost from '../images/Popover/blue/blue_team_lost.webp';
+import blue_team_win from '../images/Popover/blue/blue_team_win.webp';
 const axios = require('axios');
 
 function TeamBlue({ socket }) {
@@ -261,12 +261,11 @@ function TeamBlue({ socket }) {
           {roundfromBackend % 2 === 0 ? (
             <div>
               <ModalComponent
-                content={`You ${(
-                  <h1 style={{ color: 'red' }}>The Blue Spartans</h1>
-                )} are trapped, and you have to send messages to your commander in chief.
-                ${(
-                  <h1 style={{ color: 'blue' }}>The Red Gladiators</h1>
-                )} are your enemies, and they are trying their best to stop you.`}
+                content={`You, the '${newbluename}' are trapped, and have 
+                to send your coded location via a secret 
+                message to your Commander in Chief ‘${guesserName}’.
+                ‘${newredname}’ are your enemies, and 
+                they are trying their best to stop you.`}
                 buttonTitle="TeamRed"
                 heading={roundfromBackend}
               />
@@ -274,12 +273,11 @@ function TeamBlue({ socket }) {
           ) : (
             <div>
               <ModalComponent
-                content={`You ${(
-                  <h1 style={{ color: 'blue' }}>The Blue Spartans </h1>
-                )} are trapped, and ${(
-                  <h1 style={{ color: 'red' }}>The Red Gladiators</h1>
-                )} are sending messages to their commander in chief.
-          They are your enemies, try your best to stop them.`}
+                content={`You, the ‘${newredname}’ are trapped, and have 
+                to send your coded location via a secret 
+                message to your Commander in Chief ‘${guesserName}’.
+                ‘${newbluename}’ are your enemies, and 
+                they are trying their best to stop you.`}
                 buttonTitle="TeamRed"
                 heading={roundfromBackend}
               />
@@ -289,36 +287,31 @@ function TeamBlue({ socket }) {
       ) : (
         <div></div>
       )}
-
       <Modal
         show={show}
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
-        classname="special_modal"
       >
         <Modal.Body>
-          <div>Team Blue Spartans</div>
-          {roundfromBackend % 2 === 0 ? (
+          <div style={{ color: 'blue', fontSize: '28px' }}>{newbluename}</div>
+          {roundfromBackend % 2 !== 0 ? (
             <div>
               {' '}
               {scoreChange > 0 ? (
                 <div>
-                  <img src={image1} alt="" />
-                  <br />
-                  “Congratulations, your commander in chief was able to identify
-                  the secret word, and locate your team.
-                  <br />
-                  Your team scores {scoreChange} victory points”
+                  <img height="280px" src={blue_team_win} alt="" />
+                  Congratulations! Your commander in chief ‘
+                  {guesserName.guesserNameBlue}’ has successfully located your
+                  team and rescued you. You, the ‘${newbluename}’ score{' '}
+                  {scoreChange} victory points.
                 </div>
               ) : (
                 <div>
-                  <img src={image1} alt="" />
-                  <br />
-                  “Sorry, your commander in chief was not able to identify the
-                  secret word, and locate your team.
-                  <br />
-                  Your team scores 0 points”
+                  <img src={blue_team_lost} alt="" />
+                  Sorry! Your commander was unable to identity the secret word,
+                  and hence wasn’t able to locate you. “
+                  {guesserName.guesserNameBlue}” has failed to rescue you!
                 </div>
               )}
             </div>
@@ -327,36 +320,33 @@ function TeamBlue({ socket }) {
               {' '}
               {scoreChange > 0 ? (
                 <div>
-                  <img src={image1} alt="" />
-                  <br />
-                  “Whoops, The commander-in-chief of Red Gladiators was able to
-                  guess the secret word successfully. They score {
-                    scoreChange
-                  }{' '}
-                  victory points”.
+                  <img src={blue_team_lost} alt="" />
+                  The commander-in-chief {guesserName.guesserNameRed} of ‘
+                  {newredname}’ was able to guess the secret location
+                  successfully and free their soldiers. Your team loses this
+                  round and {newredname} score
+                  {scoreChange} victory points.
                 </div>
               ) : (
                 <div>
-                  <img src={image1} alt="" />
-                  <br />
-                  Good news. The commander in chief of Red Gladiators was not
-                  able to identity the secret word.
+                  <img height="280px" src={blue_team_win} alt="" />
+                  Congratulations! The commander in chief
+                  {guesserName.guesserNameRed} of ‘{newredname}’ was not able to
+                  identify the secret word. Your team ‘{newbluename}’ wins the
+                  round.
                 </div>
               )}
             </div>
           )}
-
-          <br></br>
           <div>
             <ImageButton
               value="Proceed"
-              classlist="red__enterbtn"
+              classlist="modal_blue_btn"
               clickMe={changeScreen}
             />
           </div>
         </Modal.Body>
       </Modal>
-
       {!clue ? (
         <div className="blue__enterhint text-center">
           <h5>{chance}</h5>
@@ -437,8 +427,8 @@ function TeamBlue({ socket }) {
                 )}
               </h3>
               <div>
-                {hintList.map((e) => (
-                  <h3 key={e.toString()}>{e}</h3>
+                {hintList.map((item, i) => (
+                  <h3 key={i}>{item}</h3>
                 ))}
               </div>
               <h4>{chance}</h4>

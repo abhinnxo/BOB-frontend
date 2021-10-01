@@ -18,6 +18,7 @@
   bottom: 0;
   padding-right: 1rem;
   padding-bottom: 1rem;
+  z-index: 100;
 }
 .inst__skip {
   font-size: 24px;

@@ -6,7 +6,10 @@ import Clock from '../images/clock.svg';
 import '../css/gusser.css';
 import { Button, Modal } from 'react-bootstrap';
 import ModalComponent from '../components/Modal';
-import image1 from '../../src/images/Popover/red4.webp';
+import blue_win from '../../src/images/Popover/guesser/blue_win.webp';
+import blue_team_lost from '../../src/images/Popover/guesser/blue_team_lost.webp';
+import red_win from '../../src/images/Popover/guesser/red_win.webp';
+import red_team_lost from '../../src/images/Popover/guesser/red_team_lost.webp';
 const axios = require('axios');
 
 const Gusser = ({ socket }) => {
@@ -128,7 +131,9 @@ const Gusser = ({ socket }) => {
 
     socket.on('guessed-wrong', (wrong) => {
       setGuessSend(0);
-      setChance(`You guessed wrong, you have ${2 - wrong} chance(s) left`);
+      setChance(`Sorry! It was a wrong guess. The help
+      could not reach the soldier, Try again, you have
+      ${2 - wrong} chance(s) left`);
     });
   }, [socket]);
 
@@ -190,11 +195,15 @@ const Gusser = ({ socket }) => {
 
   return (
     <div className="gusser">
-      {roundfromBackend % 2 == 0 ? (
+      {roundfromBackend % 2 === 0 ? (
         <div>
           {' '}
           <ModalComponent
-            content={`Congrats you are the commander in cheif of Team Red Gladiators.Try to decipher the clues sent by your soilders. `}
+            content={`Our soldiers from the ‘${redname}’ are trapped, 
+              and are sending you their coded location via a secret 
+              message to you .Decode the secret message to rescue them.
+              ‘${bluename}’ are your enemies, and 
+              are trying their best to stop you.`}
             heading={roundfromBackend}
           />
         </div>
@@ -202,45 +211,91 @@ const Gusser = ({ socket }) => {
         <div>
           {' '}
           <ModalComponent
-            content={`Congrats you are the commander in cheif of Team Blue Spartans.Try to decipher the clues sent by your soilders.`}
+            content={`Our soldiers from the ‘${bluename}’ are trapped, 
+            and are sending you their coded location via a secret 
+            message to you .Decode the secret message to rescue them.
+            ‘${redname}’ are your enemies, and 
+            are trying their best to stop you.`}
             heading={roundfromBackend}
           />
         </div>
       )}
+      {roundfromBackend % 2 === 0 ? (
+        <div>
+          <Modal
+            show={show}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+          >
+            <Modal.Body>
+              <div>Your Scorecard</div>
+              {scoreChange > 0 ? (
+                <div>
+                  <img src={red_win} alt="" />
+                  <br />
+                  Congratulations! You did it !!! You have successfully rescued
+                  the ‘{team}’ and scored {scoreChange} points.
+                </div>
+              ) : (
+                <div>
+                  <img src={red_team_lost} alt="" />
+                  <br />
+                  Sorry, you were not able to identify the secret word to locate
+                  your soldiers. They are trapped forever in enemy premises.
+                </div>
+              )}
+              <br></br>
+              <h3>{modalText}</h3>
+              <div>
+                <ImageButton
+                  value="Proceed"
+                  clickMe={changeScreen}
+                  classlist="mt-3 gusser__enterbtn"
+                />
+              </div>
+            </Modal.Body>
+          </Modal>
+        </div>
+      ) : (
+        <div>
+          <Modal
+            show={show}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+          >
+            <Modal.Body>
+              <div>Your Scorecard</div>
+              {scoreChange > 0 ? (
+                <div>
+                  <img src={blue_win} alt="" />
+                  <br />
+                  Congratulations! You did it !!! You have successfully rescued
+                  the ‘{team}’ and scored {scoreChange} points.
+                </div>
+              ) : (
+                <div>
+                  <img src={blue_team_lost} alt="" />
+                  <br />
+                  Sorry, you were not able to identify the secret word to locate
+                  your soldiers. They are trapped forever in enemy premises.
+                </div>
+              )}
+              <br></br>
+              <h3>{modalText}</h3>
+              <div>
+                <ImageButton
+                  value="Proceed"
+                  clickMe={changeScreen}
+                  classlist="mt-3 gusser__enterbtn"
+                />
+              </div>
+            </Modal.Body>
+          </Modal>
+        </div>
+      )}
 
-      <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Body>
-          <div>Your Scorecard</div>
-          {scoreChange > 0 ? (
-            <div>
-              <img src={image1} alt="" />
-              <br />
-              Congrats!! you scored {scoreChange} points for Team {team}.
-            </div>
-          ) : (
-            <div>
-              <img src={image1} alt="" />
-              <br />
-              Sorry, you were not able to identify the secret word to locate
-              your soldiers. They are trapped forever in enemy premises.
-            </div>
-          )}
-          <br></br>
-          <h3>{modalText}</h3>
-          <div>
-            <ImageButton
-              value="Proceed"
-              clickMe={changeScreen}
-              classlist="mt-3 gusser__enterbtn"
-            />
-          </div>
-        </Modal.Body>
-      </Modal>
       <div className="gusser__bg"></div>
       <div className="gusser__teamranks d-flex justify-content-between px-3">
         <h3 className="my-auto" style={{ color: '#ffffff' }}>

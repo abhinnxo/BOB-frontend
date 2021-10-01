@@ -12,6 +12,24 @@
   background-size: cover;
   overflow: hidden;
 }
+.modal
+{
+    background-image: url('../images/POPUP_SCREEN_BG.webp');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    font-family: 'PaytoneOne';
+}
+.modal-content {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+  height: 550px !important;
+  width: 700px !important;
+  right: 10%;
+}
 
 .guesser_words {
   font-family: 'PaytoneOne';
