@@ -343,11 +343,11 @@ const TeamRed = ({ socket }) => {
       </Modal>
       {!clue ? (
         <div className="red__enterhint text-center">
-          <h5>
+          {/* <h5>
             {' '}
             Commander guessed wrong, Now{' '}
             <span style={{ color: 'red' }}>{chance} chance(s)</span> left...
-          </h5>
+          </h5> */}
           <h1>
             Hello Soldier,
             <br />

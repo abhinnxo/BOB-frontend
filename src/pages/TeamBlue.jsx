@@ -352,10 +352,10 @@ function TeamBlue({ socket }) {
       </Modal>
       {!clue ? (
         <div className="blue__enterhint text-center">
-          <h5>
+          {/* <h5>
             Commander guessed wrong, Now{' '}
             <span style={{ color: 'red' }}>{chance} chance(s)</span> left...
-          </h5>
+          </h5> */}
           <h1>
             Hello Soldier,
             <br />
