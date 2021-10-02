@@ -61,10 +61,14 @@
 .row2 {
   width: 592px;
 }
+#chance-msg {
+  width: 100%;
+  margin-left: -180px;
+}
 .gusser__enterdiv {
   position: absolute;
   font-family: 'PaytoneOne';
-  text-align: center;
+  /* text-align: center; */
   left: 50%;
   margin-left: -233.5px;
   top: 50%;
@@ -89,15 +93,14 @@
   transform: translate(-73px, -42px);
   color: white;
 }
-.modal
-{
-    background-image: url('../images/POPUP_SCREEN_BG.webp');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+.modal {
+  background-image: url('../images/POPUP_SCREEN_BG.webp');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .modal-content {
-  background-image:url('../images/Popover/BG.webp');
+  background-image: url('../images/Popover/BG.webp');
   background-size: cover;
   background-repeat: no-repeat;
 }

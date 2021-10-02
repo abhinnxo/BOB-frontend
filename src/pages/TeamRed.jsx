@@ -124,13 +124,17 @@ const TeamRed = ({ socket }) => {
       .catch((err) => console.error(err));
   });
 
+  //  getting aproved hint list from admin
   useEffect(() => {
-    //  getting approved hint list from admkin
-    socket.on('hintList', (list) => {
-      console.log('hints', list);
-      setHintList(list);
-    });
-  }, [socket]);
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/hintList`,
+    })
+      .then((res) => {
+        setHintList(res.data);
+      })
+      .catch((err) => console.error(err));
+  });
 
   // setting the round number
   socket.on('current-round', (round) => {
@@ -413,13 +417,32 @@ const TeamRed = ({ socket }) => {
             <>
               <h3>
                 {roundfromBackend % 2 === 0 ? (
-                  <h3>
-                    Clues that reached your Commander in chief &nbsp;
-                    <span style={{ color: 'red' }}>
-                      "{guesserName.guesserNameRed}"
-                    </span>
-                    :
-                  </h3>
+                  <>
+                    <h3>
+                      Clues that reached your Commander in chief &nbsp;
+                      <span style={{ color: 'red' }}>
+                        "{guesserName.guesserNameRed}"
+                      </span>
+                      :
+                    </h3>
+                    <br />
+                    <h3>
+                      {hintList.map((e) => (
+                        <span
+                          style={{
+                            background: '#9b5825',
+                            color: 'white',
+                            width: 'fitContent',
+                            borderRadius: '5%',
+                            padding: '5px',
+                          }}
+                          key={e.toString()}
+                        >
+                          {e} &nbsp;{' '}
+                        </span>
+                      ))}
+                    </h3>
+                  </>
                 ) : (
                   <>
                     <h3>
@@ -430,29 +453,66 @@ const TeamRed = ({ socket }) => {
                       </span>
                       :
                     </h3>
-                    {hintList.map((e) => (
-                      <span key={e.toString()}>{e}</span>
-                    ))}
+                    <br />
+                    <h3>
+                      {hintList.map((e) => (
+                        <span
+                          style={{
+                            background: '#9b5825',
+                            color: 'white',
+                            width: 'fitContent',
+                            borderRadius: '5%',
+                            padding: '5px',
+                          }}
+                          key={e.toString()}
+                        >
+                          {e} &nbsp;{' '}
+                        </span>
+                      ))}
+                    </h3>
                   </>
                 )}
               </h3>
-              <h4>
-                {' '}
-                Commander guessed wrong, Now{' '}
-                <span style={{ color: 'red' }}>{chance} chance(s)</span> left...
-              </h4>
+              {chance == 2 ? (
+                <h4>
+                  Commander guessed wrong, Now{' '}
+                  <span style={{ color: 'red' }}>{chance} chance(s)</span>{' '}
+                  left...
+                </h4>
+              ) : (
+                <></>
+              )}
             </>
           ) : (
             <>
               {roundfromBackend % 2 === 0 ? (
-                <h3>
-                  These are the Clues that reached your Commander in Chief
-                  &nbsp;
-                  <span style={{ color: 'red' }}>
-                    "{guesserName.guesserNameRed}"
-                  </span>
-                  :
-                </h3>
+                <>
+                  <h3>
+                    These are the Clues that reached your Commander in Chief
+                    &nbsp;
+                    <span style={{ color: 'red' }}>
+                      "{guesserName.guesserNameRed}"
+                    </span>
+                    :
+                  </h3>
+                  <br />
+                  <h3>
+                    {hintList.map((e) => (
+                      <span
+                        style={{
+                          background: '#9b5825',
+                          color: 'white',
+                          width: 'fitContent',
+                          borderRadius: '5%',
+                          padding: '5px',
+                        }}
+                        key={e.toString()}
+                      >
+                        {e} &nbsp;{' '}
+                      </span>
+                    ))}
+                  </h3>
+                </>
               ) : (
                 <>
                   <h3>
@@ -463,16 +523,34 @@ const TeamRed = ({ socket }) => {
                     </span>
                     :
                   </h3>
-                  {hintList.map((e) => (
-                    <span key={e.toString()}>{e}</span>
-                  ))}
+                  <br />
+                  <h3>
+                    {hintList.map((e) => (
+                      <span
+                        style={{
+                          background: '#9b5825',
+                          color: 'white',
+                          width: 'fitContent',
+                          borderRadius: '5%',
+                          padding: '5px',
+                        }}
+                        key={e.toString()}
+                      >
+                        {e} &nbsp;{' '}
+                      </span>
+                    ))}
+                  </h3>
                 </>
               )}
-              <h4>
-                {' '}
-                Commander guessed wrong, Now{' '}
-                <span style={{ color: 'red' }}>{chance} chance(s)</span> left...
-              </h4>
+              {chance == 2 ? (
+                <h4>
+                  Commander guessed wrong, Now{' '}
+                  <span style={{ color: 'red' }}>{chance} chance(s)</span>{' '}
+                  left...
+                </h4>
+              ) : (
+                <></>
+              )}
             </>
           )}
         </div>

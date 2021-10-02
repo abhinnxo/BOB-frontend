@@ -135,12 +135,16 @@ function TeamBlue({ socket }) {
       .catch((err) => console.error(err));
   });
 
-  //  getting approved hint list from admin
+  //  getting aproved hint list from admin
   useEffect(() => {
-    socket.on('hintList', (list) => {
-      setHintList(list);
-      console.log(list);
-    });
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/hintList`,
+    })
+      .then((res) => {
+        setHintList(res.data);
+      })
+      .catch((err) => console.error(err));
   });
 
   // setting the round number
@@ -150,10 +154,6 @@ function TeamBlue({ socket }) {
 
   //  end game button
   useEffect(() => {
-    // socket.on('gusserHints', (arr) => {
-    //   setHintList(arr);
-    // });
-
     socket.on('game-ended', (gameValue) => {
       if (gameValue == 1) {
         localStorage.clear();
@@ -427,64 +427,131 @@ function TeamBlue({ socket }) {
                       </span>
                       :
                     </h3>
-
-                    {hintList.map((item, i) => (
-                      <span key={i}>{item}</span>
-                    ))}
                   </>
                 ) : (
-                  <h3>
-                    Clues that reached their Commander in chief &nbsp;
-                    <span style={{ color: 'blue' }}>
-                      "{guesserName.guesserNameBlue}"
-                    </span>
-                    :{' '}
-                    {hintList.map((item, i) => (
-                      <span key={i}>{item}</span>
-                    ))}
-                  </h3>
+                  <>
+                    <h3>
+                      Clues that reached their Commander in chief &nbsp;
+                      <span style={{ color: 'blue' }}>
+                        "{guesserName.guesserNameBlue}"
+                      </span>
+                      :{' '}
+                    </h3>
+                    <br />
+                    <h3>
+                      {hintList.map((e) => (
+                        <span
+                          style={{
+                            background: '#9b5825',
+                            color: 'white',
+                            width: 'fitContent',
+                            borderRadius: '5%',
+                            padding: '5px',
+                          }}
+                          key={e.toString()}
+                        >
+                          {e} &nbsp;{' '}
+                        </span>
+                      ))}
+                    </h3>
+                  </>
                 )}
               </h3>
-              <div>
-                {hintList.map((item, i) => (
-                  <span key={i}>{item}</span>
+              <br />
+              <h3>
+                {hintList.map((e) => (
+                  <span
+                    style={{
+                      background: '#9b5825',
+                      color: 'white',
+                      width: 'fitContent',
+                      borderRadius: '5%',
+                      padding: '5px',
+                    }}
+                    key={e.toString()}
+                  >
+                    {e} &nbsp;{' '}
+                  </span>
                 ))}
-              </div>
-              <h4>
-                Commander guessed wrong, Now{' '}
-                <span style={{ color: 'red' }}>{chance} chance(s)</span> left...
-              </h4>
+              </h3>
+              {chance == 2 ? (
+                <h4>
+                  Commander guessed wrong, Now{' '}
+                  <span style={{ color: 'red' }}>{chance} chance(s)</span>{' '}
+                  left...
+                </h4>
+              ) : (
+                <></>
+              )}
             </>
           ) : (
             <>
               {roundfromBackend % 2 !== 0 ? (
-                <h3>
-                  These are the Clues that reached your Commander in Chief
-                  &nbsp;
-                  <span style={{ color: 'blue' }}>
-                    "{guesserName.guesserNameRed}"
-                  </span>
-                  :
-                </h3>
+                <>
+                  <h3>
+                    These are the Clues that reached your Commander in Chief
+                    &nbsp;
+                    <span style={{ color: 'blue' }}>
+                      "{guesserName.guesserNameBlue}"
+                    </span>
+                    :
+                  </h3>
+                  <br />
+                  <h3>
+                    {hintList.map((e) => (
+                      <span
+                        style={{
+                          background: '#9b5825',
+                          color: 'white',
+                          width: 'fitContent',
+                          borderRadius: '5%',
+                          padding: '5px',
+                        }}
+                        key={e.toString()}
+                      >
+                        {e} &nbsp;{' '}
+                      </span>
+                    ))}
+                  </h3>
+                </>
               ) : (
-                <h3>
-                  These are the Clues that reached their Commander in Chief
-                  &nbsp;
-                  <span style={{ color: 'red' }}>
-                    "{guesserName.guesserNameBlue}"
-                  </span>
-                  :
-                </h3>
+                <>
+                  <h3>
+                    These are the Clues that reached their Commander in Chief
+                    &nbsp;
+                    <span style={{ color: 'red' }}>
+                      "{guesserName.guesserNameBlue}"
+                    </span>
+                    :
+                  </h3>
+                  <br />
+                  <h3>
+                    {hintList.map((e) => (
+                      <span
+                        style={{
+                          background: '#9b5825',
+                          color: 'white',
+                          width: 'fitContent',
+                          borderRadius: '5%',
+                          padding: '5px',
+                        }}
+                        key={e.toString()}
+                      >
+                        {e}
+                      </span>
+                    ))}
+                  </h3>
+                </>
               )}
-              <div>
-                {hintList.map((e) => (
-                  <span key={e.toString()}>{e}</span>
-                ))}
-              </div>
-              <h4>
-                Commander guessed wrong, Now{' '}
-                <span style={{ color: 'red' }}>{chance} chance(s)</span> left...
-              </h4>
+              {chance == 2 ? (
+                <h4>
+                  Commander guessed wrong, Now{' '}
+                  <span style={{ color: 'red' }}>{chance} chance(s)</span>{' '}
+                  left...
+                </h4>
+              ) : (
+                <></>
+              )}
             </>
           )}
         </div>

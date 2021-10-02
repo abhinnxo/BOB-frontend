@@ -321,11 +321,11 @@ const Gusser = ({ socket }) => {
       <div className="gusser__enterdiv">
         <h3 className="fw-bold">You're the Commander in Cheif now</h3>
         <br />
-        <h5 id="chance-msg" style={{ color: 'red' }}>
+        <h5 id="chance-msg" style={{ color: 'red', textAlign: 'center' }}>
           {chance}
         </h5>
         {guessSend ? (
-          <div className="text-center">
+          <div>
             <h5>
               <span style={{ color: 'red' }}>Guess sent</span>, waiting for the
               host's response...

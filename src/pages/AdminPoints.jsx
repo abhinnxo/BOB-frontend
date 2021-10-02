@@ -81,9 +81,20 @@ const AdminPoints = ({ socket }) => {
 
   // setting final gueser array
   useEffect(() => {
-    console.log('guess array  ', guessingArr);
     setGuessingArray(location.state.arr);
   }, []);
+
+  //  getting aproved hint list from admin
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/hintList`,
+    })
+      .then((res) => {
+        setHintList(res.data);
+      })
+      .catch((err) => console.error(err));
+  });
 
   // when game is ended route everyone to main screen
   socket.on('game-ended', (gameValue) => {
@@ -93,11 +104,11 @@ const AdminPoints = ({ socket }) => {
     }
   });
 
-  //  getting approved hint list from admkin
-  socket.on('hintList', (list) => {
-    setHintList(list);
-    console.log('hints', list);
-  });
+  // //  getting approved hint list from admkin
+  // socket.on('hintList', (list) => {
+  //   setHintList(list);
+  //   console.log('hints', list);
+  // });
 
   socket.on('guessToHost', (guessSubmitted) => {
     setGusser(guessSubmitted);
@@ -225,7 +236,11 @@ const AdminPoints = ({ socket }) => {
           Words that reached the Commander in Chief of Team&nbsp;"
           {roundNumber % 2 === 0 ? <>{redname}</> : <>{bluename}</>}
           ":
-          <h5>{hintList}</h5>
+          <h5>
+            {hintList.map((item) => (
+              <span key={item.toString()}>{item} &nbsp; </span>
+            ))}
+          </h5>
         </center>
       </h3>
       <div className="gusserhints">

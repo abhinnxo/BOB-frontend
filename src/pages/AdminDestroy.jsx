@@ -119,11 +119,13 @@ const AdminDestroy = ({ socket }) => {
     setDestroyClicked(true);
 
     let allWords = document.querySelectorAll('.guessingTeam input');
+    let allWords1 = document.querySelectorAll('.guessingTeam label');
     allWords.forEach((word) => {
       if (!word.checked) {
         setGuessingArr([...guessingArr, word.value]);
+      } else {
         document
-          .querySelector('.hidedestroyed')
+          .querySelector('.guessingTeam label')
           .classList.add('admindestroy__hide');
       }
     });
