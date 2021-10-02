@@ -233,9 +233,11 @@ const AdminPoints = ({ socket }) => {
       <br />
       <h3>
         <center>
-          Words that reached the Commander in Chief of Team&nbsp;"
-          {roundNumber % 2 === 0 ? <>{redname}</> : <>{bluename}</>}
-          ":
+          Words that reached the Commander in Chief of &nbsp;
+          <span style={{ color: '#663c17' }}>
+            "{roundNumber % 2 === 0 ? <>{redname}</> : <>{bluename}</>}"
+          </span>
+          :
           <h5>
             {hintList.map((item) => (
               <span key={item.toString()}>{item} &nbsp; </span>

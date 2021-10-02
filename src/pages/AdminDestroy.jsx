@@ -120,13 +120,17 @@ const AdminDestroy = ({ socket }) => {
 
     let allWords = document.querySelectorAll('.guessingTeam input');
     let allWords1 = document.querySelectorAll('.guessingTeam label');
+    let len1 = 0;
+
     allWords.forEach((word) => {
       if (!word.checked) {
         setGuessingArr([...guessingArr, word.value]);
+        len1++;
       } else {
-        document
-          .querySelector('.guessingTeam label')
-          .classList.add('admindestroy__hide');
+        allWords1[len1].classList.add('admindestroy__hide');
+        // document
+        //   .querySelector('.guessingTeam label')
+        //   .classList.add('admindestroy__hide');
       }
     });
 

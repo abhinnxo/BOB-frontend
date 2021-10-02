@@ -364,7 +364,7 @@ const TeamRed = ({ socket }) => {
             </span>
           </h1>
           <h3>
-            {roundfromBackend % 2 !== 0 ? (
+            {roundfromBackend % 2 === 0 ? (
               <p>
                 Type your one word clue similar to
                 <br />
