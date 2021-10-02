@@ -232,7 +232,7 @@ const Gusser = ({ socket }) => {
               <div>Your Scorecard</div>
               {scoreChange > 0 ? (
                 <div>
-                  <img src={red_win} alt="" />
+                  <img height="280px" src={red_win} alt="" />
                   <br />
                   Congratulations! You did it !!! You have successfully rescued
                   the ‘{team}’ and scored {scoreChange} points.

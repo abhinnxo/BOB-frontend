@@ -326,7 +326,7 @@ function TeamBlue({ socket }) {
                     <br />
                     The commander-in-chief of ‘{newredname}’ was able to guess
                     the secret location successfully and free their soldiers.
-                    Your team loses this round and {newredname} score
+                    Your team loses this round and {newredname} score{' '}
                     {scoreChange} victory points.
                   </div>
                 ) : (
