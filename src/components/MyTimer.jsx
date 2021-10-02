@@ -77,7 +77,7 @@ const MyTimer = ({ expiryTimestamp, socket, showNextRound }) => {
     alert('Skipped to the Next Round...');
 
     const time = new Date();
-    time.setSeconds(time.getSeconds() + 90);
+    time.setSeconds(time.getSeconds() + 180);
     restart(time);
 
     socket.emit('change-score', 0);

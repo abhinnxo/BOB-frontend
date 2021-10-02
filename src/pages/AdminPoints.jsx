@@ -23,7 +23,7 @@ const AdminPoints = ({ socket }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const time = new Date();
-  time.setSeconds(time.getSeconds() + 90);
+  time.setSeconds(time.getSeconds() + 180);
   const [guessingArr, setGuessingArray] = useState([]);
   const history = useHistory();
   const location = useLocation();

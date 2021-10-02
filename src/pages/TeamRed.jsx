@@ -290,7 +290,7 @@ const TeamRed = ({ socket }) => {
           <Modal.Body>
             <div style={{ color: 'red', fontSize: '28px' }}>{newredname}</div>
             <h5>
-              {roundfromBackend % 2 === 0 ? (
+              {roundfromBackend % 2 !== 0 ? (
                 <div>
                   {' '}
                   {scoreChange > 0 ? (
@@ -470,6 +470,10 @@ const TeamRed = ({ socket }) => {
                         </span>
                       ))}
                     </h3>
+                    <h3>
+                      Word guessed by the Commander in cheif "
+                      {guesserName.guesserNameBlue}" : {guessedWord}
+                    </h3>
                   </>
                 )}
               </h3>
@@ -511,6 +515,10 @@ const TeamRed = ({ socket }) => {
                         {e} &nbsp;{' '}
                       </span>
                     ))}
+                  </h3>
+                  <h3>
+                    Word guessed by the Commander in cheif "
+                    {guesserName.guesserNameRed}" : {guessedWord}
                   </h3>
                 </>
               ) : (

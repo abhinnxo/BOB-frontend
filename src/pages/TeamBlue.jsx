@@ -297,7 +297,7 @@ function TeamBlue({ socket }) {
         <Modal.Body>
           <div style={{ color: 'blue', fontSize: '28px' }}>{newbluename}</div>
           <h5>
-            {roundfromBackend % 2 !== 0 ? (
+            {roundfromBackend % 2 === 0 ? (
               <div>
                 {' '}
                 {scoreChange > 0 ? (
@@ -513,6 +513,10 @@ function TeamBlue({ socket }) {
                       </span>
                     ))}
                   </h3>
+                  <h3>
+                    Word guessed by the Commander in cheif "
+                    {guesserName.guesserNameBlue}" : {guessedWord}
+                  </h3>
                 </>
               ) : (
                 <>
@@ -520,7 +524,7 @@ function TeamBlue({ socket }) {
                     These are the Clues that reached their Commander in Chief
                     &nbsp;
                     <span style={{ color: 'red' }}>
-                      "{guesserName.guesserNameBlue}"
+                      "{guesserName.guesserNameRed}"
                     </span>
                     :
                   </h3>
@@ -540,6 +544,10 @@ function TeamBlue({ socket }) {
                         {e}
                       </span>
                     ))}
+                  </h3>
+                  <h3>
+                    Word guessed by the Commander in cheif "
+                    {guesserName.guesserNameRed}" : {guessedWord}
                   </h3>
                 </>
               )}

@@ -27,7 +27,7 @@ const AdminDestroy = ({ socket }) => {
   const history = useHistory();
 
   const time = new Date();
-  time.setSeconds(time.getSeconds() + 90);
+  time.setSeconds(time.getSeconds() + 180);
 
   useEffect(() => {
     if (roundNumber % 2 === 0) {
