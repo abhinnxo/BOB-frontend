@@ -75,14 +75,12 @@ function Instructions({ socket }) {
   return (
     <div>
       <div className="inst__bg" style={bgstyle}>
-        <div style={caro} datra-wrap="false" className="caro">
+        <div style={caro} className="caro">
           <Carousel
-            wrap="false"
-            datra-wrap="false"
-            interval={null}
             style={img}
             nextIcon={directionButtons('Next')}
             prevIcon={directionButtons('Previous')}
+            // nextIcon={nextIcon} prevIcon={prevIcon}
           >
             <Carousel.Item style={img1}>
               <img className="d-block instimg" src={inst1} alt="First slide" />

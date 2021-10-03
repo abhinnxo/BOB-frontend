@@ -1,16 +1,14 @@
-.admindestroy__bg {
+.hostwaitinglobby__bg {
   position: absolute;
   left: 0px;
   top: 0px;
   z-index: -3;
-  background: url('../images/bglogo.webp');
+  background: url("../images/map1.webp");
   height: 100%;
   width: 100%;
   background-position: center center;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-size: cover;
-  overflow: hidden;
 }
 .hostWaitingLobby {
   display: flex;
@@ -18,40 +16,25 @@
   align-items: center;
   margin: auto;
   width: max-content;
-  margin-top: 50px;
+  margin-top: 100px;
 }
 .end_settings > img {
   cursor: pointer;
 }
-.timer__round {
+.end_settings,
+.timer_round,
+.pauseTimer_nextRound {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1300px;
-  margin-bottom: 2px;
+  width: 900px;
+  margin-bottom: 5px;
 }
 .endGame {
-  margin-bottom: 50px;
-  width: 50px !important;
-  cursor: pointer;
+  width: 200px;
 }
-.settings {
-  cursor: pointer;
-  margin-left: auto;
-}
-.admin__round {
-  background: url('../images/timer.svg');
-  height: 45px;
-  width: 150px;
-  color: white;
-  font-size: 20px;
-  font-weight: bolder;
-  padding: 7px 0 6px 37px;
-  margin-top: -30px;
-}
-/* background of round number */
-.timer_round > div > p {
-  background: url('../images/timer.svg');
+.timer_round > p {
+  background: url("../images/timer.svg");
   background-size: cover;
   width: 186px;
   height: 53px;
@@ -61,51 +44,57 @@
   font-weight: 700;
   color: #ffffff;
 }
+
 .pauseTimer_nextRound > img {
   cursor: pointer;
   background-size: cover;
   width: 120px;
 }
+
 .mainWord,
 .teamNameBlue,
 .teamNameRed {
   background-size: cover !important;
   display: grid;
   place-items: center;
-  width: 190px;
-  height: 45px;
+  min-width: 190px;
+  min-height: 45px;
   width: fit-content;
   font-weight: 700;
   color: #ffffff;
   position: relative;
 }
+
 .teamNameBlue {
-  background: url('../images/team_name_blue.svg');
+  background: url("../images//team_name_blue.svg");
   transform: translate(100px, -100px);
-  padding-bottom: 5px;
 }
+
 .teamNameRed {
-  background: url('../images/team_nam_red.svg');
+  background: url("../images//team_nam_red.svg");
   transform: translate(-100px, 100px);
-  padding-bottom: 5px;
 }
-.admin__similar {
-  font-weight: bolder;
-  text-shadow: 10px solid black;
+
+.mainWord {
+  font-size: medium;
+  background: url("../images/mainword.svg");
+  width: 200px;
+  height: 50px;
+  margin: 10px auto -40px auto;
 }
+
 .destroy {
   width: 150px;
 }
-.admindestroy__guessername {
-  transform: translateY(35px);
-}
+
 .join {
   display: flex;
   align-items: center;
 }
+
 .teams {
   color: #ffffff;
-  background: url('../images/centre_box.svg');
+  background: url("../images/centre_box.svg");
   background-size: cover !important;
   width: 750px;
   height: 400px;
@@ -115,15 +104,18 @@
   align-items: center;
   justify-content: space-between;
 }
+
 .allPlayers {
   width: 500px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
+
 .player {
   display: flex;
   justify-content: center;
 }
+
 .player > div {
   margin: 3px 0px 0px 10px;
   width: 20px;
@@ -132,6 +124,7 @@
   background-color: #ffffff;
   border: 5px solid #ffffff;
 }
+
 .player .answered {
   background-color: #1bd5e2;
   overflow: hidden;
@@ -153,8 +146,11 @@
   width: 900px;
   margin-bottom: 5px;
 }
+.endGame {
+  width: 200px;
+}
 .timer_round > p {
-  background: url('../images/timer.svg');
+  background: url("../images/timer.svg");
   background-size: cover;
   width: 186px;
   height: 53px;
@@ -168,23 +164,33 @@
   background-size: cover;
   width: 120px;
 }
+.mainWord,
+.teamNameBlue,
+.teamNameRed {
+  background-size: cover !important;
+  display: grid;
+  place-items: center;
+  min-width: 190px;
+  min-height: 45px;
+  width: fit-content;
+  font-weight: 700;
+  color: #ffffff;
+  position: relative;
+}
 .teamNameBlue {
-  background: url('../images/team_name_blue.svg');
+  background: url("../images//team_name_blue.svg");
   transform: translate(100px, -100px);
 }
 .teamNameRed {
-  background: url('../images/team_nam_red.svg');
+  background: url("../images//team_nam_red.svg");
   transform: translate(-100px, 100px);
 }
 .mainWord {
-  background: url('../images/mainword.webp') !important;
-  width: 220px !important;
-  height: 50px !important;
+  font-size: medium;
+  background: url("../images/mainword.svg");
+  width: 200px;
+  height: 50px;
   margin: 10px auto -40px auto;
-  text-transform: uppercase;
-  font-size: 20px !important;
-  letter-spacing: 1.5px;
-  padding-bottom: 5px;
 }
 .destroy {
   width: 150px;
@@ -195,7 +201,7 @@
 }
 .teams {
   color: #ffffff;
-  background: url('../images/centre_box.svg');
+  background: url("../images/centre_box.svg");
   background-size: cover !important;
   width: 750px;
   height: 400px;
@@ -213,6 +219,7 @@
 .player {
   display: flex;
   justify-content: center;
+  /* margin-top: 2rem; */
 }
 .player > div {
   margin: 3px 0px 0px 10px;
@@ -232,28 +239,15 @@
   top: -45px;
   left: 420px;
 }
-.admin__destroy {
-  cursor: pointer;
-  background: #34c78f;
-  color: white;
-  height: 2.5rem;
-  width: 5.5rem;
-  font-weight: 900;
-  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 19.9895px;
-  border: none;
-}
 
 /* ========================== Destroy Admin ======================== */
 
 .seperateBoard {
   color: #ffffff;
-  background: url('../images/centre_box_with_partition.svg');
+  background: url("../images/centre_box_with_partition.svg");
   background-size: cover !important;
-  width: 850px !important;
-  height: 470px !important;
-  /* width: 750px;
-  height: 400px; */
+  width: 750px;
+  height: 400px;
   padding: 60px;
   display: flex;
   flex-direction: column;
@@ -271,35 +265,31 @@
   grid-template-columns: 1fr 1fr;
   width: 550px;
   gap: 20px;
+  /* border: 1px solid black; */
 }
 
 .eachTeam {
-  width: 350px !important;
-  height: 280px !important;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  transform: translateX(-85px);
 }
 
 .word {
-  /* z-index: 5; */
   font-weight: 800;
   padding: 0px 10px;
-  background: url('../images/timer.svg');
+  background: url("../images//timer.svg");
   background-size: cover;
-  height: 40px !important;
-  width: fit-content !important;
-  /* width: fit-content; */
+  height: 25px;
+  min-width: 100px;
+  width: fit-content;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 5px;
-  font-size: 10px;
+  font-size: small;
 }
-.word > label {
-  font-size: 24px;
-}
+
 .word > span:last-child {
   cursor: pointer;
   width: 10px;
@@ -309,95 +299,35 @@
   border: 3px solid #ffffff;
 }
 
-.admindestroy__hide {
-  text-decoration: line-through;
-  color: red;
-}
-
-@media only screen and (max-width: 1600px), screen and (max-height: 900px) {
-  .seperateBoard {
-    transform: translateY(-60px);
-  }
-  .mainWord {
-    transform: translateY(-40px);
-    z-index: 3;
-  }
-  span.teamNameBlue {
-    transform: translate(120px, -175px);
-    z-index: 3;
-  }
-  span.teamNameRed {
-    transform: translate(-100px, 60px);
-  }
-  .admin__destroy {
-    transform: translateY(-80px);
-  }
-  .admindestroy__guessername {
-    transform: translateY(25px);
-  }
-}
-@media only screen and (max-width: 1366px), screen and (max-height: 768px) {
-  .seperateBoard {
-    transform: translateY(-90px);
-  }
-  .mainWord {
-    transform: translateY(-65px);
-  }
-  .admindestroy__guessername {
-    transform: translateY(20px);
-  }
-}
-@media only screen and (max-width: 1280px), screen and (max-height: 720px) {
-  .timer__round {
-    width: 1000px;
-  }
-  .seperateBoard {
-    transform: translateY(-70px);
+@media only screen and (max-width: 1366px) {
+  .hostWaitingLobby {
+    margin-top: 70px;
   }
 
+  .end_settings,
+  .timer_round,
+  .pauseTimer_nextRound {
+    width: 800px;
+    margin-bottom: 0px;
+  }
+
+  .teams,
   .seperateBoard {
-    width: 700px !important;
-    height: 370px !important;
+    width: 650px;
+    height: 350px;
   }
-  .eachTeam {
-    width: 220px !important;
-    height: 180px !important;
-    transform: translateX(25px);
+
+  .players {
+    transform: translateY(-10px);
   }
-  .mainWord {
-    transform: translateY(-60px);
-    z-index: 3;
+
+  .teams > h3,
+  .players > h3 {
+    font-size: 22px;
   }
-  span.teamNameBlue {
-    transform: translate(110px, -150px);
-    z-index: 3;
-  }
-  span.teamNameRed {
-    transform: translate(-100px, 25px);
-  }
-  .destroyButton > img {
-    transform: translateY(20px);
-    cursor: pointer;
-    width: 150px;
-  }
-  .admin__destroy {
-    transform: translateY(-8 0px);
-  }
-}
-@media only screen and (max-width: 1024px), screen and (max-height: 600px) {
-  .seperateBoard {
-    transform: translateY(-150px) !important;
-  }
-  .admin__destroy {
-    transform: translateY(-150px) !important;
-  }
-  span.teamNameBlue {
-    transform: translate(110px, -50px);
-  }
-  span.teamNameRed {
-    transform: translate(-100px, -45px);
-  }
-  .mainWord {
-    transform: translateY(-135px);
+
+  .msgInput > div > input {
+    width: 350px !important;
+    height: 50px !important;
   }
 }

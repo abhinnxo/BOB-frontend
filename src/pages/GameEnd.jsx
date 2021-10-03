@@ -17,7 +17,7 @@ const GameEnd = () => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bobbackend.games.madiee.com/score`,
+      url: `https://bob-backend-madiee-h.herokuapp.com/score`,
     })
       .then((res) => {
         console.log('score from backend: ', res.data);
@@ -32,7 +32,7 @@ const GameEnd = () => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bobbackend.games.madiee.com/newteamnames`,
+      url: `https://bob-backend-madiee-h.herokuapp.com/newteamnames`,
     })
       .then((res) => {
         setBluename(res.data.newblueteamname);

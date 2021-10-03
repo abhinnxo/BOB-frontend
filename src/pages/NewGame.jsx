@@ -17,11 +17,25 @@ const NewGame = ({ socket }) => {
 
   const history = useHistory();
 
+  // username/password check
+  useEffect(() => {
+    console.log('username', username);
+  }, [username]);
+  useEffect(() => {
+    console.log('password', password);
+  }, [password]);
+  useEffect(() => {
+    console.log('nickname', nickname);
+  }, [nickname]);
+  useEffect(() => {
+    console.log('roomid', roomid);
+  }, [roomid]);
+
   //  Get Nanmes of Joined Players
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bobbackend.games.madiee.com/usernames`,
+      url: `https://bob-backend-madiee-h.herokuapp.com/usernames`,
     })
       .then((res) => {
         setPlayersInLobby(res.data);
@@ -75,7 +89,7 @@ const NewGame = ({ socket }) => {
     } else {
       axios({
         method: 'get',
-        url: `https://bobbackend.games.madiee.com/code`,
+        url: `https://bob-backend-madiee-h.herokuapp.com/code`,
       })
         .then((res) => {
           console.log('axios ', res.data);

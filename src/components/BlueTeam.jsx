@@ -7,17 +7,17 @@ const BlueTeam = ({ playerListBlue, hostId, socket }) => {
   const [teamName, setTeamName] = useState('Team  Red');
   const [newTeamName, setNewTeamName] = useState('Team Red');
 
-  // // getting new team name given by the host
-  // useEffect(() => {
-  //   axios({
-  //     method: 'get',
-  //     url: `https://bob-backend-madiee-h.herokuapp.com/newteamnames`,
-  //   })
-  //     .then((res) => {
-  //       setNewTeamName(res.data.newblueteamname);
-  //     })
-  //     .catch((err) => console.error(err));
-  // });
+  // getting new team name given by the host
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `https://bob-backend-madiee-h.herokuapp.com/newteamnames`,
+    })
+      .then((res) => {
+        setNewTeamName(res.data.newblueteamname);
+      })
+      .catch((err) => console.error(err));
+  });
 
   // emit changing team name
   useEffect(() => {

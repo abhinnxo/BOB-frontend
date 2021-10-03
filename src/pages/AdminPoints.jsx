@@ -36,7 +36,7 @@ const AdminPoints = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bobbackend.games.madiee.com/newteamnames`,
+      url: `https://bob-backend-madiee-h.herokuapp.com/newteamnames`,
     })
       .then((res) => {
         setBluename(res.data.newblueteamname);
@@ -49,7 +49,7 @@ const AdminPoints = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bobbackend.games.madiee.com/randomword`,
+      url: `https://bob-backend-madiee-h.herokuapp.com/randomword`,
     })
       .then((res) => {
         setRandomWord(res.data);
@@ -59,7 +59,7 @@ const AdminPoints = ({ socket }) => {
     //  getting round number
     axios({
       method: 'get',
-      url: `https://bobbackend.games.madiee.com/roundNo`,
+      url: `https://bob-backend-madiee-h.herokuapp.com/roundNo`,
     })
       .then((res) => {
         setRoundNumber(res.data.round);
@@ -70,7 +70,7 @@ const AdminPoints = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bobbackend.games.madiee.com/score`,
+      url: `https://bob-backend-madiee-h.herokuapp.com/score`,
     })
       .then((res) => {
         setRedTeamScore(res.data[0].TeamScore);
@@ -88,7 +88,7 @@ const AdminPoints = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bobbackend.games.madiee.com/hintList`,
+      url: `https://bob-backend-madiee-h.herokuapp.com/hintList`,
     })
       .then((res) => {
         setHintList(res.data);
@@ -162,7 +162,7 @@ const AdminPoints = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bobbackend.games.madiee.com/guesserName`,
+      url: `https://bob-backend-madiee-h.herokuapp.com/guesserName`,
     })
       .then((res) => {
         console.log('guessername', res.data);

@@ -10,7 +10,9 @@ import GameEnd from './pages/GameEnd';
 import AdminPoints from './pages/AdminPoints';
 // import Admin from "./pages/Admin";
 import AdminDestroy from './pages/AdminDestroy';
+import HostWaitingLobby from './pages/HostWaitingLobby';
 import io from 'socket.io-client';
+// import PageNotFound from './components/PageNotFound';
 import Animation from '../src/pages/Animation';
 import Instructions from '../src/pages/Instructions';
 
@@ -30,7 +32,7 @@ function App() {
   };
 
   useEffect(() => {
-    const newSocket = io('https://bobbackend.games.madiee.com');
+    const newSocket = io('https://bob-backend-madiee-h.herokuapp.com/');
     console.log(newSocket);
     newSocket.on('confirmation', (message) => {
       console.log(message);
@@ -50,6 +52,11 @@ function App() {
         exact
         path="/lobby"
         render={(props) => <WaitingLobby {...props} socket={socket} />}
+      />
+      <Route
+        exact
+        path="/admin/lobby"
+        render={(props) => <HostWaitingLobby {...props} socket={socket} />}
       />
       <Route
         exact
