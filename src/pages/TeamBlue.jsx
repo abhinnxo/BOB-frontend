@@ -15,7 +15,6 @@ const axios = require('axios');
 function TeamBlue({ socket }) {
   const [hint, setHint] = useState('');
   const [roundfromBackend, setRoundFromBackend] = useState(1);
-  // const [chatmsgSent, setchatmsgSent] = useState(0);
   const [redTeamScore, setRedTeamScore] = useState(0);
   const [blueTeamScore, setBlueTeamScore] = useState(0);
   const [guesserId, setGueserId] = useState('');
@@ -53,16 +52,15 @@ function TeamBlue({ socket }) {
       .catch((err) => console.error(err));
   }, []);
 
+  // comming bnack from animation screen
   useEffect(() => {
     setClue(location.state.clueGiven);
-    console.log('clueeeee ', location.state.clueGiven);
-
     socket.on('score-change', (score) => {
       setScoreChange(score);
     });
   }, []);
 
-  // getting the round number
+  // getting the current round number
   useEffect(() => {
     axios({
       method: 'get',
@@ -87,7 +85,7 @@ function TeamBlue({ socket }) {
       .catch((err) => console.error(err));
   }, [guesserId]);
 
-  // getting the  random word
+  // getting the random(main) word
   useEffect(() => {
     axios({
       method: 'get',
@@ -99,38 +97,25 @@ function TeamBlue({ socket }) {
       .catch((err) => console.error(err));
   });
 
-  // getting the guesser name
+  // getting the guesser(commander) name
   useEffect(() => {
     axios({
       method: 'get',
       url: `https://bobbackend.games.madiee.com/guesserName`,
     })
       .then((res) => {
-        console.log('<<< guesser name >>>', res.data.guesserNameBlue);
-        console.log('<<< guesser name >>>', res.data.guesserNameRed);
         setGuesserName(res.data);
 
         // blue guesser
-        if (
-          roundfromBackend % 2 !==
-          0
-          // res.data.guesserName.guesserNameBlue !== ''
-        ) {
+        if (roundfromBackend % 2 !== 0) {
           setGuesserTeam('Blue Spartans');
           setEnemyTeam('Red Gladiators');
-          // setGuesserName(res.data);
         }
-
         // red guesser
-        if (
-          roundfromBackend % 2 ===
-          0
-          // res.data.guesserName.guesserNameRed !== ''
-        ) {
+        if (roundfromBackend % 2 === 0) {
           setGuesserTeam('Red Gladiators');
           setEnemyTeam('Blue Spartans');
         }
-        // setGuesserName(res.data);
       })
       .catch((err) => console.error(err));
   });
@@ -152,10 +137,10 @@ function TeamBlue({ socket }) {
     setRoundFromBackend(round);
   });
 
-  //  end game button
   useEffect(() => {
+    //  end game button
     socket.on('game-ended', (gameValue) => {
-      if (gameValue == 1) {
+      if (gameValue === 1) {
         localStorage.clear();
         history.push('/endgame');
       }
@@ -168,7 +153,6 @@ function TeamBlue({ socket }) {
     });
 
     socket.on('round-change-from-backend', (round) => {
-      // setchatmsgSent(1);
       setUserMagSent(0);
       setChance('');
       setRoundFromBackend(round);
@@ -180,7 +164,6 @@ function TeamBlue({ socket }) {
     });
 
     socket.on('guessID', (guesserID) => {
-      console.log('guesser ID from backend', guesserID);
       setGueserId(guesserID);
       setShow(true);
     });
@@ -190,7 +173,6 @@ function TeamBlue({ socket }) {
     var flag = 0;
 
     var wordArr = hint.split(' ');
-    console.log('[<<<<< WORD ARR >>>>> ', wordArr);
     if (wordArr.length > 1) {
       flag = 1;
       setWordError('Please enter a clue with single word only');
@@ -242,7 +224,7 @@ function TeamBlue({ socket }) {
   });
 
   function changeScreen() {
-    if (guesserId == socket.id) {
+    if (guesserId === socket.id) {
       if (socket.id === guesserId) {
         history.push({
           pathname: `/blue/guess`,
@@ -352,10 +334,6 @@ function TeamBlue({ socket }) {
       </Modal>
       {!clue ? (
         <div className="blue__enterhint text-center">
-          {/* <h5>
-            Commander guessed wrong, Now{' '}
-            <span style={{ color: 'red' }}>{chance} chance(s)</span> left...
-          </h5> */}
           <h1>
             Hello Soldier,
             <br />
@@ -440,18 +418,21 @@ function TeamBlue({ socket }) {
                     <br />
                     <h3>
                       {hintList.map((e) => (
-                        <span
-                          style={{
-                            background: '#9b5825',
-                            color: 'white',
-                            width: 'fitContent',
-                            borderRadius: '5%',
-                            padding: '5px',
-                          }}
-                          key={e.toString()}
-                        >
-                          {e} &nbsp;{' '}
-                        </span>
+                        <>
+                          <span
+                            style={{
+                              background: '#9b5825',
+                              color: 'white',
+                              width: 'fitContent',
+                              borderRadius: '5%',
+                              padding: '5px 7px 5px 7px',
+                            }}
+                            key={e.toString()}
+                          >
+                            {e}{' '}
+                          </span>
+                          &nbsp;
+                        </>
                       ))}
                     </h3>
                   </>
@@ -460,18 +441,21 @@ function TeamBlue({ socket }) {
               <br />
               <h3>
                 {hintList.map((e) => (
-                  <span
-                    style={{
-                      background: '#9b5825',
-                      color: 'white',
-                      width: 'fitContent',
-                      borderRadius: '5%',
-                      padding: '5px',
-                    }}
-                    key={e.toString()}
-                  >
-                    {e} &nbsp;{' '}
-                  </span>
+                  <>
+                    <span
+                      style={{
+                        background: '#9b5825',
+                        color: 'white',
+                        width: 'fitContent',
+                        borderRadius: '5%',
+                        padding: '5px 7px 5px 7px',
+                      }}
+                      key={e.toString()}
+                    >
+                      {e}{' '}
+                    </span>
+                    &nbsp;
+                  </>
                 ))}
               </h3>
               {chance == 2 ? (
@@ -499,18 +483,21 @@ function TeamBlue({ socket }) {
                   <br />
                   <h3>
                     {hintList.map((e) => (
-                      <span
-                        style={{
-                          background: '#9b5825',
-                          color: 'white',
-                          width: 'fitContent',
-                          borderRadius: '5%',
-                          padding: '5px',
-                        }}
-                        key={e.toString()}
-                      >
-                        {e} &nbsp;{' '}
-                      </span>
+                      <>
+                        <span
+                          style={{
+                            background: '#9b5825',
+                            color: 'white',
+                            width: 'fitContent',
+                            borderRadius: '5%',
+                            padding: '5px 7px 5px 7px',
+                          }}
+                          key={e.toString()}
+                        >
+                          {e}
+                        </span>
+                        &nbsp;
+                      </>
                     ))}
                   </h3>
                   <h3>
@@ -531,18 +518,21 @@ function TeamBlue({ socket }) {
                   <br />
                   <h3>
                     {hintList.map((e) => (
-                      <span
-                        style={{
-                          background: '#9b5825',
-                          color: 'white',
-                          width: 'fitContent',
-                          borderRadius: '5%',
-                          padding: '5px',
-                        }}
-                        key={e.toString()}
-                      >
-                        {e}
-                      </span>
+                      <>
+                        <span
+                          style={{
+                            background: '#9b5825',
+                            color: 'white',
+                            width: 'fitContent',
+                            borderRadius: '5%',
+                            padding: '5px 7px 5px 7px',
+                          }}
+                          key={e.toString()}
+                        >
+                          {e}
+                        </span>
+                        &nbsp;
+                      </>
                     ))}
                   </h3>
                   <h3>
@@ -551,7 +541,7 @@ function TeamBlue({ socket }) {
                   </h3>
                 </>
               )}
-              {chance == 2 ? (
+              {chance === 2 ? (
                 <h4>
                   Commander guessed wrong, Now{' '}
                   <span style={{ color: 'red' }}>{chance} chance(s)</span>{' '}
@@ -562,6 +552,12 @@ function TeamBlue({ socket }) {
               )}
             </>
           )}
+          <br />
+          <br />
+          <h3>
+            The Commander Guessed:{' '}
+            <span style={{ color: '#9b5825' }}>{guessedWord}</span>
+          </h3>
         </div>
       )}
       <div className="blue__timer d-flex align-items-baseline">
