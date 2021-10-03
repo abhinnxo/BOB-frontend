@@ -16,7 +16,6 @@ const axios = require('axios');
 const TeamRed = ({ socket }) => {
   const [hint, setHint] = useState('');
   const [roundfromBackend, setRoundFromBackend] = useState(1);
-  // const [chatmsgSent, setchatmsgSent] = useState(0);
   const [redTeamScore, setRedTeamScore] = useState(0);
   const [blueTeamScore, setBlueTeamScore] = useState(0);
   const [guesserId, setGueserId] = useState('');
@@ -55,15 +54,16 @@ const TeamRed = ({ socket }) => {
       .catch((err) => console.error(err));
   }, []);
 
+  // comming bnack from animation screen
+
   useEffect(() => {
-    console.log('clueeeee ', location.state.clueGiven);
     setClue(location.state.clueGiven);
     socket.on('score-change', (score) => {
       setScoreChange(score);
     });
   }, []);
 
-  // getting the round number
+  // getting the current round number
   useEffect(() => {
     axios({
       method: 'get',
@@ -88,7 +88,7 @@ const TeamRed = ({ socket }) => {
       .catch((err) => console.error(err));
   }, [guesserId]);
 
-  //  get random word
+  //  getting the random(main) word
   useEffect(() => {
     axios({
       method: 'get',
@@ -100,17 +100,15 @@ const TeamRed = ({ socket }) => {
       .catch((err) => console.error(err));
   });
 
-  // getting the guesser name
+  // getting the guesser(commander) name
   useEffect(() => {
     axios({
       method: 'get',
       url: `https://bob-backend-madiee-h.herokuapp.com/guesserName`,
     })
       .then((res) => {
-        console.log('<<< guesser name >>>', res.data.guesserNameBlue);
-        console.log('<<< guesser name >>>', res.data.guesserNameRed);
         setGuesserName(res.data);
-        // blue gyesser
+        // blue guesser
         if (roundfromBackend % 2) {
           setGuesserTeam('Blue Spartans');
           setEnemyTeam('Red Gladiators');
@@ -141,10 +139,10 @@ const TeamRed = ({ socket }) => {
     setRoundFromBackend(round);
   });
 
-  //  end game button
   useEffect(() => {
+    //  end game button
     socket.on('game-ended', (gameValue) => {
-      if (gameValue == 1) {
+      if (gameValue === 1) {
         localStorage.clear();
         history.push('/endgame');
       }
@@ -157,7 +155,6 @@ const TeamRed = ({ socket }) => {
     });
 
     socket.on('round-change-from-backend', (round) => {
-      // setchatmsgSent(1);
       setUserMagSent(0);
       setChance('');
       setRoundFromBackend(round);
@@ -173,7 +170,6 @@ const TeamRed = ({ socket }) => {
     });
 
     socket.on('guessID', (guesserID) => {
-      console.log('guesser ID from backend', guesserID);
       setGueserId(guesserID);
       setShow(true);
     });
@@ -183,7 +179,6 @@ const TeamRed = ({ socket }) => {
     var flag = 0;
 
     var wordArr = hint.split(' ');
-    console.log('[<<<<< WORD ARR >>>>> ', wordArr);
     if (wordArr.length > 1) {
       flag = 1;
       setWordError('Please enter a clue with single word only');
@@ -347,11 +342,6 @@ const TeamRed = ({ socket }) => {
       </Modal>
       {!clue ? (
         <div className="red__enterhint text-center">
-          {/* <h5>
-            {' '}
-            Commander guessed wrong, Now{' '}
-            <span style={{ color: 'red' }}>{chance} chance(s)</span> left...
-          </h5> */}
           <h1>
             Hello Soldier,
             <br />
@@ -428,18 +418,21 @@ const TeamRed = ({ socket }) => {
                     <br />
                     <h3>
                       {hintList.map((e) => (
-                        <span
-                          style={{
-                            background: '#9b5825',
-                            color: 'white',
-                            width: 'fitContent',
-                            borderRadius: '5%',
-                            padding: '5px',
-                          }}
-                          key={e.toString()}
-                        >
-                          {e} &nbsp;{' '}
-                        </span>
+                        <>
+                          <span
+                            style={{
+                              background: '#9b5825',
+                              color: 'white',
+                              width: 'fitContent',
+                              borderRadius: '5%',
+                              padding: '0px 7px 0px 7px',
+                            }}
+                            key={e.toString()}
+                          >
+                            {e}{' '}
+                          </span>
+                          &nbsp;
+                        </>
                       ))}
                     </h3>
                   </>
@@ -456,18 +449,21 @@ const TeamRed = ({ socket }) => {
                     <br />
                     <h3>
                       {hintList.map((e) => (
-                        <span
-                          style={{
-                            background: '#9b5825',
-                            color: 'white',
-                            width: 'fitContent',
-                            borderRadius: '5%',
-                            padding: '5px',
-                          }}
-                          key={e.toString()}
-                        >
-                          {e} &nbsp;{' '}
-                        </span>
+                        <>
+                          <span
+                            style={{
+                              background: '#9b5825',
+                              color: 'white',
+                              width: 'fitContent',
+                              borderRadius: '5%',
+                              padding: '0px 7px 0px 7px',
+                            }}
+                            key={e.toString()}
+                          >
+                            {e}
+                          </span>
+                          &nbsp;
+                        </>
                       ))}
                     </h3>
                     <h3>
@@ -502,18 +498,21 @@ const TeamRed = ({ socket }) => {
                   <br />
                   <h3>
                     {hintList.map((e) => (
-                      <span
-                        style={{
-                          background: '#9b5825',
-                          color: 'white',
-                          width: 'fitContent',
-                          borderRadius: '5%',
-                          padding: '5px',
-                        }}
-                        key={e.toString()}
-                      >
-                        {e} &nbsp;{' '}
-                      </span>
+                      <>
+                        <span
+                          style={{
+                            background: '#9b5825',
+                            color: 'white',
+                            width: 'fitContent',
+                            borderRadius: '5%',
+                            padding: '0px 7px 0px 7px',
+                          }}
+                          key={e.toString()}
+                        >
+                          {e}{' '}
+                        </span>
+                        &nbsp;
+                      </>
                     ))}
                   </h3>
                   <h3>
@@ -534,23 +533,26 @@ const TeamRed = ({ socket }) => {
                   <br />
                   <h3>
                     {hintList.map((e) => (
-                      <span
-                        style={{
-                          background: '#9b5825',
-                          color: 'white',
-                          width: 'fitContent',
-                          borderRadius: '5%',
-                          padding: '5px',
-                        }}
-                        key={e.toString()}
-                      >
-                        {e} &nbsp;{' '}
-                      </span>
+                      <>
+                        <span
+                          style={{
+                            background: '#9b5825',
+                            color: 'white',
+                            width: 'fitContent',
+                            borderRadius: '5%',
+                            padding: '0px 7px 0px 7px',
+                          }}
+                          key={e.toString()}
+                        >
+                          {e}{' '}
+                        </span>
+                        &nbsp;
+                      </>
                     ))}
                   </h3>
                 </>
               )}
-              {chance == 2 ? (
+              {chance === 2 ? (
                 <h4>
                   Commander guessed wrong, Now{' '}
                   <span style={{ color: 'red' }}>{chance} chance(s)</span>{' '}
@@ -561,6 +563,12 @@ const TeamRed = ({ socket }) => {
               )}
             </>
           )}
+          <br />
+          <br />
+          <h3>
+            The Commander Guessed:{' '}
+            <span style={{ color: '#9b5825' }}>{guessedWord}</span>
+          </h3>
         </div>
       )}
       <div className="red__timer d-flex align-items-baseline">
