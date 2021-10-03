@@ -105,7 +105,7 @@
 }
 .teams {
   color: #ffffff;
-  background: url('../images/centre_box.svg');
+  background: url('../images/centre_box.webp');
   background-size: cover !important;
   width: 750px;
   height: 400px;
@@ -195,7 +195,7 @@
 }
 .teams {
   color: #ffffff;
-  background: url('../images/centre_box.svg');
+  background: url('../images/centre_box.webp');
   background-size: cover !important;
   width: 750px;
   height: 400px;
@@ -248,7 +248,7 @@
 
 .seperateBoard {
   color: #ffffff;
-  background: url('../images/centre_box_with_partition.svg');
+  background: url('../images/centre_box_with_partition.webp');
   background-size: cover !important;
   width: 850px !important;
   height: 470px !important;
