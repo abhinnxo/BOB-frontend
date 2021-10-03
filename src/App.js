@@ -32,7 +32,7 @@ function App() {
   };
 
   useEffect(() => {
-    const newSocket = io('https://bob-backend-madiee-h.herokuapp.com/');
+    const newSocket = io('https://bobbackend.games.madiee.com');
     console.log(newSocket);
     newSocket.on('confirmation', (message) => {
       console.log(message);

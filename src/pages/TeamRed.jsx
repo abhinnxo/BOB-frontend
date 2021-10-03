@@ -45,7 +45,7 @@ const TeamRed = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com/newteamnames`,
+      url: `https://bobbackend.games.madiee.com/newteamnames`,
     })
       .then((res) => {
         console.log('<<<new team name>>>', res.data);
@@ -67,7 +67,7 @@ const TeamRed = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com/roundNo`,
+      url: `https://bobbackend.games.madiee.com/roundNo`,
     })
       .then((res) => {
         setRoundFromBackend(res.data.round);
@@ -79,7 +79,7 @@ const TeamRed = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com/score`,
+      url: `https://bobbackend.games.madiee.com/score`,
     })
       .then((res) => {
         setRedTeamScore(res.data[0].TeamScore);
@@ -92,7 +92,7 @@ const TeamRed = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com/randomword`,
+      url: `https://bobbackend.games.madiee.com/randomword`,
     })
       .then((res) => {
         setRandomWord(res.data);
@@ -104,7 +104,7 @@ const TeamRed = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com/guesserName`,
+      url: `https://bobbackend.games.madiee.com/guesserName`,
     })
       .then((res) => {
         console.log('<<< guesser name >>>', res.data.guesserNameBlue);
@@ -128,7 +128,7 @@ const TeamRed = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com/hintList`,
+      url: `https://bobbackend.games.madiee.com/hintList`,
     })
       .then((res) => {
         setHintList(res.data);
@@ -206,7 +206,7 @@ const TeamRed = ({ socket }) => {
     if (value) {
       axios({
         method: 'get',
-        url: `https://bob-backend-madiee-h.herokuapp.com/guesserid`,
+        url: `https://bobbackend.games.madiee.com/guesserid`,
       })
         .then((res) => {
           console.log('<<< guesser ID >>> ', res.data);
@@ -219,7 +219,7 @@ const TeamRed = ({ socket }) => {
       // getting the random word
       axios({
         method: 'get',
-        url: `https://bob-backend-madiee-h.herokuapp.com/randomword`,
+        url: `https://bobbackend.games.madiee.com/randomword`,
       })
         .then((res) => {
           setRandomWord(res.data);

@@ -19,7 +19,7 @@ function Animation({ socket }) {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com/randomword`,
+      url: `https://bobbackend.games.madiee.com/randomword`,
     })
       .then((res) => {
         setRandomWord(res.data);
@@ -31,7 +31,7 @@ function Animation({ socket }) {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com/roundNo`,
+      url: `https://bobbackend.games.madiee.com/roundNo`,
     })
       .then((res) => {
         setRoundNumber(res.data.round);
@@ -43,7 +43,7 @@ function Animation({ socket }) {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com/newteamnames`,
+      url: `https://bobbackend.games.madiee.com/newteamnames`,
     })
       .then((res) => {
         setBluename(res.data.newblueteamname);

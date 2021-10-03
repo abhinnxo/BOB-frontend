@@ -34,7 +34,7 @@ const WaitingLobby = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com/lobby`,
+      url: `https://bobbackend.games.madiee.com/lobby`,
     })
       .then((res) => {
         setRedPlayerList(res.data.teamredplayer);

@@ -41,7 +41,7 @@ const AdminDestroy = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com/guesserName`,
+      url: `https://bobbackend.games.madiee.com/guesserName`,
     })
       .then((res) => {
         // blue gyesser
@@ -59,7 +59,7 @@ const AdminDestroy = ({ socket }) => {
     // getting the random word
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com/randomword`,
+      url: `https://bobbackend.games.madiee.com/randomword`,
     })
       .then((res) => {
         setRandomWord(res.data);
@@ -69,7 +69,7 @@ const AdminDestroy = ({ socket }) => {
     // getting the round number
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com/roundNo`,
+      url: `https://bobbackend.games.madiee.com/roundNo`,
     })
       .then((res) => {
         setRoundNumber(res.data.round);
@@ -81,7 +81,7 @@ const AdminDestroy = ({ socket }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://bob-backend-madiee-h.herokuapp.com/newteamnames`,
+      url: `https://bobbackend.games.madiee.com/newteamnames`,
     })
       .then((res) => {
         setBluename(res.data.newblueteamname);
