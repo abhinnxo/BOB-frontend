@@ -470,10 +470,6 @@ const TeamRed = ({ socket }) => {
                         </span>
                       ))}
                     </h3>
-                    <h3>
-                      Word guessed by the Commander in cheif "
-                      {guesserName.guesserNameBlue}" : {guessedWord}
-                    </h3>
                   </>
                 )}
               </h3>
@@ -515,10 +511,6 @@ const TeamRed = ({ socket }) => {
                         {e} &nbsp;{' '}
                       </span>
                     ))}
-                  </h3>
-                  <h3>
-                    Word guessed by the Commander in cheif "
-                    {guesserName.guesserNameRed}" : {guessedWord}
                   </h3>
                 </>
               ) : (
@@ -563,6 +555,11 @@ const TeamRed = ({ socket }) => {
           )}
         </div>
       )}
+      <br />
+      <h3 style={{ textAlign: 'center', fontFamily: 'PaytoneOne' }}>
+        Word guessed by the Commander in cheif "{guesserName.guesserNameBlue}" :{' '}
+        {guessedWord}
+      </h3>
       <div className="red__timer d-flex align-items-baseline">
         <img src={Clock} alt="time" />
         <h3>

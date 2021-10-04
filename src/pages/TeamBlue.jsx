@@ -513,10 +513,6 @@ function TeamBlue({ socket }) {
                       </span>
                     ))}
                   </h3>
-                  <h3>
-                    Word guessed by the Commander in cheif "
-                    {guesserName.guesserNameBlue}" : {guessedWord}
-                  </h3>
                 </>
               ) : (
                 <>
@@ -545,10 +541,6 @@ function TeamBlue({ socket }) {
                       </span>
                     ))}
                   </h3>
-                  <h3>
-                    Word guessed by the Commander in cheif "
-                    {guesserName.guesserNameRed}" : {guessedWord}
-                  </h3>
                 </>
               )}
               {chance == 2 ? (
@@ -564,6 +556,11 @@ function TeamBlue({ socket }) {
           )}
         </div>
       )}
+      <br />
+      <h3 style={{ textAlign: 'center', fontFamily: 'PaytoneOne' }}>
+        Word guessed by the Commander in cheif "{guesserName.guesserNameBlue}" :{' '}
+        {guessedWord}
+      </h3>
       <div className="blue__timer d-flex align-items-baseline">
         <img src={Clock} alt="time" />
         <h3>
