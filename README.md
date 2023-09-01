@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Backend of this Project
+
+[BOB-Backend](https://github.com/abhinnxo/BOB-backend/)
+
 ## Available Scripts
 
 In the project directory, you can run:
